@@ -1,0 +1,272 @@
+Tu rédiges une NOTE DE LECTURE (compte rendu universitaire) d'une thèse de doctorat, dans la tradition académique française.
+
+La variable `context` (déjà chargée) contient le texte intégral de la thèse.
+
+## Format du blob `context`
+
+- Des marqueurs de page `[p.NNN]` sont insérés à chaque changement de page. Pour trouver le numéro de page d'un extrait, cherche sa position avec `.find()`, puis remonte jusqu'au marqueur `[p.NNN]` le plus proche.
+- Les notes de bas de page sont préfixées `[fn]` et placées à la fin de chaque page. Elles contiennent souvent les références scientifiques internes de la thèse.
+- Exemple de snippet pour trouver la page d'une phrase donnée :
+```python
+phrase = "conditions d'acceptabilité"
+pos = context.find(phrase)
+# remonter au dernier marqueur [p.XXX] avant pos
+marker_start = context.rfind("[p.", 0, pos)
+marker_end = context.find("]", marker_start) + 1
+page_tag = context[marker_start:marker_end]   # e.g. "[p.21]"
+print(f"Phrase « {phrase} » → {page_tag}")
+```
+
+
+## CARTE DE LA THÈSE (index de navigation)
+
+Index hiérarchique issu de la table des matières. Les pages sont les
+numéros des marqueurs `[p.NNN]` du blob `context` — pour atteindre
+directement un chapitre, saute à son marqueur :
+```python
+pos = context.find("[p.236]")     # début du chapitre visé
+extrait = context[pos:pos+3000]
+```
+ATTENTION : ne cherche PAS un titre de chapitre avec `context.find("titre")`
+— tu risques de tomber sur la table des matières de la thèse elle-même.
+Utilise toujours le saut par marqueur de page ci-dessous.
+
+- Chapter 1 Introduction  [p.12]–[p.33]
+  - 1.1 The Cosmic Microwave Background  [p.13]–[p.16]
+  - 1.2 The ΛCDM Model & Cosmological Parameters  [p.17]–[p.18]
+  - 1.3 The South Pole Telescope  [p.19]–[p.25]
+  - 1.4 The Flat-Sky Approximation and Map Projections  [p.26]–[p.31]
+  - 1.5 Thesis Overview  [p.32]–[p.33]
+- Chapter 2 Gravitational Lensing of the CMB  [p.34]–[p.61]
+  - 2.1 An Introduction to Weak Lensing  [p.35]–[p.38]
+  - 2.2 Weak Lensing of the CMB  [p.39]–[p.41]
+  - 2.3 CMB Lensing Science Cases  [p.42]–[p.44]
+  - 2.4 Reconstructing the Lensing Potential  [p.45]–[p.61]
+- Chapter 3 SPTpol Lensing  [p.62]–[p.67]
+- Chapter 4 SPT-3G Lensing  [p.68]–[p.127]
+  - 4.1 Analysis Overview and Motivation  [p.70]–[p.73]
+  - 4.2 Data  [p.74]–[p.84]
+  - 4.3 Simulations  [p.85]–[p.88]
+  - 4.4 Map Processing  [p.89]–[p.97]
+  - 4.5 Lensing Map Reconstruction  [p.98]–[p.103]
+  - 4.6 Power Spectrum Estimation  [p.104]–[p.110]
+  - 4.7 Null Tests and Consistency Checks  [p.111]–[p.120]
+  - 4.8 Obfuscated Data Bandpowers  [p.121]–[p.121]
+  - 4.9 Discussion and Future Work  [p.122]–[p.127]
+- Chapter 5 Summary and Conclusions  [p.128]–[p.131]
+- Bibliography  [p.132]–[p.132]
+
+Tu disposes aussi, ci-dessous, de deux ressources dans ton prompt :
+  1. La FICHE structurée de la thèse — ton plan de travail, ce que tu dois couvrir
+  2. Un EXEMPLE DE STYLE — le registre, la longueur et le flux que tu dois imiter
+
+## Règles de référence
+
+**Auteurs externes (hors thèse) : STRICTEMENT INTERDITS.** Ne cite aucun auteur, ouvrage ou revue qui ne figure pas dans le texte de la thèse. Si un compte rendu standard écrirait « comme le montre Habermas » ou « selon Bourdieu » alors que ni Habermas ni Bourdieu n'est cité par l'auteur de la thèse, tu reformules sans nommer.
+
+**Auteurs internes (cités PAR la thèse) : autorisés sous condition.** Si tu veux nommer un auteur que la thèse elle-même mobilise (ex. Foucault, Moretti, Bakhtine, Lavoinne, Tetlock), tu DOIS :
+  1. Vérifier via `context.find("Nom")` qu'il est bien présent dans la thèse — SAUF si l'auteur figure déjà dans la FICHE avec une citation et une page : dans ce cas reprends l'ancrage de la fiche tel quel, sans revérification.
+  2. Accompagner la mention d'une courte citation verbatim (entre guillemets « ») extraite de la thèse.
+  3. Indiquer le numéro de page, obtenu via la méthode du marqueur `[p.NNN]` décrite ci-dessus.
+  Exemple : « Comme le rappelle Lavoinne, "cette croissance n'est pas justifiée économiquement" (p. 34). »
+
+**Chapitres et passages de la thèse** : cite-les librement (ex. « dans le premier chapitre », « p. 612 »). Les pages doivent être vérifiées via les marqueurs `[p.NNN]` — JAMAIS une position en caractères (offset à 4+ chiffres).
+
+**Notes de bas de page** : tu n'en rédiges pas dans la note. Les `[fn]` du blob sont uniquement un outil de recherche pour toi.
+
+**Cible : au moins 8 références de page précises dans la note finale** pour étayer tes affirmations.
+
+## Structure à produire (~2000 mots)
+
+```markdown
+# [Titre complet de la thèse, en italique après l'auteur]
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-08-19
+
+**Référence :** [Auteur], *[Titre]*, [Établissement], [Année], [Nombre de pages] p.
+
+---
+
+[Paragraphe 1 — Ouverture (~250 mots) : situe la thèse, l'auteur, la discipline,
+la période étudiée, la thèse centrale, le corpus principal. Annonce le fil
+directeur et la périodisation.]
+
+[Paragraphe 2 — Méthodologie et démarche (~300 mots) : approche,
+outillage, corpus, sondages, corpus contextuels. Souligne l'originalité
+méthodologique.]
+
+[Paragraphe 3 — Première partie ou premier axe (~350 mots) : en citant les pages.]
+
+[Paragraphe 4 — Deuxième partie ou deuxième axe (~300 mots).]
+
+[Paragraphe 5 — Troisième partie ou troisième axe (~350 mots).]
+
+[Paragraphe 6 — Portée, apport et tensions (~300-400 mots) : synthèse
+critique. L'apport empirique, théorique, méthodologique. Les tensions,
+les limites. Ouverture sur ce que la thèse permet de penser.]
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de [Titre court] », [Date].
+```
+
+## Consignes RLM
+
+- **Les pages et citations de la FICHE ont déjà été vérifiées automatiquement contre la source.** Reprends-les telles quelles, SANS les revérifier via `context.find(...)`. Ne vérifie que ce que tu introduis TOI-MÊME et qui ne figure pas dans la fiche (nouvel auteur, nouvelle citation, nouvelle page).
+- Si tu as besoin d'un passage spécifique, utilise `context[start:end]` ou `context.find("phrase")` pour le localiser, puis extrait une tranche de 500-1500 caractères autour.
+- **Travaille en LOTS SERRÉS** : toute l'exploration initiale (squelette : introduction, méthodologie, ouvertures de parties, conclusion, exemples fondateurs) doit tenir en AU PLUS 3 exécutions de code, chacune extrayant PLUSIEURS passages d'un coup (5 à 8 extraits par exécution). Jamais une exécution par passage. Les extractions complémentaires entre les passes de rédaction (cœur des parties) comptent à part : au plus 1 exécution d'extraction par passe de rédaction.
+- **LIAISON PAGE-EXTRAIT (obligatoire dans les lots)** : quand une exécution imprime plusieurs extraits, fais-la précéder CHAQUE extrait d'une ligne `===== EXTRAIT [p.N] → [p.M] =====` (les marqueurs réels de début et de fin de l'extrait). Au moment de citer, reprends le numéro depuis la ligne `=====` ou le marqueur `[p.N]` visible IMMÉDIATEMENT au-dessus du passage cité — jamais de mémoire. Une citation dont tu ne retrouves pas le marqueur exact dans tes sorties ne doit PAS porter de numéro de page.
+- **RÉDACTION EN PLUSIEURS PASSES (OBLIGATOIRE)** : ne rédige JAMAIS la note entière en une seule exécution. Rédige AU PLUS 2 paragraphes par exécution de code. Avant de rédiger les paragraphes 3, 4 et 5, extrais d'abord de NOUVEAUX passages du cœur de la partie concernée (pas seulement son ouverture) — puis rédige. Assemble le tout à la fin seulement.
+- **CITATION ET AFFIRMATION CO-PRÉSENTES** : une citation verbatim « … » (p. N) ne peut étayer QUE l'affirmation du passage d'où elle provient (le texte visible sous le même marqueur `[p.N]`). N'emploie JAMAIS une phrase de la thèse pour un argument qu'elle ne porte pas dans son contexte d'origine (une hypothèse formulée sur X ne sert pas à commenter Y ; un nom de fonction, de concept ou de liste se reprend tel que le passage le donne, sans le recomposer). Si une affirmation a besoin d'un appui, va chercher le passage qui la porte et cite-le avec sa propre page.
+- **Densité d'ancrage** : chaque paragraphe de partie (3, 4 et 5) doit citer AU MOINS 3 pages distinctes. Une partie racontée sans pages précises est un paragraphe raté.
+- Ne saute pas les exemples fondateurs que la fiche met en avant (comparaison inaugurale, cas paradigmatique, date fondatrice) : s'ils motivent la thèse, ils appartiennent à la note.
+- `llm_query` est réservé aux RECHERCHES ponctuelles (localiser un thème, résumer un long passage pour toi-même). NE L'UTILISE JAMAIS pour rédiger les paragraphes de la note : la rédaction se fait TOI-MÊME, dans cette boucle, avec les marqueurs `[p.NNN]` sous les yeux — c'est la seule façon de garantir des numéros de page exacts.
+- À la fin, assemble le markdown complet dans une variable puis appelle `FINAL(markdown_complet)`.
+
+## FICHE DE LA THÈSE
+
+```markdown
+# FICHE DE SYNTHÈSE DE THÈSE
+
+## Métadonnées
+
+- **Titre** : CMB LENSING MEASUREMENTS WITH TWO YEARS OF DATA FROM THE SPT-3G SURVEY
+- **Auteur** : Cail Daley
+- **Année** : 2024
+- **Établissement** : University of Illinois Urbana-Champaign
+- **Discipline** : Astronomy
+- **Pages** : 147
+
+## Mots-clés
+
+Cosmic Microwave Background ; Gravitational Lensing ; SPT-3G ; Cosmology ; Large Scale Structure
+
+## Thèse centrale
+
+La reconstruction de la lentille gravitationnelle du fond diffus cosmologique à partir des données SPT-3G 2019+2020 produit les cartes les plus sensibles à ce jour, permettant de contraindre avec une précision inédite les paramètres du modèle ΛCDM et ses extensions (p. 129-130). Ce résultat est obtenu en appliquant un estimateur quadratique optimisé en approximation à ciel plat, validé par une comparaison rigoureuse avec une méthode bayésienne optimale sur des données SPTpol plus bruyantes (p. 129). Ces cartes permettent également de tester les tensions cosmologiques actuelles sur $H_0$ et $S_8$, et servent de référence pour le délentillage des cartes de polarisation dans la recherche d'ondes gravitationnelles primordiales (p. 130).
+
+## Questions de recherche
+
+- Comment reconstruire optimalement la lentille gravitationnelle du fond diffus cosmologique à partir des données du South Pole Telescope pour contraindre les paramètres cosmologiques et tester les tensions du modèle standard ?
+- Dans quelle mesure une méthode bayésienne d'inférence optimale surpasse-t-elle l'estimateur quadratique standard lorsque le bruit approche le plancher de bruit des modes B de lentille ?
+- Comment les cartes de lentille SPT-3G 2019+2020 permettent-elles de mesurer précisément le spectre de puissance de lentille et de contraindre $H_0$, $S_8$ et le rapport tenseur-scalaire $r$ ?
+
+## Réponses aux questions de recherche
+
+- **Question 1** : « The SPT-3G 2019+2020 lensing analysis is expected to measure the lensing power spectrum with a signal-to-noise of nearly 40$\sigma$, with a 2-3% constraint on the amplitude of the lensing power spectrum $A_\phi$ » (p. 130). Cette précision permet de « place powerful independent constraints on $\Lambda$CDM parameters and extensions to the standard model » (p. 130).
+- **Question 2** : « the Bayesian method achieved 17% tighter constraints on the amplitude of the lensing power spectrum $A_\phi$ compared to the quadratic estimator pipeline » (p. 129). La méthode bayésienne est optimale « where the quadratic estimator becomes suboptimal » (p. 129) et les deux méthodes sont « consistent with each other as well as with previous SPT analyses » (p. 129).
+- **Question 3** : « we will be able to measure the Hubble constant $H_0$ with a precision similar to that of the best *Planck* and ACT lensing measurements, and place the tightest CMB lensing constraints to date on structure growth parameter $S_8$ » (p. 130). Ces résultats « shed new light on tensions between estimates of $H_0$ and $S_8$ from early-universe vs. late-time measurements » (p. 130) et les cartes serviront à « delens CMB polarization maps in the search for primordial gravitational waves » (p. 130) pour contraindre $r$.
+
+## Hypothèses
+
+- **Hypothèse principale** : L'analyse SPT-3G 2019+2020 mesurera le spectre de puissance de lentille avec un rapport signal/bruit proche de $40\sigma$ et contraindra l'amplitude $A_\phi$ à 2-3 %, surpassant ou égalant les meilleures contraintes de *Planck* et ACT (p. 130).
+- **Hypothèse secondaire 1** : La méthode bayésienne d'inférence optimale fournira des contraintes 17 % plus serrées sur $A_\phi$ que l'estimateur quadratique standard sur des données atteignant le plancher de bruit des modes B (p. 129).
+- **Hypothèse secondaire 2** : Les cartes de lentille SPT-3G permettront de placer les contraintes les plus strictes à ce jour sur $S_8$ et de mesurer $H_0$ avec une précision comparable aux meilleures analyses de lentille du CMB, éclairant ainsi les tensions entre mesures de l'univers primitif et tardif (p. 130).
+- **Hypothèse secondaire 3** : Les cartes de lentille à haut rapport signal/bruit et faiblement contaminées par les avant-plans permettront des corrélations croisées efficaces avec les relevés optiques (DES, Euclid, LSST) pour sonder la croissance des structures et calibrer les mesures de cisaillement faible (p. 130-131).
+
+## Méthodologie
+
+- **Approche** : Analyse quantitative et comparative de pipelines de reconstruction de lentille gravitationnelle du CMB, visant à valider la robustesse des résultats cosmologiques face aux choix méthodologiques et aux approximations géométriques (p. 72).
+- **Méthode** : Déploiement de trois pipelines d'analyse indépendants pour croiser et vérifier les résultats : (1) un estimateur quadratique à ciel plat (flat-sky) incluant une combinaison à variance minimale, des données à 220 GHz et un durcissement contre les biais d'avant-plans, mais souffrant d'une approximation géométrique et d'un estimateur sous-optimal (SQE) (p. 72-73) ; (2) un estimateur quadratique à ciel courbe (curved-sky) utilisant la projection HEALPix et des transformées harmoniques sphériques, intégrant l'estimateur à variance minimale globale (GMV) qui prend en compte les corrélations TE et réduit le bruit de ~10 % (p. 72-73) ; (3) un pipeline bayésien (MUSE) effectuant une marginalisation approximative sur l'espace des paramètres latents via des simulations de modélisation forward, estimant conjointement le spectre de puissance du CMB non-lentillé et celui de la lentille, en s'appuyant uniquement sur les données de polarisation pour cette première application (p. 72-73).
+- **Corpus/Données** : Données des saisons d'observation 2019 et 2020 du télescope SPT-3G, représentant une augmentation d'un facteur ~10 du volume de données par rapport à l'analyse 2018, couvrant un champ hivernal de 1500 deg² (p. 70-71). Les cartes ProjZEA présentent des niveaux de bruit de 5,3 µK-arcmin, 4,4 µK-arcmin et 16 µK-arcmin en température, et 8,2 µK-arcmin, 6,6 µK-arcmin et 26 µK-arcmin en polarisation aux fréquences de 90 GHz, 150 GHz et 220 GHz respectivement (p. 70).
+- **Justification** : L'approximation du ciel plat devient sous-optimale pour un champ de 1500 deg², induisant des sous-optimalités dans la transformation QU → EB, l'estimation des fonctions de transfert et le filtrage inverse de variance, ce qui motive le pipeline à ciel courbe (p. 72). Parallèlement, le bruit de polarisation approche le plancher de bruit des modes B de lentille (~5 µK-arcmin), seuil où l'estimateur quadratique devient sous-optimal, justifiant le recours à une méthode bayésienne capable d'extraire les informations d'ordres supérieurs (p. 72). L'approche tri-pipeline permet des vérifications croisées rigoureuses confirmant la robustesse des mesures face aux différents estimateurs et choix d'analyse (p. 72).
+
+## Fil rouge
+
+La reconstruction optimale de la lentille gravitationnelle du fond diffus cosmologique, telle que formalisée par Hu & Okamoto (2002) (p. 128), reliant Chapter 1 Introduction à Chapter 4 SPT-3G Lensing via la validation progressive de l'estimateur quadratique standard face à une méthode bayésienne optimale sur des données de bruit décroissant.
+
+## Plan (Structure)
+
+- **Chapter 1 Introduction** : Démontre que le fond diffus cosmologique et le modèle ΛCDM offrent un cadre observationnel riche pour tester les tensions cosmologiques, en exposant les récepteurs SPT et les implications des projections cartographiques en approximation à ciel plat (p. 128).
+- **Chapter 2 Gravitational Lensing of the CMB** : Démontre que la lentille faible du fond diffus cosmologique peut être reconstruite de manière rigoureuse, en détaillant le formalisme de l'estimateur quadratique, la normalisation et le débiaisage des cartes et du spectre de puissance (p. 128).
+- **Chapter 3 SPTpol Lensing** : Démontre que la méthode bayésienne optimale surpasse l'estimateur quadratique standard en contraintes sur $A_\phi$ (17 % de gain) lorsque le bruit atteint le plancher des modes B, tout en restant cohérente avec les analyses précédentes (p. 129).
+- **Chapter 4 SPT-3G Lensing** : Démontre que le pipeline SPT-3G 2019+2020 produit les cartes de lentille les plus sensibles à ce jour, avec un rapport signal/bruit attendu proche de $40\sigma$ et des contraintes à 2-3 % sur $A_\phi$, validées par des tests de cohérence et un facteur d'obfuscation (p. 129-130).
+- **Chapter 5 Summary and Conclusions** : Démontre que les résultats consolidés éclairent les tensions $H_0$/$S_8$, permettent le délentillage pour la recherche d'ondes gravitationnelles primordiales, et ouvrent la voie à des corrélations croisées avec les relevés optiques pour sonder la croissance des structures (p. 130-131).
+
+## Cadre théorique
+
+- **Cadre principal** : Modèle concordance ΛCDM — Modèle cosmologique standard à six paramètres supposant un univers spatialement plat, isotrope et homogène décrit par la relativité générale (p. 17-18, p. 128) — Structure l'analyse globale en fournissant le cadre de référence pour contraindre les paramètres cosmologiques via les anisotropies du fond diffus cosmologique et la lentille gravitationnelle, et tester les tensions $H_0$/$S_8$ (p. 128, p. 130).
+- **Cadres secondaires** :
+  - Hu & Okamoto (2002) — Formalisme de l'estimateur quadratique pour la reconstruction de la lentille du fond diffus cosmologique (p. 128) — Sert de base méthodologique pour le pipeline standard, incluant la normalisation et le débiaisage des cartes et du spectre de puissance (p. 128).
+  - Millea et al. (2021) — Méthode bayésienne d'inférence conjointe optimale pour la reconstruction de lentille et l'estimation de paramètres (p. 129) — Fournit le cadre alternatif testé sur SPTpol, exploitant tous les ordres du signal pour surpasser l'estimateur quadratique dans les régimes à faible bruit (p. 129).
+  - BICEP/Keck Collaboration — Cadre du délentillage des cartes de polarisation pour la recherche d'ondes gravitationnelles primordiales (p. 130) — Oriente l'utilisation instrumentale des cartes SPT-3G pour contraindre le rapport tenseur-scalaire $r$ (p. 130).
+
+## Concepts clés
+
+**CONCEPT** : ESTIMATEUR QUADRATIQUE
+**SENS** : « quadratic estimator [...] which estimates each mode **L** in the lensing reconstruction by performing a weighted average over pairs of modes in the CMB maps » (p. 41)
+**ORIGINE** : emprunté à Hu & Okamoto (2002) et retravaillé par l'auteur via un filtrage inverse de variance itératif, une réponse semi-analytique dépendante de la réalisation, et un durcissement contre les biais de premier plan
+
+**CONCEPT** : DÉLENTILLAGE
+**SENS** : « reducing the uncertainty on $r$ by a factor of 2.5 with combined BICEP/Keck and SPT-3G data [...] by undeflecting or *delensing* CMB maps with the observed realization of the lensing potential » (p. 44)
+**ORIGINE** : emprunté au cadre BICEP/Keck et retravaillé par l'auteur comme application opérationnelle des cartes de convergence SPT-3G pour réduire la variance d'échantillon des modes B primordiaux
+
+**CONCEPT** : FACTEUR D'OBFUSCATION
+**SENS** : « hide the final results of an analysis [...] until all analysis choices have been finalized. This practice, which I will refer to as “obfuscation” » (p. 110)
+**ORIGINE** : propre à l'auteur (protocole méthodologique introduit pour garantir l'objectivité lors de l'estimation finale du spectre de puissance avant la levée de l'obfuscation)
+
+**CONCEPT** : DÉRIVATION BAYÉSIENNE OPTIMALE (MUSE)
+**SENS** : « near-optimal fast alternative that performs an approximate marginalization over latent parameter space using a suite of forward-model simulations of the data » (p. 73)
+**ORIGINE** : emprunté à Millea & Seljak (2021) et retravaillé par l'auteur comme pipeline de référence pour extraire les informations d'ordre supérieur et valider le gain de précision sur l'amplitude de lentille
+
+## Ancrage empirique (ou concret)
+
+- Mesure attendue du spectre de puissance de lentille SPT-3G avec un rapport signal/bruit de nearly $40\sigma$ et une contrainte de 2-3 % sur l'amplitude $A_\phi$, compétitive avec les meilleures contraintes de *Planck* et ACT (p. 130).
+- Gain de précision de 17 % sur $A_\phi$ obtenu par la méthode bayésienne par rapport à l'estimateur quadratique sur 100 deg² de données SPTpol, avec une cohérence confirmée entre les deux pipelines (p. 129).
+- Niveau de bruit par mode des cartes SPT-3G 2019+2020 inférieur de 3 à 4 fois aux mesures récentes de *Planck* et ACT, permettant des corrélations croisées à haut rapport signal/bruit avec DES, Euclid et LSST (p. 129-130).
+
+## Opposition / Contre-argumentation
+
+- **Position nuancée** : L'estimateur quadratique standard est largement utilisé mais devient sous-optimal dans les régimes de faible bruit ; « the quadratic estimator becomes suboptimal » (p. 129) lorsque le bruit approche le plancher des modes B de lentille, justifiant le recours à une méthode bayésienne exploitant tous les ordres du signal pour des contraintes plus serrées (p. 129).
+- **Position testée** : Les tensions cosmologiques actuelles entre mesures de l'univers primitif et tardif sur $H_0$ et $S_8$ nécessitent des contraintes indépendantes de haute précision ; les résultats SPT-3G sont conçus pour « shed new light on tensions between estimates of $H_0$ and $S_8$ from early-universe vs. late-time measurements » (p. 130), en fournissant une validation croisée indépendante de *Planck* et ACT.
+
+## Apport principal
+
+- **Empirique** : Production des cartes de lentille gravitationnelle du fond diffus cosmologique les plus sensibles à ce jour à partir des données SPT-3G 2019+2020, avec un niveau de bruit par mode 3 à 4 fois inférieur aux références *Planck* et ACT, fournissant un ensemble de données de référence pour les analyses cosmologiques et le délentillage (p. 129-130).
+- **Méthodologique** : Validation comparative rigoureuse d'un pipeline bayésien optimal face à l'estimateur quadratique standard, démontrant un gain de 17 % sur $A_\phi$ dans les régimes à faible bruit, et intégration d'un facteur d'obfuscation pour éliminer le biais de confirmation lors de l'estimation du spectre de puissance (p. 129-130).
+- **Critique** : Fourniture de contraintes indépendantes de haute précision sur $H_0$ et $S_8$ permettant de tester et potentiellement de résoudre les tensions actuelles du modèle ΛCDM entre l'univers primitif et tardif, tout en ouvrant la voie à des corrélations croisées multi-messagers avec les relevés optiques et radio (p. 130-131).
+
+```
+
+## EXEMPLE DE STYLE (à imiter pour le registre, la longueur des paragraphes, le flux)
+
+```markdown
+# [Titre complet de l'ouvrage : nom des directeurs et titre/sous-titre en italique]
+
+**Compte rendu par** [Auteur du compte rendu]
+
+**Date :** 2026-04-24
+
+**Source :** [URL si disponible]
+
+**Référence :** [Auteur·e·s], *Titre complet*, Ville, Éditeur, coll. « Collection », année, xxx p., ISBN : xxx.
+
+---
+
+Quatorze auteurs, parmi lesquels des sociologues clés de l'analyse du secteur social et médico-social analysent, dans cet ouvrage important, les transformations de la « morale » de l'intervention sociale de divers pays (France dont Mayotte, Suisse, Maroc, Québec), ceci à la suite d'un congrès sociologique international tenu à Tunis en 2021. Le texte décrit les tensions traversant l'intervention sociale, entre idéaux de justice sociale, d'égalité et de solidarisme d'une part, et les principes de responsabilisation et d'activation dans un contexte marqué par l'emprise croissante d'une logique managériale, d'autre part. Disons-le d'emblée, le principe de « responsabilisation » mérite d'être interrogé : il renvoie généralement non pas tant à un transfert de pouvoir aux usagers ou citoyens, comme il l'affirme, mais souvent à une « normalisation » du contrôle social reposant, désormais, sur l'individu lui-même. C'est notamment le cas dans les dispositifs de parentalité ou dans la justice restaurative, où la volonté des individus devient l'opérateur du contrôle social.
+
+Notre lecture questionne implicitement les mots-clefs contemporains de l'intervention sociale que sont « responsabiliser » et « activer ». Ces termes sont aussi les items centraux de la Nouvelle Gouvernance Publique (NGP), laquelle tend, pour l'action sociale, à substituer la « relation de service » reposant sur l'efficience et le résultat au « modèle de service public d'action » fondateur. S'impose, alors, un glissement progressif vers un paradigme managérial qui met la focale sur les difficultés de financement, d'efficacité, la qualité du service et le questionnement de la légitimité de l'État social.
+
+Dans le premier chapitre, Jean-Pierre Tabin et ses collègues explorent, à partir de la rhétorique de l'État depuis les années 2000, les politiques suisses en direction des personnes invalides. Ils identifient finement une logique « capacitiste » visant la re-marchandisation à tout prix, via un nouvel ordre d'employabilité passant par l'acceptation d'une norme d'emploi « médiocre » et, de fait, réduisant la « crédibilité épistémique » de la personne en situation de handicap psychique. Dans les Structures d'Insertion par l'Activité Économique (SIAE) analysées par Hervé Jory dans le cinquième chapitre, la prévalence des compétences d'adaptation sociale sur la formation didactique et le savoir-faire professionnel correspond à une précarisation du profil attendu des publics. L'inversion du statut de la formation, dans ces structures d'insertion, tend à favoriser des conditions d'acceptation de conditions de travail pénibles pour des emplois sous-qualifiés. Ce nouveau cadre normatif de l'inclusion professionnelle repose sur le postulat « d'insérer pour former » où l'insertion se suffit en elle-même. Il s'agit de privilégier l'adaptation quasi immédiate à l'emploi et ses difficultés, en particulier la capacité à supporter des conditions de travail éprouvantes (port de charges lourdes, intempéries…) plutôt que l'intégration de savoirs professionnels et une qualification capitalisable.
+
+L'analyse de tous ces segments de l'intervention sociale est à même d'identifier une logique de responsabilisation des publics et un tournant managérial souvent pénalisants. Mais la grammaire managériale reste fortement questionnée dans les pratiques concrètes des acteurs. Un deuxième grand apport de l'ouvrage est donc d'étudier les engagements moraux et les micro-résistances éthiques des intervenants·es infléchissant parfois certaines modalités de l'intervention sociale. Au-delà des cadres normatifs, des professionnels inventent dès lors des pratiques d'écarts éthiques pour redonner sens à leur action.
+
+Ainsi, dans l'urgence sociale présentée par Hélène Marin et Béatrice Bertho (chapitre 3), la mobilisation bénévole de professionnels illustre la volonté de participer à la neutralisation d'un déficit d'action publique récurrent, en contradiction avec les principes moraux de l'État social. Un engagement solidaire, fait en parallèle de leur travail salarié, s'instaure dans une ville de Suisse romane afin de faire face à une « politique de la pénurie » (p. 48) de l'accueil national des personnes sans-abris. Ce « bénévolat solidaire » définit ce que l'on peut appeler une « résistivité morale », des micro-résistances enracinées dans les principes de justice sociale au regard des besoins de ce public en grande vulnérabilité psychique et sociale.
+
+En définitive, l'intérêt majeur des thèses de cet ouvrage est de souligner une mutation des cadres normatifs et moraux de l'intervention sociale qui mettent désormais essentiellement l'accent sur une responsabilisation des individus vulnérables, une activation étrécie et pénalisante et privilégiant parfois l'immédiateté de l'insertion par le travail, voire des pratiques de culpabilisation-stigmatisation et des dispositifs d'activation définis par une grammaire managériale. Par contre, ces mutations ne doivent pas oblitérer, car s'exprimant à bas bruit dans les interstices de l'accompagnement, la présence modeste d'un cadre moral et cognitif secondaire d'élargissement du pouvoir d'agir pour les personnes en difficulté. Une responsabilisation que l'on peut qualifier d'« habilitante » est encore visible dans nombre des pratiques d'accompagnement. Ainsi, le Revenu de Solidarité Active (RSA) agricole représente une reconnaissance nouvelle de la vulnérabilité d'une population et un levier d'action potentiel pour des agriculteurs immergés des décennies dans une grande précarité. L'action sociale n'est pas réductible au seul tournant néo-libéral et l'on observe non pas une « nouvelle » morale de l'intervention sociale mais une hybridation de morales dont certaines fondatrices de l'État social et du travail social. Malgré tout, force est de constater que la NGP encadre l'intervention sociale par des normes managériales dissonantes au regard des idéaux universalistes, de l'éthique et de la vulnérabilité des publics et de leurs besoins. Ces nouvelles normes conduisent à une détérioration de l'action pour les usagers et le personnel que l'on retrouve aussi dans l'ensemble des services publics.
+
+---
+
+## Pour citer cet article
+
+**[Auteur]**, « [Titre court de l'ouvrage] », *Comptes rendus*, mis en ligne le [date], consulté le [date].
+
+```
+
+---
+
+Rédige maintenant la note de lecture. Vise ~2000 mots, six paragraphes denses, français académique soutenu. Termine par `FINAL(note_markdown)`.

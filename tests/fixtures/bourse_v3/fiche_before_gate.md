@@ -1,0 +1,122 @@
+# FICHE DE SYNTHÈSE DE THÈSE
+
+## Métadonnées
+
+- **Titre** : La formation de la chronique boursière dans la presse quotidienne française (1801-1870) : Métamorphoses textuelles d'un journalisme de données
+- **Auteur** : Pierre-Carl Langlais
+- **Année** : 2015
+- **Établissement** : Université Paris-Sorbonne, CELSA, École Doctorale V — Concepts et langages
+- **Discipline** : Sciences de l'information et de la communication
+- **Pages** : 697
+
+## Mots-clés
+
+Bourse ; journal ; quotidien ; France ; médias ; humanités numériques ; données ; presse ancienne ; text mining ; agence de presse ; publicité ; télégraphe ; saint-simonisme ; presse économique ; Stock Exchange ; newspaper ; daily ; medias ; digital humanities ; data ; old press ; news agency ; advertisement ; telegraph ; saint-simonism ; financial journalism
+
+## Thèse centrale
+
+La chronique boursière française s'impose entre 1826 et 1856 comme une « forme culturelle » dont l'acceptabilité résulte d'un processus dialectique articulant redistribution des savoirs, régulation éditoriale et systématisation en standard textuel (p. 612). Ce processus s'actualise en trois phases : la chronique devient envisageable par l'irrigation du savoir financier dans le savoir général, elle se matérialise par des arbitrages sociaux et techniques singuliers, puis elle se mue en modèle standard qui co-produit son lectorat et légitime un discours critique sur la société (p. 612-613). Cette acceptabilité se définit historiquement par la naissance d'une rubrique standardisée, marquée par la publication de la « Revue de la Bourse de Paris » par Isaac Pereire le 29 janvier 1838, et aboutit vingt ans plus tard à l'embauche systématique de chroniqueurs spécialisés dans chaque grand quotidien généraliste (p. 697).
+
+## Questions de recherche
+
+- « comment l'écriture journalistique régulière de la Bourse est-elle devenu acceptable ? » (p. 20)
+- « Par quelles étapes successives, les compte-rendu exceptionnels et malaisés de l'activité du Palais Bron-gniart laissent-ils place à un exercice standardisé ? » (p. 20)
+- « Comment et pourquoi les rédactions consacrent-elles une partie de leurs ressources à recruter des chroniqueurs spécialisés ? » (p. 20)
+- « Et dans quelle mesure les acteurs et les énonciateurs privilégiés de la Bourse (en parti-culier les institutions financières) se sont-elles adaptées à l'irruption de ce discours ? » (p. 20)
+- « comment décrire, analyser et conceptualiser un espace communicationnel en mouvement sans le réifier a posteriori ? » (p. 29)
+- « comment rendre compte de la mutabilité des catégories et des notions employées dans les textes étudiés, sans aboutir à l’amoncellement de cas particuliers ? » (p. 29)
+- « comment prétendre dégager des règles ou des normes préludant à la formulation d'un ensemble de textes, alors même que ces règles sont en cours d’élaboration ? » (p. 29)
+
+## Réponses aux questions de recherche
+
+- « comment l'écriture journalistique régulière de la Bourse est-elle devenu acceptable ? » : « Notre réflexion sur l'acceptabilité se déploie à deux niveaux. Au niveau de l'objet étudié, il s'agissait de considérer l'émergence de la chronique boursière en tant qu'événement unique ayant fait l'objet d'une acceptation par certains acteurs éditoriaux. Au niveau des méthodologies employées, nous devions nous donner les moyens de cerner le fait d'être accepté, l'acceptabilisation. » (p. 612)
+- « Par quelles étapes successives, les compte-rendu exceptionnels et malaisés de l'activité du Palais Bron-gniart laissent-ils place à un exercice standardisé ? » : « Les trois parties correspondent aux principales phases d'un processus d'acceptation : la chronique boursière devient envisageable ; elle se matérialise dans la publication journalistique ; elle se mue en modèle standard. » (p. 612)
+- « Comment et pourquoi les rédactions consacrent-elles une partie de leurs ressources à recruter des chroniqueurs spécialisés ? » : « Le recrutement des bulletiniers a été partiellement déterminé par les prédilections exprimées par une production écrite et/ou par les considérations normatives accompagnant cette production. Dans une presse encore essentiellement "politique et littéraire", les profils explicitement commerciaux étaient défavorisés au profil d'itinéraires hybrides, articulant une formation aux humanités et des expériences dans le négoce. » (p. 614)
+- « Et dans quelle mesure les acteurs et les énonciateurs privilégiés de la Bourse (en parti-culier les institutions financières) se sont-elles adaptées à l'irruption de ce discours ? » : « De 1838 à la fin des années 1860, les chroniqueurs boursiers bénéficient d'une conjoncture privilégiée. [...] Ces acteurs subissent cette transformation de manière passive : ils ne sont pas encore en mesure de contrôler la mise en circulation du savoir qu'ils produisent. Or, nous assistons dans un second temps à une professionnalisation de l'émission et de l'analyse des données boursières. [...] L'autonomie de la chronique boursière est graduellement émiettée par l'affirmation d'autres énonciateurs. » (p. 617-618)
+- « comment décrire, analyser et conceptualiser un espace communicationnel en mouvement sans le réifier a posteriori ? » : « Notre approche repose sur une mise en tension entre des pratiques effectives et leurs projections symboliques et normatives. [...] Nous nous sommes ainsi efforcé de remplacer des conceptions héritées par des dénominations "faillibles", en ce sens que nous donnons le mode d'emploi et de fabrique des catégories employées. » (p. 629)
+- « comment rendre compte de la mutabilité des catégories et des notions employées dans les textes étudiés, sans aboutir à l’amoncellement de cas particuliers ? » : « La notion de culture textuelle forme la clé de voûte de cette reconsidération. [...] En parlant de culture textuelle boursière plutôt que de Bourse nous cherchons à désigner plus précisément l'articulation d'un certain réseau d'écriture et d'une certaine configuration sémiotique, technique et sociale. » (p. 629)
+- « comment prétendre dégager des règles ou des normes préludant à la formulation d'un ensemble de textes, alors même que ces règles sont en cours d’élaboration ? » : « L'élaboration de notre thèse nous incite à formuler l'hypothèse suivante : il n'est pas possible de faire la part des choses. Le discontinu s'insère dans le continu et, réciproquement, les actions apparemment singulières portent la marque d'aspirations collectives. » (p. 613-614)
+
+## Hypothèses
+
+**Principale** : L'intégration d'un discours sur la Bourse dans la presse répond à un processus d'acceptabilité qui articule des variables mouvantes et des « dislocations éventuelles », plutôt qu'à une équation simple de causalité linéaire (p. 22-23).
+**Secondaires** :
+- La chronique boursière fonctionne comme une « consensation dialogique » qui construit et préjuge l'identité de son lectorat en anticipant des attentes distinctes de celles de la une du journal (p. 24-25).
+- L'analyse conjointe des archives numérisées et de la notion de « culture textuelle » permet d'articuler simultanément les manifestations techniques, sémiotiques et sociales de la saisie sélective des textes (p. 31).
+- Le discontinu s'insère dans le continu : les actions singulières portent la marque d'aspirations collectives, formant un « complexe de singularisation/généralisation » (p. 613-614).
+- Les parcours biographiques des chroniqueurs (« sociobiographies ») ne sont pas de simples choix individuels arbitraires, mais révèlent « l'emprise de phénomènes collectifs de plus grande ampleur » et l'influence d'héritages culturels et idéologiques (p. 130-131).
+- La restitution des corpus OCRisés ne relève pas d'une simple correction technique, mais exige une connaissance anticipée de la « culture textuelle propre à ces chroniques hebdomadaires » pour identifier et corriger les déviations structurelles des algorithmes (p. 141).
+
+## Méthodologie
+
+- **Approche** : Mixte (qualitative/quantitative), diachronique et généalogique, articulée autour de l'étude des « cultures textuelles » et de la « rétroactivité constante entre le champ documentaire, éditorial et poétique/discursif » (p. 111). Elle mobilise une « distanciation » méthodologique via la « lecture distante » (*Distant Reading*) pour discerner les « motifs structurants, qui règlent la fabrication, la formulation et la circulation d’une production écrite » (p. 112), tout en maintenant une dialectique entre l'analyse statistique des grands ensembles et l'exégèse qualitative des ruptures et normes textuelles (p. 113-114).
+- **Méthode** : Développement personnalisé de scripts en Python et R pour automatiser l'extraction, le nettoyage et l'analyse des corpus (p. 112). Création de l'application `Pyllica` pour récupérer et segmenter les archives de Gallica via des séparateurs textuels et des boucles itératives (p. 117, p. 134-135). Traitement systématique des erreurs OCR par substitution algorithmique (expressions régulières) et correction manuelle guidée par la connaissance du régime de textualité (p. 136-139). Analyse des correspondances et projection de réseaux lexicaux sur des bases de données relationnelles (Postgres) structurées par phrases (p. 117, p. 128). Le chercheur précise avoir rédigé « 142 scripts rédigés dans le langage python et 50 dans le langage R » (p. 118).
+- **Corpus/Données** : 
+  - *Corpus principal* : 1516 chroniques boursières hebdomadaires du *Journal des débats* extraites via `Pyllica`, couvrant la période 1838-1870 (p. 127).
+  - *Sondages comparatifs* : Chroniques hebdomadaires de *La Presse*, *Le Siècle*, *Le Constitutionnel* et *Le Temps* sur deux séquences de deux ans (1851-1852 et 1861-1862) (p. 127-128).
+  - *Corpus contextuels* : Données bibliographiques de la *Bibliographie de la France* et de l'*Almanach de commerce* pour la géolocalisation et le repérage des publications (p. 129) ; formes successives du tableau de cotation dans le *Journal des débats* (1800-1870) ; compte-rendus du *Constitutionnel* (janv.-fév. 1829) ; pages publicitaires du *Journal des débats* (avr. 1833 et 1837) ; 18 chroniques affermées dans *L'Ami de la religion* (oct. 1860-janv. 1861) (p. 129).
+  - *Base biographique* : Répertoire de « bulletiniers » compilé à partir de portraits de presse, préfaces et pamphlets, articulant données normalisées et fragments documentaires (p. 129-130).
+- **Justification** : Nécessité de surmonter les biais de sélection des bibliothèques numériques et les filtres de lecture canoniques en s'appuyant sur la « lecture distante » de Franco Moretti et les perspectives de la *culturonomics* (p. 113-114). La programmation permet d'expliciter les pratiques de recherche (« textualisation des pratiques ») et de construire un « dialecte » méthodologique adapté, évitant le conditionnement des logiciels préformatés (p. 112, p. 117). Le recours aux bibliographies anciennes (*Bibliographie de la France*, *Almanach de commerce*) est justifié par leur dimension « performative » pour restituer la diversité et la hiérarchisation des productions textuelles de l'époque, occultées par les indexations modernes (p. 132-133). La focalisation sur le *Journal des débats* et les chroniques hebdomadaires repose sur leur statut de « référence active » et de « laboratoire d'usages » dans un système médiatique fortement hiérarchisé (p. 122).
+
+## Fil rouge
+
+Culture textuelle telle que définie par l'auteur (p. 31, p. 629), reliant la genèse du journalisme boursier à sa dispersion via l'articulation entre les pratiques effectives d'écriture, les configurations sémiotiques et techniques, et les projections normatives des acteurs éditoriaux.
+
+## Plan (Structure)
+
+- **Préambule Méthodologique** : Démontre que l'analyse des textes émergents exige une dialectique entre outils numériques et culture textuelle en montrant comment les notions d'épiphanie et de filtre de lecture permettent de saisir la visibilité sociale des énoncés.
+- **La genèse du journalisme boursier** : Démontre que l'émergence du discours boursier dans la presse résulte d'une redistribution des savoirs et d'une configuration spécifique de l'économie générale des textes en montrant les conditions initiales qui ont rendu possible le couple journal-Bourse.
+- **La régulation d'une écriture boursière (1829-1848)** : Démontre que la matérialisation d'une expression autorisée s'opère par des arbitrages sociaux, techniques et éditoriaux en montrant comment les rôles, les ressources et les liaisons intertextuelles se structurent pour encadrer la recension régulière.
+- **La dispersion d'une forme (1850-1870)** : Démontre que la forme acceptée détermine ses propres normes et son univers d'énoncés admissibles en montrant la transformation de la chronique en standard textuel, l'adoption de tropes récurrents et la systématisation des canaux de diffusion.
+
+## Cadre théorique
+
+- **Cadre principal** : Michel Foucault — conditions d'acceptabilité / formations discursives (p. 21, p. 613, p. 635) — structure l'analyse globale en définissant l'univers des énoncés possibles, la hiérarchie implicite des discours et les « faisceaux de rapports » entre termes usuellement énoncés conjointement.
+- **Cadres secondaires** :
+  - Michael Schudson — journalisme comme culture / forme culturelle (p. 23-25) — permet d'interroger les présupposés normatifs du « qui », « quoi », « où » et d'analyser comment la chronique construit l'identité de son lectorat.
+  - Jean-François Tétu et Maurice Mouillaud — sémiotique de l'événement / lecture codée (p. 24, p. 28) — sert à analyser le pouvoir normatif des procédés de fabrique de l'information et la standardisation de la saisie de l'expérience boursière.
+  - James Carey — rituels communicationnels (p. 25) — éclaire la fixation des rôles énonciatifs et la distribution des positions sociales dans la réception des pages financières.
+  - Delphine Gardey — métamorphose des régimes de textualité (p. 26) — contextualise le passage d'un ancien régime du classement à une textualisation massive et industrielle des pratiques financières.
+  - Roland Barthes — de l'œuvre au texte / malaise classificatoire (p. 621-622) — éclaire la déconstruction des catégories héritées et la nécessité d'une reconstruction raisonnée face à l'informatisation des textes.
+
+## Concepts clés
+
+**CONCEPT** : CULTURE TEXTUELLE
+**SENS** : « des ensembles textuels caractérisés par une symbiose entre les conditions de circulation des productions écrites et les constructions stylistiques et éditoriales effectives » (p. 31)
+**ORIGINE** : notion circulante dans les sciences du texte, formalisée par l'auteur en une grille de lecture analytique et clé de voûte de la thèse.
+
+**CONCEPT** : RECONNAISSANCE TEXTUELLE
+**SENS** : « découle d'arbitrages complexes entre acteurs, outils et normes documentaires » qui « conditionnent la morphologie des collections et les modes de lecture et de retranscription » (p. 39)
+**ORIGINE** : propre à l'auteur, conceptualisé pour décrire la numérisation non pas comme une simple opération technique, mais comme un processus composite façonnant les filtres de lecture et les représentations du texte.
+
+**CONCEPT** : DIALECTE DE PROGRAMMATION
+**SENS** : « un "dialecte" ou "pidgin" personnel, partiellement distinct des inflexions propres au langage originel », bâti « graduellement » par l'imbrication de fonctions et de scripts sur-mesure (p. 117)
+**ORIGINE** : propre à l'auteur, désigne l'outillage computationnel personnalisé qui textualise et explicite les pratiques de recherche, constituant un « devenir-texte de la recherche » (p. 112).
+
+**CONCEPT** : RÉGIMES DE TEXTUALITÉ
+**SENS** : conceptions communément partagées de ce qui fait texte, évoluant continuellement et rendant le journalisme boursier apte à altérer ses propres coordonnées (p. 29-30)
+**ORIGINE** : propre à l'auteur, articulé à la « tectonique des textes » pour décrire un espace communicationnel en mouvement et les normes de lisibilité qui se transforment avec la numérisation.
+
+**CONCEPT** : ARCHITEXTE NUMÉRIQUE
+**SENS** : structures de balisage et d'interface qui « procèdent à une assimilation forcée de collections hétérogènes, tout en présentant tous les simulacres de l'homogénéité » (p. 57)
+**ORIGINE** : emprunté à Gérard Genette et retravaillé par l'auteur pour analyser comment les plateformes de numérisation imposent un formalisme commun qui écrase les spécificités matérielles et éditoriales des documents patrimoniaux.
+
+## Ancrage empirique (ou concret)
+
+- Comparaison diachronique de deux journées emblématiques : l'inauguration du Palais Brongniart le 4 novembre 1826 (couverture médiatique politique et esthétique, occultation du financier) et une journée ordinaire le 4 novembre 1856 (bulletins financiers réguliers, jargon technique, chroniques de Jules Paton, Alphonse Lauvray, Ildefonse Rousset) (p. 14-20).
+- Analyse des chroniques du *Journal des débats*, du *Siècle*, de *La Presse* et du *Constitutionnel* pour mesurer l'émergence d'un « standard textuel » et la spécialisation des chroniqueurs (p. 18-20).
+- Exploitation des archives Gallica des grands quotidiens français du XIXe siècle via OCR pour extraire des données textuelles et évaluer statistiquement l'emploi de locutions boursières, complétée par des requêtes ciblées sur des termes rares comme « donnée » (p. 30-31, p. 630).
+- Étude du compte-rendu du *Constitutionnel* (1829) retranscrit manuellement pour identifier des formules récurrentes et des schémas de phrase procéduraux (p. 634).
+
+## Opposition / Contre-argumentation
+
+- **Sciences économiques / économie de la communication** : occultation des procédures communicationnelles et conception désincarnée du marché, réduisant les textes financiers à de simples « supports indifférents d'un savoir abstrait » ou à des « outils de transmission transitoires » (p. 11).
+- **Études de corrélations statistiques (type Tetlock)** : effets limitatifs qui permettent de constater une influence sans la qualifier, et éludent les déformations et modalités de mise en forme de l'information boursière par les journalistes (p. 13-14).
+- **Approches synchroniques ou réifiantes** : tentatives de situer les métamorphoses textuelles dans un espace communicationnel stabilisé ou de classer les pratiques selon des ruptures/évolutions par rapport à un usage supposé fixe, ce qui produit une « photographie floue de rapports de force instables » (p. 28).
+- **Usage naïf des algorithmes / API des éditeurs** : tentation de substituer aux catégories héritées des désignations opérationnelles pour un substrat technique, risquant une instrumentalisation et un « effet d'inertie » considérable (p. 639-640).
+
+## Apport principal
+
+- **Théorique** : Formule la notion de « culture textuelle » comme symbiose entre circulation des écrits et constructions éditoriales, permettant de penser l'émergence du journalisme boursier non comme un reflet passif, mais comme une force agissante qui co-produit son sujet et son support (p. 31, p. 629).
+- **Méthodologique** : Propose une dialectique articulée entre l'analyse numérique de vastes corpus OCR (recherche de motifs, évaluation statistique, réseaux de mots) et l'étude qualitative de ruptures textuelles, afin de décrire un espace communicationnel en mouvement sans le réifier a posteriori, tout en documentant explicitement le processus de recherche via une « grammaire des délégations poétiques » (p. 30-31, p. 627, p. 630). Développement de l'application Pyllica pour le scraping et la structuration en base de données des chroniques hebdomadaires, ouvrant la voie à l'étude informatisée des poétiques journalistiques (p. 697).
+- **Critique** : Remet en cause la naturalisation des médias dans les sciences économiques et la réduction des textes financiers à des données scalaires, en démontrant que la textualité boursière a un commencement historique, des conditions d'acceptabilité spécifiques et qu'elle interroge rétroactivement les limites de la mise en données du social (p. 11-14, p. 617, p. 641).

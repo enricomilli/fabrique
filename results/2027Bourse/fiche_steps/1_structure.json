@@ -1,0 +1,1439 @@
+{
+  "thesis_id": "2027Bourse",
+  "parquet_blocks": 6305,
+  "parquet_pages": 695,
+  "metadata": {
+    "titre": "La formation de la chronique boursière dans la presse quotidienne française (1801-1870) *Métamorphoses textuelles d'un journalisme de données*",
+    "auteur": "Pierre-Carl Langlais",
+    "annee": "2015",
+    "etablissement": "Université Paris-Sorbonne, CELSA, École Doctorale V — Concepts et langages",
+    "discipline": "Sciences de l'information et de la communication",
+    "mots_cles": [
+      "Bourse",
+      "journal",
+      "quotidien",
+      "France",
+      "médias",
+      "humanités numériques",
+      "données",
+      "presse ancienne",
+      "text mining",
+      "agence de presse",
+      "publicité",
+      "télégraphe",
+      "saint-simonisme",
+      "presse économique",
+      "Stock Exchange",
+      "newspaper",
+      "daily",
+      "medias",
+      "digital humanities",
+      "data",
+      "old press",
+      "news agency",
+      "advertisement",
+      "telegraph",
+      "saint-simonism",
+      "financial journalism"
+    ],
+    "pages": 697
+  },
+  "toc": [
+    {
+      "title": "Table des matières",
+      "page_start": 5,
+      "level": 0,
+      "page_end": 10,
+      "role": "frontmatter",
+      "page_start_parquet": 5,
+      "page_end_parquet": 10
+    },
+    {
+      "title": "Introduction",
+      "page_start": 11,
+      "level": 0,
+      "page_end": 36,
+      "role": "frontmatter",
+      "page_start_parquet": 11,
+      "page_end_parquet": 36
+    },
+    {
+      "title": "Préambule Méthodologique",
+      "page_start": 37,
+      "level": 0,
+      "page_end": 38,
+      "role": "part",
+      "page_start_parquet": 37,
+      "page_end_parquet": 38
+    },
+    {
+      "title": "1 Reconnaissance textuelle",
+      "page_start": 39,
+      "level": 0,
+      "page_end": 72,
+      "role": "chapter",
+      "page_start_parquet": 39,
+      "page_end_parquet": 72
+    },
+    {
+      "title": "1.1 Les cadres historiques de l'indexation",
+      "page_start": 40,
+      "level": 1,
+      "page_end": 53,
+      "role": "section",
+      "page_start_parquet": 40,
+      "page_end_parquet": 53
+    },
+    {
+      "title": "1.1.1 L'omission des Tables du Temps",
+      "page_start": 40,
+      "level": 2,
+      "page_end": 40,
+      "role": "section",
+      "page_start_parquet": 40,
+      "page_end_parquet": 40
+    },
+    {
+      "title": "1.1.2 Ordres et préjugés",
+      "page_start": 41,
+      "level": 2,
+      "page_end": 48,
+      "role": "section",
+      "page_start_parquet": 41,
+      "page_end_parquet": 48
+    },
+    {
+      "title": "1.1.3 Reconsidérer le texte",
+      "page_start": 49,
+      "level": 2,
+      "page_end": 53,
+      "role": "section",
+      "page_start_parquet": 49,
+      "page_end_parquet": 53
+    },
+    {
+      "title": "1.2 Numérisation et filtres de lecture",
+      "page_start": 54,
+      "level": 1,
+      "page_end": 72,
+      "role": "section",
+      "page_start_parquet": 54,
+      "page_end_parquet": 72
+    },
+    {
+      "title": "1.2.1 La formation des collections de périodiques : une question d'arbitrage",
+      "page_start": 55,
+      "level": 2,
+      "page_end": 61,
+      "role": "section",
+      "page_start_parquet": 55,
+      "page_end_parquet": 61
+    },
+    {
+      "title": "1.2.2 La reconnaissance des caractères : une nouvelle dynamique d'indexation",
+      "page_start": 62,
+      "level": 2,
+      "page_end": 72,
+      "role": "section",
+      "page_start_parquet": 62,
+      "page_end_parquet": 72
+    },
+    {
+      "title": "2 La notion de culture textuelle",
+      "page_start": 73,
+      "level": 0,
+      "page_end": 110,
+      "role": "chapter",
+      "page_start_parquet": 73,
+      "page_end_parquet": 110
+    },
+    {
+      "title": "2.1 L'itinéraire d'un concept",
+      "page_start": 75,
+      "level": 1,
+      "page_end": 80,
+      "role": "section",
+      "page_start_parquet": 75,
+      "page_end_parquet": 80
+    },
+    {
+      "title": "2.1.1 À la suite de Foucault...",
+      "page_start": 75,
+      "level": 2,
+      "page_end": 78,
+      "role": "section",
+      "page_start_parquet": 75,
+      "page_end_parquet": 78
+    },
+    {
+      "title": "2.1.2 L'émergence d'une communauté de recherche",
+      "page_start": 79,
+      "level": 2,
+      "page_end": 80,
+      "role": "section",
+      "page_start_parquet": 79,
+      "page_end_parquet": 80
+    },
+    {
+      "title": "2.2 Essai de définition",
+      "page_start": 81,
+      "level": 1,
+      "page_end": 90,
+      "role": "section",
+      "page_start_parquet": 81,
+      "page_end_parquet": 90
+    },
+    {
+      "title": "2.2.1 Le texte : une corrélation de phénomènes hétérogènes",
+      "page_start": 81,
+      "level": 2,
+      "page_end": 84,
+      "role": "section",
+      "page_start_parquet": 81,
+      "page_end_parquet": 84
+    },
+    {
+      "title": "2.2.2 Un objet emblématique des cultures textuelles : la donnée",
+      "page_start": 85,
+      "level": 2,
+      "page_end": 87,
+      "role": "section",
+      "page_start_parquet": 85,
+      "page_end_parquet": 87
+    },
+    {
+      "title": "2.2.3 Quelques problèmes méthodologiques",
+      "page_start": 88,
+      "level": 2,
+      "page_end": 90,
+      "role": "section",
+      "page_start_parquet": 88,
+      "page_end_parquet": 90
+    },
+    {
+      "title": "2.3 Un processus historique : le devenir texte de la Bourse",
+      "page_start": 91,
+      "level": 1,
+      "page_end": 110,
+      "role": "section",
+      "page_start_parquet": 91,
+      "page_end_parquet": 110
+    },
+    {
+      "title": "2.3.1 Les conditions règlementaires d'une production textuelle",
+      "page_start": 91,
+      "level": 2,
+      "page_end": 95,
+      "role": "section",
+      "page_start_parquet": 91,
+      "page_end_parquet": 95
+    },
+    {
+      "title": "2.3.2 Un espace-temps sous contrôle",
+      "page_start": 96,
+      "level": 2,
+      "page_end": 99,
+      "role": "section",
+      "page_start_parquet": 96,
+      "page_end_parquet": 99
+    },
+    {
+      "title": "2.3.3 Le régime de la réécriture",
+      "page_start": 100,
+      "level": 2,
+      "page_end": 104,
+      "role": "section",
+      "page_start_parquet": 100,
+      "page_end_parquet": 104
+    },
+    {
+      "title": "2.3.4 Renseigner des formulaires : les cadres éditoriaux du texte boursier",
+      "page_start": 105,
+      "level": 2,
+      "page_end": 110,
+      "role": "section",
+      "page_start_parquet": 105,
+      "page_end_parquet": 110
+    },
+    {
+      "title": "3 Corpus et méthodologies",
+      "page_start": 111,
+      "level": 0,
+      "page_end": 142,
+      "role": "chapter",
+      "page_start_parquet": 111,
+      "page_end_parquet": 142
+    },
+    {
+      "title": "3.1 En lisant, en écrivant, en programmant",
+      "page_start": 112,
+      "level": 1,
+      "page_end": 120,
+      "role": "section",
+      "page_start_parquet": 112,
+      "page_end_parquet": 120
+    },
+    {
+      "title": "3.1.1 L'art de la lecture distante",
+      "page_start": 112,
+      "level": 2,
+      "page_end": 114,
+      "role": "section",
+      "page_start_parquet": 112,
+      "page_end_parquet": 114
+    },
+    {
+      "title": "3.1.2 Du langage au dialecte : l'élaboration d'un outillage personnel",
+      "page_start": 115,
+      "level": 2,
+      "page_end": 117,
+      "role": "section",
+      "page_start_parquet": 115,
+      "page_end_parquet": 117
+    },
+    {
+      "title": "3.1.3 Textualiser la fabrique d'un savoir",
+      "page_start": 118,
+      "level": 2,
+      "page_end": 120,
+      "role": "section",
+      "page_start_parquet": 118,
+      "page_end_parquet": 120
+    },
+    {
+      "title": "3.2 Délimiter les champs d'observation",
+      "page_start": 121,
+      "level": 1,
+      "page_end": 130,
+      "role": "section",
+      "page_start_parquet": 121,
+      "page_end_parquet": 130
+    },
+    {
+      "title": "3.2.1 Un corpus sur le temps long : le Journal des débats (1838-1870)",
+      "page_start": 124,
+      "level": 2,
+      "page_end": 126,
+      "role": "section",
+      "page_start_parquet": 124,
+      "page_end_parquet": 126
+    },
+    {
+      "title": "3.2.2 Des sondages dans le système médiatique : 1851/52 et 1861/62",
+      "page_start": 127,
+      "level": 2,
+      "page_end": 127,
+      "role": "section",
+      "page_start_parquet": 127,
+      "page_end_parquet": 127
+    },
+    {
+      "title": "3.2.3 Contextes et contours : situer la chronique boursière dans une culture textuelle",
+      "page_start": 128,
+      "level": 2,
+      "page_end": 130,
+      "role": "section",
+      "page_start_parquet": 128,
+      "page_end_parquet": 130
+    },
+    {
+      "title": "3.3 Les modalités d'une reconstitution",
+      "page_start": 131,
+      "level": 1,
+      "page_end": 142,
+      "role": "section",
+      "page_start_parquet": 131,
+      "page_end_parquet": 142
+    },
+    {
+      "title": "3.3.1 Réguler la représentativité des collections documentaires",
+      "page_start": 131,
+      "level": 2,
+      "page_end": 133,
+      "role": "section",
+      "page_start_parquet": 131,
+      "page_end_parquet": 133
+    },
+    {
+      "title": "3.3.2 L'extraction documentaire",
+      "page_start": 134,
+      "level": 2,
+      "page_end": 134,
+      "role": "section",
+      "page_start_parquet": 134,
+      "page_end_parquet": 134
+    },
+    {
+      "title": "3.3.3 Restituer le document numérique",
+      "page_start": 135,
+      "level": 2,
+      "page_end": 142,
+      "role": "section",
+      "page_start_parquet": 135,
+      "page_end_parquet": 142
+    },
+    {
+      "title": "La genèse du journalisme boursier",
+      "page_start": 143,
+      "level": 0,
+      "page_end": 150,
+      "role": "part",
+      "page_start_parquet": 143,
+      "page_end_parquet": 150
+    },
+    {
+      "title": "4 De l'indexation à l'exposition",
+      "page_start": 151,
+      "level": 0,
+      "page_end": 202,
+      "role": "chapter",
+      "page_start_parquet": 151,
+      "page_end_parquet": 202
+    },
+    {
+      "title": "4.1 L'utopie de Claude Chappe",
+      "page_start": 154,
+      "level": 1,
+      "page_end": 171,
+      "role": "section",
+      "page_start_parquet": 154,
+      "page_end_parquet": 171
+    },
+    {
+      "title": "4.1.1 La promesse d'un réseau de Bourses (mai 1802)",
+      "page_start": 155,
+      "level": 2,
+      "page_end": 158,
+      "role": "section",
+      "page_start_parquet": 155,
+      "page_end_parquet": 158
+    },
+    {
+      "title": "4.1.2 Promesses et mirages d'une utopie communicationnelle",
+      "page_start": 159,
+      "level": 2,
+      "page_end": 164,
+      "role": "section",
+      "page_start_parquet": 159,
+      "page_end_parquet": 164
+    },
+    {
+      "title": "4.1.3 Une déformation de l'espace-temps",
+      "page_start": 165,
+      "level": 2,
+      "page_end": 171,
+      "role": "section",
+      "page_start_parquet": 165,
+      "page_end_parquet": 171
+    },
+    {
+      "title": "4.2 La codification d'un savoir-faire informationnel",
+      "page_start": 172,
+      "level": 1,
+      "page_end": 186,
+      "role": "section",
+      "page_start_parquet": 172,
+      "page_end_parquet": 186
+    },
+    {
+      "title": "4.2.1 Classer et indexer un savoir économique",
+      "page_start": 172,
+      "level": 2,
+      "page_end": 175,
+      "role": "section",
+      "page_start_parquet": 172,
+      "page_end_parquet": 175
+    },
+    {
+      "title": "4.2.2 L'élaboration de circulations transversales : le rôle de l'autographie",
+      "page_start": 176,
+      "level": 2,
+      "page_end": 178,
+      "role": "section",
+      "page_start_parquet": 176,
+      "page_end_parquet": 178
+    },
+    {
+      "title": "4.2.3 Du savoir faire au faire savoir : le domaine public de Jacques Bresson",
+      "page_start": 179,
+      "level": 2,
+      "page_end": 183,
+      "role": "section",
+      "page_start_parquet": 179,
+      "page_end_parquet": 183
+    },
+    {
+      "title": "4.2.4 L'élaboration d'un régime légal structuré par la publicité",
+      "page_start": 184,
+      "level": 2,
+      "page_end": 186,
+      "role": "section",
+      "page_start_parquet": 184,
+      "page_end_parquet": 186
+    },
+    {
+      "title": "4.3 Le projet de l'Office-Correspondance",
+      "page_start": 187,
+      "level": 1,
+      "page_end": 202,
+      "role": "section",
+      "page_start_parquet": 187,
+      "page_end_parquet": 202
+    },
+    {
+      "title": "4.3.1 Une initiation à la finance : la vocation pédagogique de l'Office",
+      "page_start": 188,
+      "level": 2,
+      "page_end": 190,
+      "role": "section",
+      "page_start_parquet": 188,
+      "page_end_parquet": 190
+    },
+    {
+      "title": "4.3.2 L'élaboration d'une nouvelle culture textuelle",
+      "page_start": 191,
+      "level": 2,
+      "page_end": 194,
+      "role": "section",
+      "page_start_parquet": 191,
+      "page_end_parquet": 194
+    },
+    {
+      "title": "4.3.3 Une dynamique de standardisation",
+      "page_start": 195,
+      "level": 2,
+      "page_end": 202,
+      "role": "section",
+      "page_start_parquet": 195,
+      "page_end_parquet": 202
+    },
+    {
+      "title": "5 Le moment Villèle",
+      "page_start": 203,
+      "level": 0,
+      "page_end": 234,
+      "role": "chapter",
+      "page_start_parquet": 203,
+      "page_end_parquet": 234
+    },
+    {
+      "title": "5.1 Les émissions de rentes de la Restauration (1816-1823)",
+      "page_start": 205,
+      "level": 1,
+      "page_end": 214,
+      "role": "section",
+      "page_start_parquet": 205,
+      "page_end_parquet": 214
+    },
+    {
+      "title": "5.1.1 Un constat documentaire : la dispersion des discours politiques sur la Bourse",
+      "page_start": 206,
+      "level": 2,
+      "page_end": 209,
+      "role": "section",
+      "page_start_parquet": 206,
+      "page_end_parquet": 209
+    },
+    {
+      "title": "5.1.2 La mise sur agenda des questions financières",
+      "page_start": 210,
+      "level": 2,
+      "page_end": 212,
+      "role": "section",
+      "page_start_parquet": 210,
+      "page_end_parquet": 212
+    },
+    {
+      "title": "5.1.3 Le développement des manuels de Bourse",
+      "page_start": 213,
+      "level": 2,
+      "page_end": 214,
+      "role": "section",
+      "page_start_parquet": 213,
+      "page_end_parquet": 214
+    },
+    {
+      "title": "5.2 La conversion des rentes (1824-1825)",
+      "page_start": 215,
+      "level": 1,
+      "page_end": 221,
+      "role": "section",
+      "page_start_parquet": 215,
+      "page_end_parquet": 221
+    },
+    {
+      "title": "5.2.1 L'onde de choc d'une décision contestée",
+      "page_start": 216,
+      "level": 2,
+      "page_end": 217,
+      "role": "section",
+      "page_start_parquet": 216,
+      "page_end_parquet": 217
+    },
+    {
+      "title": "5.2.2 L'acculturation au bulletin boursier",
+      "page_start": 218,
+      "level": 2,
+      "page_end": 219,
+      "role": "section",
+      "page_start_parquet": 218,
+      "page_end_parquet": 219
+    },
+    {
+      "title": "5.2.3 Un intérêt périodique durable",
+      "page_start": 220,
+      "level": 2,
+      "page_end": 221,
+      "role": "section",
+      "page_start_parquet": 220,
+      "page_end_parquet": 221
+    },
+    {
+      "title": "5.3 La Bourse, un objet de discours circulants",
+      "page_start": 222,
+      "level": 1,
+      "page_end": 234,
+      "role": "section",
+      "page_start_parquet": 222,
+      "page_end_parquet": 234
+    },
+    {
+      "title": "5.3.1 L'utopie saint-simonienne",
+      "page_start": 223,
+      "level": 2,
+      "page_end": 228,
+      "role": "section",
+      "page_start_parquet": 223,
+      "page_end_parquet": 228
+    },
+    {
+      "title": "5.3.2 Une obsession littéraire",
+      "page_start": 229,
+      "level": 2,
+      "page_end": 234,
+      "role": "section",
+      "page_start_parquet": 229,
+      "page_end_parquet": 234
+    },
+    {
+      "title": "6 Une redéfinition des frontières éditoriales",
+      "page_start": 235,
+      "level": 0,
+      "page_end": 258,
+      "role": "chapter",
+      "page_start_parquet": 235,
+      "page_end_parquet": 258
+    },
+    {
+      "title": "6.1 La loi de 1828, un interdit discursif",
+      "page_start": 236,
+      "level": 1,
+      "page_end": 242,
+      "role": "section",
+      "page_start_parquet": 236,
+      "page_end_parquet": 242
+    },
+    {
+      "title": "6.1.1 Le statut légal du périodique : la politique de la complexité",
+      "page_start": 236,
+      "level": 2,
+      "page_end": 237,
+      "role": "section",
+      "page_start_parquet": 236,
+      "page_end_parquet": 237
+    },
+    {
+      "title": "6.1.2 Une nouvelle approche de la censure",
+      "page_start": 238,
+      "level": 2,
+      "page_end": 239,
+      "role": "section",
+      "page_start_parquet": 238,
+      "page_end_parquet": 239
+    },
+    {
+      "title": "6.1.3 Un journalisme économique sans « raisonnement »",
+      "page_start": 240,
+      "level": 2,
+      "page_end": 240,
+      "role": "section",
+      "page_start_parquet": 240,
+      "page_end_parquet": 240
+    },
+    {
+      "title": "6.1.4 Théorie et pratique d'un interdit discursif",
+      "page_start": 241,
+      "level": 2,
+      "page_end": 242,
+      "role": "section",
+      "page_start_parquet": 241,
+      "page_end_parquet": 242
+    },
+    {
+      "title": "6.2 Contours de la presse économique",
+      "page_start": 243,
+      "level": 1,
+      "page_end": 258,
+      "role": "section",
+      "page_start_parquet": 243,
+      "page_end_parquet": 258
+    },
+    {
+      "title": "6.2.1 Généalogie du privilège temporel de la presse généraliste",
+      "page_start": 244,
+      "level": 2,
+      "page_end": 248,
+      "role": "section",
+      "page_start_parquet": 244,
+      "page_end_parquet": 248
+    },
+    {
+      "title": "6.2.2 Vers une hégémonie du quotidien ? La tactique du supplément",
+      "page_start": 249,
+      "level": 2,
+      "page_end": 253,
+      "role": "section",
+      "page_start_parquet": 249,
+      "page_end_parquet": 253
+    },
+    {
+      "title": "6.2.3 L'essor à rebours de la presse spécialisée (1825-1835)",
+      "page_start": 254,
+      "level": 2,
+      "page_end": 258,
+      "role": "section",
+      "page_start_parquet": 254,
+      "page_end_parquet": 258
+    },
+    {
+      "title": "La régulation d'une écriture boursière (1829-1848)",
+      "page_start": 259,
+      "level": 0,
+      "page_end": 264,
+      "role": "part",
+      "page_start_parquet": 259,
+      "page_end_parquet": 264
+    },
+    {
+      "title": "7 Commenter la cotation (1829-1836)",
+      "page_start": 265,
+      "level": 0,
+      "page_end": 296,
+      "role": "chapter",
+      "page_start_parquet": 265,
+      "page_end_parquet": 296
+    },
+    {
+      "title": "7.1 Le compte-rendu du Constitutionnel",
+      "page_start": 266,
+      "level": 1,
+      "page_end": 279,
+      "role": "section",
+      "page_start_parquet": 266,
+      "page_end_parquet": 279
+    },
+    {
+      "title": "7.1.1 L'effet liste",
+      "page_start": 268,
+      "level": 2,
+      "page_end": 271,
+      "role": "section",
+      "page_start_parquet": 268,
+      "page_end_parquet": 271
+    },
+    {
+      "title": "7.1.2 Une construction discursive combinatoire",
+      "page_start": 272,
+      "level": 2,
+      "page_end": 277,
+      "role": "section",
+      "page_start_parquet": 272,
+      "page_end_parquet": 277
+    },
+    {
+      "title": "7.1.3 Une syntaxe nominale et laconique",
+      "page_start": 278,
+      "level": 2,
+      "page_end": 279,
+      "role": "section",
+      "page_start_parquet": 278,
+      "page_end_parquet": 279
+    },
+    {
+      "title": "7.2 Une dispersion lente (1829-1838)",
+      "page_start": 280,
+      "level": 1,
+      "page_end": 285,
+      "role": "section",
+      "page_start_parquet": 280,
+      "page_end_parquet": 285
+    },
+    {
+      "title": "7.2.1 La chronique boursière : une évolution graduelle",
+      "page_start": 281,
+      "level": 2,
+      "page_end": 283,
+      "role": "section",
+      "page_start_parquet": 281,
+      "page_end_parquet": 283
+    },
+    {
+      "title": "7.2.2 Vers une nouvelle absorption de la presse spécialisée?",
+      "page_start": 284,
+      "level": 2,
+      "page_end": 285,
+      "role": "section",
+      "page_start_parquet": 284,
+      "page_end_parquet": 285
+    },
+    {
+      "title": "7.3 La naissance de la publicité financière",
+      "page_start": 286,
+      "level": 1,
+      "page_end": 296,
+      "role": "section",
+      "page_start_parquet": 286,
+      "page_end_parquet": 296
+    },
+    {
+      "title": "7.3.1 Une analyse comparée sous contraintes",
+      "page_start": 286,
+      "level": 2,
+      "page_end": 288,
+      "role": "section",
+      "page_start_parquet": 286,
+      "page_end_parquet": 288
+    },
+    {
+      "title": "7.3.2 De la publicité littéraire à la publicité financière",
+      "page_start": 289,
+      "level": 2,
+      "page_end": 290,
+      "role": "section",
+      "page_start_parquet": 289,
+      "page_end_parquet": 290
+    },
+    {
+      "title": "7.3.3 L'inventivité stylistique de l'écrit publicitaire : l'exemple des Bougies de l'Étoile",
+      "page_start": 291,
+      "level": 2,
+      "page_end": 296,
+      "role": "section",
+      "page_start_parquet": 291,
+      "page_end_parquet": 296
+    },
+    {
+      "title": "8 Création d'une nouvelle forme chronique",
+      "page_start": 297,
+      "level": 0,
+      "page_end": 344,
+      "role": "chapter",
+      "page_start_parquet": 297,
+      "page_end_parquet": 344
+    },
+    {
+      "title": "8.1 Une auctorialité plurielle",
+      "page_start": 299,
+      "level": 1,
+      "page_end": 322,
+      "role": "section",
+      "page_start_parquet": 299,
+      "page_end_parquet": 322
+    },
+    {
+      "title": "8.1.1 Un projet polyphonique",
+      "page_start": 299,
+      "level": 2,
+      "page_end": 306,
+      "role": "section",
+      "page_start_parquet": 299,
+      "page_end_parquet": 306
+    },
+    {
+      "title": "8.1.2 Une lignée de chroniqueurs",
+      "page_start": 307,
+      "level": 2,
+      "page_end": 313,
+      "role": "section",
+      "page_start_parquet": 307,
+      "page_end_parquet": 313
+    },
+    {
+      "title": "8.1.3 Essai d'attribution automatisée",
+      "page_start": 314,
+      "level": 2,
+      "page_end": 322,
+      "role": "section",
+      "page_start_parquet": 314,
+      "page_end_parquet": 322
+    },
+    {
+      "title": "8.2 Composer la chronique",
+      "page_start": 323,
+      "level": 1,
+      "page_end": 334,
+      "role": "section",
+      "page_start_parquet": 323,
+      "page_end_parquet": 334
+    },
+    {
+      "title": "8.2.1 Une poétique énonciative",
+      "page_start": 324,
+      "level": 2,
+      "page_end": 327,
+      "role": "section",
+      "page_start_parquet": 324,
+      "page_end_parquet": 327
+    },
+    {
+      "title": "8.2.2 Les parties de la chronique",
+      "page_start": 328,
+      "level": 2,
+      "page_end": 334,
+      "role": "section",
+      "page_start_parquet": 328,
+      "page_end_parquet": 334
+    },
+    {
+      "title": "8.3 Splendeurs et misères d'une utopie boursière",
+      "page_start": 335,
+      "level": 1,
+      "page_end": 344,
+      "role": "section",
+      "page_start_parquet": 335,
+      "page_end_parquet": 344
+    },
+    {
+      "title": "8.3.1 L'appropriation des idéaux saint-simoniens",
+      "page_start": 335,
+      "level": 2,
+      "page_end": 336,
+      "role": "section",
+      "page_start_parquet": 335,
+      "page_end_parquet": 336
+    },
+    {
+      "title": "8.3.2 Chronique d'une désillusion",
+      "page_start": 337,
+      "level": 2,
+      "page_end": 340,
+      "role": "section",
+      "page_start_parquet": 337,
+      "page_end_parquet": 340
+    },
+    {
+      "title": "8.3.3 L'utopie face aux routines médiatiques",
+      "page_start": 341,
+      "level": 2,
+      "page_end": 344,
+      "role": "section",
+      "page_start_parquet": 341,
+      "page_end_parquet": 344
+    },
+    {
+      "title": "9 L'impulsion publicitaire",
+      "page_start": 345,
+      "level": 0,
+      "page_end": 404,
+      "role": "chapter",
+      "page_start_parquet": 345,
+      "page_end_parquet": 404
+    },
+    {
+      "title": "9.1 Le rôle de la SGA",
+      "page_start": 348,
+      "level": 1,
+      "page_end": 382,
+      "role": "section",
+      "page_start_parquet": 348,
+      "page_end_parquet": 382
+    },
+    {
+      "title": "9.1.1 Une coalition d'intérêts",
+      "page_start": 348,
+      "level": 2,
+      "page_end": 357,
+      "role": "section",
+      "page_start_parquet": 348,
+      "page_end_parquet": 357
+    },
+    {
+      "title": "9.1.2 Ordonner le texte publicitaire",
+      "page_start": 358,
+      "level": 2,
+      "page_end": 365,
+      "role": "section",
+      "page_start_parquet": 358,
+      "page_end_parquet": 365
+    },
+    {
+      "title": "9.1.3 La tentation boursière : limites et métamorphoses de la SGA",
+      "page_start": 366,
+      "level": 2,
+      "page_end": 382,
+      "role": "section",
+      "page_start_parquet": 366,
+      "page_end_parquet": 382
+    },
+    {
+      "title": "9.2 L'émergence d'un genre journalistique",
+      "page_start": 383,
+      "level": 1,
+      "page_end": 404,
+      "role": "section",
+      "page_start_parquet": 383,
+      "page_end_parquet": 404
+    },
+    {
+      "title": "9.2.1 Trois chroniqueurs : l'invention d'une fonction",
+      "page_start": 384,
+      "level": 2,
+      "page_end": 388,
+      "role": "section",
+      "page_start_parquet": 384,
+      "page_end_parquet": 388
+    },
+    {
+      "title": "9.2.2 Imiter ou réinventer : des rapports énonciatifs sous tension",
+      "page_start": 389,
+      "level": 2,
+      "page_end": 396,
+      "role": "section",
+      "page_start_parquet": 389,
+      "page_end_parquet": 396
+    },
+    {
+      "title": "9.2.3 Une phase de consolidation",
+      "page_start": 397,
+      "level": 2,
+      "page_end": 404,
+      "role": "section",
+      "page_start_parquet": 397,
+      "page_end_parquet": 404
+    },
+    {
+      "title": "La dispersion d'une forme (1850-1870)",
+      "page_start": 405,
+      "level": 0,
+      "page_end": 410,
+      "role": "part",
+      "page_start_parquet": 405,
+      "page_end_parquet": 410
+    },
+    {
+      "title": "10 La politique des auteurs",
+      "page_start": 411,
+      "level": 0,
+      "page_end": 488,
+      "role": "chapter",
+      "page_start_parquet": 411,
+      "page_end_parquet": 488
+    },
+    {
+      "title": "10.1 La contrainte légale (1849-1851)",
+      "page_start": 412,
+      "level": 1,
+      "page_end": 431,
+      "role": "section",
+      "page_start_parquet": 412,
+      "page_end_parquet": 431
+    },
+    {
+      "title": "10.1.1 La loi sur les signatures",
+      "page_start": 412,
+      "level": 2,
+      "page_end": 421,
+      "role": "section",
+      "page_start_parquet": 412,
+      "page_end_parquet": 421
+    },
+    {
+      "title": "10.1.2 De la loi à l'usage",
+      "page_start": 422,
+      "level": 2,
+      "page_end": 426,
+      "role": "section",
+      "page_start_parquet": 422,
+      "page_end_parquet": 426
+    },
+    {
+      "title": "10.1.3 La chronique boursière sous le régime de la signature",
+      "page_start": 427,
+      "level": 2,
+      "page_end": 431,
+      "role": "section",
+      "page_start_parquet": 427,
+      "page_end_parquet": 431
+    },
+    {
+      "title": "10.2 Les trois fonctions du chroniqueur",
+      "page_start": 432,
+      "level": 1,
+      "page_end": 453,
+      "role": "section",
+      "page_start_parquet": 432,
+      "page_end_parquet": 453
+    },
+    {
+      "title": "10.2.1 Une fonction-auteur : l'exemple de Jules Paton",
+      "page_start": 432,
+      "level": 2,
+      "page_end": 440,
+      "role": "section",
+      "page_start_parquet": 432,
+      "page_end_parquet": 440
+    },
+    {
+      "title": "10.2.2 La fonction-reporter : Alphonse Lauvray",
+      "page_start": 441,
+      "level": 2,
+      "page_end": 446,
+      "role": "section",
+      "page_start_parquet": 441,
+      "page_end_parquet": 446
+    },
+    {
+      "title": "10.2.3 Un intermédiaire démocratique : Ildefonse Rousset",
+      "page_start": 447,
+      "level": 2,
+      "page_end": 453,
+      "role": "section",
+      "page_start_parquet": 447,
+      "page_end_parquet": 453
+    },
+    {
+      "title": "10.3 L'émergence d'une communauté de pratiques",
+      "page_start": 454,
+      "level": 1,
+      "page_end": 488,
+      "role": "section",
+      "page_start_parquet": 454,
+      "page_end_parquet": 488
+    },
+    {
+      "title": "10.3.1 Quand l'identification crée l'identité : l'invention du bulletinier",
+      "page_start": 455,
+      "level": 2,
+      "page_end": 464,
+      "role": "section",
+      "page_start_parquet": 455,
+      "page_end_parquet": 464
+    },
+    {
+      "title": "10.3.2 Une condition commune",
+      "page_start": 465,
+      "level": 2,
+      "page_end": 472,
+      "role": "section",
+      "page_start_parquet": 465,
+      "page_end_parquet": 472
+    },
+    {
+      "title": "10.3.3 Un emploi du temps partagé",
+      "page_start": 473,
+      "level": 2,
+      "page_end": 479,
+      "role": "section",
+      "page_start_parquet": 473,
+      "page_end_parquet": 479
+    },
+    {
+      "title": "10.3.4 Une cartographie des sociabilités professionnelles",
+      "page_start": 480,
+      "level": 2,
+      "page_end": 488,
+      "role": "section",
+      "page_start_parquet": 480,
+      "page_end_parquet": 488
+    },
+    {
+      "title": "11 Un répertoire de discours",
+      "page_start": 489,
+      "level": 0,
+      "page_end": 560,
+      "role": "chapter",
+      "page_start_parquet": 489,
+      "page_end_parquet": 560
+    },
+    {
+      "title": "11.1 La chronique boursière, au confluent des influences",
+      "page_start": 490,
+      "level": 1,
+      "page_end": 513,
+      "role": "section",
+      "page_start_parquet": 490,
+      "page_end_parquet": 513
+    },
+    {
+      "title": "11.1.1 La réinvention du jargon",
+      "page_start": 490,
+      "level": 2,
+      "page_end": 502,
+      "role": "section",
+      "page_start_parquet": 490,
+      "page_end_parquet": 502
+    },
+    {
+      "title": "11.1.2 Tempête sur les marchés!",
+      "page_start": 503,
+      "level": 2,
+      "page_end": 513,
+      "role": "section",
+      "page_start_parquet": 503,
+      "page_end_parquet": 513
+    },
+    {
+      "title": "11.2 Une poétique journalistique de la donnée boursière",
+      "page_start": 514,
+      "level": 1,
+      "page_end": 539,
+      "role": "section",
+      "page_start_parquet": 514,
+      "page_end_parquet": 539
+    },
+    {
+      "title": "11.2.1 Le travail de la donnée : « Une langue chiffrée des événements »",
+      "page_start": 515,
+      "level": 2,
+      "page_end": 530,
+      "role": "section",
+      "page_start_parquet": 515,
+      "page_end_parquet": 530
+    },
+    {
+      "title": "11.2.2 Une rhétorique : « Les chiffres aussi ont leur éloquence »",
+      "page_start": 531,
+      "level": 2,
+      "page_end": 539,
+      "role": "section",
+      "page_start_parquet": 531,
+      "page_end_parquet": 539
+    },
+    {
+      "title": "11.3 L'art de conjuguer les temps",
+      "page_start": 540,
+      "level": 1,
+      "page_end": 560,
+      "role": "section",
+      "page_start_parquet": 540,
+      "page_end_parquet": 560
+    },
+    {
+      "title": "11.3.1 Une dextérité périodique",
+      "page_start": 541,
+      "level": 2,
+      "page_end": 548,
+      "role": "section",
+      "page_start_parquet": 541,
+      "page_end_parquet": 548
+    },
+    {
+      "title": "11.3.2 Une pensée du cycle",
+      "page_start": 549,
+      "level": 2,
+      "page_end": 560,
+      "role": "section",
+      "page_start_parquet": 549,
+      "page_end_parquet": 560
+    },
+    {
+      "title": "12 Les risques d'une dispersion",
+      "page_start": 561,
+      "level": 0,
+      "page_end": 610,
+      "role": "chapter",
+      "page_start_parquet": 561,
+      "page_end_parquet": 610
+    },
+    {
+      "title": "12.1 Les terrains d'une dissémination",
+      "page_start": 562,
+      "level": 1,
+      "page_end": 573,
+      "role": "section",
+      "page_start_parquet": 562,
+      "page_end_parquet": 573
+    },
+    {
+      "title": "12.1.1 Une présence démultipliée : les pseudonymes de Jules Paton",
+      "page_start": 562,
+      "level": 2,
+      "page_end": 565,
+      "role": "section",
+      "page_start_parquet": 562,
+      "page_end_parquet": 565
+    },
+    {
+      "title": "12.1.2 Contrôler la circulation régionale",
+      "page_start": 566,
+      "level": 2,
+      "page_end": 573,
+      "role": "section",
+      "page_start_parquet": 566,
+      "page_end_parquet": 573
+    },
+    {
+      "title": "12.2 Vers l'usine à bulletins",
+      "page_start": 574,
+      "level": 1,
+      "page_end": 610,
+      "role": "section",
+      "page_start_parquet": 574,
+      "page_end_parquet": 610
+    },
+    {
+      "title": "12.2.1 Le tournant publicitaire du saint-simonisme",
+      "page_start": 575,
+      "level": 2,
+      "page_end": 583,
+      "role": "section",
+      "page_start_parquet": 575,
+      "page_end_parquet": 583
+    },
+    {
+      "title": "12.2.2 Entre banque et journal : l'expérience limite d'un faussaire",
+      "page_start": 584,
+      "level": 2,
+      "page_end": 595,
+      "role": "section",
+      "page_start_parquet": 584,
+      "page_end_parquet": 595
+    },
+    {
+      "title": "12.2.3 La fragilisation de la fonction auteur (1868-1887)",
+      "page_start": 596,
+      "level": 2,
+      "page_end": 610,
+      "role": "section",
+      "page_start_parquet": 596,
+      "page_end_parquet": 610
+    },
+    {
+      "title": "Conclusion",
+      "page_start": 611,
+      "level": 0,
+      "page_end": 642,
+      "role": "backmatter",
+      "page_start_parquet": 611,
+      "page_end_parquet": 642
+    },
+    {
+      "title": "Bibliographie",
+      "page_start": 643,
+      "level": 0,
+      "page_end": 666,
+      "role": "backmatter",
+      "page_start_parquet": 643,
+      "page_end_parquet": 666
+    },
+    {
+      "title": "Livres",
+      "page_start": 643,
+      "level": 1,
+      "page_end": 656,
+      "role": "section",
+      "page_start_parquet": 643,
+      "page_end_parquet": 656
+    },
+    {
+      "title": "Articles",
+      "page_start": 657,
+      "level": 1,
+      "page_end": 661,
+      "role": "section",
+      "page_start_parquet": 657,
+      "page_end_parquet": 661
+    },
+    {
+      "title": "Chapitres et études extraits d'ouvrages collectifs",
+      "page_start": 662,
+      "level": 1,
+      "page_end": 666,
+      "role": "section",
+      "page_start_parquet": 662,
+      "page_end_parquet": 666
+    },
+    {
+      "title": "Table des figures",
+      "page_start": 667,
+      "level": 0,
+      "page_end": 672,
+      "role": "backmatter",
+      "page_start_parquet": 667,
+      "page_end_parquet": 672
+    },
+    {
+      "title": "Index",
+      "page_start": 673,
+      "level": 0,
+      "page_end": 676,
+      "role": "backmatter",
+      "page_start_parquet": 673,
+      "page_end_parquet": 676
+    },
+    {
+      "title": "Annexes",
+      "page_start": 677,
+      "level": 0,
+      "page_end": 677,
+      "role": "backmatter",
+      "page_start_parquet": 677,
+      "page_end_parquet": 677
+    },
+    {
+      "title": "1 Textes",
+      "page_start": 680,
+      "level": 1,
+      "page_end": 684,
+      "role": "section",
+      "page_start_parquet": 680,
+      "page_end_parquet": 684
+    },
+    {
+      "title": "1.1 La marché aux nouvelles : chronique de Jules Paton dans Le Figaro du 20 octobre 1867",
+      "page_start": 680,
+      "level": 2,
+      "page_end": 680,
+      "role": "section",
+      "page_start_parquet": 680,
+      "page_end_parquet": 680
+    },
+    {
+      "title": "1.2 La logique de l'affermage : le bulletin de A. Serre dans l'Ami de la religion du 18 décembre 1860",
+      "page_start": 681,
+      "level": 2,
+      "page_end": 684,
+      "role": "section",
+      "page_start_parquet": 681,
+      "page_end_parquet": 684
+    },
+    {
+      "title": "2 Base de bulletiniers",
+      "page_start": 685,
+      "level": 1,
+      "page_end": 689,
+      "role": "section",
+      "page_start_parquet": 685,
+      "page_end_parquet": 689
+    },
+    {
+      "title": "3 Images",
+      "page_start": 690,
+      "level": 1,
+      "page_end": 690,
+      "role": "section",
+      "page_start_parquet": 690,
+      "page_end_parquet": 690
+    }
+  ],
+  "page_offset": {
+    "intro_page_toc": 11,
+    "intro_page_parquet": 11,
+    "offset": 0,
+    "method": "introduction-anchor"
+  },
+  "toc_validation": {
+    "issues": [],
+    "ok": true
+  }
+}

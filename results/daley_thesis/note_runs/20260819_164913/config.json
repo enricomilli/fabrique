@@ -1,0 +1,14 @@
+{
+  "thesis": "daley_thesis",
+  "run_id": "20260819_164913",
+  "model": "Qwen3.6-27B-Q6_K.gguf",
+  "fiche_path": "/Users/rosas/claude_theses/current_repo/results/daley_thesis/daley_thesis_fiche.md",
+  "parquet_path": "/Users/rosas/claude_theses/current_repo/data/daley_thesis.parquet",
+  "blob_chars": 259805,
+  "blob_tok_est": 64951,
+  "prompt_chars": 30213,
+  "shim_env": {
+    "GEMMA_SERVER_URL": "https://harvard-vancouver-viii-mice.trycloudflare.com/v1"
+  },
+  "rlm_config": "max_iterations: 20\nmax_depth: 1\nmax_sub_queries: 15\ntruncate_len: 20000\nmetadata_preview_lines: 20\n"
+}

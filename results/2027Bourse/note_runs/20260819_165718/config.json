@@ -1,0 +1,14 @@
+{
+  "thesis": "2027Bourse",
+  "run_id": "20260819_165718",
+  "model": "Qwen3.6-27B-Q6_K.gguf",
+  "fiche_path": "/Users/rosas/claude_theses/current_repo/results/2027Bourse/2027Bourse_fiche.md",
+  "parquet_path": "/Users/rosas/claude_theses/current_repo/data/2027Bourse.parquet",
+  "blob_chars": 1605471,
+  "blob_tok_est": 401367,
+  "prompt_chars": 39210,
+  "shim_env": {
+    "GEMMA_SERVER_URL": "https://harvard-vancouver-viii-mice.trycloudflare.com/v1"
+  },
+  "rlm_config": "max_iterations: 20\nmax_depth: 1\nmax_sub_queries: 15\ntruncate_len: 20000\nmetadata_preview_lines: 20\n"
+}

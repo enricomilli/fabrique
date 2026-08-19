@@ -1,0 +1,5 @@
+max_iterations: 20
+max_depth: 1
+max_sub_queries: 15
+truncate_len: 20000
+metadata_preview_lines: 20

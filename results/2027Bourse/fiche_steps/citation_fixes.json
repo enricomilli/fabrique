@@ -1,0 +1,66 @@
+[
+  {
+    "quote": "Par quelles étapes successives, les compte-rendu exceptionnels et malaisés de l'activité du Palais Bron-gniart laissent-",
+    "tag": "(p. 20)",
+    "cited": [
+      20
+    ],
+    "to": 21,
+    "how": "rewrite"
+  },
+  {
+    "quote": "Comment et pourquoi les rédactions consacrent-elles une partie de leurs ressources à recruter des chroniqueurs spécialis",
+    "tag": "(p. 20)",
+    "cited": [
+      20
+    ],
+    "to": 21,
+    "how": "rewrite"
+  },
+  {
+    "quote": "Et dans quelle mesure les acteurs et les énonciateurs privilégiés de la Bourse (en parti-culier les institutions financi",
+    "tag": "(p. 20)",
+    "cited": [
+      20
+    ],
+    "to": 21,
+    "how": "rewrite"
+  },
+  {
+    "quote": "Par quelles étapes successives, les compte-rendu exceptionnels et malaisés de l'activité du Palais Bron-gniart laissent-",
+    "tag": "(p. 612)",
+    "cited": [
+      612
+    ],
+    "to": 21,
+    "how": "insert"
+  },
+  {
+    "quote": "comment décrire, analyser et conceptualiser un espace communicationnel en mouvement sans le réifier a posteriori ?",
+    "tag": "(p. 626-627)",
+    "cited": [
+      626,
+      627
+    ],
+    "to": 29,
+    "how": "insert"
+  },
+  {
+    "quote": "comment prétendre dégager des règles ou des normes préludant à la formulation d'un ensemble de textes, alors même que ce",
+    "tag": "(p. 627)",
+    "cited": [
+      627
+    ],
+    "to": 29,
+    "how": "insert"
+  },
+  {
+    "quote": "réintégrer de la discontinuité dans le cadre d'une observation générale des formes écrites",
+    "tag": "(p. 30)",
+    "cited": [
+      30
+    ],
+    "to": 31,
+    "how": "rewrite"
+  }
+]

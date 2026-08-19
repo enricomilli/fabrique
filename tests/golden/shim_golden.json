@@ -1,0 +1,318 @@
+{
+  "_source": "/Users/rosas/claude_theses/current_repo/scripts",
+  "v3_env": {
+    "/api/tags": {
+      "models": [
+        {
+          "name": "Qwen3.6-27B-Q6_K.gguf",
+          "model": "Qwen3.6-27B-Q6_K.gguf",
+          "modified_at": "2026-04-23T00:00:00Z",
+          "size": 23000000000,
+          "digest": "sha256:fakefakefakefakefakefakefakefakefakefakefakefakefakefakefakefake",
+          "details": {
+            "format": "gguf",
+            "family": "qwen",
+            "parameter_size": "27B",
+            "quantization_level": "Q6_K"
+          }
+        }
+      ]
+    },
+    "root_turn": {
+      "status": 200,
+      "upstream_path": "/v1/chat/completions",
+      "auth": "Bearer real-key",
+      "body": {
+        "model": "Qwen3.6-27B-Q6_K.gguf",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an RLM agent. Use the REPL to read `context`.\n"
+          },
+          {
+            "role": "user",
+            "content": "Iteration 1/20. Sub-queries used: 0/15.\n\nTask…"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "max_completion_tokens": 8192,
+        "thinking_budget_tokens": 1500,
+        "temperature": 0.6,
+        "top_k": 20,
+        "top_p": 0.95
+      }
+    },
+    "root_turn_multi": {
+      "status": 200,
+      "upstream_path": "/v1/chat/completions",
+      "auth": "Bearer real-key",
+      "body": {
+        "model": "Qwen3.6-27B-Q6_K.gguf",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an RLM agent. Use the REPL to read `context`.\n"
+          },
+          {
+            "role": "user",
+            "content": "Iteration 1/20…"
+          },
+          {
+            "role": "assistant",
+            "content": "```python\nprint(context[:10])\n```"
+          },
+          {
+            "role": "user",
+            "content": "Iteration 2/20. Sub-queries used: 0/15.\n\n[p.1] Thèse"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "max_completion_tokens": 8192,
+        "thinking_budget_tokens": 1500,
+        "temperature": 0.6,
+        "top_k": 20,
+        "top_p": 0.95
+      }
+    },
+    "subquery": {
+      "status": 200,
+      "upstream_path": "/v1/chat/completions",
+      "auth": "Bearer real-key",
+      "body": {
+        "model": "Qwen3.6-27B-Q6_K.gguf",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a helpful assistant."
+          },
+          {
+            "role": "user",
+            "content": "Summarise: …"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "max_completion_tokens": 8192,
+        "thinking_budget_tokens": 1500,
+        "temperature": 0.6,
+        "top_k": 20,
+        "top_p": 0.95
+      }
+    },
+    "no_system_with_max_tokens": {
+      "status": 200,
+      "upstream_path": "/v1/chat/completions",
+      "auth": "Bearer real-key",
+      "body": {
+        "model": "Qwen3.6-27B-Q6_K.gguf",
+        "messages": [
+          {
+            "role": "user",
+            "content": "hi"
+          }
+        ],
+        "stream": false,
+        "max_tokens": 8192,
+        "temperature": 0.6,
+        "thinking_budget_tokens": 1500,
+        "top_k": 20,
+        "top_p": 0.95
+      }
+    },
+    "fiche_style_call": {
+      "status": 200,
+      "upstream_path": "/v1/chat/completions",
+      "auth": "Bearer real-key",
+      "body": {
+        "model": "Qwen3.6-27B-Q6_K.gguf",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Tu es un expert."
+          },
+          {
+            "role": "user",
+            "content": "Voici…"
+          }
+        ],
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "max_tokens": 8192,
+        "stream": true,
+        "top_k": 20,
+        "thinking_budget_tokens": 500,
+        "chat_template_kwargs": {
+          "enable_thinking": true
+        }
+      }
+    },
+    "trace_set": true,
+    "trace_files": [
+      "001_subquery.json"
+    ],
+    "trace_cleared": true,
+    "GET /v1/models": {
+      "status": 200,
+      "upstream_path": "/v1/models",
+      "auth": "Bearer real-key"
+    }
+  },
+  "empty_env": {
+    "/api/tags": {
+      "models": [
+        {
+          "name": "Qwen3.6-27B-Q6_K.gguf",
+          "model": "Qwen3.6-27B-Q6_K.gguf",
+          "modified_at": "2026-04-23T00:00:00Z",
+          "size": 23000000000,
+          "digest": "sha256:fakefakefakefakefakefakefakefakefakefakefakefakefakefakefakefake",
+          "details": {
+            "format": "gguf",
+            "family": "qwen",
+            "parameter_size": "27B",
+            "quantization_level": "Q6_K"
+          }
+        }
+      ]
+    },
+    "root_turn": {
+      "status": 200,
+      "upstream_path": "/v1/chat/completions",
+      "auth": "Bearer real-key",
+      "body": {
+        "model": "Qwen3.6-27B-Q6_K.gguf",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an RLM agent. You have 17 iteration(s) remaining and 15 sub-query call(s) remaining out of 15 total.\nUse the REPL to read `context`.\n"
+          },
+          {
+            "role": "user",
+            "content": "Iteration 1/20. Sub-queries used: 0/15.\n\nTask…"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "max_completion_tokens": 4096
+      }
+    },
+    "root_turn_multi": {
+      "status": 200,
+      "upstream_path": "/v1/chat/completions",
+      "auth": "Bearer real-key",
+      "body": {
+        "model": "Qwen3.6-27B-Q6_K.gguf",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an RLM agent. You have 17 iteration(s) remaining and 15 sub-query call(s) remaining out of 15 total.\nUse the REPL to read `context`.\n"
+          },
+          {
+            "role": "user",
+            "content": "Iteration 1/20…"
+          },
+          {
+            "role": "assistant",
+            "content": "```python\nprint(context[:10])\n```"
+          },
+          {
+            "role": "user",
+            "content": "Iteration 2/20. Sub-queries used: 0/15.\n\n[p.1] Thèse"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "max_completion_tokens": 4096
+      }
+    },
+    "subquery": {
+      "status": 200,
+      "upstream_path": "/v1/chat/completions",
+      "auth": "Bearer real-key",
+      "body": {
+        "model": "Qwen3.6-27B-Q6_K.gguf",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a helpful assistant."
+          },
+          {
+            "role": "user",
+            "content": "Summarise: …"
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "max_completion_tokens": 4096
+      }
+    },
+    "no_system_with_max_tokens": {
+      "status": 200,
+      "upstream_path": "/v1/chat/completions",
+      "auth": "Bearer real-key",
+      "body": {
+        "model": "Qwen3.6-27B-Q6_K.gguf",
+        "messages": [
+          {
+            "role": "user",
+            "content": "hi"
+          }
+        ],
+        "stream": false,
+        "max_tokens": 100,
+        "temperature": 0.1
+      }
+    },
+    "fiche_style_call": {
+      "status": 200,
+      "upstream_path": "/v1/chat/completions",
+      "auth": "Bearer real-key",
+      "body": {
+        "model": "Qwen3.6-27B-Q6_K.gguf",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Tu es un expert."
+          },
+          {
+            "role": "user",
+            "content": "Voici…"
+          }
+        ],
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "max_tokens": 10000,
+        "stream": true,
+        "top_k": 40,
+        "thinking_budget_tokens": 500,
+        "chat_template_kwargs": {
+          "enable_thinking": true
+        }
+      }
+    },
+    "trace_set": true,
+    "trace_files": [
+      "001_subquery.json"
+    ],
+    "trace_cleared": true,
+    "GET /v1/models": {
+      "status": 200,
+      "upstream_path": "/v1/models",
+      "auth": "Bearer real-key"
+    }
+  }
+}

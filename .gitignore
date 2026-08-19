@@ -1,0 +1,7 @@
+# maintainer log, internal — not part of the repo
+progress_notes.md
+
+__pycache__/
+*.pyc
+.pytest_cache/
+explorer/

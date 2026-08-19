@@ -1,0 +1,14 @@
+| section | score | gaps | refs |
+|---|---|---|---|
+| these_centrale | 8 | La synthèse est solide mais pourrait intégrer plus explicitement la notion de « consensation dialogique » comme mécanisme central de l'acceptabilité. | 2 La notion de culture textuelle ; 8 Création d'une nouvelle forme chronique |
+| questions_recherche | 9 | Les questions sont bien listées, mais on pourrait vérifier si des sous-questions méthodologiques précises (ex. sur l'OCR) sont formulées explicitement ailleurs. | 3 Corpus et méthodologies ; 1 Reconnaissance textuelle |
+| reponses_questions | 7 | Les réponses sont partielles ; la réponse à la question sur l'adaptation des acteurs financiers manque de détails sur les contre-mesures spécifiques (ex. contrôle de l'information). | 12 Les risques d'une dispersion ; 10 La politique des auteurs |
+| hypotheses | 8 | Les hypothèses sont bien formulées, mais on pourrait préciser l'hypothèse sur le rôle de la publicité financière comme catalyseur. | 9 L'impulsion publicitaire ; 4 De l'indexation à l'exposition |
+| methodologie | 9 | La section est très complète. Une vérification des détails techniques sur l'outillage Pyllica pourrait enrichir la description. | 3 Corpus et méthodologies ; 1 Reconnaissance textuelle |
+| fil_rouge | 8 | Le fil rouge est bien identifié, mais on pourrait préciser comment la « culture textuelle » évolue concrètement à travers les trois parties. | 2 La notion de culture textuelle ; 11 Un répertoire de discours |
+| plan | 10 | — | — |
+| cadre_theorique | 8 | L'articulation avec Foucault est claire, mais on pourrait approfondir le lien avec les théories de la réception ou de la lecture codée. | 2 La notion de culture textuelle ; 5 Le moment Villèle |
+| concepts_cles | 7 | Les concepts sont bien définis, mais on manque de détails sur la « grammaire des délégations poétiques » et son application concrète. | 3 Corpus et méthodologies ; 1 Reconnaissance textuelle |
+| ancrage_empirique | 6 | Manque de précision sur les corpus secondaires (ex. presse spécialisée) et sur les méthodes d'analyse des manuscrits. | 3 Corpus et méthodologies ; 7 Commenter la cotation (1829-1836) |
+| opposition | 9 | La critique des sciences économiques est bien argumentée, mais on pourrait ajouter une nuance sur les approches historiques traditionnelles. | 1 Reconnaissance textuelle ; 2 La notion de culture textuelle |
+| apport_principal | 8 | L'apport méthodologique est bien mis en avant, mais l'apport historique sur la genèse du journalisme financier pourrait être plus détaillé. | 4 De l'indexation à l'exposition ; 11 Un répertoire de discours |
