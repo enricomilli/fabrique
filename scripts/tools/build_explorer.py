@@ -2,13 +2,13 @@
 """
 build_explorer.py — organize one thesis' fiche run + one note run into a shareable
 JSON and a LOCAL html explorer (two tabs: Fiche / Note; per step / per iteration:
-prompt · thinking · output · stdout). No network, no external libs: index.html
-loads data.js (the same JSON assigned to window.EXPLORER_DATA) so it works from file://.
+prompt · thinking · output · stdout). index.html is SELF-CONTAINED (the JSON is
+inlined) — send that one file; data.json is the same data for a UI to consume.
 
 Usage:
   python3 scripts/tools/build_explorer.py --thesis-dir results/2027Bourse --out explorer/bourse
   # optional: --note-dir results/2027Bourse/note_runs/<run_id>   (default: note_runs/latest)
-Outputs: <out>/data.json, <out>/data.js, <out>/index.html  (zip the folder to share)
+Outputs: <out>/index.html (standalone), <out>/data.json (the UI data contract)
 
 Reads the results layout of scripts/layout.py: <thesis>_fiche.md + fiche_steps/
 (calls.jsonl = every call with system · prompt · reasoning · output, 1_structure.json,
@@ -210,9 +210,10 @@ mark{background:#fff3a3}
 <span id="runinfo" class="meta" style="margin:0 0 0 12px"></span>
 <input id="q" placeholder="filter text in current view…"></header>
 <main><nav id="nav"></nav><section id="view"></section></main>
-<script src="data.js"></script>
+<script>window.EXPLORER_DATA=__EXPLORER_DATA__;</script>
 <script>
 const D=window.EXPLORER_DATA;let tab='fiche',sel=0,q='';
+const TLEN=(m=>m?(+m[1]).toLocaleString('en-US'):'truncate_len')(/truncate_len:\s*(\d+)/.exec(((D.note||{}).config||{}).rlm_config||''));
 const esc=s=>(s??'').toString().replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const hl=s=>{s=esc(s);if(!q)return s;const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');return s.replace(re,m=>'<mark>'+m+'</mark>')};
 const box=(cls,title,body,open)=>body?`<details class="${cls}" ${open?'open':''}><summary>${title} <span class="chip">${(body.length).toLocaleString()} chars</span></summary><pre>${hl(body)}</pre></details>`:`<details class="${cls}"><summary>${title}</summary><div class="empty">not available</div></details>`;
@@ -238,7 +239,7 @@ function renderView(){const v=document.getElementById('view');
    +box('in','Input this turn (new user message = previous tool output + rlm footer)',it.input,false)
    +box('think','Thinking (reasoning_content)',it.reasoning,true)
    +box('out','Output (assistant content — code the REPL executed / FINAL)',it.output,true)
-   +box('in','Execution stdout — verbatim as the RLM received it (rlm-cli truncates to the last 10,000 chars ONLY when the code printed more; that marker is rlm\'s, not the explorer\'s)',it.exec_stdout,true)
+   +box('in','Execution stdout — verbatim as the RLM received it (rlm-cli truncates to the last '+TLEN+' chars ONLY when the code printed more; that marker is rlm\'s, not the explorer\'s)',it.exec_stdout,true)
    +box('in','System prompt (as sent this turn)',it.system,false);return}
  if(sel===2+m){v.innerHTML=`<h2>Final note</h2>`+box('out','note.md',N.note_md,true);return}
  v.innerHTML=`<h2>rlm log</h2>`+box('in','rlm_log.txt',N.rlm_stdout,true)}
@@ -262,8 +263,8 @@ def main():
     out = pathlib.Path(a.out); out.mkdir(parents=True, exist_ok=True)
     js = json.dumps(data, ensure_ascii=False)
     (out / "data.json").write_text(js, encoding="utf-8")
-    (out / "data.js").write_text("window.EXPLORER_DATA=" + js + ";", encoding="utf-8")
-    (out / "index.html").write_text(HTML, encoding="utf-8")
+    # "</" would close the <script> tag; "<\/" is the same string in a JS literal
+    (out / "index.html").write_text(HTML.replace("__EXPLORER_DATA__", js.replace("</", "<\\/")), encoding="utf-8")
     nf = len(data["fiche"]["steps"]); ni = len(data["note"]["iterations"])
     print(f"wrote {out}/index.html  data.json ({len(js)/1e6:.1f} MB)  fiche steps={nf} (full calls: {data['fiche']['has_full_calls']})  note iterations={ni}")
 
