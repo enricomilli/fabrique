@@ -1,0 +1,8 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "app_title": "Projet initial TanStack Start",
+  "home_title": "Bienvenue dans TanStack Start",
+  "home_instructions": "Modifiez {file} pour commencer.",
+  "language_label": "Langue",
+  "give_feedback": "Donner un avis"
+}
