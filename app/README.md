@@ -272,3 +272,41 @@ Do not publicly cache preference-based redirects without cookie-aware cache rule
 
 - [Paraglide integration for TanStack Start](https://inlang.com/m/gerre34r/library-inlang-paraglideJs/tanstack-start)
 - [TanStack Start example](https://github.com/TanStack/router/tree/main/examples/react/start-i18n-paraglide)
+
+## Feedback backend
+
+Set `DISCORD_FEEDBACK_WEBHOOK_URL` in the server environment or `.env.local`.
+Use `.env.example` as a template.
+Do not add a `VITE_` prefix or commit the webhook URL.
+The server reads this secret through `process.env`.
+
+Import `submitFeedback` from `src/lib/feedback-fns.ts`.
+Call `submitFeedback({ data: { email, message } })` to send feedback through POST.
+This function does not require authentication.
+
+The shared `feedbackSchema` export lives in `src/lib/feedback-schema.ts`.
+It trims both fields.
+The email must be valid and contain at most 254 characters.
+The message must contain 1–2,000 characters after trimming.
+Field validation uses `invalid_email` and `invalid_message` error codes.
+
+The result is `{ success: true }` or `{ success: false, error }`.
+The error is `invalid_input`, `unavailable`, or `send_failed`.
+A missing webhook URL returns `unavailable`.
+Discord failures and the eight-second timeout return `send_failed`.
+Results do not expose the webhook URL or Discord response details.
+Discord receives the email and raw message without added quotes.
+The payload disables automatic mentions with `allowed_mentions: { parse: [] }`.
+
+Run backend tests with Node 24:
+
+```bash
+node --test tests/feedback.test.ts
+```
+
+The tests use a mock transport and do not send Discord requests.
+
+The header links to `/en/feedback` or `/fr/feedback` based on the current language.
+The feedback page translates labels, validation errors, and submission results.
+Failed submissions keep the email and message for another attempt.
+Apply rate limits at the hosting layer before you expose this unauthenticated endpoint publicly.

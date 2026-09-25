@@ -4,5 +4,21 @@
   "home_title": "Welcome to TanStack Start",
   "home_instructions": "Edit {file} to start.",
   "language_label": "Language",
-  "give_feedback": "Give feedback"
+  "give_feedback": "Give feedback",
+  "feedback_page_title": "Give feedback | Fabrique",
+  "feedback_description": "Tell us what works and what we can improve.",
+  "feedback_email": "Email",
+  "feedback_email_placeholder": "you@example.com",
+  "feedback_message": "Your feedback",
+  "feedback_message_hint": "Use 2,000 characters or fewer.",
+  "feedback_privacy": "We send your email and feedback to our team's Discord channel.",
+  "feedback_submit": "Send feedback",
+  "feedback_sending": "Please wait…",
+  "feedback_success": "Thank you. We received your feedback.",
+  "feedback_invalid_email": "Enter a valid email address with 254 characters or fewer.",
+  "feedback_invalid_message": "Enter feedback with 1 to 2,000 characters.",
+  "feedback_unavailable": "Feedback is temporarily unavailable. Try again later.",
+  "feedback_send_failed": "Could not send your feedback. Try again.",
+  "feedback_invalid_input": "Check your email and feedback, then try again.",
+  "back_home": "Back to home"
 }

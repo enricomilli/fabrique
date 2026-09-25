@@ -4,5 +4,21 @@
   "home_title": "Bienvenue dans TanStack Start",
   "home_instructions": "Modifiez {file} pour commencer.",
   "language_label": "Langue",
-  "give_feedback": "Donner un avis"
+  "give_feedback": "Donner un avis",
+  "feedback_page_title": "Donner un avis | Fabrique",
+  "feedback_description": "Dites-nous ce qui fonctionne et ce que nous pouvons améliorer.",
+  "feedback_email": "Adresse e-mail",
+  "feedback_email_placeholder": "vous@exemple.fr",
+  "feedback_message": "Votre avis",
+  "feedback_message_hint": "Utilisez 2 000 caractères maximum.",
+  "feedback_privacy": "Nous transmettons votre adresse e-mail et votre avis au canal Discord de notre équipe.",
+  "feedback_submit": "Envoyer mon avis",
+  "feedback_sending": "Veuillez patienter…",
+  "feedback_success": "Merci. Nous avons reçu votre avis.",
+  "feedback_invalid_email": "Saisissez une adresse e-mail valide de 254 caractères maximum.",
+  "feedback_invalid_message": "Saisissez un avis de 1 à 2 000 caractères.",
+  "feedback_unavailable": "Le formulaire est temporairement indisponible. Réessayez plus tard.",
+  "feedback_send_failed": "Impossible d’envoyer votre avis. Réessayez.",
+  "feedback_invalid_input": "Vérifiez votre adresse e-mail et votre avis, puis réessayez.",
+  "back_home": "Retour à l’accueil"
 }
