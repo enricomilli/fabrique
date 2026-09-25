@@ -73,12 +73,12 @@ test('concurrent server requests keep separate languages', async () => {
       async () => {
         await new Promise((resolve) => setTimeout(resolve, index % 3))
         assert.equal(getLocale(), locale)
-        return new Response(m.home_instructions({ file: 'example.tsx' }))
+        return new Response(m.search_collection_single({ count: '1' }))
       },
     )
     const expected = locale === 'en'
-      ? 'Edit example.tsx to start.'
-      : 'Modifiez example.tsx pour commencer.'
+      ? 'Theses · HDR · Articles — 1 document, full text'
+      : 'Thèses · HDR · Articles — 1 document, texte intégral'
     assert.equal(await response.text(), expected)
   }))
 })
