@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useId, useState } from "react";
 import { Button } from "#/components/ui/button";
 import {
@@ -61,53 +62,60 @@ function DocumentCard({ document }: { document: DocumentSummary }) {
 		.filter(Boolean)
 		.join(" · ");
 	return (
-		<article className="min-w-0">
-			<div
-				aria-hidden="true"
-				className="aspect-[5/3] overflow-hidden border border-foreground/15 bg-card p-4 shadow-xs"
-			>
-				{/*<p className="mb-2 font-mono text-[8px] uppercase tracking-[0.16em] text-muted-foreground">
+		<Link
+			to="/documents/$documentId"
+			params={{ documentId: document.id }}
+			aria-label={document.title}
+			className="group block min-w-0 outline-offset-4 focus-visible:outline-2 focus-visible:outline-ring"
+		>
+			<article className="min-w-0">
+				<div
+					aria-hidden="true"
+					className="aspect-[5/3] overflow-hidden border border-foreground/15 bg-card p-4 shadow-xs transition-colors duration-150 group-hover:border-foreground/40 group-hover:bg-muted/40 group-focus-visible:bg-muted/40 motion-reduce:transition-none"
+				>
+					{/*<p className="mb-2 font-mono text-[8px] uppercase tracking-[0.16em] text-muted-foreground">
 					{document.hasFiche
 						? m.documents_preview_fiche()
 						: document.hasNote
 							? m.documents_status_note()
 							: m.documents_preview_source()}
 				</p>*/}
-				<p className="line-clamp-2 break-words font-heading text-[11px] leading-snug font-semibold capitalize">
-					{document.title.toLocaleLowerCase(getLocale())}
-				</p>
-				<div className="my-2 h-[3px] w-1/4 bg-blue-900 dark:bg-blue-300" />
-				<p className="line-clamp-8 break-words font-heading text-[9px] leading-relaxed text-foreground/75">
-					{document.preview}
-				</p>
-			</div>
-			{document.preview && <p className="sr-only">{document.preview}</p>}
-			<h3
-				className="mt-2.5 line-clamp-2 break-words font-heading text-sm leading-relaxed capitalize"
-				title={document.title}
-			>
-				{document.title.toLocaleLowerCase(getLocale())}
-			</h3>
-			<p className="mt-1 break-words text-xs leading-relaxed text-muted-foreground">
-				{details || document.thesis}
-			</p>
-			<div className="mt-1.5 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-				<span
-					className={`shrink-0 rounded-full border px-2 py-0.5 font-mono text-[10px] leading-none ${
-						status === "source"
-							? "border-border text-muted-foreground"
-							: "border-blue-800/25 bg-blue-100/40 text-blue-900 dark:border-blue-300/30 dark:bg-blue-950/40 dark:text-blue-200"
-					}`}
+					<p className="line-clamp-2 break-words font-heading text-[11px] leading-snug font-semibold capitalize">
+						{document.title.toLocaleLowerCase(getLocale())}
+					</p>
+					<div className="my-2 h-[3px] w-1/4 bg-blue-900 dark:bg-blue-300" />
+					<p className="line-clamp-8 break-words font-heading text-[9px] leading-relaxed text-foreground/75">
+						{document.preview}
+					</p>
+				</div>
+				{document.preview && <p className="sr-only">{document.preview}</p>}
+				<h3
+					className="mt-2.5 line-clamp-2 break-words font-heading text-sm leading-relaxed capitalize"
+					title={document.title}
 				>
-					{statusLabels()[status]}
-				</span>
-				{metadata?.discipline?.trim() && (
-					<span className="min-w-0 break-words text-[11px] leading-relaxed text-muted-foreground">
-						{metadata.discipline}
+					{document.title.toLocaleLowerCase(getLocale())}
+				</h3>
+				<p className="mt-1 break-words text-xs leading-relaxed text-muted-foreground">
+					{details || document.thesis}
+				</p>
+				<div className="mt-1.5 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+					<span
+						className={`shrink-0 rounded-full border px-2 py-0.5 font-mono text-[10px] leading-none ${
+							status === "source"
+								? "border-border text-muted-foreground"
+								: "border-blue-800/25 bg-blue-100/40 text-blue-900 dark:border-blue-300/30 dark:bg-blue-950/40 dark:text-blue-200"
+						}`}
+					>
+						{statusLabels()[status]}
 					</span>
-				)}
-			</div>
-		</article>
+					{metadata?.discipline?.trim() && (
+						<span className="min-w-0 break-words text-[11px] leading-relaxed text-muted-foreground">
+							{metadata.discipline}
+						</span>
+					)}
+				</div>
+			</article>
+		</Link>
 	);
 }
 

@@ -46,5 +46,22 @@
   "documents_sort_title": "Titre",
   "documents_pages": "{count} p.",
   "documents_show_results": "Voir les résultats",
-  "documents_reset_filters": "Réinitialiser les filtres"
+  "documents_reset_filters": "Réinitialiser les filtres",
+  "document_choose": "Choisissez votre format de lecture",
+  "document_fiche": "Fiche de synthèse",
+  "document_fiche_description": "Repérez les questions de recherche, les méthodes et les principaux résultats dans des rubriques structurées.",
+  "document_note": "Note de lecture",
+  "document_note_description": "Suivez le raisonnement et découvrez les apports et les limites dans un compte rendu rédigé.",
+  "document_read_fiche": "Consulter la fiche",
+  "document_read_note": "Lire la note",
+  "document_read_pdf": "Lire plutôt le PDF",
+  "document_pdf_unavailable": "Le PDF original n’est pas encore disponible.",
+  "document_format_unavailable": "Ce format n’est pas encore disponible.",
+  "document_not_found": "Document introuvable",
+  "document_load_error": "Impossible de charger ce document. Réessayez.",
+  "document_back": "Retour aux documents",
+  "document_back_description": "Explorez les autres documents de la collection.",
+  "document_pdf_description": "Consultez le document original dans son intégralité.",
+  "document_change_format": "Choisir un autre format",
+  "document_generated": "Document généré automatiquement à partir du texte original. Vérifiez les informations dans la source."
 }

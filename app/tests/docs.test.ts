@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import process from "node:process";
 import { test } from "node:test";
-import { getExplorerDirectory, loadDocuments } from "../src/lib/docs.server.ts";
-import type { Docs, FicheStructure } from "../src/lib/docs.schema.ts";
+import { getExplorerDirectory, loadDocument, loadDocuments } from "../src/lib/docs.server.ts";
+import { docsSchema, type Docs, type FicheStructure } from "../src/lib/docs.schema.ts";
 
 function document(): Docs {
 	return {
@@ -228,4 +228,79 @@ test("central thesis preview keeps the 600 character limit", async (t) => {
 	assert.ok(summary.preview.startsWith("Central claim."));
 	assert.ok(summary.preview.length <= 600);
 	assert.ok(summary.preview.endsWith("…"));
+});
+
+test("detail returns final Markdown and metadata without trace fields", async (t) => {
+	const root = await mkdtemp(join(tmpdir(), "docs-test-"));
+	t.after(() => rm(root, { recursive: true, force: true }));
+	const input = document();
+	input.fiche.structure_json = JSON.stringify(structure());
+	input.fiche.fiche_md = "# Final title\n\n## Thèse centrale\nFinal claim.\n";
+	input.fiche.intro_md = "private draft";
+	input.note.note_md = "# Final note\n\nNote body.\n";
+	input.note.prompt = "private prompt";
+	input.note.dir = "/private/path";
+	await writeDocument(root, "a", input);
+	const summary = (await loadDocuments(root))[0];
+	assert.deepEqual(await loadDocument("a", root), {
+		...summary,
+		ficheMarkdown: input.fiche.fiche_md,
+		noteMarkdown: input.note.note_md,
+		pdfUrl: null,
+	});
+	assert.deepEqual(summary.metadata, structure().metadata);
+	assert.equal(summary.preview, "Final claim.");
+});
+
+test("detail returns null for missing documents and invalid IDs", async (t) => {
+	const root = await mkdtemp(join(tmpdir(), "docs-test-"));
+	t.after(() => rm(root, { recursive: true, force: true }));
+	await mkdir(join(root, "empty"));
+	for (const id of ["missing", "empty", "", ".", "..", "../a", "/tmp", "a/b", "a\\b", "%2e%2e", "a\0b"])
+		assert.equal(await loadDocument(id, root), null, id);
+});
+
+test("detail rejects directory and file symlinks outside the document directory", async (t) => {
+	const root = await mkdtemp(join(tmpdir(), "docs-test-"));
+	t.after(() => rm(root, { recursive: true, force: true }));
+	const explorer = join(root, "explorer");
+	await mkdir(explorer);
+	await writeDocument(root, "outside", document());
+	await symlink(join(root, "outside"), join(explorer, "linked"));
+	await mkdir(join(explorer, "file-link"));
+	await symlink(join(root, "outside", "data.json"), join(explorer, "file-link", "data.json"));
+	assert.equal(await loadDocument("linked", explorer), null);
+	assert.equal(await loadDocument("file-link", explorer), null);
+});
+
+test("detail validates JSON and schemas without exposing paths or values", async (t) => {
+	const root = await mkdtemp(join(tmpdir(), "docs-test-"));
+	t.after(() => rm(root, { recursive: true, force: true }));
+	await mkdir(join(root, "a"));
+	for (const contents of ["private-invalid-content", JSON.stringify({ note: "private-invalid-content" }), JSON.stringify({ ...document(), fiche: { ...document().fiche, structure_json: "private-invalid-content" } })]) {
+		await writeFile(join(root, "a", "data.json"), contents);
+		await assert.rejects(loadDocument("a", root), (error: unknown) => {
+			assert.ok(error instanceof Error);
+			assert.doesNotMatch(error.message, /private-invalid-content/);
+			assert.ok(!error.message.includes(root));
+			assert.equal(error.cause, undefined);
+			return true;
+		});
+	}
+});
+
+test("PDF URL permits missing, null, HTTP, and HTTPS values only", async (t) => {
+	const root = await mkdtemp(join(tmpdir(), "docs-test-"));
+	t.after(() => rm(root, { recursive: true, force: true }));
+	for (const [index, pdf_url] of [undefined, null, "https://example.com/thesis.pdf", "http://example.com/thesis.pdf"].entries()) {
+		const input = { ...document(), pdf_url };
+		assert.equal(docsSchema.safeParse(input).success, true);
+		await writeDocument(root, String(index), input);
+		assert.equal((await loadDocument(String(index), root))?.pdfUrl, pdf_url ?? null);
+	}
+	for (const pdf_url of ["javascript:alert(1)", "data:application/pdf;base64,AA", "file:///private/file.pdf", "ftp://example.com/a.pdf", "/a.pdf", "not a URL", ""]) {
+		assert.equal(docsSchema.safeParse({ ...document(), pdf_url }).success, false, pdf_url);
+	}
+	await writeDocument(root, "unsafe", { ...document(), pdf_url: "javascript:alert(1)" });
+	await assert.rejects(loadDocument("unsafe", root), /Invalid document schema/);
 });

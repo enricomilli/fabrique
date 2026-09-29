@@ -46,5 +46,22 @@
   "documents_sort_title": "Title",
   "documents_pages": "{count} p.",
   "documents_show_results": "Show results",
-  "documents_reset_filters": "Reset filters"
+  "documents_reset_filters": "Reset filters",
+  "document_choose": "Choose how to read",
+  "document_fiche": "Summary sheet",
+  "document_fiche_description": "Find the research questions, methods, and main findings in a structured reference.",
+  "document_note": "Reading note",
+  "document_note_description": "Follow the argument and explore the contributions and limitations in a continuous review.",
+  "document_read_fiche": "Read the summary sheet",
+  "document_read_note": "Read the note",
+  "document_read_pdf": "Read PDF instead",
+  "document_pdf_unavailable": "The original PDF is not available yet.",
+  "document_format_unavailable": "This format is not available yet.",
+  "document_not_found": "Document not found",
+  "document_load_error": "Cannot load this document. Try again.",
+  "document_back": "Back to documents",
+  "document_back_description": "Explore other documents in the collection.",
+  "document_pdf_description": "Read the full original document.",
+  "document_change_format": "Choose another format",
+  "document_generated": "Automatically generated from the original document. Check the source for accuracy."
 }

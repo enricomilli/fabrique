@@ -11,6 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FeedbackRouteImport } from './routes/feedback'
+import { Route as DocumentsDocumentIdRouteImport } from './routes/documents/$documentId'
+import { Route as DocumentsDocumentIdIndexRouteImport } from './routes/documents/$documentId/index'
+import { Route as DocumentsDocumentIdReaderRouteImport } from './routes/documents/$documentId/_reader'
+import { Route as DocumentsDocumentIdReaderFicheRouteImport } from './routes/documents/$documentId/_reader/fiche'
+import { Route as DocumentsDocumentIdReaderNoteRouteImport } from './routes/documents/$documentId/_reader/note'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +27,91 @@ const FeedbackRoute = FeedbackRouteImport.update({
   path: '/feedback',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocumentsDocumentIdRoute = DocumentsDocumentIdRouteImport.update({
+  id: '/documents/$documentId',
+  path: '/documents/$documentId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsDocumentIdIndexRoute =
+  DocumentsDocumentIdIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => DocumentsDocumentIdRoute,
+  } as any)
+const DocumentsDocumentIdReaderRoute =
+  DocumentsDocumentIdReaderRouteImport.update({
+    id: '/_reader',
+    getParentRoute: () => DocumentsDocumentIdRoute,
+  } as any)
+const DocumentsDocumentIdReaderFicheRoute =
+  DocumentsDocumentIdReaderFicheRouteImport.update({
+    id: '/fiche',
+    path: '/fiche',
+    getParentRoute: () => DocumentsDocumentIdReaderRoute,
+  } as any)
+const DocumentsDocumentIdReaderNoteRoute =
+  DocumentsDocumentIdReaderNoteRouteImport.update({
+    id: '/note',
+    path: '/note',
+    getParentRoute: () => DocumentsDocumentIdReaderRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/feedback': typeof FeedbackRoute
+  '/documents/$documentId': typeof DocumentsDocumentIdRouteWithChildren
+  '/documents/$documentId/': typeof DocumentsDocumentIdIndexRoute
+  '/documents/$documentId/fiche': typeof DocumentsDocumentIdReaderFicheRoute
+  '/documents/$documentId/note': typeof DocumentsDocumentIdReaderNoteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/feedback': typeof FeedbackRoute
+  '/documents/$documentId': typeof DocumentsDocumentIdIndexRoute
+  '/documents/$documentId/fiche': typeof DocumentsDocumentIdReaderFicheRoute
+  '/documents/$documentId/note': typeof DocumentsDocumentIdReaderNoteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/feedback': typeof FeedbackRoute
+  '/documents/$documentId': typeof DocumentsDocumentIdRouteWithChildren
+  '/documents/$documentId/_reader': typeof DocumentsDocumentIdReaderRouteWithChildren
+  '/documents/$documentId/': typeof DocumentsDocumentIdIndexRoute
+  '/documents/$documentId/_reader/fiche': typeof DocumentsDocumentIdReaderFicheRoute
+  '/documents/$documentId/_reader/note': typeof DocumentsDocumentIdReaderNoteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/feedback'
+  fullPaths:
+    | '/'
+    | '/feedback'
+    | '/documents/$documentId'
+    | '/documents/$documentId/'
+    | '/documents/$documentId/fiche'
+    | '/documents/$documentId/note'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/feedback'
-  id: '__root__' | '/' | '/feedback'
+  to:
+    | '/'
+    | '/feedback'
+    | '/documents/$documentId'
+    | '/documents/$documentId/fiche'
+    | '/documents/$documentId/note'
+  id:
+    | '__root__'
+    | '/'
+    | '/feedback'
+    | '/documents/$documentId'
+    | '/documents/$documentId/_reader'
+    | '/documents/$documentId/'
+    | '/documents/$documentId/_reader/fiche'
+    | '/documents/$documentId/_reader/note'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FeedbackRoute: typeof FeedbackRoute
+  DocumentsDocumentIdRoute: typeof DocumentsDocumentIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +130,77 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeedbackRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/documents/$documentId': {
+      id: '/documents/$documentId'
+      path: '/documents/$documentId'
+      fullPath: '/documents/$documentId'
+      preLoaderRoute: typeof DocumentsDocumentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents/$documentId/': {
+      id: '/documents/$documentId/'
+      path: '/'
+      fullPath: '/documents/$documentId/'
+      preLoaderRoute: typeof DocumentsDocumentIdIndexRouteImport
+      parentRoute: typeof DocumentsDocumentIdRoute
+    }
+    '/documents/$documentId/_reader': {
+      id: '/documents/$documentId/_reader'
+      path: ''
+      fullPath: '/documents/$documentId'
+      preLoaderRoute: typeof DocumentsDocumentIdReaderRouteImport
+      parentRoute: typeof DocumentsDocumentIdRoute
+    }
+    '/documents/$documentId/_reader/fiche': {
+      id: '/documents/$documentId/_reader/fiche'
+      path: '/fiche'
+      fullPath: '/documents/$documentId/fiche'
+      preLoaderRoute: typeof DocumentsDocumentIdReaderFicheRouteImport
+      parentRoute: typeof DocumentsDocumentIdReaderRoute
+    }
+    '/documents/$documentId/_reader/note': {
+      id: '/documents/$documentId/_reader/note'
+      path: '/note'
+      fullPath: '/documents/$documentId/note'
+      preLoaderRoute: typeof DocumentsDocumentIdReaderNoteRouteImport
+      parentRoute: typeof DocumentsDocumentIdReaderRoute
+    }
   }
 }
+
+interface DocumentsDocumentIdReaderRouteChildren {
+  DocumentsDocumentIdReaderFicheRoute: typeof DocumentsDocumentIdReaderFicheRoute
+  DocumentsDocumentIdReaderNoteRoute: typeof DocumentsDocumentIdReaderNoteRoute
+}
+
+const DocumentsDocumentIdReaderRouteChildren: DocumentsDocumentIdReaderRouteChildren =
+  {
+    DocumentsDocumentIdReaderFicheRoute: DocumentsDocumentIdReaderFicheRoute,
+    DocumentsDocumentIdReaderNoteRoute: DocumentsDocumentIdReaderNoteRoute,
+  }
+
+const DocumentsDocumentIdReaderRouteWithChildren =
+  DocumentsDocumentIdReaderRoute._addFileChildren(
+    DocumentsDocumentIdReaderRouteChildren,
+  )
+
+interface DocumentsDocumentIdRouteChildren {
+  DocumentsDocumentIdReaderRoute: typeof DocumentsDocumentIdReaderRouteWithChildren
+  DocumentsDocumentIdIndexRoute: typeof DocumentsDocumentIdIndexRoute
+}
+
+const DocumentsDocumentIdRouteChildren: DocumentsDocumentIdRouteChildren = {
+  DocumentsDocumentIdReaderRoute: DocumentsDocumentIdReaderRouteWithChildren,
+  DocumentsDocumentIdIndexRoute: DocumentsDocumentIdIndexRoute,
+}
+
+const DocumentsDocumentIdRouteWithChildren =
+  DocumentsDocumentIdRoute._addFileChildren(DocumentsDocumentIdRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FeedbackRoute: FeedbackRoute,
+  DocumentsDocumentIdRoute: DocumentsDocumentIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

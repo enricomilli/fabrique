@@ -1,5 +1,5 @@
-import { readdir, readFile } from "node:fs/promises";
-import { isAbsolute, join, resolve } from "node:path";
+import { readdir, readFile, realpath } from "node:fs/promises";
+import { isAbsolute, join, relative, resolve, sep } from "node:path";
 import process from "node:process";
 import {
 	type Docs,
@@ -19,6 +19,11 @@ export interface DocumentSummary {
 	preview: string;
 }
 
+export interface DocumentDetail extends DocumentSummary {
+	ficheMarkdown: string;
+	noteMarkdown: string;
+	pdfUrl: string | null;
+}
 // Start the server from app, or set EXPLORER_DIR to an absolute directory path.
 export function getExplorerDirectory(): string {
 	const configured = process.env.EXPLORER_DIR?.trim();
@@ -175,4 +180,56 @@ export async function loadDocuments(
 		summaries.push(summarize(folder.name, parsed.data));
 	}
 	return summaries;
+}
+
+export async function loadDocument(
+	id: string,
+	directory: string = getExplorerDirectory(),
+): Promise<DocumentDetail | null> {
+	// Accept one directory name. Reject encoded separators and control characters.
+	if (
+		!id ||
+		id === "." ||
+		id === ".." ||
+		/[/\\%]/.test(id) ||
+		Array.from(id).some((character) => {
+			const code = character.charCodeAt(0);
+			return code < 32 || code === 127;
+		})
+	)
+		return null;
+
+	let contents: string;
+	try {
+		const root = await realpath(directory);
+		const file = await realpath(join(root, id, "data.json"));
+		const localPath = relative(root, file);
+		if (isAbsolute(localPath) || localPath === ".." || localPath.startsWith(`..${sep}`))
+			return null;
+		contents = await readFile(file, "utf8");
+	} catch (error: unknown) {
+		if (
+			error instanceof Error &&
+			"code" in error &&
+			(error.code === "ENOENT" || error.code === "ENOTDIR")
+		)
+			return null;
+		throw new Error("Cannot read the document.");
+	}
+
+	let input: unknown;
+	try {
+		input = JSON.parse(contents);
+	} catch {
+		throw new Error("Invalid document JSON.");
+	}
+	const parsed = docsSchema.safeParse(input);
+	if (!parsed.success) throw new Error("Invalid document schema.");
+	const document = parsed.data;
+	return {
+		...summarize(id, document),
+		ficheMarkdown: document.fiche.fiche_md,
+		noteMarkdown: document.note.note_md,
+		pdfUrl: document.pdf_url ?? null,
+	};
 }

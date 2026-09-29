@@ -46,15 +46,18 @@ export function SearchBar({
 	}
 
 	return (
-		<section className="px-6 py-10 sm:pt-12 sm:pb-8" aria-labelledby={`${id}-title`}>
+		<section
+			className="px-6 py-10 sm:pt-20 sm:pb-8"
+			aria-labelledby={`${id}-title`}
+		>
 			<div className="mx-auto w-full max-w-5xl">
 				<h1
 					id={`${id}-title`}
-					className="text-balance text-center font-heading text-xl leading-snug "
+					className="text-balance text-center font-heading text-3xl leading-snug "
 				>
 					{m.search_title()}
 				</h1>
-				<search aria-labelledby={`${id}-title`} className="mt-6">
+				<search aria-labelledby={`${id}-title`} className="mt-10">
 					<form onSubmit={handleSubmit} noValidate>
 						<label htmlFor={`${id}-query`} className="sr-only">
 							{m.search_label()}

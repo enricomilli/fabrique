@@ -310,3 +310,14 @@ The header links to `/en/feedback` or `/fr/feedback` based on the current langua
 The feedback page translates labels, validation errors, and submission results.
 Failed submissions keep the email and message for another attempt.
 Apply rate limits at the hosting layer before you expose this unauthenticated endpoint publicly.
+
+## Document reader
+
+Document cards open `/documents/<id>` with a choice of summary sheet or reading note.
+The cards link to separate `/documents/<id>/fiche` and `/documents/<id>/note` pages.
+Both pages use the shared `_reader` layout. The selection page contains no reader logic.
+The interface supports English and French. Source content keeps its original language.
+
+To enable the PDF link, add a top-level `pdf_url` field to `explorer/<id>/data.json`.
+Use an absolute HTTP or HTTPS URL for the matching original PDF.
+If the URL is missing, the page shows an unavailable message instead of a broken link.
