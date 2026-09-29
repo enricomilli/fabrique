@@ -1,6 +1,7 @@
 import type { Element, Root as HastRoot } from "hast";
 import type { Heading, Root } from "mdast";
 import { toString as headingText } from "mdast-util-to-string";
+import remarkMath from "remark-math";
 import remarkParse from "remark-parse";
 import { unified } from "unified";
 export type FicheHeading = {
@@ -8,7 +9,7 @@ export type FicheHeading = {
 	label: string;
 };
 
-const parser = unified().use(remarkParse);
+const parser = unified().use(remarkParse).use(remarkMath);
 
 function collectHeadings(
 	tree: Root,

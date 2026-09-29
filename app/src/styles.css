@@ -4,6 +4,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/merriweather";
+@import "katex/dist/katex.min.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -249,4 +250,11 @@ html.fiche-reading {
 @media print {
   .pdf-sidebar, .pdf-dialog { display: none; }
   .fiche-reader-pdf { display: block; }
+}
+
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25rem;
 }
