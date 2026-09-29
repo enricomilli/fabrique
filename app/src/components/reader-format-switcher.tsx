@@ -33,7 +33,7 @@ export function ReaderFormatSwitcher({
 		<div className="pointer-events-none fixed inset-x-0 bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-40 flex justify-center px-4">
 			<nav
 				aria-label={m.document_choose()}
-				className="pointer-events-auto grid w-full max-w-[12rem] grid-cols-2 gap-1 border bg-background p-0.5 shadow-xs"
+				className="pointer-events-auto grid w-full max-w-[13rem] grid-cols-2 gap-0.5 border bg-background p-0.5 shadow-xs"
 			>
 				{formats.map((format) => {
 					const Icon = format.icon;

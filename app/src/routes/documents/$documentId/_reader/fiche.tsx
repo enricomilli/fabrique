@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DocumentContent } from "#/components/document-content";
+import { FicheContent } from "#/components/fiche-content";
 import { Route as DocumentRoute } from "../../$documentId";
 
 export const Route = createFileRoute("/documents/$documentId/_reader/fiche")({
@@ -8,5 +8,5 @@ export const Route = createFileRoute("/documents/$documentId/_reader/fiche")({
 
 function FichePage() {
 	const document = DocumentRoute.useLoaderData();
-	return <DocumentContent markdown={document.ficheMarkdown} />;
+	return <FicheContent key={document.id} markdown={document.ficheMarkdown} />;
 }

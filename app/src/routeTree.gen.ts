@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FeedbackRouteImport } from './routes/feedback'
 import { Route as DocumentsDocumentIdRouteImport } from './routes/documents/$documentId'
+import { Route as ApiPdfsDocumentIdRouteImport } from './routes/api/pdfs/$documentId'
 import { Route as DocumentsDocumentIdIndexRouteImport } from './routes/documents/$documentId/index'
 import { Route as DocumentsDocumentIdReaderRouteImport } from './routes/documents/$documentId/_reader'
 import { Route as DocumentsDocumentIdReaderFicheRouteImport } from './routes/documents/$documentId/_reader/fiche'
@@ -30,6 +31,11 @@ const FeedbackRoute = FeedbackRouteImport.update({
 const DocumentsDocumentIdRoute = DocumentsDocumentIdRouteImport.update({
   id: '/documents/$documentId',
   path: '/documents/$documentId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPdfsDocumentIdRoute = ApiPdfsDocumentIdRouteImport.update({
+  id: '/api/pdfs/$documentId',
+  path: '/api/pdfs/$documentId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocumentsDocumentIdIndexRoute =
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/feedback': typeof FeedbackRoute
   '/documents/$documentId': typeof DocumentsDocumentIdRouteWithChildren
+  '/api/pdfs/$documentId': typeof ApiPdfsDocumentIdRoute
   '/documents/$documentId/': typeof DocumentsDocumentIdIndexRoute
   '/documents/$documentId/fiche': typeof DocumentsDocumentIdReaderFicheRoute
   '/documents/$documentId/note': typeof DocumentsDocumentIdReaderNoteRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/feedback': typeof FeedbackRoute
+  '/api/pdfs/$documentId': typeof ApiPdfsDocumentIdRoute
   '/documents/$documentId': typeof DocumentsDocumentIdIndexRoute
   '/documents/$documentId/fiche': typeof DocumentsDocumentIdReaderFicheRoute
   '/documents/$documentId/note': typeof DocumentsDocumentIdReaderNoteRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/feedback': typeof FeedbackRoute
   '/documents/$documentId': typeof DocumentsDocumentIdRouteWithChildren
+  '/api/pdfs/$documentId': typeof ApiPdfsDocumentIdRoute
   '/documents/$documentId/_reader': typeof DocumentsDocumentIdReaderRouteWithChildren
   '/documents/$documentId/': typeof DocumentsDocumentIdIndexRoute
   '/documents/$documentId/_reader/fiche': typeof DocumentsDocumentIdReaderFicheRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/feedback'
     | '/documents/$documentId'
+    | '/api/pdfs/$documentId'
     | '/documents/$documentId/'
     | '/documents/$documentId/fiche'
     | '/documents/$documentId/note'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/feedback'
+    | '/api/pdfs/$documentId'
     | '/documents/$documentId'
     | '/documents/$documentId/fiche'
     | '/documents/$documentId/note'
@@ -102,6 +113,7 @@ export interface FileRouteTypes {
     | '/'
     | '/feedback'
     | '/documents/$documentId'
+    | '/api/pdfs/$documentId'
     | '/documents/$documentId/_reader'
     | '/documents/$documentId/'
     | '/documents/$documentId/_reader/fiche'
@@ -112,6 +124,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FeedbackRoute: typeof FeedbackRoute
   DocumentsDocumentIdRoute: typeof DocumentsDocumentIdRouteWithChildren
+  ApiPdfsDocumentIdRoute: typeof ApiPdfsDocumentIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/documents/$documentId'
       fullPath: '/documents/$documentId'
       preLoaderRoute: typeof DocumentsDocumentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/pdfs/$documentId': {
+      id: '/api/pdfs/$documentId'
+      path: '/api/pdfs/$documentId'
+      fullPath: '/api/pdfs/$documentId'
+      preLoaderRoute: typeof ApiPdfsDocumentIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/documents/$documentId/': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FeedbackRoute: FeedbackRoute,
   DocumentsDocumentIdRoute: DocumentsDocumentIdRouteWithChildren,
+  ApiPdfsDocumentIdRoute: ApiPdfsDocumentIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

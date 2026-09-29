@@ -148,3 +148,50 @@ body {
     cursor: default;
   }
 }
+
+/* Native proximity supplies sticky scrolling. JavaScript adds the heading threshold. */
+html.fiche-reading {
+  scroll-padding-top: 96px;
+  scroll-snap-type: y proximity;
+}
+
+.fiche-content .fiche-section {
+  display: flow-root;
+  min-height: calc(100vh - 96px - 3rem - env(safe-area-inset-bottom));
+  min-height: calc(100svh - 96px - 3rem - env(safe-area-inset-bottom));
+  padding-block-end: 30vh;
+  padding-block-end: 30svh;
+  scroll-snap-align: start;
+}
+
+.fiche-content .fiche-section + .fiche-section {
+  margin-block-start: clamp(8rem, 20vh, 16rem);
+  margin-block-start: clamp(8rem, 20svh, 16rem);
+}
+
+.fiche-content .fiche-section > h2:first-child {
+  margin-block-start: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.fiche-reading {
+    scroll-snap-type: none;
+  }
+}
+
+@media print {
+  html.fiche-reading {
+    scroll-padding-top: 0;
+    scroll-snap-type: none;
+  }
+
+  .fiche-content .fiche-section {
+    min-height: 0;
+    padding-block-end: 0;
+    scroll-snap-align: none;
+  }
+
+  .fiche-content .fiche-section + .fiche-section {
+    margin-block-start: 0;
+  }
+}

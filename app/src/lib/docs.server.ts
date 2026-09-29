@@ -7,6 +7,7 @@ import {
 	type FicheMetadata,
 	parseFicheStructure,
 } from "./docs.schema.ts";
+import { findPdf } from "./pdf.server.ts";
 
 export interface DocumentSummary {
 	id: string;
@@ -226,10 +227,13 @@ export async function loadDocument(
 	const parsed = docsSchema.safeParse(input);
 	if (!parsed.success) throw new Error("Invalid document schema.");
 	const document = parsed.data;
+	const pdfUrl = document.pdf_url ?? (
+		await findPdf(id) ? `/api/pdfs/${encodeURIComponent(id)}` : null
+	);
 	return {
 		...summarize(id, document),
 		ficheMarkdown: document.fiche.fiche_md,
 		noteMarkdown: document.note.note_md,
-		pdfUrl: document.pdf_url ?? null,
+		pdfUrl,
 	};
 }

@@ -63,5 +63,6 @@
   "document_back_description": "Explore other documents in the collection.",
   "document_pdf_description": "Read the full original document.",
   "document_change_format": "Choose another format",
+  "document_contents": "Contents",
   "document_generated": "Automatically generated from the original document. Check the source for accuracy."
 }

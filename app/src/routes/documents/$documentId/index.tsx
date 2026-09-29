@@ -99,54 +99,64 @@ function DocumentSelectionPage() {
 						})}
 					</div>
 				</section>
-				<div className="mx-auto mt-16 grid max-w-xl gap-6 text-center sm:grid-cols-2">
-					<div>
-						<Link
-							to="/"
-							aria-describedby="document-back-description"
-							className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+				<div className="mx-auto mt-16 grid max-w-2xl gap-6 text-center sm:grid-cols-2">
+					<Link
+						to="/"
+						aria-labelledby="document-back-label"
+						aria-describedby="document-back-description"
+						className="flex flex-col items-center text-muted-foreground transition-colors duration-150 hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring motion-reduce:transition-none"
+					>
+						<span
+							id="document-back-label"
+							className="inline-flex items-center gap-2 text-sm"
 						>
 							<ArrowLeftIcon aria-hidden="true" className="size-4" />
 							{m.document_back()}
-						</Link>
-						<p
+						</span>
+						<span
 							id="document-back-description"
-							className="mt-2 text-xs leading-relaxed text-muted-foreground"
+							className="mt-2 text-xs leading-relaxed"
 						>
 							{m.document_back_description()}
-						</p>
-					</div>
-					<div>
-						{document.pdfUrl ? (
-							<a
-								href={document.pdfUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-								aria-describedby="document-pdf-description"
-								className="inline-flex items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-							>
-								{m.document_read_pdf()}
-								<ArrowRightIcon aria-hidden="true" className="size-4" />
-							</a>
-						) : (
+						</span>
+					</Link>
+					{document.pdfUrl ? (
+						<a
+							href={document.pdfUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-labelledby="document-pdf-label"
+							aria-describedby="document-pdf-description"
+							className="flex flex-col items-center text-muted-foreground transition-colors duration-150 hover:text-foreground focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring motion-reduce:transition-none"
+						>
 							<span
-								aria-disabled="true"
-								aria-describedby="document-pdf-description"
-								className="inline-flex items-center gap-2 text-sm text-muted-foreground"
+								id="document-pdf-label"
+								className="inline-flex items-center gap-2 text-sm"
 							>
 								{m.document_read_pdf()}
 								<ArrowRightIcon aria-hidden="true" className="size-4" />
 							</span>
-						)}
-						<p
-							id="document-pdf-description"
-							className="mt-2 text-xs leading-relaxed text-muted-foreground"
+							<span
+								id="document-pdf-description"
+								className="mt-2 text-xs leading-relaxed"
+							>
+								{m.document_pdf_description()}
+							</span>
+						</a>
+					) : (
+						<div
+							className="flex flex-col items-center text-muted-foreground"
+							aria-disabled="true"
 						>
-							{document.pdfUrl
-								? m.document_pdf_description()
-								: m.document_pdf_unavailable()}
-						</p>
-					</div>
+							<span className="inline-flex items-center gap-2 text-sm">
+								{m.document_read_pdf()}
+								<ArrowRightIcon aria-hidden="true" className="size-4" />
+							</span>
+							<p className="mt-2 text-xs leading-relaxed">
+								{m.document_pdf_unavailable()}
+							</p>
+						</div>
+					)}
 				</div>
 			</main>
 		</div>

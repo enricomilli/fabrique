@@ -318,6 +318,11 @@ The cards link to separate `/documents/<id>/fiche` and `/documents/<id>/note` pa
 Both pages use the shared `_reader` layout. The selection page contains no reader logic.
 The interface supports English and French. Source content keeps its original language.
 
-To enable the PDF link, add a top-level `pdf_url` field to `explorer/<id>/data.json`.
+Place original PDFs in `../data/pdf/<id>.pdf` to enable the PDF links automatically.
+The server serves them at `/api/pdfs/<id>` with byte-range support for PDF readers.
+Set `PDF_DIR` to an absolute directory path if the PDFs live elsewhere.
+Include this directory in your deployment. The build does not copy the PDF files.
+
+An optional top-level `pdf_url` in `explorer/<id>/data.json` overrides the local PDF link.
 Use an absolute HTTP or HTTPS URL for the matching original PDF.
-If the URL is missing, the page shows an unavailable message instead of a broken link.
+If neither source exists, the page shows an unavailable message instead of a broken link.

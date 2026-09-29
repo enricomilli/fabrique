@@ -304,3 +304,23 @@ test("PDF URL permits missing, null, HTTP, and HTTPS values only", async (t) => 
 	await writeDocument(root, "unsafe", { ...document(), pdf_url: "javascript:alert(1)" });
 	await assert.rejects(loadDocument("unsafe", root), /Invalid document schema/);
 });
+
+test("detail detects local PDFs and keeps explicit URL overrides", async (t) => {
+	const root = await mkdtemp(join(tmpdir(), "docs-pdf-test-"));
+	const previous = process.env.PDF_DIR;
+	t.after(async () => {
+		if (previous === undefined) delete process.env.PDF_DIR;
+		else process.env.PDF_DIR = previous;
+		await rm(root, { recursive: true, force: true });
+	});
+	const pdfDirectory = join(root, "pdf");
+	await mkdir(pdfDirectory);
+	process.env.PDF_DIR = pdfDirectory;
+	await writeDocument(root, "local", document());
+	assert.equal((await loadDocument("local", root))?.pdfUrl, null);
+	await writeFile(join(pdfDirectory, "local.pdf"), "%PDF-1.7\n");
+	assert.equal((await loadDocument("local", root))?.pdfUrl, "/api/pdfs/local");
+	await writeDocument(root, "external", { ...document(), pdf_url: "https://example.com/original.pdf" });
+	await writeFile(join(pdfDirectory, "external.pdf"), "%PDF-1.7\n");
+	assert.equal((await loadDocument("external", root))?.pdfUrl, "https://example.com/original.pdf");
+});

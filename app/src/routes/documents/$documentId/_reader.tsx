@@ -1,7 +1,6 @@
 import { createFileRoute, Outlet, useMatch } from "@tanstack/react-router";
 import { AppHeader } from "#/components/app-header";
 import { ReaderFormatSwitcher } from "#/components/reader-format-switcher";
-import { m } from "#/paraglide/messages";
 import { Route as DocumentRoute } from "../$documentId";
 
 export const Route = createFileRoute("/documents/$documentId/_reader")({
@@ -20,7 +19,9 @@ function DocumentReaderLayout() {
 				documentTitle={ficheMatch ? document.title : undefined}
 				showFeedback={!ficheMatch}
 			/>
-			<main className="mx-auto w-full max-w-4xl px-6 pt-8 pb-[calc(7rem+env(safe-area-inset-bottom))]">
+			<main
+				className={`mx-auto w-full px-6 pt-8 pb-[calc(7rem+env(safe-area-inset-bottom))] ${ficheMatch ? "lg:grid lg:grid-cols-[minmax(14rem,1fr)_minmax(0,53rem)_minmax(14rem,1fr)] lg:gap-x-8" : "max-w-4xl"}`}
+			>
 				<h1
 					className={
 						ficheMatch
@@ -30,22 +31,7 @@ function DocumentReaderLayout() {
 				>
 					{document.title}
 				</h1>
-				<p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-					{m.document_generated()}
-				</p>
 				<Outlet />
-				{document.pdfUrl && (
-					<div className="mt-8 text-center">
-						<a
-							href={document.pdfUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
-						>
-							{m.document_read_pdf()} <span aria-hidden="true">→</span>
-						</a>
-					</div>
-				)}
 			</main>
 			<ReaderFormatSwitcher
 				documentId={document.id}
