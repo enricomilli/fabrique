@@ -195,3 +195,58 @@ html.fiche-reading {
     margin-block-start: 0;
   }
 }
+
+
+
+.pdf-sidebar {
+  position: sticky;
+  grid-column: 3;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-top: -2rem;
+  border: 1px solid var(--border);
+  background: var(--background);
+  transition: border-top-color 150ms;
+}
+
+[data-app-header][data-scrolled="true"] ~ main .pdf-sidebar {
+  border-top-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pdf-sidebar {
+    transition: none;
+  }
+}
+.pdf-dialog {
+  position: fixed;
+  inset: auto 0 0;
+  width: 100%;
+  max-width: none;
+  height: 90dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0 0 env(safe-area-inset-bottom);
+  color: var(--foreground);
+  background: var(--background);
+  border: 1px solid var(--border);
+}
+.pdf-dialog[open] { display: flex; flex-direction: column; }
+.pdf-dialog::backdrop { background: oklch(0 0 0 / 0.4); }
+
+@media (min-width: 1280px) {
+  html.fiche-pdf-open main {
+    padding-right: 0;
+  }
+
+  .fiche-reader-pdf {
+    grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr) minmax(0, 40vw);
+    column-gap: 1.5rem;
+  }
+}
+@media print {
+  .pdf-sidebar, .pdf-dialog { display: none; }
+  .fiche-reader-pdf { display: block; }
+}

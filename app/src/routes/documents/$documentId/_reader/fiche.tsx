@@ -8,5 +8,11 @@ export const Route = createFileRoute("/documents/$documentId/_reader/fiche")({
 
 function FichePage() {
 	const document = DocumentRoute.useLoaderData();
-	return <FicheContent key={document.id} markdown={document.ficheMarkdown} />;
+	return (
+		<FicheContent
+			key={document.id}
+			markdown={document.ficheMarkdown}
+			pdfUrl={document.pdfUrl}
+		/>
+	);
 }

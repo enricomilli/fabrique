@@ -64,5 +64,16 @@
   "document_pdf_description": "Consultez le document original dans son intégralité.",
   "document_change_format": "Choisir un autre format",
   "document_contents": "Sommaire",
-  "document_generated": "Document généré automatiquement à partir du texte original. Vérifiez les informations dans la source."
+  "document_generated": "Document généré automatiquement à partir du texte original. Vérifiez les informations dans la source.",
+  "pdf_panel_title": "PDF source",
+  "pdf_close": "Fermer le PDF",
+  "pdf_open_source": "Ouvrir le PDF dans un nouvel onglet",
+  "pdf_loading": "Chargement du PDF…",
+  "pdf_error": "Impossible d’afficher ce PDF. Ouvrez la source dans un nouvel onglet.",
+  "pdf_page_error": "La page {page} n’est pas disponible dans ce PDF.",
+  "pdf_page_status": "{page} sur {count} pages",
+  "pdf_previous": "Précédent",
+  "pdf_next": "Suivant",
+  "pdf_citation": "Lire la page {page} du PDF",
+  "pdf_physical_pages": "Les numéros correspondent aux positions dans le PDF, et non à la pagination imprimée."
 }

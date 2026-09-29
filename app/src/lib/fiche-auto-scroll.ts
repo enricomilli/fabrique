@@ -140,10 +140,7 @@ export function installFicheAutoScroll(
 		"scroll",
 		() => {
 			const y = window.scrollY;
-			// Native proximity can move upward during a downward gesture.
-			// Explicit upward input cancels the gesture in the input handler.
-			if (y < previousY && !armed) cancel();
-			else if (y > previousY) movedDown = true;
+			if (y > previousY) movedDown = true;
 			previousY = y;
 			activity();
 		},
@@ -152,13 +149,15 @@ export function installFicheAutoScroll(
 	window.addEventListener(
 		"wheel",
 		(event) => {
-			if (event.deltaY !== 0)
-				input(
-					event.deltaY > 0 &&
-						!event.ctrlKey &&
-						Math.abs(event.deltaY) > Math.abs(event.deltaX),
-					event.target,
-				);
+			if (
+				event.defaultPrevented ||
+				event.ctrlKey ||
+				Math.abs(event.deltaY) <= Math.abs(event.deltaX)
+			) {
+				cancel();
+				return;
+			}
+			input(event.deltaY > 0, event.target);
 		},
 		options,
 	);

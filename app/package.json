@@ -13,6 +13,7 @@
     "format": "biome format",
     "lint": "biome lint",
     "check": "biome check",
+    "test": "tsx --test tests/*.test.ts tests/*.test.tsx tests/*.test.mjs",
     "test:i18n": "npm run build && node --test tests/i18n.test.mjs"
   },
   "dependencies": {
@@ -36,6 +37,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-markdown": "^10.1.0",
+    "react-pdf": "^11.0.0",
     "remark-parse": "^11.0.0",
     "shadcn": "^4.21.0",
     "tailwindcss": "^4.1.18",
@@ -56,6 +58,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
     "babel-plugin-react-compiler": "^1.0.0",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.2",
     "vite": "^8.0.0"
   },

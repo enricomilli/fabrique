@@ -64,5 +64,16 @@
   "document_pdf_description": "Read the full original document.",
   "document_change_format": "Choose another format",
   "document_contents": "Contents",
-  "document_generated": "Automatically generated from the original document. Check the source for accuracy."
+  "document_generated": "Automatically generated from the original document. Check the source for accuracy.",
+  "pdf_panel_title": "Source PDF",
+  "pdf_close": "Close PDF",
+  "pdf_open_source": "Open PDF in a new tab",
+  "pdf_loading": "Loading PDF…",
+  "pdf_error": "Cannot display this PDF. Open the source in a new tab.",
+  "pdf_page_error": "Page {page} is not available in this PDF.",
+  "pdf_page_status": "{page} of {count} pages",
+  "pdf_previous": "Back",
+  "pdf_next": "Next",
+  "pdf_citation": "Read PDF page {page}",
+  "pdf_physical_pages": "Page numbers refer to positions in the PDF, not printed page labels."
 }

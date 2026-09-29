@@ -29,6 +29,8 @@ export const AppHeader = ({
 
 	return (
 		<header
+			data-app-header
+			data-scrolled={scrolled}
 			className={`sticky top-0 z-50 flex w-full items-center justify-between gap-3 border-b bg-background px-6 py-3 transition-colors duration-150 motion-reduce:transition-none ${documentTitle ? "flex-nowrap" : "flex-wrap"} ${scrolled ? "border-border" : "border-transparent"}`}
 		>
 			<div className="flex min-w-0 flex-1 items-baseline gap-6">

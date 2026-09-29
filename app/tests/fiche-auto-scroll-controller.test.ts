@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { installFicheAutoScroll } from "../src/lib/fiche-auto-scroll.ts";
 
-// Model passive wheel delivery before or after compositor movement.
+// Model input, compositor movement, and idle timers separately.
 function controllerFixture() {
 	class PageElement {
 		scrollHeight = 100;
@@ -87,14 +87,17 @@ function controllerFixture() {
 				}
 			}
 		},
-		wheel(deltaY: number, target = content) {
-			const event = Object.assign(new Event("wheel"), {
+		wheel(deltaY: number, target = content, overrides: Partial<WheelEvent> = {}) {
+			const event = Object.assign(new Event("wheel", { cancelable: true }), {
 				deltaY,
 				deltaX: 0,
+				deltaMode: 0,
 				ctrlKey: false,
+				...overrides,
 			});
 			Object.defineProperty(event, "target", { value: target });
 			browser.dispatchEvent(event);
+			return event;
 		},
 		scroll() {
 			browser.dispatchEvent(new Event("scroll"));
@@ -114,25 +117,23 @@ function controllerFixture() {
 	};
 }
 
-for (const compositorFirst of [true, false]) {
-	test(`auto-scroll handles compositor movement ${compositorFirst ? "before" : "after"} passive wheel delivery`, () => {
-		const fixture = controllerFixture();
-		try {
-			if (compositorFirst) fixture.browser.scrollY = 35;
-			fixture.wheel(35);
-			if (!compositorFirst) fixture.browser.scrollY = 35;
-			fixture.scroll();
-			fixture.tick();
-			assert.deepEqual(fixture.calls, [{ top: 734, behavior: "smooth" }]);
-			// The next heading now meets the threshold during the transition.
-			fixture.browser.scrollY = 900;
-			fixture.scroll();
-			assert.equal(fixture.calls.length, 1);
-		} finally {
-			fixture.cleanup();
-		}
-	});
-}
+test("does not clamp native movement after a threshold transition", () => {
+	const f = controllerFixture();
+	try {
+		f.wheel(35);
+		f.browser.scrollY = 35;
+		f.scroll();
+		f.tick();
+		assert.deepEqual(f.calls, [{ top: 734, behavior: "smooth" }]);
+		f.browser.scrollY = 900;
+		f.scroll();
+		f.tick();
+		assert.equal(f.browser.scrollY, 900);
+		assert.deepEqual(f.calls, [{ top: 734, behavior: "smooth" }]);
+	} finally {
+		f.cleanup();
+	}
+});
 
 test("controller ignores movement without input and clears upward intent", () => {
 	const fixture = controllerFixture();
@@ -170,8 +171,9 @@ for (const interval of [16, 30]) {
 			assert.deepEqual(f.calls, [{ top: 734, behavior: "smooth" }]);
 			f.browser.scrollY = 900;
 			f.scroll();
+			f.browser.scrollY = 734;
 			f.tick();
-			assert.equal(f.calls.length, 1, "must not chain");
+			assert.deepEqual(f.calls, [{ top: 734, behavior: "smooth" }]);
 		} finally {
 			f.cleanup();
 		}
@@ -291,6 +293,69 @@ test("waits for a continuous touch gesture to settle", () => {
 		assert.deepEqual(f.calls, [{ top: 734, behavior: "smooth" }]);
 		f.touch("touchmove", 500);
 		assert.equal(f.calls.at(-1)?.behavior, "instant");
+	} finally {
+		f.cleanup();
+	}
+});
+
+for (const reduced of [false, true]) {
+	for (const deltaMode of [0, 1, 2]) {
+		test(`huge wheel stays native with reduced motion ${reduced} and delta mode ${deltaMode}`, () => {
+			const f = controllerFixture();
+			try {
+				f.motion.matches = reduced;
+				for (const deltaY of [10000, -10000]) {
+					assert.equal(
+						f.wheel(deltaY, f.content, { deltaMode }).defaultPrevented,
+						false,
+					);
+					f.browser.scrollY = deltaY > 0 ? 1800 : 0;
+					f.scroll();
+					f.tick();
+					assert.deepEqual(f.calls, []);
+					assert.equal(f.browser.scrollY, deltaY > 0 ? 1800 : 0);
+				}
+			} finally {
+				f.cleanup();
+			}
+		});
+	}
+}
+
+for (const excluded of ["control", "nested", "zoom", "horizontal"]) {
+	test(`does not prevent ${excluded} wheel input`, () => {
+		const f = controllerFixture();
+		try {
+			if (excluded === "control") f.content.excluded = true;
+			if (excluded === "nested") f.content.scrollHeight = 200;
+			const event = f.wheel(10000, f.content, {
+				ctrlKey: excluded === "zoom",
+				deltaX: excluded === "horizontal" ? 20000 : 0,
+			});
+			assert.equal(event.defaultPrevented, false);
+			assert.deepEqual(f.calls, []);
+		} finally {
+			f.cleanup();
+		}
+	});
+}
+
+test("does not clamp touch movement across section starts", () => {
+	const f = controllerFixture();
+	try {
+		f.touch("touchstart", 500);
+		f.browser.scrollY = 1800;
+		f.touch("touchmove", 100);
+		f.scroll();
+		f.tick();
+		assert.equal(f.browser.scrollY, 1800);
+		assert.deepEqual(f.calls, []);
+		f.touch("touchmove", 500);
+		f.browser.scrollY = 0;
+		f.scroll();
+		f.tick();
+		assert.equal(f.browser.scrollY, 0);
+		assert.deepEqual(f.calls, []);
 	} finally {
 		f.cleanup();
 	}
