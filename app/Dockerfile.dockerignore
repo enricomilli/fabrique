@@ -1,0 +1,24 @@
+# Only send the app, document exports, and PDFs to the build.
+**
+!app/
+!app/**
+!explorer/
+!explorer/*/
+!explorer/*/data.json
+!data/
+!data/pdf/
+!data/pdf/*.pdf
+
+app/node_modules/
+app/.output/
+app/dist/
+app/.nitro/
+app/.tanstack/
+app/.vinxi/
+app/.wrangler/
+app/.env*
+app/src/paraglide/
+app/config/i18n.inlang/cache/
+app/.vscode/
+**/.DS_Store
+**/*.log
