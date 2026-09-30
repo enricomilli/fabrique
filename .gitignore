@@ -6,3 +6,5 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
+cli/rlm-cli/node_modules/
+cli/rlm-cli/dist/

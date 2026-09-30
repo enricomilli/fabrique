@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>thesis_rlm Request Flow</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+body { margin: 0; }
+/* Layout: one wide diagram (machine zone → tunnel → GPU zone), then three short notes in a row. */
+:root {
+  --bg: #f6f7f8;
+  --panel: #ffffff;
+  --fg: #1b2530;
+  --muted: #5d6b78;
+  --line: #c9d1d9;
+  --fiche: #1f6fb2;
+  --note: #2f8a5f;
+  --warn: #b26a00;
+  --zone: #eceff2;
+  --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171c; --panel: #1a2128; --fg: #e3e8ed; --muted: #95a3b0; --line: #34404b;
+    --fiche: #6aaee6; --note: #62c595; --warn: #e6a346; --zone: #161c22; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171c; --panel: #1a2128; --fg: #e3e8ed; --muted: #95a3b0; --line: #34404b;
+  --fiche: #6aaee6; --note: #62c595; --warn: #e6a346; --zone: #161c22; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 36px 48px; }
+h1 { font-size: 1.6rem; font-weight: 600; margin: 0 0 6px; text-wrap: balance; }
+.lede { color: var(--muted); max-width: 68ch; margin: 0 0 24px; }
+code { font-family: var(--mono); font-size: 0.9em; }
+figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
+.scroll { overflow-x: auto; }
+svg { display: block; width: 100%; min-width: 860px; height: auto; }
+figcaption { color: var(--muted); font-size: 0.9rem; margin-top: 10px; }
+
+/* diagram classes (page CSS styles the inline SVG) */
+.zone { fill: var(--zone); stroke: var(--line); }
+.zlabel { fill: var(--muted); font: 600 11px var(--sans); letter-spacing: .08em; }
+.box { fill: var(--panel); stroke: var(--line); stroke-width: 1.2; }
+.box.fiche { stroke: var(--fiche); stroke-width: 1.6; }
+.box.note { stroke: var(--note); stroke-width: 1.6; }
+.box.warn { stroke: var(--warn); stroke-dasharray: 4 3; }
+.t { fill: var(--fg); font: 500 13px var(--mono); }
+.s { fill: var(--muted); font: 400 11px var(--mono); }
+.lab { fill: var(--muted); font: 400 11px var(--sans); }
+.lab.f { fill: var(--fiche); }
+.lab.n { fill: var(--note); }
+.lab.w { fill: var(--warn); }
+.a { fill: none; stroke-width: 1.6; }
+.a.f { stroke: var(--fiche); }
+.a.n { stroke: var(--note); }
+.a.g { stroke: var(--muted); }
+.a.d { stroke: var(--muted); stroke-dasharray: 5 4; }
+.hf { fill: var(--fiche); } .hn { fill: var(--note); } .hg { fill: var(--muted); }
+.tunnel { fill: var(--panel); stroke: var(--line); }
+
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 24px; }
+.notes section { min-width: 0; }
+.notes h2 { font-size: 0.95rem; font-weight: 600; margin: 0 0 4px; display: flex; gap: 8px; align-items: center; }
+.notes p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.dot.f { background: var(--fiche); } .dot.n { background: var(--note); } .dot.w { background: var(--warn); }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <h1>thesis_rlm request flow</h1>
+  <p class="lede">Both pipelines call the same llama-server on the Colab GPU through a Cloudflare tunnel. The fiche calls it directly. The note goes through rlm-cli, which can only talk to Ollama or hosted providers, so a local shim poses as Ollama and forwards to llama-server.</p>
+
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 1140 450" role="img" aria-label="The fiche sends OpenAI chat requests with its own sampling straight to the tunnel and gets the streamed answer back. The note runner starts rlm-cli, which calls the shim on port 11434 as if it were Ollama; the shim adds sampling, forwards to the tunnel, and returns the reply. The tunnel reaches llama-server on the Colab GPU. Every hop carries the request out and the response back.">
+      <defs>
+        <marker id="af" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="hf" d="M0 0 L10 5 L0 10 z"/></marker>
+        <marker id="an" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="hn" d="M0 0 L10 5 L0 10 z"/></marker>
+        <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="hg" d="M0 0 L10 5 L0 10 z"/></marker>
+      </defs>
+
+      <!-- zones -->
+      <rect class="zone" x="10" y="14" width="760" height="426" rx="6"/>
+      <text class="zlabel" x="26" y="36">YOUR MACHINE</text>
+      <rect class="zone" x="910" y="14" width="220" height="426" rx="6"/>
+      <text class="zlabel" x="926" y="36">COLAB GPU</text>
+
+      <!-- tunnel -->
+      <rect class="tunnel" x="800" y="56" width="80" height="286" rx="6"/>
+      <text class="t" x="840" y="190" text-anchor="middle" transform="rotate(-90 840 190)">Cloudflare tunnel</text>
+      <text class="s" x="860" y="200" text-anchor="middle" transform="rotate(-90 860 200)">https://…trycloudflare.com/v1</text>
+
+      <!-- llama-server -->
+      <rect class="box" x="928" y="146" width="184" height="112" rx="5"/>
+      <text class="t" x="942" y="172">llama-server</text>
+      <text class="s" x="942" y="194">Qwen3.6-27B Q6_K</text>
+      <text class="s" x="942" y="210">--spec-type draft-mtp</text>
+      <text class="s" x="942" y="226">3 slots × 87k ctx</text>
+      <text class="s" x="942" y="242">port 8000</text>
+      <path class="a g" d="M882 202 H926" marker-start="url(#ag)" marker-end="url(#ag)"/>
+
+      <!-- FICHE row -->
+      <rect class="box fiche" x="30" y="60" width="150" height="48" rx="5"/>
+      <text class="t" x="44" y="82">run_fiche.py</text>
+      <text class="s" x="44" y="99">7 calls per thesis</text>
+      <path class="a f" d="M182 84 H798" marker-start="url(#af)" marker-end="url(#af)"/>
+      <text class="lab f" x="200" y="76">→ POST /v1/chat/completions, with its own sampling per step (temp 0.3 / 0.5 / 0.6, top_k 40)</text>
+      <text class="lab f" x="200" y="100">← streamed back token by token: the thinking, then the answer</text>
+      <text class="lab f" x="30" y="132">QWEN_SERVER_URL points at the tunnel, never at the shim:</text>
+      <text class="lab f" x="30" y="147">the shim would overwrite the fiche's per-step sampling.</text>
+
+      <!-- NOTE row -->
+      <rect class="box note" x="30" y="250" width="150" height="48" rx="5"/>
+      <text class="t" x="44" y="272">run_note.py</text>
+      <text class="s" x="44" y="289">prompt + thesis text</text>
+      <path class="a n" d="M182 274 H263" marker-start="url(#an)" marker-end="url(#an)"/>
+      <text class="lab n" x="222" y="266" text-anchor="middle">starts rlm run</text>
+      <text class="lab n" x="222" y="292" text-anchor="middle">note on stdout</text>
+
+      <rect class="box note" x="265" y="250" width="160" height="48" rx="5"/>
+      <text class="t" x="279" y="272">rlm-cli 0.5.0</text>
+      <text class="s" x="279" y="289">REPL loop, 8–9 turns</text>
+      <rect class="box warn" x="265" y="306" width="160" height="26" rx="4"/>
+      <text class="lab w" x="345" y="323" text-anchor="middle">patched: rlm run finds Ollama</text>
+
+      <path class="a n" d="M427 262 H558" marker-start="url(#an)" marker-end="url(#an)"/>
+      <text class="lab n" x="492" y="254" text-anchor="middle">GET /api/tags ⇄ model list</text>
+      <path class="a n" d="M427 286 H558" marker-start="url(#an)" marker-end="url(#an)"/>
+      <text class="lab n" x="492" y="302" text-anchor="middle">POST chat, no sampling</text>
+      <text class="lab n" x="492" y="316" text-anchor="middle">⇄ model's reply (one turn)</text>
+
+      <rect class="box note" x="560" y="214" width="182" height="124" rx="5"/>
+      <text class="t" x="574" y="236">run_shim.py :11434</text>
+      <text class="s" x="574" y="256">poses as Ollama</text>
+      <text class="s" x="574" y="272">+ temp 0.6 · top_k 20 · top_p .95</text>
+      <text class="s" x="574" y="288">+ max_tokens 8192 · think 1500</text>
+      <text class="s" x="574" y="304">− per-turn countdown line</text>
+      <text class="s" x="574" y="320">passes the reply back</text>
+      <path class="a n" d="M744 274 H798" marker-start="url(#an)" marker-end="url(#an)"/>
+
+      <!-- trace control + dumps -->
+      <path class="a d" d="M105 298 V380 H620 V340" marker-end="url(#ag)"/>
+      <text class="lab" x="126" y="374">POST /shim/trace {dir} before the run, {dir: null} after</text>
+      <path class="a d" d="M700 338 V392" marker-end="url(#ag)"/>
+      <rect class="box" x="600" y="394" width="160" height="40" rx="5"/>
+      <text class="s" x="612" y="411">note_runs/&lt;id&gt;/trace/</text>
+      <text class="s" x="612" y="426">NNN_root.json per turn</text>
+    </svg>
+    </div>
+    <figcaption>Blue: the fiche path. Green: the note path. Double-headed arrows carry the request out and the response back. Dashed: control messages and trace files, which never reach the GPU.</figcaption>
+  </figure>
+
+  <div class="notes">
+    <section>
+      <h2><span class="dot f"></span>Fiche goes direct</h2>
+      <p>The fiche sets temperature, top_k and token limits per step. It talks to llama-server through the tunnel and refuses to start without <code>QWEN_SERVER_URL</code>.</p>
+    </section>
+    <section>
+      <h2><span class="dot n"></span>Why the shim exists</h2>
+      <p>rlm-cli has no setting for a custom OpenAI URL, and it sends no sampling parameters. The shim answers its Ollama probe, adds the note's sampling, and forwards each request to the tunnel.</p>
+    </section>
+    <section>
+      <h2><span class="dot w"></span>rlm-cli patch</h2>
+      <p>Stock rlm-cli 0.5.0 only looks up Ollama models in interactive mode. The note uses <code>rlm run</code>, so the repo ships a patched copy in <code>cli/rlm-cli/</code>. Install it with <code>cli/install.sh</code>.</p>
+    </section>
+  </div>
+</div>
+
+</body>
+</html>

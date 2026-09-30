@@ -1,0 +1,33 @@
+diff --git a/src/cli.ts b/src/cli.ts
+index fc3a642..32976bc 100644
+--- a/src/cli.ts
++++ b/src/cli.ts
+@@ -21,6 +21,7 @@ import * as fs from "node:fs";
+ const { getModels, getProviders } = await import("@mariozechner/pi-ai");
+ const { PythonRepl } = await import("./repl.js");
+ const { runRlmLoop } = await import("./rlm.js");
++const { fetchOllamaModels, createOllamaModel, OLLAMA_DEFAULT_BASE_URL } = await import("./ollama.js");
+ 
+ import type { Api, Model } from "@mariozechner/pi-ai";
+ 
+@@ -162,6 +163,20 @@ async function main(): Promise<void> {
+ 	const allModelIds: string[] = [];
+ 	const knownProviders = new Set(Object.keys(providerKeys));
+ 
++	// Ollama (thesis_rlm patch): let `rlm run` resolve models served at OLLAMA_BASE_URL
++	// (default http://localhost:11434) — upstream only does this in interactive mode.
++	const ollamaBaseUrl = process.env.OLLAMA_BASE_URL || OLLAMA_DEFAULT_BASE_URL;
++	try {
++		const ollamaModels = await fetchOllamaModels(ollamaBaseUrl);
++		for (const om of ollamaModels) {
++			allModelIds.push(`ollama:${om.name}`);
++			if (!model && (args.modelId === om.name || args.modelId === `ollama:${om.name}`)) {
++				model = createOllamaModel(om.name, ollamaBaseUrl) as unknown as Model<Api>;
++				resolvedProvider = "ollama";
++			}
++		}
++	} catch { /* no Ollama endpoint reachable — fine */ }
++
+ 	// First pass: only well-known providers
+ 	for (const provider of getProviders()) {
+ 		const providerModels = getModels(provider);

@@ -1,0 +1,59 @@
+{
+  "name": "rlm-cli",
+  "version": "0.5.0",
+  "description": "Standalone CLI for Recursive Language Models (RLMs) — implements Algorithm 1 from arXiv:2512.24601",
+  "type": "module",
+  "bin": {
+    "rlm": "./bin/rlm.mjs"
+  },
+  "main": "dist/main.js",
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "dist/runtime.py",
+    "bin"
+  ],
+  "scripts": {
+    "dev": "tsx src/main.ts",
+    "build": "tsc && cp src/runtime.py dist/",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "start": "node dist/main.js",
+    "cli": "tsx src/cli.ts",
+    "bench:oolong": "tsx benchmarks/oolong_synth.ts",
+    "bench:longbench": "tsx benchmarks/longbench_narrativeqa.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "rlm",
+    "recursive-language-model",
+    "llm",
+    "cli",
+    "agent",
+    "ai",
+    "long-context",
+    "python",
+    "repl"
+  ],
+  "author": "Vipul Maheshwari <vim.code.level@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/viplismism/rlm-cli.git"
+  },
+  "homepage": "https://github.com/viplismism/rlm-cli",
+  "bugs": "https://github.com/viplismism/rlm-cli/issues",
+  "dependencies": {
+    "@mariozechner/pi-ai": "^0.55.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.3",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "overrides": {
+    "minimatch": ">=10.2.1"
+  }
+}
