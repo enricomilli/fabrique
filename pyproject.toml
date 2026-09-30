@@ -4,18 +4,30 @@ version = "3.0.0"
 description = "Thesis annotation pipeline: fiche de synthèse + note de lecture (Qwen3.6-27B on llama-server, RLM loop via rlm-cli)"
 readme = "README.md"
 requires-python = ">=3.10"
+# Ranges stop at the next major so a pip install cannot jump one; the exact
+# validated versions are pinned below for uv.
 dependencies = [
-    "pandas>=2.2",
-    "pyarrow>=15",          # parquet engine for pandas.read_parquet
-    "openai>=1.40",         # fiche: OpenAI-compatible client to llama-server
-    "aiohttp>=3.9",         # note: the Ollama-compatible shim
-    "requests>=2.31",       # tools/spec_bench.py
+    "pandas>=2.2,<3",
+    "pyarrow>=15,<22",      # parquet engine for pandas.read_parquet
+    "openai>=2,<3",         # fiche: OpenAI-compatible client to llama-server
+    "aiohttp>=3.9,<4",      # note: the Ollama-compatible shim
+    "requests>=2.31,<3",    # tools/spec_bench.py
 ]
 
 [dependency-groups]
-dev = ["pytest>=8"]
+dev = ["pytest>=8,<10"]
 
+[tool.uv]
 # Not a library: the scripts are run from the repo root (they put scripts/ on
 # sys.path themselves), so uv manages the environment only.
-[tool.uv]
 package = false
+# The versions every reference and validation run used (2026-08-19, v3).
+# Upgrade deliberately: bump here, `uv lock`, run the tests + one live run.
+constraint-dependencies = [
+    "pandas==2.3.1",
+    "pyarrow==21.0.0",
+    "openai==2.32.0",
+    "aiohttp==3.13.2",
+    "requests==2.33.1",
+    "pytest==9.0.3",
+]

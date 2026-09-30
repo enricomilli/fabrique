@@ -25,7 +25,7 @@ note ≈50/60 with **0 wrong pages, 0 blind citations**. Judge criteria and the
 
 | where | what | version used |
 |---|---|---|
-| local (Mac) | Python ≥ 3.10 + the deps in `pyproject.toml` (`pandas`, `pyarrow`, `openai`, `aiohttp`, `requests`; `pytest` in the dev group), pinned in `uv.lock` — see *Install* below | locked in `uv.lock` |
+| local (Mac) | Python ≥ 3.10 + the deps in `pyproject.toml` (`pandas`, `pyarrow`, `openai`, `aiohttp`, `requests`; `pytest` in the dev group), pinned in `uv.lock` to the versions every reference run used — see *Install* below | Python 3.13 · pandas 2.3.1 · pyarrow 21.0.0 · openai 2.32.0 · aiohttp 3.13.2 · requests 2.33.1 |
 | local | **rlm-cli** (`rlm` on PATH; Node ≥ 20). 0.5.0 is not on npm — install from the commit: `git clone https://github.com/viplismism/rlm-cli && cd rlm-cli && git checkout 19f0eb5 && npm install && npm run build && npm link` — the note prompt, the shim's countdown-strip regex, `rlm/rlm_config.yaml` (`truncate_len`) and the metadata banner parsing were validated on **0.5.0** ([github.com/viplismism/rlm-cli](https://github.com/viplismism/rlm-cli), commit 19f0eb5). Newer versions may change those strings — re-run `tests/` and one note before trusting them. rlm's REPL executes Python, so `python3` must be on PATH for it too. | 0.5.0 |
 | remote (GPU) | Colab with a ≥ 80 GB GPU (A100/H100 class — 64 GB used by the Q6_K model + q8_0 KV at 262k ctx), Google Drive for the GGUF, a Hugging Face account; `notebooks/current_thesis_server.ipynb` builds llama.cpp (CUDA) and downloads `unsloth/Qwen3.6-27B-MTP-GGUF` Q6_K (~22 GB) | llama.cpp master (2026-08), MTP build |
 | inputs | `data/<thesis>.parquet` — one row per layout block with `page`, `block_index`, `category`, `text` (Page-header/Page-footer/Footnote/Section-header/List-item/Text/…). The three parquets here are theses as delivered by the layout parser; their source PDFs are in `data/pdf/` (same stem). Parquet `page` = PDF page, except `2024LORR0201` where the PDF has one extra cover page (parquet p.N = PDF p.N+1) | — |
@@ -39,7 +39,9 @@ uv run python scripts/run_fiche.py …   # or `source .venv/bin/activate` and us
 ```
 
 Without uv: `python3 -m venv .venv && . .venv/bin/activate && pip install -e . pytest`
-(unpinned — resolves the ranges in `pyproject.toml`). The repo is not an installable
+(resolves the ranges in `pyproject.toml`, which stop at the next major version; only
+uv reproduces the exact validated set). To upgrade a dependency: bump its pin in
+`[tool.uv] constraint-dependencies`, `uv lock`, run the tests and one live run. The repo is not an installable
 package: run the scripts from the repo root; they put `scripts/` on `sys.path` themselves.
 rlm-cli (Node) and the GPU server (Colab notebook) are outside the Python environment —
 install them as described in the table above.
