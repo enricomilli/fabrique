@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DocumentContent } from "#/components/document-content";
+import { NoteContent } from "#/components/note-content";
 import { Route as DocumentRoute } from "../../$documentId";
 
 export const Route = createFileRoute("/documents/$documentId/_reader/note")({
@@ -8,5 +8,11 @@ export const Route = createFileRoute("/documents/$documentId/_reader/note")({
 
 function NotePage() {
 	const document = DocumentRoute.useLoaderData();
-	return <DocumentContent markdown={document.noteMarkdown} />;
+	return (
+		<NoteContent
+			title={document.title}
+			markdown={document.noteMarkdown}
+			pdfUrl={document.pdfUrl}
+		/>
+	);
 }

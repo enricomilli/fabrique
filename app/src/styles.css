@@ -246,10 +246,31 @@ html.fiche-reading {
     grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr) minmax(0, 40vw);
     column-gap: 1.5rem;
   }
+
+  html.note-pdf-open .note-reader-main {
+    max-width: none;
+    padding-right: 0;
+  }
+
+  .note-reader-pdf {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 40vw);
+    column-gap: 1.5rem;
+  }
+
+  .note-reader-pdf > .pdf-sidebar {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
+  }
 }
 @media print {
   .pdf-sidebar, .pdf-dialog { display: none; }
-  .fiche-reader-pdf { display: block; }
+  .fiche-reader-pdf, .note-reader-pdf { display: block; }
+  html.note-pdf-open .note-reader-main {
+    max-width: 56rem;
+    padding-inline: 1.5rem;
+  }
 }
 
 .katex-display {

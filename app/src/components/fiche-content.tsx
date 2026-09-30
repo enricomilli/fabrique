@@ -1,12 +1,7 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import type { Components, Options } from "react-markdown";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { Options } from "react-markdown";
 import { DocumentContent } from "#/components/document-content";
-import { PdfSidebar } from "#/components/pdf-sidebar";
-import {
-	remarkPageCitations,
-	safePdfUrl,
-	validPdfPage,
-} from "#/lib/page-citations";
+import { usePdfCitations } from "#/components/use-pdf-citations";
 import { installFicheAutoScroll } from "#/lib/fiche-auto-scroll";
 import {
 	currentFicheHeading,
@@ -57,68 +52,15 @@ export function FicheContent({
 	const title = useMemo(() => extractFicheTitle(markdown), [markdown]);
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [activeId, setActiveId] = useState<string | null>(null);
-	const [page, setPage] = useState<number | null>(null);
-	const citationRef = useRef<HTMLAnchorElement | null>(null);
-	const positionRef = useRef<number | null>(null);
-	const url = safePdfUrl(pdfUrl);
+	const {
+		isOpen,
+		plugins: citationPlugins,
+		components,
+		sidebar,
+	} = usePdfCitations(pdfUrl, "fiche-pdf-open");
 	const plugins = useMemo<Options["remarkPlugins"]>(
-		() => [...anchorPlugins, [remarkPageCitations, { pdfUrl: url }]],
-		[url],
-	);
-	const isOpen = page !== null;
-	useLayoutEffect(() => {
-		const root = document.documentElement;
-		root.classList.toggle("fiche-pdf-open", isOpen);
-		const anchor = citationRef.current;
-		const top = positionRef.current;
-		if (
-			anchor &&
-			top !== null &&
-			window.matchMedia("(min-width: 1280px)").matches
-		) {
-			window.scrollBy({
-				top: anchor.getBoundingClientRect().top - top,
-				behavior: "instant",
-			});
-		}
-		positionRef.current = null;
-		if (!isOpen) anchor?.focus({ preventScroll: true });
-		return () => root.classList.remove("fiche-pdf-open");
-	}, [isOpen]);
-	const components = useMemo<Components>(
-		() => ({
-			a: ({ node, children, ...props }) => {
-				const citedPage = Number(node?.properties["data-pdf-page"]);
-				if (!url || !validPdfPage(citedPage))
-					return <a {...props}>{children}</a>;
-				return (
-					<a
-						{...props}
-						href={props.href}
-						data-pdf-page={citedPage}
-						aria-label={m.pdf_citation({ page: citedPage })}
-						onClick={(event) => {
-							if (
-								event.button !== 0 ||
-								event.metaKey ||
-								event.ctrlKey ||
-								event.shiftKey ||
-								event.altKey
-							)
-								return;
-							event.preventDefault();
-							citationRef.current = event.currentTarget;
-							positionRef.current =
-								event.currentTarget.getBoundingClientRect().top;
-							setPage(citedPage);
-						}}
-					>
-						{children}
-					</a>
-				);
-			},
-		}),
-		[url],
+		() => [...anchorPlugins, ...(citationPlugins ?? [])],
+		[citationPlugins],
 	);
 	useEffect(() => {
 		const content = contentRef.current;
@@ -212,18 +154,7 @@ export function FicheContent({
 					components={components}
 				/>
 			</div>
-			{page !== null && url && (
-				<PdfSidebar
-					url={url}
-					page={page}
-					onPageChange={setPage}
-					onClose={() => {
-						positionRef.current =
-							citationRef.current?.getBoundingClientRect().top ?? null;
-						setPage(null);
-					}}
-				/>
-			)}
+			{sidebar}
 		</div>
 	);
 }
