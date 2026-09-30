@@ -1,0 +1,21 @@
+[project]
+name = "thesis-rlm"
+version = "3.0.0"
+description = "Thesis annotation pipeline: fiche de synthèse + note de lecture (Qwen3.6-27B on llama-server, RLM loop via rlm-cli)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.2",
+    "pyarrow>=15",          # parquet engine for pandas.read_parquet
+    "openai>=1.40",         # fiche: OpenAI-compatible client to llama-server
+    "aiohttp>=3.9",         # note: the Ollama-compatible shim
+    "requests>=2.31",       # tools/spec_bench.py
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+# Not a library: the scripts are run from the repo root (they put scripts/ on
+# sys.path themselves), so uv manages the environment only.
+[tool.uv]
+package = false
