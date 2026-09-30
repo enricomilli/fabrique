@@ -61,14 +61,7 @@ git apply /path/to/thesis_rlm/cli/rlm-cli-ollama-run.patch
 npm ci && npm run build && npm link
 ```
 
-## Checked on 2026-09-30
-
-- `install.sh --no-link` from a clean copy of this folder builds `rlm v0.5.0`.
-- The built `dist/cli.js` matches the build every reference run used, apart from
-  one comment.
-- Against a fake Ollama endpoint, the patched `rlm run --model Qwen3.6-27B-Q6_K.gguf`
-  sends `POST /v1/chat/completions` and completes (`1 iterations | success`). The
-  unpatched build of the same commit stops with `unknown model`.
+## Upgrading
 
 Upgrading to a newer rlm-cli is a behaviour change. The note prompt, the shim's
 countdown-strip regex, `rlm/rlm_config.yaml` (`truncate_len`) and the parsing of
