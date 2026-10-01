@@ -462,28 +462,61 @@ def find_intro_parquet_page(df: pd.DataFrame, toc: list) -> Optional[int]:
     return min(candidates) if candidates else None
 
 
+def folio_offset(df: pd.DataFrame, min_votes: int = 5) -> Optional[int]:
+    """Offset (parquet page − printed page) read from the printed page numbers
+    themselves: Page-header / Page-footer blocks whose text is a bare Arabic
+    number. Returns the modal delta when at least `min_votes` blocks agree and
+    they are a majority of the numeric folios; None otherwise (roman-numeral
+    front matter is ignored, which is what we want — the TOC uses body pages)."""
+    band = df[df["category"].isin(["Page-header", "Page-footer"])]
+    deltas: list[int] = []
+    for _, row in band.iterrows():
+        t = re.sub(r"^[#*\s]+|[*\s]+$", "", str(row.get("text", "")))
+        if t.isdigit() and len(t) <= 4:
+            deltas.append(int(row["page"]) - int(t))
+    if not deltas:
+        return None
+    best = max(set(deltas), key=deltas.count)
+    votes = deltas.count(best)
+    return best if votes >= min_votes and votes * 2 > len(deltas) else None
+
+
 def compute_page_offset(df: pd.DataFrame, toc: list) -> dict:
     """
     Compute the deterministic offset between printed page numbers (as listed
-    in the TOC) and raw parquet page indices, using the Introduction section
-    as the anchor.
+    in the TOC) and raw parquet page indices.
+
+    1. "introduction-anchor": the Introduction's printed page in the TOC vs the
+       parquet page where an "Introduction" heading actually appears.
+    2. "printed-folio" (fallback, only when 1 fails): the modal offset of the
+       printed page numbers in the page headers/footers. Needed when the layout
+       parser did not tag the Introduction title as a heading.
     """
     intro_toc = find_intro_toc_page(toc)
     intro_parquet = find_intro_parquet_page(df, toc)
 
-    if intro_toc is None or intro_parquet is None:
+    if intro_toc is not None and intro_parquet is not None:
         return {
             "intro_page_toc": intro_toc,
             "intro_page_parquet": intro_parquet,
-            "offset": None,
-            "method": "failed",
+            "offset": intro_parquet - intro_toc,
+            "method": "introduction-anchor",
+        }
+
+    folio = folio_offset(df)
+    if folio is not None:
+        return {
+            "intro_page_toc": intro_toc,
+            "intro_page_parquet": intro_toc + folio if intro_toc is not None else None,
+            "offset": folio,
+            "method": "printed-folio",
         }
 
     return {
         "intro_page_toc": intro_toc,
         "intro_page_parquet": intro_parquet,
-        "offset": intro_parquet - intro_toc,
-        "method": "introduction-anchor",
+        "offset": None,
+        "method": "failed",
     }
 
 
@@ -554,7 +587,7 @@ def extract_structure(parquet_path: Path, client: OpenAI) -> dict:
           "intro_page_toc":     int,
           "intro_page_parquet": int,
           "offset":             int,
-          "method":             "introduction-anchor" | "failed"
+          "method":             "introduction-anchor" | "printed-folio" | "failed"
         },
         "toc_validation": { "ok": bool, "issues": [str, ...] }
       }
@@ -632,7 +665,7 @@ def extract_structure(parquet_path: Path, client: OpenAI) -> dict:
     else:
         log.info(f"[{thesis_id}]   intro in TOC: p.{offset_info['intro_page_toc']}  |  "
               f"intro in parquet: p.{offset_info['intro_page_parquet']}  |  "
-              f"offset = {offset_info['offset']:+d}")
+              f"offset = {offset_info['offset']:+d}  ({offset_info['method']})")
 
     # 1d: project the offset onto every TOC entry
     if offset_info.get("offset") is not None:

@@ -253,3 +253,26 @@ def test_resolved_refs_filter():
                               {"resolved": False, "page_start_parquet": None, "page_end_parquet": None},
                               {"resolved": True, "page_start_parquet": 0, "page_end_parquet": 4}]}
     assert len(g("resolved_refs")(sec)) == 1
+
+
+def test_folio_offset_fallback():
+    """printed-folio fallback: modal (parquet − printed) over bare numeric headers/footers."""
+    folio_offset = g("folio_offset")
+    rows = [{"page": p, "block_index": 0, "category": "Page-footer", "text": str(p - 20)} for p in range(21, 30)]
+    rows += [{"page": 5, "block_index": 0, "category": "Page-footer", "text": "ii"},          # roman: ignored
+             {"page": 40, "block_index": 0, "category": "Page-header", "text": "## 3.1 TITLE"}]  # not a folio
+    assert folio_offset(pd.DataFrame(rows)) == 20
+    too_few = pd.DataFrame(rows[:3])
+    assert folio_offset(too_few) is None                   # < 5 agreeing folios → no guess
+
+
+def test_compute_page_offset_uses_folio_only_when_anchor_fails():
+    compute_page_offset = g("compute_page_offset")
+    toc = [{"title": "1 Introduction", "level": 0, "page_start": 1}]
+    folios = [{"page": p, "block_index": 0, "category": "Page-footer", "text": str(p - 20)} for p in range(21, 30)]
+    no_heading = pd.DataFrame(folios + [{"page": 21, "block_index": 1, "category": "Text", "text": "Introduction"}])
+    off = compute_page_offset(no_heading, toc)
+    assert off["method"] == "printed-folio" and off["offset"] == 20 and off["intro_page_parquet"] == 21
+    with_heading = pd.DataFrame(folios + [{"page": 23, "block_index": 1, "category": "Section-header", "text": "Introduction"}])
+    off = compute_page_offset(with_heading, toc)
+    assert off["method"] == "introduction-anchor" and off["offset"] == 22   # anchor wins even if folios disagree
