@@ -21,6 +21,17 @@ services:
       retries: 10
       start_period: 10s
 
+  migrations:
+    build:
+      context: ../..
+      dockerfile: app/infra/Dockerfile.migrations
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
   seaweedfs:
     image: chrislusf/seaweedfs:4.48
     command: mini -dir=/data -s3.port=8333 -bucket=app -master.telemetry=false

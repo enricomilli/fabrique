@@ -1,0 +1,14 @@
+# Build from the repository root: docker build -f app/infra/Dockerfile.migrations -t fabrique-migrations .
+FROM node:24-bookworm-slim
+WORKDIR /srv/app
+
+RUN npm install --no-save --package-lock=false --no-audit --no-fund \
+    drizzle-kit@1.0.0-rc.4 \
+    drizzle-orm@1.0.0-rc.4 \
+    pg@8.23.1
+
+COPY app/src/db/ ./src/db/
+COPY app/infra/drizzle.migrate.config.ts ./infra/drizzle.migrate.config.ts
+
+USER node
+CMD ["./node_modules/.bin/drizzle-kit", "migrate", "--config=./infra/drizzle.migrate.config.ts"]

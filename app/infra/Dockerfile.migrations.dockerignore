@@ -1,0 +1,10 @@
+# Send only the migration image inputs to the build.
+**
+!app/
+!app/infra/
+!app/infra/drizzle.migrate.config.ts
+!app/src/
+!app/src/db/
+!app/src/db/**
+**/.DS_Store
+**/*.log

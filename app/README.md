@@ -34,6 +34,47 @@ docker build -f app/infra/Dockerfile -t fabrique .
 
 Keep the repository root as the build context for the app, document exports, and PDFs.
 
+### Database migrations
+
+Generate and commit migration files in `app/src/db/migrations/` before you build the migration image.
+Run `npm run db:generate` from `app/` to generate migration files from the schema.
+
+Compose runs the migration container after PostgreSQL passes its health check.
+After you change migration files, rebuild the image from `app/`:
+
+```bash
+docker compose -f infra/compose.dev.yaml up --build
+```
+
+Check the migration result from `app/`:
+
+```bash
+docker compose -f infra/compose.dev.yaml logs migrations
+docker compose -f infra/compose.dev.yaml ps -a migrations
+```
+
+The migration container exits with code zero on success and a nonzero code on failure.
+
+Build the migration image separately from the repository root:
+
+```bash
+docker build -f app/infra/Dockerfile.migrations -t fabrique-migrations .
+```
+
+Set `DATABASE_URL` in your shell to a database that the container can reach.
+Apply all pending migrations:
+
+```bash
+docker run --rm -e DATABASE_URL fabrique-migrations
+```
+
+The migration image needs only `DATABASE_URL`, not the application secrets.
+Run one migration container at a time before you deploy the application.
+Do not configure an automatic restart for this container.
+
+For a separate deployment job, use `app/infra/Dockerfile.migrations`, context `.`, and an empty build stage.
+The application uses `app/infra/Dockerfile` with an empty build stage or `runtime`.
+
 # Building For Production
 
 To build this application for production:
