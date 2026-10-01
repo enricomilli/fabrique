@@ -2,11 +2,11 @@ import { ExternalLinkIcon, XIcon } from "lucide-react";
 import {
 	Component,
 	lazy,
+	type ReactNode,
 	Suspense,
 	useEffect,
 	useRef,
 	useState,
-	type ReactNode,
 } from "react";
 import { buttonVariants } from "#/components/ui/button";
 import {
@@ -98,18 +98,18 @@ export function PdfSidebar({
 									href={pdfPageUrl(url, page)}
 									target="_blank"
 									rel="noopener noreferrer"
-								/>
+								>
+									<ExternalLinkIcon aria-hidden="true" className="size-4" />
+									<span className="sr-only">{m.pdf_open_source()}</span>
+								</a>
 							}
-							aria-label={m.pdf_open_source()}
 							className={buttonVariants({
 								variant: "ghost",
 								size: "icon",
 								className:
 									"size-11 bg-background/20 backdrop-blur-md hover:bg-muted/50",
 							})}
-						>
-							<ExternalLinkIcon aria-hidden="true" className="size-4" />
-						</TooltipTrigger>
+						/>
 						<TooltipContent
 							side="bottom"
 							align="end"

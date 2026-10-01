@@ -17,7 +17,7 @@
     "preview": "vite preview",
     "format": "biome format --write",
     "lint": "biome lint",
-    "check": "biome check",
+    "check": "biome check --write",
     "test": "tsx --test tests/*.test.ts tests/*.test.tsx tests/*.test.mjs",
     "test:i18n": "npm run build && node --test tests/i18n.test.mjs"
   },

@@ -1,10 +1,10 @@
+import { FunnelIcon, SearchIcon, XIcon } from "lucide-react";
+import { type FormEvent, useId, useRef, useState } from "react";
 import { Button } from "#/components/ui/button";
 import { DrawerTrigger } from "#/components/ui/drawer";
 import { Input } from "#/components/ui/input";
 import { m } from "#/paraglide/messages";
 import { getLocale } from "#/paraglide/runtime";
-import { FunnelIcon, SearchIcon, XIcon } from "lucide-react";
-import { type FormEvent, useId, useRef, useState } from "react";
 
 type SearchBarProps = {
 	initialQuery?: string;
