@@ -39,11 +39,13 @@ Keep the repository root as the build context for the app, document exports, and
 Generate and commit migration files in `app/src/db/migrations/` before you build the migration image.
 Run `npm run db:generate` from `app/` to generate migration files from the schema.
 
+Compose rebuilds the migration image on each start through `pull_policy: build`.
+Docker reuses cached build layers when their inputs have not changed.
 Compose runs the migration container after PostgreSQL passes its health check.
-After you change migration files, rebuild the image from `app/`:
+After you change migration files, start Compose from `app/`:
 
 ```bash
-docker compose -f infra/compose.dev.yaml up --build
+npm run compose:up
 ```
 
 Check the migration result from `app/`:
