@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FeedbackRouteImport } from './routes/feedback'
 import { Route as DocumentsDocumentIdRouteImport } from './routes/documents/$documentId'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiPdfsDocumentIdRouteImport } from './routes/api/pdfs/$documentId'
 import { Route as DocumentsDocumentIdIndexRouteImport } from './routes/documents/$documentId/index'
 import { Route as DocumentsDocumentIdReaderRouteImport } from './routes/documents/$documentId/_reader'
@@ -31,6 +32,11 @@ const FeedbackRoute = FeedbackRouteImport.update({
 const DocumentsDocumentIdRoute = DocumentsDocumentIdRouteImport.update({
   id: '/documents/$documentId',
   path: '/documents/$documentId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPdfsDocumentIdRoute = ApiPdfsDocumentIdRouteImport.update({
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/feedback': typeof FeedbackRoute
   '/documents/$documentId': typeof DocumentsDocumentIdRouteWithChildren
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/pdfs/$documentId': typeof ApiPdfsDocumentIdRoute
   '/documents/$documentId/': typeof DocumentsDocumentIdIndexRoute
   '/documents/$documentId/fiche': typeof DocumentsDocumentIdReaderFicheRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/feedback': typeof FeedbackRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/pdfs/$documentId': typeof ApiPdfsDocumentIdRoute
   '/documents/$documentId': typeof DocumentsDocumentIdIndexRoute
   '/documents/$documentId/fiche': typeof DocumentsDocumentIdReaderFicheRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/feedback': typeof FeedbackRoute
   '/documents/$documentId': typeof DocumentsDocumentIdRouteWithChildren
+  '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/pdfs/$documentId': typeof ApiPdfsDocumentIdRoute
   '/documents/$documentId/_reader': typeof DocumentsDocumentIdReaderRouteWithChildren
   '/documents/$documentId/': typeof DocumentsDocumentIdIndexRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/feedback'
     | '/documents/$documentId'
+    | '/api/auth/$'
     | '/api/pdfs/$documentId'
     | '/documents/$documentId/'
     | '/documents/$documentId/fiche'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/feedback'
+    | '/api/auth/$'
     | '/api/pdfs/$documentId'
     | '/documents/$documentId'
     | '/documents/$documentId/fiche'
@@ -113,6 +124,7 @@ export interface FileRouteTypes {
     | '/'
     | '/feedback'
     | '/documents/$documentId'
+    | '/api/auth/$'
     | '/api/pdfs/$documentId'
     | '/documents/$documentId/_reader'
     | '/documents/$documentId/'
@@ -124,6 +136,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FeedbackRoute: typeof FeedbackRoute
   DocumentsDocumentIdRoute: typeof DocumentsDocumentIdRouteWithChildren
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiPdfsDocumentIdRoute: typeof ApiPdfsDocumentIdRoute
 }
 
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/documents/$documentId'
       fullPath: '/documents/$documentId'
       preLoaderRoute: typeof DocumentsDocumentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/pdfs/$documentId': {
@@ -221,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FeedbackRoute: FeedbackRoute,
   DocumentsDocumentIdRoute: DocumentsDocumentIdRouteWithChildren,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiPdfsDocumentIdRoute: ApiPdfsDocumentIdRoute,
 }
 export const routeTree = rootRouteImport

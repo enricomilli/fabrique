@@ -4,6 +4,7 @@ import { openAPI, testUtils } from "better-auth/plugins";
 
 import { env } from "#/env.ts";
 import { db } from "../../db/drizzle";
+import { tanstackStartCookies } from "better-auth/tanstack-start";
 
 const trustedOrigins = ["https://fabrique.com"];
 export const auth = betterAuth({
@@ -21,7 +22,7 @@ export const auth = betterAuth({
 			enabled: true,
 		},
 	},
-	plugins: [testUtils({ captureOTP: true }), openAPI()],
+	plugins: [testUtils({ captureOTP: true }), openAPI(), tanstackStartCookies()],
 	database: drizzleAdapter(db, {
 		provider: "pg",
 	}),
