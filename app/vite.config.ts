@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import { devtools } from '@tanstack/devtools-vite'
 import { paraglideVitePlugin } from '@inlang/paraglide-js'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
@@ -53,4 +53,13 @@ const config = defineConfig({
   ],
 })
 
-export default config
+export default defineConfig(({ command, mode }) => {
+  if (command === 'serve') {
+    // Load server values for development without changing shell values.
+    const localEnv = loadEnv(mode, process.cwd(), '')
+    for (const [key, value] of Object.entries(localEnv)) {
+      process.env[key] ??= value
+    }
+  }
+  return config
+})

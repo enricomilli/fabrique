@@ -1,4 +1,4 @@
-# Build from the repository root: docker build -f app/Dockerfile -t fabrique .
+# Build from the repository root: docker build -f app/infra/Dockerfile -t fabrique .
 FROM node:24-bookworm-slim AS build
 WORKDIR /build/app
 

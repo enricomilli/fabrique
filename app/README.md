@@ -9,6 +9,31 @@ npm install
 npm run dev
 ```
 
+## Docker
+
+Start the local PostgreSQL and SeaweedFS services from `app/`:
+
+```bash
+docker compose -f infra/compose.dev.yaml up -d
+```
+
+Stop the services from `app/`:
+
+```bash
+docker compose -f infra/compose.dev.yaml down
+```
+
+The Compose project name stays `app` to preserve the default volume names.
+Do not add `-v` unless you want to delete the service data.
+
+Build the production image from the repository root:
+
+```bash
+docker build -f app/infra/Dockerfile -t fabrique .
+```
+
+Keep the repository root as the build context for the app, document exports, and PDFs.
+
 # Building For Production
 
 To build this application for production:

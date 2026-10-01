@@ -4,36 +4,23 @@ import { z } from 'zod'
 export const env = createEnv({
   server: {
     SERVER_URL: z.url().optional(),
+    DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
+    BETTER_AUTH_SECRET: z.string().trim().min(32),
+    S3_ENDPOINT: z.url({ protocol: /^https?$/ }),
+    S3_REGION: z.string().trim().min(1),
+    S3_ACCESS_KEY_ID: z.string().trim().min(1),
+    S3_SECRET_ACCESS_KEY: z.string().trim().min(1),
+    S3_BUCKET: z.string().trim().min(1),
+    S3_FORCE_PATH_STYLE: z.enum(['true', 'false']).transform((value) => value === 'true'),
   },
-
-  /**
-   * The prefix that client-side variables must have. This is enforced both at
-   * a type-level and at runtime.
-   */
   clientPrefix: 'VITE_',
-
   client: {
     VITE_APP_TITLE: z.string().min(1).optional(),
   },
-
-  /**
-   * What object holds the environment variables at runtime. This is usually
-   * `process.env` or `import.meta.env`.
-   */
-  runtimeEnv: import.meta.env,
-
-  /**
-   * By default, this library will feed the environment variables directly to
-   * the Zod validator.
-   *
-   * This means that if you have an empty string for a value that is supposed
-   * to be a number (e.g. `PORT=` in a ".env" file), Zod will incorrectly flag
-   * it as a type mismatch violation. Additionally, if you have an empty string
-   * for a value that is supposed to be a string with a default value (e.g.
-   * `DOMAIN=` in an ".env" file), the default value will never be applied.
-   *
-   * In order to solve these issues, we recommend that all new projects
-   * explicitly specify this option as true.
-   */
+  // Vite provides client values. The server reads secrets at runtime.
+  runtimeEnv: {
+    ...import.meta.env,
+    ...(typeof window === 'undefined' ? process.env : {}),
+  },
   emptyStringAsUndefined: true,
 })

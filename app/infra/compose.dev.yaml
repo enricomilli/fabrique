@@ -1,0 +1,44 @@
+# Local development only.
+# Start from app/: docker compose -f infra/compose.dev.yaml up -d
+# Connect: postgresql://postgres:postgres@localhost:5432/app
+name: app
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d app"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  seaweedfs:
+    image: chrislusf/seaweedfs:4.48
+    command: mini -dir=/data -s3.port=8333 -bucket=app -master.telemetry=false
+    environment:
+      AWS_ACCESS_KEY_ID: seaweedadmin
+      AWS_SECRET_ACCESS_KEY: seaweedadmin
+    ports:
+      - "127.0.0.1:9000:8333"
+      - "127.0.0.1:9001:23646"
+    volumes:
+      - seaweedfs_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8333/status"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  postgres_data:
+  seaweedfs_data:
