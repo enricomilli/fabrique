@@ -205,7 +205,11 @@ export async function loadDocument(
 		const root = await realpath(directory);
 		const file = await realpath(join(root, id, "data.json"));
 		const localPath = relative(root, file);
-		if (isAbsolute(localPath) || localPath === ".." || localPath.startsWith(`..${sep}`))
+		if (
+			isAbsolute(localPath) ||
+			localPath === ".." ||
+			localPath.startsWith(`..${sep}`)
+		)
 			return null;
 		contents = await readFile(file, "utf8");
 	} catch (error: unknown) {
@@ -227,9 +231,9 @@ export async function loadDocument(
 	const parsed = docsSchema.safeParse(input);
 	if (!parsed.success) throw new Error("Invalid document schema.");
 	const document = parsed.data;
-	const pdfUrl = document.pdf_url ?? (
-		await findPdf(id) ? `/api/pdfs/${encodeURIComponent(id)}` : null
-	);
+	const pdfUrl =
+		document.pdf_url ??
+		((await findPdf(id)) ? `/api/pdfs/${encodeURIComponent(id)}` : null);
 	return {
 		...summarize(id, document),
 		ficheMarkdown: document.fiche.fiche_md,

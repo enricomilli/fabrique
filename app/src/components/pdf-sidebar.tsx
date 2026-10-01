@@ -9,7 +9,12 @@ import {
 	type ReactNode,
 } from "react";
 import { buttonVariants } from "#/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "#/components/ui/tooltip";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "#/components/ui/tooltip";
 import { pdfPageUrl } from "#/lib/page-citations";
 import { m } from "#/paraglide/messages";
 
@@ -99,12 +104,17 @@ export function PdfSidebar({
 							className={buttonVariants({
 								variant: "ghost",
 								size: "icon",
-								className: "size-11 bg-background/20 backdrop-blur-md hover:bg-muted/50",
+								className:
+									"size-11 bg-background/20 backdrop-blur-md hover:bg-muted/50",
 							})}
 						>
 							<ExternalLinkIcon aria-hidden="true" className="size-4" />
 						</TooltipTrigger>
-						<TooltipContent side="bottom" align="end" portalContainer={desktop ? undefined : dialog}>
+						<TooltipContent
+							side="bottom"
+							align="end"
+							portalContainer={desktop ? undefined : dialog}
+						>
 							{m.pdf_open_source()}
 						</TooltipContent>
 					</Tooltip>
@@ -115,13 +125,18 @@ export function PdfSidebar({
 							className={buttonVariants({
 								variant: "ghost",
 								size: "icon",
-								className: "size-11 bg-background/20 backdrop-blur-md hover:bg-muted/50",
+								className:
+									"size-11 bg-background/20 backdrop-blur-md hover:bg-muted/50",
 							})}
 							onClick={onClose}
 						>
 							<XIcon aria-hidden="true" className="size-4" />
 						</TooltipTrigger>
-						<TooltipContent side="bottom" align="end" portalContainer={desktop ? undefined : dialog}>
+						<TooltipContent
+							side="bottom"
+							align="end"
+							portalContainer={desktop ? undefined : dialog}
+						>
 							{m.pdf_close()}
 						</TooltipContent>
 					</Tooltip>

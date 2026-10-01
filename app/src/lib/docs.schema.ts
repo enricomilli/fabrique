@@ -172,7 +172,10 @@ export const docsSchema = z.object({
 	fiche: ficheSchema,
 	generated: z.string(),
 	note: noteSchema,
-	pdf_url: z.url({ protocol: /^https?$/ }).nullable().optional(),
+	pdf_url: z
+		.url({ protocol: /^https?$/ })
+		.nullable()
+		.optional(),
 });
 
 export type FicheCallMeta = z.infer<typeof ficheCallMetaSchema>;

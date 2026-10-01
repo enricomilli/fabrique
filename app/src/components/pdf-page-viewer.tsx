@@ -87,7 +87,10 @@ export default function PdfPageViewer({
 			<div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t p-3 text-sm">
 				<button
 					type="button"
-					className={buttonVariants({ variant: "ghost", className: "min-h-11" })}
+					className={buttonVariants({
+						variant: "ghost",
+						className: "min-h-11",
+					})}
 					disabled={!count || page <= 1}
 					onClick={() => onPageChange(Math.min(page - 1, count ?? 1))}
 				>
@@ -99,7 +102,10 @@ export default function PdfPageViewer({
 				</output>
 				<button
 					type="button"
-					className={buttonVariants({ variant: "ghost", className: "min-h-11" })}
+					className={buttonVariants({
+						variant: "ghost",
+						className: "min-h-11",
+					})}
 					disabled={!count || page >= count}
 					onClick={() => onPageChange(page + 1)}
 				>

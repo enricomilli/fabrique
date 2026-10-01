@@ -28,7 +28,10 @@ export function DocumentContent({
 			<Markdown
 				skipHtml
 				remarkPlugins={[remarkMath, ...(remarkPlugins ?? [])]}
-				rehypePlugins={[...(rehypePlugins ?? []), [rehypeKatex, { trust: false }]]}
+				rehypePlugins={[
+					...(rehypePlugins ?? []),
+					[rehypeKatex, { trust: false }],
+				]}
 				components={components}
 			>
 				{markdown}

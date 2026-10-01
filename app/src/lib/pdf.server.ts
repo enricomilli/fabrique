@@ -23,21 +23,33 @@ export async function findPdf(
 		const root = await realpath(directory);
 		const path = await realpath(join(root, `${id}.pdf`));
 		const local = relative(root, path);
-		if (!local || isAbsolute(local) || local === ".." || local.startsWith(`..${sep}`)) {
+		if (
+			!local ||
+			isAbsolute(local) ||
+			local === ".." ||
+			local.startsWith(`..${sep}`)
+		) {
 			return null;
 		}
 		const file = await stat(path);
 		return file.isFile() ? { path, size: file.size } : null;
 	} catch (error: unknown) {
-		if (error instanceof Error && "code" in error &&
-			["ENOENT", "ENOTDIR", "ELOOP"].includes(String(error.code))) return null;
+		if (
+			error instanceof Error &&
+			"code" in error &&
+			["ENOENT", "ENOTDIR", "ELOOP"].includes(String(error.code))
+		)
+			return null;
 		throw new Error("Cannot read the PDF.");
 	}
 }
 
 type ByteRange = { start: number; end: number };
 
-function parseRange(value: string | null, size: number): ByteRange | "unsatisfied" | null {
+function parseRange(
+	value: string | null,
+	size: number,
+): ByteRange | "unsatisfied" | null {
 	if (value === null) return null;
 	// Ignore malformed ranges, unsupported units, and multiple ranges.
 	const match = /^bytes=(\d*)-(\d*)$/i.exec(value.trim());
@@ -46,13 +58,19 @@ function parseRange(value: string | null, size: number): ByteRange | "unsatisfie
 	if (!match[1]) {
 		const suffix = BigInt(match[2]);
 		if (suffix === 0n || size === 0) return "unsatisfied";
-		return { start: Number(suffix >= length ? 0n : length - suffix), end: size - 1 };
+		return {
+			start: Number(suffix >= length ? 0n : length - suffix),
+			end: size - 1,
+		};
 	}
 	const start = BigInt(match[1]);
 	const end = match[2] ? BigInt(match[2]) : length - 1n;
 	if (match[2] && end < start) return null;
 	if (start >= length) return "unsatisfied";
-	return { start: Number(start), end: Number(end >= length ? length - 1n : end) };
+	return {
+		start: Number(start),
+		end: Number(end >= length ? length - 1n : end),
+	};
 }
 
 export async function servePdf(
@@ -68,7 +86,10 @@ export async function servePdf(
 		headers.set("Content-Type", "text/plain; charset=utf-8");
 		headers.delete("Content-Disposition");
 		headers.set("Content-Length", String(Buffer.byteLength(message)));
-		return new Response(request.method === "HEAD" ? null : message, { status, headers });
+		return new Response(request.method === "HEAD" ? null : message, {
+			status,
+			headers,
+		});
 	};
 	if (request.method !== "GET" && request.method !== "HEAD") {
 		headers.set("Allow", "GET, HEAD");
@@ -78,7 +99,10 @@ export async function servePdf(
 		const pdf = await findPdf(id, directory);
 		if (!pdf) return errorResponse(404, "PDF not found.");
 		// Open before sending headers. Reject a final symlink if the file changed.
-		const file = await open(pdf.path, constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK);
+		const file = await open(
+			pdf.path,
+			constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK,
+		);
 		let streamOwnsFile = false;
 		try {
 			const info = await file.stat();
@@ -88,8 +112,10 @@ export async function servePdf(
 			headers.set("Content-Type", "application/pdf");
 			headers.set("Content-Disposition", `inline; filename="${id}.pdf"`);
 			// Range applies only to GET. Without validators, If-Range needs a full response.
-			const range = request.method === "GET" && !request.headers.has("If-Range")
-				? parseRange(request.headers.get("Range"), size) : null;
+			const range =
+				request.method === "GET" && !request.headers.has("If-Range")
+					? parseRange(request.headers.get("Range"), size)
+					: null;
 			if (range === "unsatisfied") {
 				headers.set("Content-Range", `bytes */${size}`);
 				headers.set("Content-Length", "0");
@@ -97,9 +123,14 @@ export async function servePdf(
 			}
 			const length = range ? range.end - range.start + 1 : size;
 			headers.set("Content-Length", String(length));
-			if (range) headers.set("Content-Range", `bytes ${range.start}-${range.end}/${size}`);
+			if (range)
+				headers.set(
+					"Content-Range",
+					`bytes ${range.start}-${range.end}/${size}`,
+				);
 			const status = range ? 206 : 200;
-			if (request.method === "HEAD" || length === 0) return new Response(null, { status, headers });
+			if (request.method === "HEAD" || length === 0)
+				return new Response(null, { status, headers });
 			const source = Readable.toWeb(file.createReadStream(range ?? {}), {
 				strategy: {
 					highWaterMark: 64 * 1024,

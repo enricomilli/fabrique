@@ -93,9 +93,9 @@ export function rehypeFicheSections() {
 }
 
 export function extractFicheTitle(markdown: string): string | null {
-	const title = parser.parse(markdown).children.find(
-		(node) => node.type === "heading" && node.depth === 1,
-	);
+	const title = parser
+		.parse(markdown)
+		.children.find((node) => node.type === "heading" && node.depth === 1);
 	return title ? headingText(title) : null;
 }
 
