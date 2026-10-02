@@ -6,15 +6,15 @@ import { documentStatus, filterDocuments } from "../src/lib/document-list.ts";
 const documents: DocumentSummary[] = [
 	{
 		id: "a", title: "Écologie marine", thesis: "these-a", generated: "2025-01-01",
-		hasFiche: true, hasNote: false, preview: "Marine research.",
+		generationCompleted: false, hasFiche: true, hasNote: false, preview: "Marine research.",
 		metadata: { titre: "Écologie marine", auteur: "Émilie Martin", annee: "2020", etablissement: "Université de Brest", discipline: "Écologie", mots_cles: ["plancton"], pages: 310 },
 	},
 	{
 		id: "b", title: "La presse française", thesis: "these-b", generated: "2026-01-01",
-		hasFiche: true, hasNote: true, preview: "Press research.",
+		generationCompleted: false, hasFiche: true, hasNote: true, preview: "Press research.",
 		metadata: { titre: "La presse française", auteur: null, annee: null, etablissement: null, discipline: "Histoire", mots_cles: [], pages: 200 },
 	},
-	{ id: "c", title: "Archive", thesis: "these-c", generated: "unknown", hasFiche: false, hasNote: false, preview: "", metadata: null },
+	{ id: "c", title: "Archive", thesis: "these-c", generated: "unknown", generationCompleted: false, hasFiche: false, hasNote: false, preview: "", metadata: null },
 ];
 
 test("search ignores case and accents and matches every term", () => {
@@ -27,7 +27,7 @@ test("status filters combine with search", () => {
 	assert.equal(filterDocuments(documents, "", "both")[0]?.id, "b");
 	assert.equal(filterDocuments(documents, "marine", "both").length, 0);
 	assert.equal(filterDocuments(documents, "", "source")[0]?.id, "c");
-	assert.equal(documentStatus({ ...documents[0], hasFiche: false, hasNote: true }), "note");
+	assert.equal(documentStatus({ ...documents[0], generationCompleted: false, hasFiche: false, hasNote: true }), "note");
 });
 
 test("recent sort puts unknown dates last and does not change the input", () => {

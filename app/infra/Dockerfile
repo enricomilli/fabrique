@@ -16,13 +16,9 @@ WORKDIR /srv/app
 
 ENV NODE_ENV=production \
     HOST=0.0.0.0 \
-    PORT=3000 \
-    EXPLORER_DIR=/srv/explorer \
-    PDF_DIR=/srv/data/pdf
+    PORT=3000
 
 COPY --from=build /build/app/.output/ ./.output/
-COPY explorer/ /srv/explorer/
-COPY data/pdf/ /srv/data/pdf/
 
 USER node
 EXPOSE 3000

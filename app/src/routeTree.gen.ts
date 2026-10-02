@@ -9,30 +9,60 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as FeedbackRouteImport } from './routes/feedback'
-import { Route as DocumentsDocumentIdRouteImport } from './routes/documents/$documentId'
+import { Route as ProtectedRouteImport } from './routes/_protected'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
+import { Route as ProtectedFeedbackRouteImport } from './routes/_protected/feedback'
+import { Route as ProtectedMyDocumentsRouteImport } from './routes/_protected/my-documents'
+import { Route as ApiDocumentsRouteImport } from './routes/api/documents'
+import { Route as ProtectedDocumentsDocumentIdRouteImport } from './routes/_protected/documents/$documentId'
+import { Route as ProtectedDocumentsNewRouteImport } from './routes/_protected/documents/new'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiPdfsDocumentIdRouteImport } from './routes/api/pdfs/$documentId'
-import { Route as DocumentsDocumentIdIndexRouteImport } from './routes/documents/$documentId/index'
-import { Route as DocumentsDocumentIdReaderRouteImport } from './routes/documents/$documentId/_reader'
-import { Route as DocumentsDocumentIdReaderFicheRouteImport } from './routes/documents/$documentId/_reader/fiche'
-import { Route as DocumentsDocumentIdReaderNoteRouteImport } from './routes/documents/$documentId/_reader/note'
+import { Route as ProtectedDocumentsDocumentIdIndexRouteImport } from './routes/_protected/documents/$documentId/index'
+import { Route as ProtectedDocumentsDocumentIdReaderRouteImport } from './routes/_protected/documents/$documentId/_reader'
+import { Route as ProtectedDocumentsDocumentIdReaderFicheRouteImport } from './routes/_protected/documents/$documentId/_reader/fiche'
+import { Route as ProtectedDocumentsDocumentIdReaderNoteRouteImport } from './routes/_protected/documents/$documentId/_reader/note'
 
-const IndexRoute = IndexRouteImport.update({
+const ProtectedRoute = ProtectedRouteImport.update({
+  id: '/_protected',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => ProtectedRoute,
 } as any)
-const FeedbackRoute = FeedbackRouteImport.update({
+const ProtectedFeedbackRoute = ProtectedFeedbackRouteImport.update({
   id: '/feedback',
   path: '/feedback',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtectedMyDocumentsRoute = ProtectedMyDocumentsRouteImport.update({
+  id: '/my-documents',
+  path: '/my-documents',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ApiDocumentsRoute = ApiDocumentsRouteImport.update({
+  id: '/api/documents',
+  path: '/api/documents',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocumentsDocumentIdRoute = DocumentsDocumentIdRouteImport.update({
-  id: '/documents/$documentId',
-  path: '/documents/$documentId',
-  getParentRoute: () => rootRouteImport,
+const ProtectedDocumentsDocumentIdRoute =
+  ProtectedDocumentsDocumentIdRouteImport.update({
+    id: '/documents/$documentId',
+    path: '/documents/$documentId',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
+const ProtectedDocumentsNewRoute = ProtectedDocumentsNewRouteImport.update({
+  id: '/documents/new',
+  path: '/documents/new',
+  getParentRoute: () => ProtectedRoute,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -44,67 +74,84 @@ const ApiPdfsDocumentIdRoute = ApiPdfsDocumentIdRouteImport.update({
   path: '/api/pdfs/$documentId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DocumentsDocumentIdIndexRoute =
-  DocumentsDocumentIdIndexRouteImport.update({
+const ProtectedDocumentsDocumentIdIndexRoute =
+  ProtectedDocumentsDocumentIdIndexRouteImport.update({
     id: '/',
     path: '/',
-    getParentRoute: () => DocumentsDocumentIdRoute,
+    getParentRoute: () => ProtectedDocumentsDocumentIdRoute,
   } as any)
-const DocumentsDocumentIdReaderRoute =
-  DocumentsDocumentIdReaderRouteImport.update({
+const ProtectedDocumentsDocumentIdReaderRoute =
+  ProtectedDocumentsDocumentIdReaderRouteImport.update({
     id: '/_reader',
-    getParentRoute: () => DocumentsDocumentIdRoute,
+    getParentRoute: () => ProtectedDocumentsDocumentIdRoute,
   } as any)
-const DocumentsDocumentIdReaderFicheRoute =
-  DocumentsDocumentIdReaderFicheRouteImport.update({
+const ProtectedDocumentsDocumentIdReaderFicheRoute =
+  ProtectedDocumentsDocumentIdReaderFicheRouteImport.update({
     id: '/fiche',
     path: '/fiche',
-    getParentRoute: () => DocumentsDocumentIdReaderRoute,
+    getParentRoute: () => ProtectedDocumentsDocumentIdReaderRoute,
   } as any)
-const DocumentsDocumentIdReaderNoteRoute =
-  DocumentsDocumentIdReaderNoteRouteImport.update({
+const ProtectedDocumentsDocumentIdReaderNoteRoute =
+  ProtectedDocumentsDocumentIdReaderNoteRouteImport.update({
     id: '/note',
     path: '/note',
-    getParentRoute: () => DocumentsDocumentIdReaderRoute,
+    getParentRoute: () => ProtectedDocumentsDocumentIdReaderRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/feedback': typeof FeedbackRoute
-  '/documents/$documentId': typeof DocumentsDocumentIdRouteWithChildren
+  '/': typeof ProtectedIndexRoute
+  '/login': typeof LoginRoute
+  '/feedback': typeof ProtectedFeedbackRoute
+  '/my-documents': typeof ProtectedMyDocumentsRoute
+  '/api/documents': typeof ApiDocumentsRoute
+  '/documents/$documentId': typeof ProtectedDocumentsDocumentIdRouteWithChildren
+  '/documents/new': typeof ProtectedDocumentsNewRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/pdfs/$documentId': typeof ApiPdfsDocumentIdRoute
-  '/documents/$documentId/': typeof DocumentsDocumentIdIndexRoute
-  '/documents/$documentId/fiche': typeof DocumentsDocumentIdReaderFicheRoute
-  '/documents/$documentId/note': typeof DocumentsDocumentIdReaderNoteRoute
+  '/documents/$documentId/': typeof ProtectedDocumentsDocumentIdIndexRoute
+  '/documents/$documentId/fiche': typeof ProtectedDocumentsDocumentIdReaderFicheRoute
+  '/documents/$documentId/note': typeof ProtectedDocumentsDocumentIdReaderNoteRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/feedback': typeof FeedbackRoute
+  '/login': typeof LoginRoute
+  '/feedback': typeof ProtectedFeedbackRoute
+  '/my-documents': typeof ProtectedMyDocumentsRoute
+  '/api/documents': typeof ApiDocumentsRoute
+  '/': typeof ProtectedIndexRoute
+  '/documents/new': typeof ProtectedDocumentsNewRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/pdfs/$documentId': typeof ApiPdfsDocumentIdRoute
-  '/documents/$documentId': typeof DocumentsDocumentIdIndexRoute
-  '/documents/$documentId/fiche': typeof DocumentsDocumentIdReaderFicheRoute
-  '/documents/$documentId/note': typeof DocumentsDocumentIdReaderNoteRoute
+  '/documents/$documentId': typeof ProtectedDocumentsDocumentIdIndexRoute
+  '/documents/$documentId/fiche': typeof ProtectedDocumentsDocumentIdReaderFicheRoute
+  '/documents/$documentId/note': typeof ProtectedDocumentsDocumentIdReaderNoteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/feedback': typeof FeedbackRoute
-  '/documents/$documentId': typeof DocumentsDocumentIdRouteWithChildren
+  '/_protected': typeof ProtectedRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_protected/feedback': typeof ProtectedFeedbackRoute
+  '/_protected/my-documents': typeof ProtectedMyDocumentsRoute
+  '/api/documents': typeof ApiDocumentsRoute
+  '/_protected/': typeof ProtectedIndexRoute
+  '/_protected/documents/$documentId': typeof ProtectedDocumentsDocumentIdRouteWithChildren
+  '/_protected/documents/new': typeof ProtectedDocumentsNewRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/pdfs/$documentId': typeof ApiPdfsDocumentIdRoute
-  '/documents/$documentId/_reader': typeof DocumentsDocumentIdReaderRouteWithChildren
-  '/documents/$documentId/': typeof DocumentsDocumentIdIndexRoute
-  '/documents/$documentId/_reader/fiche': typeof DocumentsDocumentIdReaderFicheRoute
-  '/documents/$documentId/_reader/note': typeof DocumentsDocumentIdReaderNoteRoute
+  '/_protected/documents/$documentId/_reader': typeof ProtectedDocumentsDocumentIdReaderRouteWithChildren
+  '/_protected/documents/$documentId/': typeof ProtectedDocumentsDocumentIdIndexRoute
+  '/_protected/documents/$documentId/_reader/fiche': typeof ProtectedDocumentsDocumentIdReaderFicheRoute
+  '/_protected/documents/$documentId/_reader/note': typeof ProtectedDocumentsDocumentIdReaderNoteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login'
     | '/feedback'
+    | '/my-documents'
+    | '/api/documents'
     | '/documents/$documentId'
+    | '/documents/new'
     | '/api/auth/$'
     | '/api/pdfs/$documentId'
     | '/documents/$documentId/'
@@ -112,8 +159,12 @@ export interface FileRouteTypes {
     | '/documents/$documentId/note'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/login'
     | '/feedback'
+    | '/my-documents'
+    | '/api/documents'
+    | '/'
+    | '/documents/new'
     | '/api/auth/$'
     | '/api/pdfs/$documentId'
     | '/documents/$documentId'
@@ -121,47 +172,87 @@ export interface FileRouteTypes {
     | '/documents/$documentId/note'
   id:
     | '__root__'
-    | '/'
-    | '/feedback'
-    | '/documents/$documentId'
+    | '/_protected'
+    | '/login'
+    | '/_protected/feedback'
+    | '/_protected/my-documents'
+    | '/api/documents'
+    | '/_protected/'
+    | '/_protected/documents/$documentId'
+    | '/_protected/documents/new'
     | '/api/auth/$'
     | '/api/pdfs/$documentId'
-    | '/documents/$documentId/_reader'
-    | '/documents/$documentId/'
-    | '/documents/$documentId/_reader/fiche'
-    | '/documents/$documentId/_reader/note'
+    | '/_protected/documents/$documentId/_reader'
+    | '/_protected/documents/$documentId/'
+    | '/_protected/documents/$documentId/_reader/fiche'
+    | '/_protected/documents/$documentId/_reader/note'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  FeedbackRoute: typeof FeedbackRoute
-  DocumentsDocumentIdRoute: typeof DocumentsDocumentIdRouteWithChildren
+  ProtectedRoute: typeof ProtectedRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  ApiDocumentsRoute: typeof ApiDocumentsRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiPdfsDocumentIdRoute: typeof ApiPdfsDocumentIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ProtectedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_protected/': {
+      id: '/_protected/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof ProtectedIndexRouteImport
+      parentRoute: typeof ProtectedRoute
     }
-    '/feedback': {
-      id: '/feedback'
+    '/_protected/feedback': {
+      id: '/_protected/feedback'
       path: '/feedback'
       fullPath: '/feedback'
-      preLoaderRoute: typeof FeedbackRouteImport
+      preLoaderRoute: typeof ProtectedFeedbackRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/my-documents': {
+      id: '/_protected/my-documents'
+      path: '/my-documents'
+      fullPath: '/my-documents'
+      preLoaderRoute: typeof ProtectedMyDocumentsRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/api/documents': {
+      id: '/api/documents'
+      path: '/api/documents'
+      fullPath: '/api/documents'
+      preLoaderRoute: typeof ApiDocumentsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/documents/$documentId': {
-      id: '/documents/$documentId'
+    '/_protected/documents/$documentId': {
+      id: '/_protected/documents/$documentId'
       path: '/documents/$documentId'
       fullPath: '/documents/$documentId'
-      preLoaderRoute: typeof DocumentsDocumentIdRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof ProtectedDocumentsDocumentIdRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/documents/new': {
+      id: '/_protected/documents/new'
+      path: '/documents/new'
+      fullPath: '/documents/new'
+      preLoaderRoute: typeof ProtectedDocumentsNewRouteImport
+      parentRoute: typeof ProtectedRoute
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -177,70 +268,98 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPdfsDocumentIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/documents/$documentId/': {
-      id: '/documents/$documentId/'
+    '/_protected/documents/$documentId/': {
+      id: '/_protected/documents/$documentId/'
       path: '/'
       fullPath: '/documents/$documentId/'
-      preLoaderRoute: typeof DocumentsDocumentIdIndexRouteImport
-      parentRoute: typeof DocumentsDocumentIdRoute
+      preLoaderRoute: typeof ProtectedDocumentsDocumentIdIndexRouteImport
+      parentRoute: typeof ProtectedDocumentsDocumentIdRoute
     }
-    '/documents/$documentId/_reader': {
-      id: '/documents/$documentId/_reader'
+    '/_protected/documents/$documentId/_reader': {
+      id: '/_protected/documents/$documentId/_reader'
       path: ''
       fullPath: '/documents/$documentId'
-      preLoaderRoute: typeof DocumentsDocumentIdReaderRouteImport
-      parentRoute: typeof DocumentsDocumentIdRoute
+      preLoaderRoute: typeof ProtectedDocumentsDocumentIdReaderRouteImport
+      parentRoute: typeof ProtectedDocumentsDocumentIdRoute
     }
-    '/documents/$documentId/_reader/fiche': {
-      id: '/documents/$documentId/_reader/fiche'
+    '/_protected/documents/$documentId/_reader/fiche': {
+      id: '/_protected/documents/$documentId/_reader/fiche'
       path: '/fiche'
       fullPath: '/documents/$documentId/fiche'
-      preLoaderRoute: typeof DocumentsDocumentIdReaderFicheRouteImport
-      parentRoute: typeof DocumentsDocumentIdReaderRoute
+      preLoaderRoute: typeof ProtectedDocumentsDocumentIdReaderFicheRouteImport
+      parentRoute: typeof ProtectedDocumentsDocumentIdReaderRoute
     }
-    '/documents/$documentId/_reader/note': {
-      id: '/documents/$documentId/_reader/note'
+    '/_protected/documents/$documentId/_reader/note': {
+      id: '/_protected/documents/$documentId/_reader/note'
       path: '/note'
       fullPath: '/documents/$documentId/note'
-      preLoaderRoute: typeof DocumentsDocumentIdReaderNoteRouteImport
-      parentRoute: typeof DocumentsDocumentIdReaderRoute
+      preLoaderRoute: typeof ProtectedDocumentsDocumentIdReaderNoteRouteImport
+      parentRoute: typeof ProtectedDocumentsDocumentIdReaderRoute
     }
   }
 }
 
-interface DocumentsDocumentIdReaderRouteChildren {
-  DocumentsDocumentIdReaderFicheRoute: typeof DocumentsDocumentIdReaderFicheRoute
-  DocumentsDocumentIdReaderNoteRoute: typeof DocumentsDocumentIdReaderNoteRoute
+interface ProtectedDocumentsDocumentIdReaderRouteChildren {
+  ProtectedDocumentsDocumentIdReaderFicheRoute: typeof ProtectedDocumentsDocumentIdReaderFicheRoute
+  ProtectedDocumentsDocumentIdReaderNoteRoute: typeof ProtectedDocumentsDocumentIdReaderNoteRoute
 }
 
-const DocumentsDocumentIdReaderRouteChildren: DocumentsDocumentIdReaderRouteChildren =
+const ProtectedDocumentsDocumentIdReaderRouteChildren: ProtectedDocumentsDocumentIdReaderRouteChildren =
   {
-    DocumentsDocumentIdReaderFicheRoute: DocumentsDocumentIdReaderFicheRoute,
-    DocumentsDocumentIdReaderNoteRoute: DocumentsDocumentIdReaderNoteRoute,
+    ProtectedDocumentsDocumentIdReaderFicheRoute:
+      ProtectedDocumentsDocumentIdReaderFicheRoute,
+    ProtectedDocumentsDocumentIdReaderNoteRoute:
+      ProtectedDocumentsDocumentIdReaderNoteRoute,
   }
 
-const DocumentsDocumentIdReaderRouteWithChildren =
-  DocumentsDocumentIdReaderRoute._addFileChildren(
-    DocumentsDocumentIdReaderRouteChildren,
+const ProtectedDocumentsDocumentIdReaderRouteWithChildren =
+  ProtectedDocumentsDocumentIdReaderRoute._addFileChildren(
+    ProtectedDocumentsDocumentIdReaderRouteChildren,
   )
 
-interface DocumentsDocumentIdRouteChildren {
-  DocumentsDocumentIdReaderRoute: typeof DocumentsDocumentIdReaderRouteWithChildren
-  DocumentsDocumentIdIndexRoute: typeof DocumentsDocumentIdIndexRoute
+interface ProtectedDocumentsDocumentIdRouteChildren {
+  ProtectedDocumentsDocumentIdReaderRoute: typeof ProtectedDocumentsDocumentIdReaderRouteWithChildren
+  ProtectedDocumentsDocumentIdIndexRoute: typeof ProtectedDocumentsDocumentIdIndexRoute
 }
 
-const DocumentsDocumentIdRouteChildren: DocumentsDocumentIdRouteChildren = {
-  DocumentsDocumentIdReaderRoute: DocumentsDocumentIdReaderRouteWithChildren,
-  DocumentsDocumentIdIndexRoute: DocumentsDocumentIdIndexRoute,
+const ProtectedDocumentsDocumentIdRouteChildren: ProtectedDocumentsDocumentIdRouteChildren =
+  {
+    ProtectedDocumentsDocumentIdReaderRoute:
+      ProtectedDocumentsDocumentIdReaderRouteWithChildren,
+    ProtectedDocumentsDocumentIdIndexRoute:
+      ProtectedDocumentsDocumentIdIndexRoute,
+  }
+
+const ProtectedDocumentsDocumentIdRouteWithChildren =
+  ProtectedDocumentsDocumentIdRoute._addFileChildren(
+    ProtectedDocumentsDocumentIdRouteChildren,
+  )
+
+interface ProtectedRouteChildren {
+  ProtectedFeedbackRoute: typeof ProtectedFeedbackRoute
+  ProtectedMyDocumentsRoute: typeof ProtectedMyDocumentsRoute
+  ProtectedIndexRoute: typeof ProtectedIndexRoute
+  ProtectedDocumentsDocumentIdRoute: typeof ProtectedDocumentsDocumentIdRouteWithChildren
+  ProtectedDocumentsNewRoute: typeof ProtectedDocumentsNewRoute
 }
 
-const DocumentsDocumentIdRouteWithChildren =
-  DocumentsDocumentIdRoute._addFileChildren(DocumentsDocumentIdRouteChildren)
+const ProtectedRouteChildren: ProtectedRouteChildren = {
+  ProtectedFeedbackRoute: ProtectedFeedbackRoute,
+  ProtectedMyDocumentsRoute: ProtectedMyDocumentsRoute,
+  ProtectedIndexRoute: ProtectedIndexRoute,
+  ProtectedDocumentsDocumentIdRoute:
+    ProtectedDocumentsDocumentIdRouteWithChildren,
+  ProtectedDocumentsNewRoute: ProtectedDocumentsNewRoute,
+}
+
+const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
+  ProtectedRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  FeedbackRoute: FeedbackRoute,
-  DocumentsDocumentIdRoute: DocumentsDocumentIdRouteWithChildren,
+  ProtectedRoute: ProtectedRouteWithChildren,
+  LoginRoute: LoginRoute,
+  ApiDocumentsRoute: ApiDocumentsRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiPdfsDocumentIdRoute: ApiPdfsDocumentIdRoute,
 }

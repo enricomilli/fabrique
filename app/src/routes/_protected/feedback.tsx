@@ -9,7 +9,7 @@ import { submitFeedback } from "#/lib/feedback-fns";
 import { feedbackSchema } from "#/lib/feedback-schema";
 import { m } from "#/paraglide/messages";
 
-export const Route = createFileRoute("/feedback")({
+export const Route = createFileRoute("/_protected/feedback")({
 	head: () => ({ meta: [{ title: m.feedback_page_title() }] }),
 	component: FeedbackPage,
 });

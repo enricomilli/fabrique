@@ -9,7 +9,7 @@ import { AppHeader } from "#/components/app-header";
 import { m } from "#/paraglide/messages";
 import { Route as DocumentRoute } from "../$documentId";
 
-export const Route = createFileRoute("/documents/$documentId/")({
+export const Route = createFileRoute("/_protected/documents/$documentId/")({
 	component: DocumentSelectionPage,
 });
 

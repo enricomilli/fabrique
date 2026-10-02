@@ -1,10 +1,16 @@
-# Send only the migration image inputs to the build.
+# Send only the migration and seed image inputs to the build.
 **
 !app/
 !app/infra/
 !app/infra/drizzle.migrate.config.ts
+!app/scripts/
+!app/scripts/seed-documents.ts
 !app/src/
 !app/src/db/
 !app/src/db/**
+!app/src/lib/
+!app/src/lib/docs.schema.ts
+!app/src/lib/docs.server.ts
+!app/src/lib/pdf.server.ts
 **/.DS_Store
 **/*.log

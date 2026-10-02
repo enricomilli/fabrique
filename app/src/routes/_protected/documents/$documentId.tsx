@@ -7,11 +7,12 @@ import {
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { AppHeader } from "#/components/app-header";
+import { PendingDocument } from "#/components/pending-document";
 import { Button } from "#/components/ui/button";
 import { getDocument } from "#/lib/docs-fns";
 import { m } from "#/paraglide/messages";
 
-export const Route = createFileRoute("/documents/$documentId")({
+export const Route = createFileRoute("/_protected/documents/$documentId")({
 	loader: async ({ params }) => {
 		const document = await getDocument({ data: { id: params.documentId } });
 		if (!document) throw notFound();
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/documents/$documentId")({
 			{ title: loaderData ? `${loaderData.title} | Fabrique` : "Fabrique" },
 		],
 	}),
-	component: Outlet,
+	component: DocumentLayout,
 	notFoundComponent: () => (
 		<DocumentMessage>{m.document_not_found()}</DocumentMessage>
 	),
@@ -68,5 +69,14 @@ function DocumentError() {
 				</div>
 			</main>
 		</>
+	);
+}
+
+function DocumentLayout() {
+	const document = Route.useLoaderData();
+	return document.generationCompleted ? (
+		<Outlet />
+	) : (
+		<PendingDocument title={document.title} />
 	);
 }

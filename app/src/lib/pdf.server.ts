@@ -46,7 +46,7 @@ export async function findPdf(
 
 type ByteRange = { start: number; end: number };
 
-function parseRange(
+export function parseRange(
 	value: string | null,
 	size: number,
 ): ByteRange | "unsatisfied" | null {

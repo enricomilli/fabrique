@@ -4,6 +4,20 @@
 name: app
 
 services:
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
   postgres:
     image: postgres:17-alpine
     environment:
@@ -28,8 +42,29 @@ services:
       dockerfile: app/infra/Dockerfile.migrations
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
+      S3_ENDPOINT: http://seaweedfs:8333
+      S3_REGION: us-east-1
+      S3_ACCESS_KEY_ID: seaweedadmin
+      S3_SECRET_ACCESS_KEY: seaweedadmin
+      S3_BUCKET: app
+      S3_FORCE_PATH_STYLE: "true"
+    volumes:
+      - type: bind
+        source: ../../explorer
+        target: /srv/explorer
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ../../data/pdf
+        target: /srv/data/pdf
+        read_only: true
+        bind:
+          create_host_path: false
     depends_on:
       postgres:
+        condition: service_healthy
+      seaweedfs:
         condition: service_healthy
     restart: "no"
 
@@ -54,3 +89,4 @@ services:
 volumes:
   postgres_data:
   seaweedfs_data:
+  redis_data:

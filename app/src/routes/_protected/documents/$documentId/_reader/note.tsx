@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { NoteContent } from "#/components/note-content";
 import { Route as DocumentRoute } from "../../$documentId";
 
-export const Route = createFileRoute("/documents/$documentId/_reader/note")({
+export const Route = createFileRoute(
+	"/_protected/documents/$documentId/_reader/note",
+)({
 	component: NotePage,
 });
 

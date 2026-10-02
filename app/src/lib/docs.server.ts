@@ -1,17 +1,37 @@
-import { readdir, readFile, realpath } from "node:fs/promises";
-import { isAbsolute, join, relative, resolve, sep } from "node:path";
+import { isAbsolute, resolve } from "node:path";
 import process from "node:process";
+import { and, eq, isNull, or } from "drizzle-orm";
+import { documents } from "../db/schema/documents.ts";
 import {
 	type Docs,
 	docsSchema,
 	type FicheMetadata,
 	parseFicheStructure,
 } from "./docs.schema.ts";
-import { findPdf } from "./pdf.server.ts";
+
+type DocumentRecord = typeof documents.$inferSelect;
+
+export const publicDocumentsFilter = and(
+	eq(documents.public, true),
+	eq(documents.generationCompleted, true),
+	isNull(documents.deletedAt),
+);
+
+async function lookupPdf(id: string): Promise<{ size: number } | null> {
+	const { findStoredPdf } = await import("./s3-pdf.server.ts");
+	return findStoredPdf(id);
+}
+
+function validateDocument(data: unknown): Docs {
+	const parsed = docsSchema.safeParse(data);
+	if (!parsed.success) throw new Error("Invalid document schema.");
+	return parsed.data;
+}
 
 export interface DocumentSummary {
 	id: string;
 	title: string;
+	generationCompleted: boolean;
 	metadata: FicheMetadata | null;
 	thesis: string;
 	generated: string;
@@ -129,6 +149,7 @@ function summarize(id: string, document: Docs): DocumentSummary {
 	return {
 		id,
 		title: cleanMarkdown(metadata?.titre ?? "") || getTitle(markdown, thesis),
+		generationCompleted: true,
 		metadata,
 		thesis,
 		generated: document.generated,
@@ -138,56 +159,59 @@ function summarize(id: string, document: Docs): DocumentSummary {
 	};
 }
 
-export async function loadDocuments(
-	directory: string = getExplorerDirectory(),
-): Promise<DocumentSummary[]> {
-	const entries = await readdir(directory, { withFileTypes: true }).catch(
-		() => {
-			throw new Error(
-				"Cannot read the document directory. Check EXPLORER_DIR and directory permissions.",
-			);
-		},
-	);
-	const summaries: DocumentSummary[] = [];
-	const folders = entries.filter((entry) => entry.isDirectory());
-	folders.sort((left, right) => left.name.localeCompare(right.name, "en"));
-	for (const folder of folders) {
-		const file = join(directory, folder.name, "data.json");
-		let contents: string;
-		try {
-			contents = await readFile(file, "utf8");
-		} catch (error: unknown) {
-			// Directories without data.json do not match explorer/*/data.json.
-			if (error instanceof Error && "code" in error && error.code === "ENOENT")
-				continue;
-			throw new Error(`Cannot read document file: ${file}`);
-		}
-		let input: unknown;
-		try {
-			input = JSON.parse(contents);
-		} catch {
-			throw new Error(`Invalid JSON in document file: ${file}`);
-		}
-		const parsed = docsSchema.safeParse(input);
-		if (!parsed.success) {
-			// Do not expose document values or Zod messages in errors.
-			const paths = parsed.error.issues
-				.slice(0, 5)
-				.map((issue) => issue.path.join("."));
-			throw new Error(
-				`Invalid document schema: ${file}. ${parsed.error.issues.length} issue(s). First paths: ${paths.join(", ")}`,
-			);
-		}
-		summaries.push(summarize(folder.name, parsed.data));
+function summarizeRecord(record: DocumentRecord): DocumentSummary {
+	if (record.generationCompleted) {
+		return summarize(record.id, validateDocument(record.data));
 	}
-	return summaries;
+	return {
+		id: record.id,
+		title: record.title ?? record.id,
+		generationCompleted: false,
+		metadata: null,
+		thesis: "",
+		generated: "",
+		hasFiche: false,
+		hasNote: false,
+		preview: "",
+	};
+}
+
+export async function loadDocuments(): Promise<DocumentSummary[]> {
+	let records: DocumentRecord[];
+	try {
+		const { db } = await import("../db/drizzle.ts");
+		records = await db.select().from(documents).where(publicDocumentsFilter);
+	} catch {
+		throw new Error("Cannot read documents.");
+	}
+	return records
+		.sort((left, right) => left.id.localeCompare(right.id, "en"))
+		.map(summarizeRecord);
+}
+
+export async function loadMyDocuments(
+	userId: string,
+): Promise<DocumentSummary[]> {
+	let records: DocumentRecord[];
+	try {
+		const { db } = await import("../db/drizzle.ts");
+		records = await db
+			.select()
+			.from(documents)
+			.where(and(eq(documents.createdBy, userId), isNull(documents.deletedAt)));
+	} catch {
+		throw new Error("Cannot read documents.");
+	}
+	return records
+		.sort((left, right) => left.id.localeCompare(right.id, "en"))
+		.map(summarizeRecord);
 }
 
 export async function loadDocument(
 	id: string,
-	directory: string = getExplorerDirectory(),
+	userId?: string,
 ): Promise<DocumentDetail | null> {
-	// Accept one directory name. Reject encoded separators and control characters.
+	// Reject encoded separators and control characters.
 	if (
 		!id ||
 		id === "." ||
@@ -200,42 +224,48 @@ export async function loadDocument(
 	)
 		return null;
 
-	let contents: string;
+	let record: DocumentRecord | undefined;
 	try {
-		const root = await realpath(directory);
-		const file = await realpath(join(root, id, "data.json"));
-		const localPath = relative(root, file);
-		if (
-			isAbsolute(localPath) ||
-			localPath === ".." ||
-			localPath.startsWith(`..${sep}`)
-		)
-			return null;
-		contents = await readFile(file, "utf8");
-	} catch (error: unknown) {
-		if (
-			error instanceof Error &&
-			"code" in error &&
-			(error.code === "ENOENT" || error.code === "ENOTDIR")
-		)
-			return null;
+		const { db } = await import("../db/drizzle.ts");
+		[record] = await db
+			.select()
+			.from(documents)
+			.where(
+				and(
+					eq(documents.id, id),
+					isNull(documents.deletedAt),
+					or(
+						eq(documents.public, true),
+						userId === undefined ? undefined : eq(documents.createdBy, userId),
+					),
+				),
+			)
+			.limit(1);
+	} catch {
 		throw new Error("Cannot read the document.");
 	}
-
-	let input: unknown;
-	try {
-		input = JSON.parse(contents);
-	} catch {
-		throw new Error("Invalid document JSON.");
+	if (!record) return null;
+	if (!record.generationCompleted) {
+		return {
+			...summarizeRecord(record),
+			ficheMarkdown: "",
+			noteMarkdown: "",
+			pdfUrl: `/api/pdfs/${encodeURIComponent(id)}`,
+		};
 	}
-	const parsed = docsSchema.safeParse(input);
-	if (!parsed.success) throw new Error("Invalid document schema.");
-	const document = parsed.data;
-	const pdfUrl =
-		document.pdf_url ??
-		((await findPdf(id)) ? `/api/pdfs/${encodeURIComponent(id)}` : null);
+	const document = validateDocument(record.data);
+	const summary = summarize(id, document);
+	let pdfUrl = document.pdf_url ?? null;
+	if (!pdfUrl) {
+		try {
+			const pdf = await lookupPdf(id);
+			if (pdf) pdfUrl = `/api/pdfs/${encodeURIComponent(id)}`;
+		} catch {
+			throw new Error("Cannot read the document PDF.");
+		}
+	}
 	return {
-		...summarize(id, document),
+		...summary,
 		ficheMarkdown: document.fiche.fiche_md,
 		noteMarkdown: document.note.note_md,
 		pdfUrl,

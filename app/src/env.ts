@@ -5,6 +5,7 @@ export const env = createEnv({
 	server: {
 		SERVER_URL: z.url().optional(),
 		DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
+		REDIS_URL: z.url({ protocol: /^rediss?$/ }),
 		BETTER_AUTH_SECRET: z.string().trim().min(32),
 		S3_ENDPOINT: z.url({ protocol: /^https?$/ }),
 		S3_REGION: z.string().trim().min(1),

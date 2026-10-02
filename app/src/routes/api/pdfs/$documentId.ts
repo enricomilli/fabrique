@@ -4,12 +4,12 @@ export const Route = createFileRoute("/api/pdfs/$documentId")({
 	server: {
 		handlers: {
 			GET: async ({ request, params }) => {
-				const { servePdf } = await import("../../../lib/pdf.server");
-				return servePdf(request, params.documentId);
+				const { serveStoredPdf } = await import("../../../lib/s3-pdf.server");
+				return serveStoredPdf(request, params.documentId);
 			},
 			HEAD: async ({ request, params }) => {
-				const { servePdf } = await import("../../../lib/pdf.server");
-				return servePdf(request, params.documentId);
+				const { serveStoredPdf } = await import("../../../lib/s3-pdf.server");
+				return serveStoredPdf(request, params.documentId);
 			},
 		},
 	},

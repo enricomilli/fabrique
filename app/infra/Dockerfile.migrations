@@ -2,13 +2,21 @@
 FROM node:24-bookworm-slim
 WORKDIR /srv/app
 
-RUN npm install --no-save --package-lock=false --no-audit --no-fund \
+RUN printf '{"private":true,"type":"module"}\n' > package.json \
+    && npm install --no-save --package-lock=false --no-audit --no-fund \
     drizzle-kit@1.0.0-rc.4 \
     drizzle-orm@1.0.0-rc.4 \
-    pg@8.23.1
+    pg@8.23.1 \
+    @aws-sdk/client-s3@3.1144.0 \
+    tsx@4.23.15 \
+    zod@4.6.5
+
+ENV PATH="/srv/app/node_modules/.bin:${PATH}"
 
 COPY app/src/db/ ./src/db/
+COPY app/src/lib/docs.schema.ts app/src/lib/docs.server.ts app/src/lib/pdf.server.ts ./src/lib/
+COPY app/scripts/seed-documents.ts ./scripts/seed-documents.ts
 COPY app/infra/drizzle.migrate.config.ts ./infra/drizzle.migrate.config.ts
 
 USER node
-CMD ["./node_modules/.bin/drizzle-kit", "migrate", "--config=./infra/drizzle.migrate.config.ts"]
+CMD ["sh", "-c", "drizzle-kit migrate --config=./infra/drizzle.migrate.config.ts && exec tsx scripts/seed-documents.ts"]

@@ -1,0 +1,213 @@
+import { createReadStream } from "node:fs";
+import { open, readdir, readFile, realpath, stat } from "node:fs/promises";
+import { isAbsolute, join, relative, resolve, sep } from "node:path";
+import { pathToFileURL } from "node:url";
+import { parseArgs } from "node:util";
+import { HeadBucketCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
+import { z } from "zod";
+import { documents } from "../src/db/schema/documents.ts";
+import { type Docs, docsSchema, parseFicheStructure } from "../src/lib/docs.schema.ts";
+import { getExplorerDirectory } from "../src/lib/docs.server.ts";
+import { findPdf, getPdfDirectory } from "../src/lib/pdf.server.ts";
+
+const pathsSchema = z.object({
+	explorerDir: z.string().trim().min(1).transform((value) => resolve(value)),
+	pdfDir: z.string().trim().min(1).transform((value) => resolve(value)),
+});
+
+const storageSchema = z.object({
+	DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
+	S3_ENDPOINT: z.url({ protocol: /^https?$/ }),
+	S3_REGION: z.string().trim().min(1),
+	S3_ACCESS_KEY_ID: z.string().trim().min(1),
+	S3_SECRET_ACCESS_KEY: z.string().trim().min(1),
+	S3_BUCKET: z.string().trim().min(1),
+	S3_FORCE_PATH_STYLE: z.enum(["true", "false"]).transform((value) => value === "true"),
+});
+
+const documentIdSchema = z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]*$/)
+	.refine((value) => !/[\r\n]/.test(value));
+
+// This checks the PDF signature, not the complete PDF structure.
+const pdfSchema = z.object({
+	path: z.string().min(1),
+	size: z.number().int().positive(),
+	header: z.string().regex(/^%PDF-\d\.\d/),
+});
+
+type SeedPaths = z.infer<typeof pathsSchema>;
+type SeedPdf = Pick<z.infer<typeof pdfSchema>, "path" | "size">;
+export type SeedDocument = { id: string; data: Docs; pdf: SeedPdf | null };
+export type SeedWriter = {
+	uploadPdf: (key: string, pdf: SeedPdf) => Promise<void>;
+	upsertDocument: (document: SeedDocument) => Promise<void>;
+};
+
+export function getSeedPaths(options: Partial<SeedPaths> = {}): SeedPaths {
+	return pathsSchema.parse({
+		explorerDir: options.explorerDir ?? getExplorerDirectory(),
+		pdfDir: options.pdfDir ?? getPdfDirectory(),
+	});
+}
+
+async function readSeedPdf(id: string, directory: string): Promise<SeedPdf | null> {
+	const pdf = await findPdf(id, directory);
+	if (!pdf) {
+		// A missing PDF is optional. An existing unsafe path must not be skipped.
+		try {
+			await stat(join(directory, `${id}.pdf`));
+		} catch (error: unknown) {
+			if (error instanceof Error && "code" in error && error.code === "ENOENT") return null;
+			throw error;
+		}
+		throw new Error(`Invalid PDF path for document ${id}.`);
+	}
+	const file = await open(pdf.path, "r");
+	try {
+		const header = Buffer.alloc(8);
+		await file.read(header, 0, header.length, 0);
+		if (!pdfSchema.safeParse({ ...pdf, header: header.toString("ascii") }).success) {
+			throw new Error(`Invalid PDF signature or empty file: ${pdf.path}`);
+		}
+		return pdf;
+	} finally {
+		await file.close();
+	}
+}
+
+export async function readSeedDocuments(paths: SeedPaths): Promise<SeedDocument[]> {
+	const { explorerDir, pdfDir } = pathsSchema.parse(paths);
+	for (const directory of [explorerDir, pdfDir]) {
+		if (!(await stat(directory)).isDirectory()) {
+			throw new Error(`Expected a directory: ${directory}`);
+		}
+	}
+	const root = await realpath(explorerDir);
+	const folders = (await readdir(root, { withFileTypes: true }))
+		.filter((entry) => entry.isDirectory())
+		.sort((left, right) => left.name.localeCompare(right.name, "en"));
+	const result: SeedDocument[] = [];
+	for (const folder of folders) {
+		let file: string;
+		try {
+			file = await realpath(join(root, folder.name, "data.json"));
+		} catch (error: unknown) {
+			if (error instanceof Error && "code" in error && error.code === "ENOENT") continue;
+			throw error;
+		}
+		const local = relative(root, file);
+		if (isAbsolute(local) || local === ".." || local.startsWith(`..${sep}`)) {
+			throw new Error(`Document path is outside the source directory: ${folder.name}`);
+		}
+		const id = documentIdSchema.parse(folder.name);
+		const text = await readFile(file, "utf8");
+		let input: unknown;
+		try {
+			input = JSON.parse(text);
+		} catch {
+			throw new Error(`Invalid document JSON: ${file}`);
+		}
+		const parsed = docsSchema.safeParse(input);
+		if (!parsed.success) {
+			const fields = parsed.error.issues.map((issue) => issue.path.join(".")).join(", ");
+			throw new Error(`Invalid document schema: ${file}. Fields: ${fields}`);
+		}
+		if (parsed.data.fiche.structure_json.trim()) {
+			try {
+				parseFicheStructure(parsed.data.fiche.structure_json);
+			} catch {
+				throw new Error(`Invalid fiche.structure_json: ${file}`);
+			}
+		}
+		result.push({ id, data: parsed.data, pdf: await readSeedPdf(id, pdfDir) });
+	}
+	if (result.length === 0) throw new Error(`No documents found in ${explorerDir}.`);
+	return result;
+}
+
+export async function writeSeedDocuments(records: SeedDocument[], writer: SeedWriter): Promise<void> {
+	for (const document of records) {
+		if (document.pdf) await writer.uploadPdf(`pdfs/${document.id}.pdf`, document.pdf);
+		await writer.upsertDocument(document);
+	}
+}
+
+async function main(): Promise<void> {
+	const { values } = parseArgs({
+		options: {
+			"explorer-dir": { type: "string" },
+			"pdf-dir": { type: "string" },
+			"dry-run": { type: "boolean", default: false },
+			help: { type: "boolean", default: false },
+		},
+	});
+	if (values.help) {
+		console.log("Usage: npm run db:seed -- [--explorer-dir PATH] [--pdf-dir PATH] [--dry-run]");
+		return;
+	}
+	const paths = getSeedPaths({ explorerDir: values["explorer-dir"], pdfDir: values["pdf-dir"] });
+	// Validate all source files before the first upload or database write.
+	const records = await readSeedDocuments(paths);
+	const pdfCount = records.filter((record) => record.pdf !== null).length;
+	console.log(`Validated ${records.length} documents and ${pdfCount} PDF signatures.`);
+	for (const record of records) {
+		if (!record.pdf) console.warn(`No local PDF for ${record.id}. Only the document will be seeded.`);
+	}
+	if (values["dry-run"]) return;
+
+	const config = storageSchema.parse(process.env);
+	const pool = new Pool({ connectionString: config.DATABASE_URL });
+	const db = drizzle({ client: pool });
+	const s3 = new S3Client({
+		endpoint: config.S3_ENDPOINT,
+		region: config.S3_REGION,
+		forcePathStyle: config.S3_FORCE_PATH_STYLE,
+		credentials: { accessKeyId: config.S3_ACCESS_KEY_ID, secretAccessKey: config.S3_SECRET_ACCESS_KEY },
+	});
+	try {
+		await s3.send(new HeadBucketCommand({ Bucket: config.S3_BUCKET }));
+		await db.select({ id: documents.id }).from(documents).limit(1);
+		await writeSeedDocuments(records, {
+			async uploadPdf(key, pdf) {
+				const body = createReadStream(pdf.path);
+				try {
+					await s3.send(new PutObjectCommand({
+						Bucket: config.S3_BUCKET,
+						Key: key,
+						Body: body,
+						ContentLength: pdf.size,
+						ContentType: "application/pdf",
+					}));
+				} finally {
+					body.destroy();
+				}
+			},
+			async upsertDocument(document) {
+				const generationCompleted = Boolean(
+					document.data.fiche.fiche_md.trim() && document.data.note.note_md.trim(),
+				);
+				await db.insert(documents).values({
+					id: document.id, data: document.data, public: true, createdBy: null,
+					generationCompleted,
+				}).onConflictDoUpdate({
+					target: documents.id,
+					// Preserve ownership, visibility, and deletion on repeat runs.
+					set: { data: document.data, generationCompleted },
+				});
+				console.log(`Seeded document ${document.id}.`);
+			},
+		});
+	} finally {
+		s3.destroy();
+		await pool.end();
+	}
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+	main().catch((error: unknown) => {
+		console.error(error instanceof Error ? error.message : "Document seed failed.");
+		process.exitCode = 1;
+	});
+}

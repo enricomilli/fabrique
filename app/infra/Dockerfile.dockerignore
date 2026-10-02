@@ -1,13 +1,7 @@
-# Only send the app, document exports, and PDFs to the build.
+# Send only the app to the build. PostgreSQL and S3 store runtime documents.
 **
 !app/
 !app/**
-!explorer/
-!explorer/*/
-!explorer/*/data.json
-!data/
-!data/pdf/
-!data/pdf/*.pdf
 
 app/node_modules/
 app/.output/

@@ -3,14 +3,16 @@ import { AppHeader } from "#/components/app-header";
 import { ReaderFormatSwitcher } from "#/components/reader-format-switcher";
 import { Route as DocumentRoute } from "../$documentId";
 
-export const Route = createFileRoute("/documents/$documentId/_reader")({
+export const Route = createFileRoute(
+	"/_protected/documents/$documentId/_reader",
+)({
 	component: DocumentReaderLayout,
 });
 
 function DocumentReaderLayout() {
 	const document = DocumentRoute.useLoaderData();
 	const ficheMatch = useMatch({
-		from: "/documents/$documentId/_reader/fiche",
+		from: "/_protected/documents/$documentId/_reader/fiche",
 		shouldThrow: false,
 	});
 	return (

@@ -3,6 +3,7 @@ import { spawnSync } from 'node:child_process'
 import { test } from 'node:test'
 
 const validEnv: Record<string, string> = {
+  REDIS_URL: 'redis://localhost:6379',
   DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/app',
   BETTER_AUTH_SECRET: 'test-only-secret-with-at-least-32-characters',
   S3_ENDPOINT: 'http://localhost:9000',

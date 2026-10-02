@@ -11,7 +11,7 @@ npm run dev
 
 ## Docker
 
-Start the local PostgreSQL and SeaweedFS services from `app/`:
+Start the local PostgreSQL, SeaweedFS, and Redis services from `app/`:
 
 ```bash
 docker compose -f infra/compose.dev.yaml up -d
@@ -386,11 +386,50 @@ The cards link to separate `/documents/<id>/fiche` and `/documents/<id>/note` pa
 Both pages use the shared `_reader` layout. The selection page contains no reader logic.
 The interface supports English and French. Source content keeps its original language.
 
-Place original PDFs in `../data/pdf/<id>.pdf` to enable the PDF links automatically.
-The server serves them at `/api/pdfs/<id>` with byte-range support for PDF readers.
-Set `PDF_DIR` to an absolute directory path if the PDFs live elsewhere.
-Include this directory in your deployment. The build does not copy the PDF files.
+All application pages require a session, except `/login`.
+The server reads documents from PostgreSQL and validates completed payloads with Zod.
+My documents includes the signed-in user's public and private documents.
+Public documents includes all public documents. Both lists exclude deleted documents.
+Document pages and PDFs permit the owner or a signed-in reader of a public document.
 
-An optional top-level `pdf_url` in `explorer/<id>/data.json` overrides the local PDF link.
+The seed script reads `../explorer/<id>/data.json` and uploads `../data/pdf/<id>.pdf` to the configured S3 bucket.
+Run `npm run db:seed` after database migrations.
+Use `EXPLORER_DIR` and `PDF_DIR`, or the seed path options, to change the source directories.
+These local directories are seed inputs, not runtime data sources.
+
+The server streams S3 objects at `pdfs/<id>.pdf` through `/api/pdfs/<id>` with byte-range support.
+Configure the database and S3 connection through the server variables in `.env.example`.
+The runtime image does not contain the original JSON or PDF files.
+
+An optional top-level `pdf_url` in the document payload overrides the S3 PDF link.
 Use an absolute HTTP or HTTPS URL for the matching original PDF.
 If neither source exists, the page shows an unavailable message instead of a broken link.
+
+### Academic paper uploads
+
+Select the plus card in My documents to open `/documents/new`.
+Submit a PDF up to 1,500,000,000 bytes (1.5 GB). New documents are private unless you enable the public switch.
+The server streams the PDF to S3 with bounded memory and queues a BullMQ job in Redis.
+Set `REDIS_URL` to `redis://localhost:6379` for local development.
+Configure deployment proxies to permit this upload size and enough transfer time.
+
+`generation_completed` defaults to false for uploads. Migrations do not mark documents complete.
+Seeds mark a document complete only when its validated payload contains both fiche and note Markdown.
+The application shows the pending screen until a future worker completes generation.
+No generation worker exists yet.
+
+The queue name is `document-generation`. The job name is `generate-document`.
+The job ID is the document ID. The payload contains `documentId`, `userId`, `bucket`, and `key`.
+A worker must validate the generated payload and save it before it sets `generation_completed` to true.
+A worker must check ownership and deletion before work. Retries must not duplicate completed work.
+
+If Redis fails after an upload, the endpoint returns 503 with the saved document ID.
+The row and PDF remain because Redis might have accepted the job before the connection failed.
+Recovery must enqueue the same document ID. Automatic recovery is not implemented yet.
+
+### End-to-end checks
+
+Run `npm run test:e2e` with local PostgreSQL, S3, and Redis services available.
+The tests start the built application, create temporary users and documents, and send real HTTP requests.
+They check authentication, ownership, upload validation, queue jobs, PDF downloads, and byte ranges.
+They delete their test rows, S3 objects, and queue jobs afterward.

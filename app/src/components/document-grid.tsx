@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Loader } from "lucide-react";
 import { useId, useState } from "react";
 import { Button } from "#/components/ui/button";
 import {
@@ -16,6 +17,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "#/components/ui/select";
+import { Skeleton } from "#/components/ui/skeleton";
 import type { DocumentSummary } from "#/lib/docs-fns";
 import {
 	type DocumentFilter,
@@ -46,7 +48,7 @@ function statusLabels() {
 	};
 }
 
-function DocumentCard({ document }: { document: DocumentSummary }) {
+export function DocumentCard({ document }: { document: DocumentSummary }) {
 	const status = documentStatus(document);
 	const metadata = document.metadata;
 	const details = [
@@ -73,20 +75,28 @@ function DocumentCard({ document }: { document: DocumentSummary }) {
 					aria-hidden="true"
 					className="aspect-[5/3] overflow-hidden border border-foreground/15 bg-card p-4 shadow-xs transition-colors duration-150 group-hover:border-foreground/40 group-hover:bg-muted/40 group-focus-visible:bg-muted/40 motion-reduce:transition-none"
 				>
-					{/*<p className="mb-2 font-mono text-[8px] uppercase tracking-[0.16em] text-muted-foreground">
-					{document.hasFiche
-						? m.documents_preview_fiche()
-						: document.hasNote
-							? m.documents_status_note()
-							: m.documents_preview_source()}
-				</p>*/}
-					<p className="line-clamp-2 break-words font-heading text-[11px] leading-snug font-semibold capitalize">
-						{document.title.toLocaleLowerCase(getLocale())}
-					</p>
-					<div className="my-2 h-[3px] w-1/4 bg-blue-900 dark:bg-blue-300" />
-					<p className="line-clamp-8 break-words font-heading text-[9px] leading-relaxed text-foreground/75">
-						{document.preview}
-					</p>
+					{document.generationCompleted ? (
+						<>
+							<p className="line-clamp-2 break-words font-heading text-[11px] leading-snug font-semibold capitalize">
+								{document.title.toLocaleLowerCase(getLocale())}
+							</p>
+							<div className="my-2 h-[3px] w-1/4 bg-blue-900 dark:bg-blue-300" />
+							<p className="line-clamp-8 break-words font-heading text-[9px] leading-relaxed text-foreground/75">
+								{document.preview}
+							</p>
+						</>
+					) : (
+						<div className="space-y-3">
+							<Skeleton className="h-3 w-3/4 motion-reduce:animate-none" />
+							<Skeleton className="h-1 w-1/4 motion-reduce:animate-none" />
+							<div className="space-y-2">
+								<Skeleton className="h-2 w-full motion-reduce:animate-none" />
+								<Skeleton className="h-2 w-11/12 motion-reduce:animate-none" />
+								<Skeleton className="h-2 w-full motion-reduce:animate-none" />
+								<Skeleton className="h-2 w-2/3 motion-reduce:animate-none" />
+							</div>
+						</div>
+					)}
 				</div>
 				{document.preview && <p className="sr-only">{document.preview}</p>}
 				<h3
@@ -100,13 +110,21 @@ function DocumentCard({ document }: { document: DocumentSummary }) {
 				</p>
 				<div className="mt-1.5 flex flex-wrap items-baseline gap-x-2 gap-y-1">
 					<span
-						className={`shrink-0 rounded-full border px-2 py-0.5 font-mono text-[10px] leading-none ${
+						className={`inline-flex shrink-0 items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[10px] leading-none ${
 							status === "source"
 								? "border-border text-muted-foreground"
 								: "border-blue-800/25 bg-blue-100/40 text-blue-900 dark:border-blue-300/30 dark:bg-blue-950/40 dark:text-blue-200"
 						}`}
 					>
-						{statusLabels()[status]}
+						{!document.generationCompleted && (
+							<Loader
+								aria-hidden="true"
+								className="size-3 shrink-0 animate-spin motion-reduce:animate-none"
+							/>
+						)}
+						{document.generationCompleted
+							? statusLabels()[status]
+							: m.document_queued()}
 					</span>
 					{metadata?.discipline?.trim() && (
 						<span className="min-w-0 break-words text-[11px] leading-relaxed text-muted-foreground">
@@ -180,7 +198,7 @@ export function DocumentGrid({
 		>
 			<div className="mx-auto max-w-[1440px]">
 				<h2 id={`${id}-title`} className="sr-only">
-					{m.documents_title()}
+					{m.documents_public()}
 				</h2>
 				<output className="sr-only">
 					{!failed &&
