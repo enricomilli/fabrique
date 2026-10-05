@@ -76,7 +76,8 @@ scripts/
     trace_grounding.py       gold-free grounding auditor of a note run (exit 1 on BLIND)
     score_against_gold.py    objective comparison vs a gold reference
     c12_audit.py             compound page-binding heuristic (metric)
-    build_explorer.py        local HTML explorer of a fiche run + a note run (data.json = UI contract)
+    build_explorer.py        explorer v1: every step / iteration with prompt, reasoning, output, stdout
+    build_reasoning.py       Raisonnement view: reading map + iteration cards (reasoning.json = UI contract)
     spec_bench.py            decode A/B via server timings (speculative decoding)
 tests/                       pytest — offline; replays the recorded v3 runs byte-for-byte (see below)
 rlm/rlm_config.yaml          rlm-cli limits (cwd of the rlm subprocess)
@@ -87,6 +88,7 @@ gold/                        hand-built reference fiches/notes, EVALUATION.md (g
 data/<thesis>.parquet        inputs
 data/pdf/<thesis>.pdf        the original PDFs the parquets were parsed from (reference only; the pipeline reads the parquet)
 results/                     reference runs of v3 (see results/README.md)
+explorer/                    browsable views of those runs (see explorer/README.md)
 ```
 
 ---
@@ -130,6 +132,7 @@ python3 scripts/tools/verify_citations.py results/<thesis>/<thesis>_note.md data
 
 # 6. look at everything (prompt · thinking · output · stdout per step/iteration)
 python3 scripts/tools/build_explorer.py --thesis-dir results/<thesis> --out explorer/<thesis>
+python3 scripts/tools/build_reasoning.py --thesis-dir results/<thesis>     # what the note read, why, when
 ```
 
 Wait for the fiche before launching the note: a citation-corrected fiche is the
