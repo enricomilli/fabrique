@@ -1,6 +1,7 @@
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { PlusIcon, SearchIcon } from "lucide-react";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { SearchIcon } from "lucide-react";
 import { useId, useState } from "react";
+import { AddDocumentCard } from "#/components/add-document-card";
 import { AppHeader } from "#/components/app-header";
 import { DocumentCard } from "#/components/document-grid";
 import { Button } from "#/components/ui/button";
@@ -74,42 +75,23 @@ function MyDocumentsPage() {
 			</AppHeader>
 			<main className="px-6 py-10 sm:px-10 lg:px-16">
 				<div className="mx-auto max-w-[1440px]">
-					<div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-						<h1 className="font-heading text-lg leading-none">
-							{m.documents_my()}
-						</h1>
-						<Button
-							variant="outline"
-							size="sm"
-							nativeButton={false}
-							render={<Link to="/documents/new" />}
-						>
-							<PlusIcon aria-hidden="true" className="size-3.5" />
-							{m.documents_add_new()}
-						</Button>
-					</div>
-					{visible.length > 0 ? (
-						<ul className="grid grid-cols-1 gap-x-6 gap-y-7 min-[480px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 min-[1440px]:grid-cols-5">
-							{visible.map((document) => (
-								<li key={document.id}>
-									<DocumentCard document={document} />
-								</li>
-							))}
-						</ul>
-					) : (
-						<div className="border border-dashed p-10 text-center">
-							<p className="text-sm text-muted-foreground">
-								{documents.length > 0
-									? m.documents_no_results()
-									: m.documents_create_first()}
-							</p>
-							<Link
-								to="/documents/new"
-								className="mt-4 inline-flex min-h-10 items-center text-sm underline underline-offset-4"
-							>
-								{m.upload_title()}
-							</Link>
-						</div>
+					<h1 className="mb-6 font-heading text-lg leading-none">
+						{m.documents_my()}
+					</h1>
+					<ul className="grid grid-cols-1 gap-x-6 gap-y-7 min-[480px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 min-[1440px]:grid-cols-5">
+						<li className="min-w-0">
+							<AddDocumentCard firstDocument={documents.length === 0} />
+						</li>
+						{visible.map((document) => (
+							<li key={document.id} className="min-w-0">
+								<DocumentCard document={document} canManage />
+							</li>
+						))}
+					</ul>
+					{documents.length > 0 && visible.length === 0 && (
+						<p className="mt-6 text-sm text-muted-foreground">
+							{m.documents_no_results()}
+						</p>
 					)}
 				</div>
 			</main>

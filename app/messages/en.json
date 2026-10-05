@@ -149,5 +149,16 @@
   "generation_finishing": "Save the summary sheet and reading note.",
   "generation_code": "Show code and model output",
   "generation_output": "Show execution output",
-  "generation_refresh_error": "Cannot refresh the status. This page will try again automatically."
+  "generation_refresh_error": "Cannot refresh the status. This page will try again automatically.",
+  "document_actions_label": "Options for {title}",
+  "document_make_public": "Make public",
+  "document_make_private": "Make private",
+  "document_delete": "Delete document",
+  "document_delete_title": "Delete this document?",
+  "document_delete_description": "This removes “{title}” from your documents and the public document list. You cannot restore it from the app.",
+  "document_actions_cancel": "Cancel",
+  "document_actions_error": "Cannot save the change. Try again.",
+  "document_delete_error": "Cannot delete the document. Try again.",
+  "document_actions_refresh_error": "The change was saved. Reload the page to see it.",
+  "document_deleting": "Delete in progress…"
 }

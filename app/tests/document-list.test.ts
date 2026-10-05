@@ -5,16 +5,16 @@ import { documentStatus, filterDocuments } from "../src/lib/document-list.ts";
 
 const documents: DocumentSummary[] = [
 	{
-		id: "a", title: "Écologie marine", thesis: "these-a", generated: "2025-01-01",
+		id: "a", public: true, title: "Écologie marine", thesis: "these-a", generated: "2025-01-01",
 		generationCompleted: false, hasFiche: true, hasNote: false, preview: "Marine research.",
 		metadata: { titre: "Écologie marine", auteur: "Émilie Martin", annee: "2020", etablissement: "Université de Brest", discipline: "Écologie", mots_cles: ["plancton"], pages: 310 },
 	},
 	{
-		id: "b", title: "La presse française", thesis: "these-b", generated: "2026-01-01",
+		id: "b", public: true, title: "La presse française", thesis: "these-b", generated: "2026-01-01",
 		generationCompleted: false, hasFiche: true, hasNote: true, preview: "Press research.",
 		metadata: { titre: "La presse française", auteur: null, annee: null, etablissement: null, discipline: "Histoire", mots_cles: [], pages: 200 },
 	},
-	{ id: "c", title: "Archive", thesis: "these-c", generated: "unknown", generationCompleted: false, hasFiche: false, hasNote: false, preview: "", metadata: null },
+	{ id: "c", public: true, title: "Archive", thesis: "these-c", generated: "unknown", generationCompleted: false, hasFiche: false, hasNote: false, preview: "", metadata: null },
 ];
 
 test("search ignores case and accents and matches every term", () => {

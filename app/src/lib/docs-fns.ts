@@ -30,3 +30,21 @@ export const getDocument = createServerFn({ method: "GET" })
 		const { loadDocument } = await import("./docs.server");
 		return loadDocument(data.id, session.user.id);
 	});
+
+export const updateDocumentVisibility = createServerFn({ method: "POST" })
+	.inputValidator(z.object({ id: z.string().min(1), public: z.boolean() }))
+	.handler(async ({ data }): Promise<void> => {
+		const { ensureSession } = await import("./fns/session-fns");
+		const session = await ensureSession();
+		const { setDocumentVisibility } = await import("./docs.server");
+		await setDocumentVisibility(data.id, session.user.id, data.public);
+	});
+
+export const deleteDocument = createServerFn({ method: "POST" })
+	.inputValidator(z.object({ id: z.string().min(1) }))
+	.handler(async ({ data }): Promise<void> => {
+		const { ensureSession } = await import("./fns/session-fns");
+		const session = await ensureSession();
+		const { softDeleteDocument } = await import("./docs.server");
+		await softDeleteDocument(data.id, session.user.id);
+	});

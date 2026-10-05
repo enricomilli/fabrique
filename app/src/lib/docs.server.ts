@@ -30,6 +30,7 @@ function validateDocument(data: unknown): Docs {
 
 export interface DocumentSummary {
 	id: string;
+	public: boolean;
 	title: string;
 	generationCompleted: boolean;
 	metadata: FicheMetadata | null;
@@ -133,7 +134,11 @@ function getCentralThesis(markdown: string): string | null {
 	return start === undefined ? null : lines.slice(start).join("\n");
 }
 
-function summarize(id: string, document: Docs): DocumentSummary {
+function summarize(
+	id: string,
+	document: Docs,
+	isPublic: boolean,
+): DocumentSummary {
 	const thesis = document.fiche.thesis.trim() || document.note.thesis.trim();
 	const ficheMarkdown = document.fiche.fiche_md.trim();
 	const markdown = ficheMarkdown || document.note.note_md.trim();
@@ -149,6 +154,7 @@ function summarize(id: string, document: Docs): DocumentSummary {
 	}
 	return {
 		id,
+		public: isPublic,
 		title: cleanMarkdown(metadata?.titre ?? "") || getTitle(markdown, thesis),
 		generationCompleted: true,
 		metadata,
@@ -162,10 +168,11 @@ function summarize(id: string, document: Docs): DocumentSummary {
 
 function summarizeRecord(record: DocumentRecord): DocumentSummary {
 	if (record.generationCompleted) {
-		return summarize(record.id, validateDocument(record.data));
+		return summarize(record.id, validateDocument(record.data), record.public);
 	}
 	return {
 		id: record.id,
+		public: record.public,
 		title: record.title ?? record.id,
 		generationCompleted: false,
 		metadata: null,
@@ -260,7 +267,7 @@ export async function loadDocument(
 		};
 	}
 	const document = validateDocument(record.data);
-	const summary = summarize(id, document);
+	const summary = summarize(id, document, record.public);
 	let pdfUrl = document.pdf_url ?? null;
 	if (!pdfUrl) {
 		try {
@@ -277,4 +284,43 @@ export async function loadDocument(
 		pdfUrl,
 		generationData: null,
 	};
+}
+
+export async function setDocumentVisibility(
+	id: string,
+	userId: string,
+	isPublic: boolean,
+): Promise<void> {
+	const { db } = await import("../db/drizzle.ts");
+	const updated = await db
+		.update(documents)
+		.set({ public: isPublic })
+		.where(
+			and(
+				eq(documents.id, id),
+				eq(documents.createdBy, userId),
+				isNull(documents.deletedAt),
+			),
+		)
+		.returning({ id: documents.id });
+	if (updated.length === 0) throw new Error("Cannot change this document.");
+}
+
+export async function softDeleteDocument(
+	id: string,
+	userId: string,
+): Promise<void> {
+	const { db } = await import("../db/drizzle.ts");
+	const updated = await db
+		.update(documents)
+		.set({ deletedAt: new Date(), public: false })
+		.where(
+			and(
+				eq(documents.id, id),
+				eq(documents.createdBy, userId),
+				isNull(documents.deletedAt),
+			),
+		)
+		.returning({ id: documents.id });
+	if (updated.length === 0) throw new Error("Cannot delete this document.");
 }

@@ -149,5 +149,16 @@
   "generation_finishing": "Enregistrer la fiche et la note de lecture.",
   "generation_code": "Afficher le code et le résultat du modèle",
   "generation_output": "Afficher le résultat de l’exécution",
-  "generation_refresh_error": "Impossible d’actualiser le statut. Cette page réessaiera automatiquement."
+  "generation_refresh_error": "Impossible d’actualiser le statut. Cette page réessaiera automatiquement.",
+  "document_actions_label": "Options pour {title}",
+  "document_make_public": "Rendre public",
+  "document_make_private": "Rendre privé",
+  "document_delete": "Supprimer le document",
+  "document_delete_title": "Supprimer ce document ?",
+  "document_delete_description": "Cette action retire « {title} » de vos documents et de la liste des documents publics. Vous ne pouvez pas le restaurer depuis l’application.",
+  "document_actions_cancel": "Annuler",
+  "document_actions_error": "Impossible d’enregistrer la modification. Réessayez.",
+  "document_delete_error": "Impossible de supprimer le document. Réessayez.",
+  "document_actions_refresh_error": "La modification est enregistrée. Rechargez la page pour la voir.",
+  "document_deleting": "Suppression en cours…"
 }

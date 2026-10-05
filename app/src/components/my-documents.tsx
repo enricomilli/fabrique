@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRightIcon, PlusIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
+import { AddDocumentCard } from "#/components/add-document-card";
 import { DocumentCard } from "#/components/document-grid";
 import { Button } from "#/components/ui/button";
 import type { DocumentSummary } from "#/lib/docs-fns";
@@ -15,10 +16,17 @@ export function MyDocuments({
 	failed: boolean;
 	onRetry: () => void;
 }) {
-	const recentDocuments = filterDocuments(documents, "", "all", "recent").slice(
-		0,
-		3,
+	const sortedDocuments = filterDocuments(documents, "", "all", "recent");
+	const pendingDocuments = sortedDocuments.filter(
+		(document) => !document.generationCompleted,
 	);
+	const completedDocuments = sortedDocuments.filter(
+		(document) => document.generationCompleted,
+	);
+	const recentDocuments = [
+		...pendingDocuments,
+		...completedDocuments.slice(0, Math.max(0, 3 - pendingDocuments.length)),
+	];
 
 	return (
 		<section
@@ -46,28 +54,15 @@ export function MyDocuments({
 						</Button>
 					</div>
 				)}
-				<ul className="grid grid-cols-1 gap-6 pb-4 min-[480px]:grid-cols-2 xl:grid-cols-4">
+				<ul className="grid grid-cols-1 gap-6 pb-4 min-[480px]:grid-cols-2 lg:grid-cols-4">
 					<li className="min-w-0">
-						<Link
-							to="/documents/new"
-							className="group block min-w-0 outline-offset-4 focus-visible:outline-2 focus-visible:outline-ring"
-						>
-							<div className="flex aspect-[5/3] items-center justify-center border border-dashed border-foreground/30 bg-card p-4 shadow-xs transition-colors duration-150 group-hover:bg-muted/40 group-focus-visible:bg-muted/40 motion-reduce:transition-none">
-								<PlusIcon aria-hidden="true" className="size-6" />
-							</div>
-							<h3 className="mt-2.5 font-heading text-sm leading-relaxed">
-								{m.upload_title()}
-							</h3>
-							<p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-								{documents.length === 0 && !failed
-									? m.documents_create_first()
-									: m.upload_description()}
-							</p>
-						</Link>
+						<AddDocumentCard
+							firstDocument={documents.length === 0 && !failed}
+						/>
 					</li>
 					{recentDocuments.map((document) => (
 						<li key={document.id} className="min-w-0">
-							<DocumentCard document={document} />
+							<DocumentCard document={document} canManage />
 						</li>
 					))}
 				</ul>

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Loader } from "lucide-react";
 import { useId, useState } from "react";
+import { DocumentActionsMenu } from "#/components/document-actions-menu";
 import { Button } from "#/components/ui/button";
 import {
 	DrawerClose,
@@ -48,7 +49,13 @@ function statusLabels() {
 	};
 }
 
-export function DocumentCard({ document }: { document: DocumentSummary }) {
+export function DocumentCard({
+	document,
+	canManage = false,
+}: {
+	document: DocumentSummary;
+	canManage?: boolean;
+}) {
 	const status = documentStatus(document);
 	const metadata = document.metadata;
 	const details = [
@@ -64,76 +71,79 @@ export function DocumentCard({ document }: { document: DocumentSummary }) {
 		.filter(Boolean)
 		.join(" · ");
 	return (
-		<Link
-			to="/documents/$documentId"
-			params={{ documentId: document.id }}
-			aria-label={document.title}
-			className="group block min-w-0 outline-offset-4 focus-visible:outline-2 focus-visible:outline-ring"
-		>
-			<article className="min-w-0">
-				<div
-					aria-hidden="true"
-					className="aspect-[5/3] overflow-hidden border border-foreground/15 bg-card p-4 shadow-xs transition-colors duration-150 group-hover:border-foreground/40 group-hover:bg-muted/40 group-focus-visible:bg-muted/40 motion-reduce:transition-none"
-				>
-					{document.generationCompleted ? (
-						<>
-							<p className="line-clamp-2 break-words font-heading text-[11px] leading-snug font-semibold capitalize">
-								{document.title.toLocaleLowerCase(getLocale())}
-							</p>
-							<div className="my-2 h-[3px] w-1/4 bg-blue-900 dark:bg-blue-300" />
-							<p className="line-clamp-8 break-words font-heading text-[9px] leading-relaxed text-foreground/75">
-								{document.preview}
-							</p>
-						</>
-					) : (
-						<div className="space-y-3">
-							<Skeleton className="h-3 w-3/4 motion-reduce:animate-none" />
-							<Skeleton className="h-1 w-1/4 motion-reduce:animate-none" />
-							<div className="space-y-2">
-								<Skeleton className="h-2 w-full motion-reduce:animate-none" />
-								<Skeleton className="h-2 w-11/12 motion-reduce:animate-none" />
-								<Skeleton className="h-2 w-full motion-reduce:animate-none" />
-								<Skeleton className="h-2 w-2/3 motion-reduce:animate-none" />
-							</div>
-						</div>
-					)}
-				</div>
-				{document.preview && <p className="sr-only">{document.preview}</p>}
-				<h3
-					className="mt-2.5 line-clamp-2 break-words font-heading text-sm leading-relaxed capitalize"
-					title={document.title}
-				>
-					{document.title.toLocaleLowerCase(getLocale())}
-				</h3>
-				<p className="mt-1 break-words text-xs leading-relaxed text-muted-foreground">
-					{details || document.thesis}
-				</p>
-				<div className="mt-1.5 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-					<span
-						className={`inline-flex shrink-0 items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[10px] leading-none ${
-							status === "source"
-								? "border-border text-muted-foreground"
-								: "border-blue-800/25 bg-blue-100/40 text-blue-900 dark:border-blue-300/30 dark:bg-blue-950/40 dark:text-blue-200"
-						}`}
+		<div className="group/card relative min-w-0">
+			<Link
+				to="/documents/$documentId"
+				params={{ documentId: document.id }}
+				aria-label={document.title}
+				className="group block min-w-0 outline-offset-4 focus-visible:outline-2 focus-visible:outline-ring"
+			>
+				<article className="min-w-0">
+					<div
+						aria-hidden="true"
+						className="aspect-[5/3] overflow-hidden border border-foreground/15 bg-card p-4 shadow-xs transition-colors duration-150 group-hover:border-foreground/40 group-hover:bg-muted/40 group-focus-visible:bg-muted/40 motion-reduce:transition-none"
 					>
-						{!document.generationCompleted && (
-							<Loader
-								aria-hidden="true"
-								className="size-3 shrink-0 animate-spin motion-reduce:animate-none"
-							/>
+						{document.generationCompleted ? (
+							<>
+								<p className="line-clamp-2 break-words font-heading text-[11px] leading-snug font-semibold capitalize">
+									{document.title.toLocaleLowerCase(getLocale())}
+								</p>
+								<div className="my-2 h-[3px] w-1/4 bg-blue-900 dark:bg-blue-300" />
+								<p className="line-clamp-8 break-words font-heading text-[9px] leading-relaxed text-foreground/75">
+									{document.preview}
+								</p>
+							</>
+						) : (
+							<div className="space-y-3">
+								<Skeleton className="h-3 w-3/4 motion-reduce:animate-none" />
+								<Skeleton className="h-1 w-1/4 motion-reduce:animate-none" />
+								<div className="space-y-2">
+									<Skeleton className="h-2 w-full motion-reduce:animate-none" />
+									<Skeleton className="h-2 w-11/12 motion-reduce:animate-none" />
+									<Skeleton className="h-2 w-full motion-reduce:animate-none" />
+									<Skeleton className="h-2 w-2/3 motion-reduce:animate-none" />
+								</div>
+							</div>
 						)}
-						{document.generationCompleted
-							? statusLabels()[status]
-							: m.document_queued()}
-					</span>
-					{metadata?.discipline?.trim() && (
-						<span className="min-w-0 break-words text-[11px] leading-relaxed text-muted-foreground">
-							{metadata.discipline}
+					</div>
+					{document.preview && <p className="sr-only">{document.preview}</p>}
+					<h3
+						className="mt-2.5 line-clamp-2 break-words font-heading text-sm leading-relaxed capitalize"
+						title={document.title}
+					>
+						{document.title.toLocaleLowerCase(getLocale())}
+					</h3>
+					<p className="mt-1 break-words text-xs leading-relaxed text-muted-foreground">
+						{details || document.thesis}
+					</p>
+					<div className="mt-1.5 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+						<span
+							className={`inline-flex shrink-0 items-center gap-1 rounded-full border px-2 py-0.5 font-mono text-[10px] leading-none ${
+								status === "source"
+									? "border-border text-muted-foreground"
+									: "border-blue-800/25 bg-blue-100/40 text-blue-900 dark:border-blue-300/30 dark:bg-blue-950/40 dark:text-blue-200"
+							}`}
+						>
+							{!document.generationCompleted && (
+								<Loader
+									aria-hidden="true"
+									className="size-3 shrink-0 animate-spin motion-reduce:animate-none"
+								/>
+							)}
+							{document.generationCompleted
+								? statusLabels()[status]
+								: m.document_queued()}
 						</span>
-					)}
-				</div>
-			</article>
-		</Link>
+						{metadata?.discipline?.trim() && (
+							<span className="min-w-0 break-words text-[11px] leading-relaxed text-muted-foreground">
+								{metadata.discipline}
+							</span>
+						)}
+					</div>
+				</article>
+			</Link>
+			{canManage && <DocumentActionsMenu document={document} />}
+		</div>
 	);
 }
 
