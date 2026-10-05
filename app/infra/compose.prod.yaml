@@ -21,8 +21,8 @@ services:
       SERVER_URL: ${SERVER_URL:?Set SERVER_URL to the public HTTPS URL}
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Set BETTER_AUTH_SECRET}
       DISCORD_FEEDBACK_WEBHOOK_URL: ${DISCORD_FEEDBACK_WEBHOOK_URL:-}
-    ports:
-      - "${WEB_BIND_ADDRESS:-127.0.0.1}:${WEB_PORT:-3000}:3000"
+    expose:
+      - "3000"
     depends_on:
       postgres:
         condition: service_healthy

@@ -38,9 +38,11 @@ Keep the repository root as the build context for the app, document exports, and
 
 `infra/compose.prod.yaml` runs the web app, fake worker, PostgreSQL, Redis, SeaweedFS, and migrations.
 The production project uses separate volumes from development.
-Only the web app publishes a port. It binds to `127.0.0.1` by default.
-Put a TLS reverse proxy in front of this port.
-Configure the proxy to permit PDF uploads up to 1.5 GB.
+The services do not publish host ports. The web app exposes port `3000` on the container network.
+In Dokploy, add a domain for the `web` service with container port `3000` and HTTPS enabled.
+Set `SERVER_URL` to that domain's HTTPS URL.
+Let Dokploy configure Traefik. Do not add a host port mapping for the web app.
+Configure Traefik to permit PDF uploads up to 1.5 GB.
 
 Create the production environment file from `app/`:
 
