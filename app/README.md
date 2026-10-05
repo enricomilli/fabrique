@@ -34,6 +34,41 @@ docker build -f app/infra/Dockerfile -t fabrique .
 
 Keep the repository root as the build context for the app, document exports, and PDFs.
 
+### Production Compose
+
+`infra/compose.prod.yaml` runs the web app, fake worker, PostgreSQL, Redis, SeaweedFS, and migrations.
+The production project uses separate volumes from development.
+Only the web app publishes a port. It binds to `127.0.0.1` by default.
+Put a TLS reverse proxy in front of this port.
+Configure the proxy to permit PDF uploads up to 1.5 GB.
+
+Create the production environment file from `app/`:
+
+```bash
+cp infra/.env.prod.example .env.prod.local
+```
+
+Set the public `SERVER_URL` and the secrets in `.env.prod.local`.
+Generate each secret separately with `openssl rand -hex 32`.
+Use a hexadecimal PostgreSQL password because Compose inserts it into the database URL.
+Do not commit the environment file.
+
+Start the services from `app/`:
+
+```bash
+docker compose --env-file .env.prod.local -f infra/compose.prod.yaml up -d --build
+```
+
+The migration container applies migrations and seeds the saved documents before the web app and worker start.
+Keep `explorer/` and `data/pdf/` available as read-only seed inputs on the deployment host.
+The fake worker replays the saved CMB lensing document. It does not analyze uploaded PDFs or call a model.
+
+Stop the services without deleting their data:
+
+```bash
+docker compose --env-file .env.prod.local -f infra/compose.prod.yaml down
+```
+
 ### Database migrations
 
 Generate and commit migration files in `app/src/db/migrations/` before you build the migration image.

@@ -282,7 +282,7 @@ export function PendingDocument({ document }: { document: DocumentDetail }) {
 							<ArrowLeftIcon aria-hidden="true" className="size-4" />
 							{m.document_back()}
 						</Link>
-						<h1 className="mt-3 text-balance break-words font-heading text-lg leading-relaxed">
+						<h1 className="mt-5 text-balance break-words font-heading text-lg leading-relaxed">
 							{document.title}
 						</h1>
 						<p className="mt-3 text-sm text-muted-foreground">
