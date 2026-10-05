@@ -13,7 +13,10 @@ export const feedbackSchema = z.object({
 		.max(2000, "invalid_message"),
 });
 
+export const feedbackSubmissionSchema = feedbackSchema.pick({ message: true });
+
 export type FeedbackInput = z.infer<typeof feedbackSchema>;
+export type FeedbackSubmission = z.infer<typeof feedbackSubmissionSchema>;
 
 export type FeedbackResult =
 	| { success: true }

@@ -91,6 +91,8 @@
   "auth_email": "Adresse e-mail",
   "auth_password": "Mot de passe",
   "auth_password_hint": "Utilisez au moins 8 caractères.",
+  "auth_show_password": "Afficher le mot de passe",
+  "auth_hide_password": "Masquer le mot de passe",
   "auth_sign_in_error": "Connexion impossible. Vérifiez votre adresse e-mail et votre mot de passe, puis réessayez.",
   "auth_sign_up_error": "Impossible de créer le compte. Réessayez ou connectez-vous si vous avez déjà un compte.",
   "auth_sign_up_denied": "Vous ne pouvez pas vous inscrire.",

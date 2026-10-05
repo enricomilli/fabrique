@@ -91,6 +91,8 @@
   "auth_email": "Email",
   "auth_password": "Password",
   "auth_password_hint": "Use at least 8 characters.",
+  "auth_show_password": "Show password",
+  "auth_hide_password": "Hide password",
   "auth_sign_in_error": "Cannot sign in. Check your email and password, then try again.",
   "auth_sign_up_error": "Cannot create the account. Try again or sign in if you already have an account.",
   "auth_sign_up_denied": "You are not allowed to sign up.",

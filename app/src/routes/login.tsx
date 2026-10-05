@@ -1,4 +1,5 @@
 import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { type FormEvent, useRef, useState } from "react";
 import { AppHeader } from "#/components/app-header";
 import { Button } from "#/components/ui/button";
@@ -17,6 +18,7 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
 	const [signUp, setSignUp] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
 	const [pending, setPending] = useState(false);
 	const [error, setError] = useState<"failed" | "denied" | null>(null);
 	const submitting = useRef(false);
@@ -87,17 +89,37 @@ function LoginPage() {
 					</div>
 					<div className="space-y-2">
 						<Label htmlFor="auth-password">{m.auth_password()}</Label>
-						<Input
-							className="min-h-10"
-							id="auth-password"
-							name="password"
-							type="password"
-							autoComplete={signUp ? "new-password" : "current-password"}
-							minLength={signUp ? 8 : undefined}
-							required
-							disabled={pending}
-							aria-describedby={signUp ? "password-hint" : undefined}
-						/>
+						<div className="relative">
+							<Input
+								className="min-h-10 pe-12"
+								id="auth-password"
+								name="password"
+								type={showPassword ? "text" : "password"}
+								autoComplete={signUp ? "new-password" : "current-password"}
+								minLength={signUp ? 8 : undefined}
+								required
+								disabled={pending}
+								aria-describedby={signUp ? "password-hint" : undefined}
+							/>
+							<Button
+								type="button"
+								variant="ghost"
+								size="icon"
+								className="absolute inset-y-0 end-0 size-10"
+								aria-label={
+									showPassword ? m.auth_hide_password() : m.auth_show_password()
+								}
+								aria-controls="auth-password"
+								disabled={pending}
+								onClick={() => setShowPassword((visible) => !visible)}
+							>
+								{showPassword ? (
+									<EyeOffIcon aria-hidden="true" />
+								) : (
+									<EyeIcon aria-hidden="true" />
+								)}
+							</Button>
+						</div>
 						{signUp && (
 							<p id="password-hint" className="text-sm text-muted-foreground">
 								{m.auth_password_hint()}
@@ -128,6 +150,7 @@ function LoginPage() {
 					disabled={pending}
 					onClick={() => {
 						setSignUp(!signUp);
+						setShowPassword(false);
 						setError(null);
 					}}
 				>
