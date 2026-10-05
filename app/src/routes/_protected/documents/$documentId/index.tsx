@@ -6,6 +6,7 @@ import {
 	ListIcon,
 } from "lucide-react";
 import { AppHeader } from "#/components/app-header";
+import { PendingDocument } from "#/components/pending-document";
 import { m } from "#/paraglide/messages";
 import { Route as DocumentRoute } from "../$documentId";
 
@@ -15,6 +16,8 @@ export const Route = createFileRoute("/_protected/documents/$documentId/")({
 
 function DocumentSelectionPage() {
 	const document = DocumentRoute.useLoaderData();
+	if (!document.generationCompleted)
+		return <PendingDocument document={document} />;
 	const details = [
 		document.metadata?.auteur,
 		document.metadata?.annee,

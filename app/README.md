@@ -415,8 +415,10 @@ Configure deployment proxies to permit this upload size and enough transfer time
 
 `generation_completed` defaults to false for uploads. Migrations do not mark documents complete.
 Seeds mark a document complete only when its validated payload contains both fiche and note Markdown.
-The application shows the pending screen until a future worker completes generation.
-No generation worker exists yet.
+The application shows generation progress while the worker fills the document payload.
+The fake worker app at `workers/fake-generation` replays the saved `daley_thesis` document without model calls.
+It requires an explicit demo setting. Do not use it with a real worker on the same queue.
+See `workers/fake-generation/README.md` for the install and start commands.
 
 The queue name is `document-generation`. The job name is `generate-document`.
 The job ID is the document ID. The payload contains `documentId`, `userId`, `bucket`, and `key`.
@@ -430,6 +432,8 @@ Recovery must enqueue the same document ID. Automatic recovery is not implemente
 ### End-to-end checks
 
 Run `npm run test:e2e` with local PostgreSQL, S3, and Redis services available.
-The tests start the built application, create temporary users and documents, and send real HTTP requests.
-They check authentication, ownership, upload validation, queue jobs, PDF downloads, and byte ranges.
-They delete their test rows, S3 objects, and queue jobs afterward.
+Install the fake worker dependencies with `npm ci --prefix workers/fake-generation` before the checks.
+The checks start the built application and create temporary users and documents.
+They send real HTTP requests and check uploads, authorization, PDF downloads, and generation progress.
+The generation check starts the fake worker on a separate test queue.
+The checks delete their test rows, S3 objects, and queue jobs afterward.

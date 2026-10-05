@@ -17,6 +17,7 @@ type AppHeaderProps = {
 	scrollThreshold?: number;
 	documentTitle?: string;
 	showFeedback?: boolean;
+	alwaysShowBorder?: boolean;
 	children?: ReactNode;
 };
 
@@ -24,6 +25,7 @@ export const AppHeader = ({
 	scrollThreshold = 8,
 	documentTitle,
 	showFeedback = true,
+	alwaysShowBorder = false,
 	children,
 }: AppHeaderProps) => {
 	const [scrolled, setScrolled] = useState(false);
@@ -74,7 +76,7 @@ export const AppHeader = ({
 		<header
 			data-app-header
 			data-scrolled={scrolled}
-			className={`sticky top-0 z-50 flex w-full items-center justify-between gap-3 border-b bg-background px-6 py-3 transition-colors duration-150 motion-reduce:transition-none ${documentTitle ? "flex-nowrap" : "flex-wrap"} ${scrolled ? "border-border" : "border-transparent"}`}
+			className={`sticky top-0 z-50 flex w-full items-center justify-between gap-3 border-b bg-background px-6 py-3 transition-colors duration-150 motion-reduce:transition-none ${documentTitle ? "flex-nowrap" : "flex-wrap"} ${alwaysShowBorder || scrolled ? "border-border" : "border-transparent"}`}
 		>
 			<div
 				className={`flex min-w-0 flex-1 gap-6 ${children ? "items-center" : "items-baseline"}`}
@@ -110,9 +112,9 @@ export const AppHeader = ({
 						<DropdownMenuTrigger
 							aria-label={m.auth_user_menu()}
 							disabled={signingOut}
-							className="rounded-full outline-offset-4 focus-visible:outline-2 focus-visible:outline-ring disabled:opacity-50"
+							className="rounded-full ml-2 outline-offset-4 focus-visible:outline-2 focus-visible:outline-ring disabled:opacity-50"
 						>
-							<Avatar>
+							<Avatar className="after:border-none!">
 								{user.image && <AvatarImage src={user.image} alt="" />}
 								<AvatarFallback>{initials}</AvatarFallback>
 							</Avatar>

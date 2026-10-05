@@ -3,6 +3,7 @@ import { ArrowRightIcon, PlusIcon } from "lucide-react";
 import { DocumentCard } from "#/components/document-grid";
 import { Button } from "#/components/ui/button";
 import type { DocumentSummary } from "#/lib/docs-fns";
+import { filterDocuments } from "#/lib/document-list";
 import { m } from "#/paraglide/messages";
 
 export function MyDocuments({
@@ -14,6 +15,11 @@ export function MyDocuments({
 	failed: boolean;
 	onRetry: () => void;
 }) {
+	const recentDocuments = filterDocuments(documents, "", "all", "recent").slice(
+		0,
+		3,
+	);
+
 	return (
 		<section
 			aria-labelledby="my-documents"
@@ -40,7 +46,7 @@ export function MyDocuments({
 						</Button>
 					</div>
 				)}
-				<ul className="grid auto-cols-[100%] grid-flow-col gap-6 overflow-x-auto pb-4 min-[480px]:auto-cols-[calc((100%-1.5rem)/2)] md:auto-cols-[calc((100%-3rem)/3)] xl:auto-cols-[calc((100%-4.5rem)/4)] min-[1440px]:auto-cols-[calc((100%-6rem)/5)]">
+				<ul className="grid grid-cols-1 gap-6 pb-4 min-[480px]:grid-cols-2 xl:grid-cols-4">
 					<li className="min-w-0">
 						<Link
 							to="/documents/new"
@@ -59,7 +65,7 @@ export function MyDocuments({
 							</p>
 						</Link>
 					</li>
-					{documents.map((document) => (
+					{recentDocuments.map((document) => (
 						<li key={document.id} className="min-w-0">
 							<DocumentCard document={document} />
 						</li>

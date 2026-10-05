@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, useMatch } from "@tanstack/react-router";
 import { AppHeader } from "#/components/app-header";
+import { PendingDocument } from "#/components/pending-document";
 import { ReaderFormatSwitcher } from "#/components/reader-format-switcher";
 import { Route as DocumentRoute } from "../$documentId";
 
@@ -15,6 +16,10 @@ function DocumentReaderLayout() {
 		from: "/_protected/documents/$documentId/_reader/fiche",
 		shouldThrow: false,
 	});
+	const available = ficheMatch ? document.hasFiche : document.hasNote;
+	if (!document.generationCompleted && !available) {
+		return <PendingDocument document={document} />;
+	}
 	return (
 		<div className="min-h-screen">
 			<AppHeader

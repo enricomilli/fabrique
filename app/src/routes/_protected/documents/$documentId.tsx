@@ -5,9 +5,8 @@ import {
 	Outlet,
 	useRouter,
 } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { AppHeader } from "#/components/app-header";
-import { PendingDocument } from "#/components/pending-document";
 import { Button } from "#/components/ui/button";
 import { getDocument } from "#/lib/docs-fns";
 import { m } from "#/paraglide/messages";
@@ -74,9 +73,42 @@ function DocumentError() {
 
 function DocumentLayout() {
 	const document = Route.useLoaderData();
-	return document.generationCompleted ? (
-		<Outlet />
-	) : (
-		<PendingDocument title={document.title} />
+	const router = useRouter();
+	const [refreshFailed, setRefreshFailed] = useState(false);
+
+	useEffect(() => {
+		if (document.generationCompleted) return;
+		let stopped = false;
+		let timeout: ReturnType<typeof setTimeout>;
+		async function refresh() {
+			try {
+				await router.invalidate({
+					sync: true,
+					filter: (match) =>
+						match.routeId === Route.id &&
+						match.params.documentId === document.id,
+				});
+				if (!stopped) setRefreshFailed(false);
+			} catch {
+				if (!stopped) setRefreshFailed(true);
+			}
+			if (!stopped) timeout = setTimeout(refresh, 1000);
+		}
+		timeout = setTimeout(refresh, 1000);
+		return () => {
+			stopped = true;
+			clearTimeout(timeout);
+		};
+	}, [document.id, document.generationCompleted, router]);
+
+	return (
+		<>
+			{refreshFailed && (
+				<output className="block bg-muted px-6 py-3 text-sm">
+					{m.generation_refresh_error()}
+				</output>
+			)}
+			<Outlet />
+		</>
 	);
 }

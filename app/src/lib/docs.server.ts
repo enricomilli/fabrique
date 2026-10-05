@@ -44,6 +44,7 @@ export interface DocumentDetail extends DocumentSummary {
 	ficheMarkdown: string;
 	noteMarkdown: string;
 	pdfUrl: string | null;
+	generationData: Docs | null;
 }
 // Start the server from app, or set EXPLORER_DIR to an absolute directory path.
 export function getExplorerDirectory(): string {
@@ -246,11 +247,16 @@ export async function loadDocument(
 	}
 	if (!record) return null;
 	if (!record.generationCompleted) {
+		const data = record.data === null ? null : validateDocument(record.data);
+		const pdf = await lookupPdf(id);
 		return {
 			...summarizeRecord(record),
-			ficheMarkdown: "",
-			noteMarkdown: "",
-			pdfUrl: `/api/pdfs/${encodeURIComponent(id)}`,
+			hasFiche: Boolean(data?.fiche.fiche_md.trim()),
+			hasNote: Boolean(data?.note.note_md.trim()),
+			ficheMarkdown: data?.fiche.fiche_md ?? "",
+			noteMarkdown: data?.note.note_md ?? "",
+			pdfUrl: pdf ? `/api/pdfs/${encodeURIComponent(id)}` : null,
+			generationData: data,
 		};
 	}
 	const document = validateDocument(record.data);
@@ -269,5 +275,6 @@ export async function loadDocument(
 		ficheMarkdown: document.fiche.fiche_md,
 		noteMarkdown: document.note.note_md,
 		pdfUrl,
+		generationData: null,
 	};
 }

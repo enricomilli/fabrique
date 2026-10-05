@@ -68,6 +68,26 @@ services:
         condition: service_healthy
     restart: "no"
 
+  fake-generation:
+    build:
+      context: ../..
+      dockerfile: app/workers/fake-generation/Dockerfile
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/app
+      REDIS_URL: redis://redis:6379
+      FAKE_GENERATION_ENABLED: "true"
+      FAKE_GENERATION_DURATION_MS: "720000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+    init: true
+    stop_grace_period: 13m
+    restart: unless-stopped
+
   seaweedfs:
     image: chrislusf/seaweedfs:4.48
     command: mini -dir=/data -s3.port=8333 -bucket=app -master.telemetry=false
