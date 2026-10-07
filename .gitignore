@@ -21,22 +21,15 @@ data/smaniotto_these.parquet
 data/smaniotto_these.raw_ocr.parquet
 results/smaniotto_these/
 
-# demo set 2026-10 — the thesis PDFs (241 MB) and the full run artifacts
-# (82 MB, mostly per-iteration note traces) are kept out of the repo.
+# demo set 2026-10 — the full run artifacts are kept out of the repo
+# (82 MB, mostly per-iteration note traces). Nine of the ten thesis PDFs are
+# committed (134 MB); 2024LYO20081 is excluded at 64 MB — high-resolution
+# archive scans, and the only file over GitHub's 50 MB warning threshold.
 # The parquets and the explorer outputs are committed and are enough to
 # browse or regenerate the views. PDFs live in demo_candidates/pdfs/.
 # Listed explicitly rather than by pattern so future reference PDFs are
 # not silently excluded (data/pdf/{2027Bourse,daley_thesis,2024LORR0201} stay tracked).
-data/pdf/2022LORR0062.pdf
-data/pdf/2022LORR0183.pdf
-data/pdf/2022LYO10153.pdf
-data/pdf/2023LYO20128.pdf
-data/pdf/2023TOU20042.pdf
-data/pdf/2024ESMA0001.pdf
 data/pdf/2024LYO20081.pdf
-data/pdf/2024PA100032.pdf
-data/pdf/2024PA100054.pdf
-data/pdf/2024SORUL013.pdf
 results/2022LORR0062/
 results/2022LORR0183/
 results/2022LYO10153/

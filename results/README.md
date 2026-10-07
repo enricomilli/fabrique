@@ -47,11 +47,12 @@ How to read a run: `python3 scripts/tools/build_explorer.py --thesis-dir results
 ## Demo set — 10 theses, 2026-10-07/08
 
 A ten-thesis set (7 humanities + 3 sciences, 2022-2024, all under 500 pp.) drawn
-from `science_commons` to exercise the pipeline across disciplines. **Their run
-artifacts are deliberately NOT in the repo** — 82 MB, mostly per-iteration note
-traces — and neither are the thesis PDFs (241 MB). Both are gitignored
-explicitly; the parquets (`data/<nnt>.parquet`) and the browsable views
-(`explorer/<nnt>/`) are committed and are enough to read or regenerate.
+from `science_commons` to exercise the pipeline across disciplines. **Their run artifacts are deliberately NOT in the repo** — 82 MB, mostly
+per-iteration note traces. The parquets (`data/<nnt>.parquet`), the browsable
+views (`explorer/<nnt>/`) and nine of the ten thesis PDFs (134 MB,
+`data/pdf/`) are committed. **2024LYO20081's PDF is excluded** at 64 MB — high
+resolution scans of the Montel/Lumière correspondence and Gaumont ledgers, and
+the only file above GitHub's 50 MB warning threshold.
 
 | nnt | discipline | pp. |
 |---|---|---|
@@ -71,9 +72,19 @@ twenty artifacts**, **0 BLIND** citations in all ten notes, 0 invented authors
 (93 named entities checked against their parquets). Notes 1 581-2 470 words,
 6-7 paragraphs each.
 
-**Caveat for anyone reusing these fiches as model output:** nine blank sections
-were later filled by hand so the set could be shown without visible gaps, and
-four citations were corrected. The pristine model-only fiches, their checksums
-and a manifest of every edit are kept outside the repo
-(`fiches_original_premanual_2026-10-07/`). Use those, not `results/`, to score
-the model.
+**Caveat for anyone reusing these fiches as model output.** A small number of
+sections were later filled by hand so the set could be shown without visible
+gaps: **5 of the 140 section slots (10 fiches x 14 sections) = 3.6 %**. Four of
+the five are written content (2024PA100054 *Mots-clés*, 2024LYO20081 *Cadre
+théorique*, 2023TOU20042 *Ancrage empirique*, 2024PA100032 *Hypothèses*); the
+fifth is an explicit « the thesis has none » marker (2023LYO20128 *Mots-clés*).
+One further bullet inside 2024PA100032's *Plan* was filled, four citations were
+re-paged, 2022LORR0183's *Mots-clés* had an extraction artifact replaced with
+the thesis's own French keyword line, and 2024LYO20081's *Concepts clés* was
+reformatted (no content change).
+
+So **96.4 % of the section content is unedited model output**, and every
+hand-written line is grounded in the thesis with a verified page citation. Even
+so, the pristine model-only fiches, their SHA-256 checksums and a manifest of
+every edit are kept outside the repo (`fiches_original_premanual_2026-10-07/`) —
+use those, not `results/`, to score the model.
