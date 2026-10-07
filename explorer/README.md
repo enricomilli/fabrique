@@ -49,3 +49,24 @@ Things to know:
   `trace_grounding.py`'s "pages read", which also counts the TOC map in the prompt.
 - **Reading map granularity**: top-level TOC entries, or level-1 subsections when the TOC has
   fewer than 10 top-level entries (Daley).
+
+## Demo set views (2026-10)
+
+`explorer/<nnt>/` is committed for the ten demo-set theses (both views each).
+Two things to know about them:
+
+- **The thesis PDFs are not in the repo** (241 MB), so `source.pdf_file` resolves
+  only on a machine that has `demo_candidates/pdfs/`. The page *numbers* are
+  still correct and usable.
+- **`pdf_page_offset` is 0 for all ten** — parquet page N is PDF page N. Verified
+  two ways: every parquet's `page` column spans exactly `1 … PDF page_count`, and
+  138 of 140 sampled pages best-match at offset 0 by text overlap (the two
+  exceptions are image-only PDF pages whose text layer is empty).
+- A `(p. N)` citation therefore links straight to PDF page N. The number *printed
+  on the paper* is `N − page_offset.offset` (from `fiche_steps/1_structure.json`,
+  +1 to +30 across the set), so a UI should show both.
+- Highlighting a quote by searching the PDF text layer is unreliable — 7 of the
+  10 PDFs have pages with no text layer at all (2024LYO20081: 30 pages) and the
+  OCR text is not character-identical to the PDF's own. Use the parquet `bbox`
+  instead, divided by **2.0** per page (the blocks are in 144-DPI pixels, the
+  page rect is in 72-DPI points).

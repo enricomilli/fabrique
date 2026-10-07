@@ -8,3 +8,42 @@ __pycache__/
 .venv/
 cli/rlm-cli/node_modules/
 cli/rlm-cli/dist/
+
+# internal findings note, not part of the repo
+notes_structure_gate.md
+notes_demo_audit.md
+fiches_original_premanual_2026-10-07/
+notes_manual_repairs.md
+retired_2026-10-08/
+
+# smaniotto: local test thesis, not part of the reference set
+data/smaniotto_these.parquet
+data/smaniotto_these.raw_ocr.parquet
+results/smaniotto_these/
+
+# demo set 2026-10 — the thesis PDFs (241 MB) and the full run artifacts
+# (82 MB, mostly per-iteration note traces) are kept out of the repo.
+# The parquets and the explorer outputs are committed and are enough to
+# browse or regenerate the views. PDFs live in demo_candidates/pdfs/.
+# Listed explicitly rather than by pattern so future reference PDFs are
+# not silently excluded (data/pdf/{2027Bourse,daley_thesis,2024LORR0201} stay tracked).
+data/pdf/2022LORR0062.pdf
+data/pdf/2022LORR0183.pdf
+data/pdf/2022LYO10153.pdf
+data/pdf/2023LYO20128.pdf
+data/pdf/2023TOU20042.pdf
+data/pdf/2024ESMA0001.pdf
+data/pdf/2024LYO20081.pdf
+data/pdf/2024PA100032.pdf
+data/pdf/2024PA100054.pdf
+data/pdf/2024SORUL013.pdf
+results/2022LORR0062/
+results/2022LORR0183/
+results/2022LYO10153/
+results/2023LYO20128/
+results/2023TOU20042/
+results/2024ESMA0001/
+results/2024LYO20081/
+results/2024PA100032/
+results/2024PA100054/
+results/2024SORUL013/

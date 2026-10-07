@@ -24,6 +24,7 @@ import os
 import pathlib
 import re
 import sys
+from typing import Optional
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 from layout import ThesisLayout   # noqa: E402
@@ -32,6 +33,38 @@ REPO = pathlib.Path(__file__).resolve().parent.parent.parent
 PDF_PAGE_OFFSETS = {"2024LORR0201": 1}   # PDF page = parquet page + offset (extra cover page)
 
 EXTRACT_RE = re.compile(r"=====\s*EXTRAIT\s*\[p\.(\d+)\]\s*→\s*\[p\.(\d+)\]")
+# The canonical marker above is what the note prompt asks the model to print, but
+# it does not always comply, and then the whole Raisonnement view reads "0 pages
+# consulted" although the REPL plainly returned the text (2024LYO20081,
+# 2024PA100032, 2024GRALY003 on the 2026-10-07 demo set). Two observed variants
+# and a last-resort signal, tried in order, per turn:
+EXTRACT_SINGLE_RE = re.compile(r"=====\s*EXTRAITS?\s*\[p\.(\d+)\]")   # "EXTRAIT [p.23] - Introduction ====="
+# The range form must sit on a MARKER LINE — decorated with dashes or equals and
+# nothing else on the line, e.g. "--- INTRODUCTION (p.13-24) ---". Matching a
+# bare "(p. 123-129)" anywhere would harvest the model's own citations out of the
+# paragraphs the REPL echoes back, which inflated the Bourse reference from a
+# hand-verified 112 pages to 116.
+EXTRACT_RANGE_RE = re.compile(r"^[-=\s]*[^\n(]{0,80}?\(p\.\s?(\d+)\s*[-–]\s*(\d+)\)[-=\s]*$", re.M)
+EXTRACT_BARE_RE = re.compile(r"\[p\.(\d+)\]")                         # the blob's own per-page markers
+# REPL output that is the model's drafted prose coming back, not thesis text
+DRAFT_ECHO_RE = re.compile(r"===\s*PARAGRAPHE|^Compte rendu par|\*\*Référence :\*\*", re.M)
+MAX_EXTRACT_SPAN = 200          # a wider "range" is a parse artefact, not a read
+
+
+def parse_extracts(repl_output: str) -> list[tuple[int, int]]:
+    """Page ranges the REPL returned to the model, in decreasing order of
+    confidence. Applied to REPL stdout only, never to a prompt, so the marker
+    template quoted in the instructions cannot be mistaken for a real read."""
+    found = [(int(a), int(b)) for a, b in EXTRACT_RE.findall(repl_output)]
+    if found:
+        return [(a, b) for a, b in found if 0 < a <= b and b - a <= MAX_EXTRACT_SPAN]
+    if DRAFT_ECHO_RE.search(repl_output):
+        return []               # drafted paragraphs echoed back: no page was read
+    found = [(int(a), int(a)) for a in EXTRACT_SINGLE_RE.findall(repl_output)]
+    found += [(int(a), int(b)) for a, b in EXTRACT_RANGE_RE.findall(repl_output)]
+    if not found:
+        found = [(int(p), int(p)) for p in sorted(set(EXTRACT_BARE_RE.findall(repl_output)), key=int)]
+    return [(a, b) for a, b in found if 0 < a <= b and b - a <= MAX_EXTRACT_SPAN]
 JUMP_RE = re.compile(r'find\(\s*["\']\[p\.(\d+)\]')
 PHRASE_RE = re.compile(r'find\(\s*(["\'])(?!\[p\.)(.+?)(?<!\\)\1')
 PARA_RE = re.compile(r'^\s*(\w+)\s*=\s*f?(?:"""|\'\'\')(.*?)(?:"""|\'\'\')', re.S | re.M)
@@ -53,7 +86,8 @@ def sse(raw: str, key: str) -> str:
     return "".join(out)
 
 
-def build(thesis_dir: pathlib.Path, pdf: str, granularity="auto") -> dict:
+def build(thesis_dir: pathlib.Path, pdf: str, granularity="auto",
+          total_pages_override: Optional[int] = None) -> dict:
     lay = ThesisLayout(thesis_dir)
     structure = json.loads(lay.structure.read_text(encoding="utf-8"))
     run = lay.latest_note_run.resolve()
@@ -73,7 +107,7 @@ def build(thesis_dir: pathlib.Path, pdf: str, granularity="auto") -> dict:
         reasoning = sse(t.get("response_raw", ""), "reasoning_content").strip()
         code = "\n\n".join(re.findall(r"```python\n(.*?)```", content, re.S)).strip()
         nxt = str(traces[i + 1]["request"]["messages"][-1]["content"]) if i + 1 < len(traces) else ""
-        extracts = [(int(a), int(b)) for a, b in EXTRACT_RE.findall(nxt)]
+        extracts = parse_extracts(nxt)
         for a, b in extracts:
             consulted.update(range(a, b + 1))
         jumps = [int(p) for p in JUMP_RE.findall(code)]
@@ -98,7 +132,13 @@ def build(thesis_dir: pathlib.Path, pdf: str, granularity="auto") -> dict:
             "extracts": extracts, "error": err.group(0).strip() if err else None, "lang": lang,
         })
 
-    total_pages = int(structure.get("parquet_pages") or structure["metadata"].get("pages"))
+    # `parquet_pages` is nunique() — the number of pages that carry at least one
+    # block — so it UNDER-reports the document length whenever a page is blank or
+    # image-only (2023LYO20128: 433 counted, 435 real; 5 of the 10 demo theses are
+    # affected by 1-2 pages). The TOC's furthest projected page is a better floor.
+    counted = int(structure.get("parquet_pages") or structure["metadata"].get("pages"))
+    toc_last = max((e.get("page_end_parquet") or 0) for e in structure["toc"]) if structure.get("toc") else 0
+    total_pages = total_pages_override or max(counted, int(toc_last))
     level0 = [e for e in toc if e["level"] == 0]
     if granularity == 0 or (granularity == "auto" and len(level0) >= 10):
         units = level0
@@ -555,7 +595,18 @@ def main():
     offset = a.pdf_page_offset if a.pdf_page_offset is not None else PDF_PAGE_OFFSETS.get(thesis, 0)
     out_dir.mkdir(parents=True, exist_ok=True)
     pdf_link = os.path.relpath(pdf.resolve(), out_dir.resolve())     # links keep working if the repo moves
-    raw = build(a.thesis_dir, pdf_link, a.granularity if a.granularity == "auto" else int(a.granularity))
+    # The document's real length. `parquet_pages` is nunique(), so it under-counts
+    # whenever a page is blank or image-only; the PDF page count is exact and
+    # equals the parquet page index (verified: parquet page N == PDF page N).
+    true_pages = None
+    try:
+        import fitz
+        with fitz.open(pdf) as doc:
+            true_pages = doc.page_count
+    except Exception:
+        pass                                                         # never fail generation on this
+    raw = build(a.thesis_dir, pdf_link, a.granularity if a.granularity == "auto" else int(a.granularity),
+                total_pages_override=true_pages)
     c = contract(raw, offset)
     (out_dir / "reasoning.json").write_text(json.dumps(c, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     js = json.dumps(c, ensure_ascii=False).replace("</", "<\\/")

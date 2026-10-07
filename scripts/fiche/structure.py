@@ -15,6 +15,7 @@ Output: the `structure` dict written to `<thesis>_structure.json` (shape in
 """
 import logging
 import re
+import unicodedata
 from pathlib import Path
 from typing import Optional
 
@@ -25,6 +26,10 @@ from .blobs import extract_first_pages_blob
 from .config import STEP1_CONFIG, STRUCTURE_PAGE_WINDOW
 from .llm import llm_call
 from .prompts import STRUCTURE_PROMPT, STRUCTURE_SYSTEM
+
+# A printed-folio vote this far from the introduction-anchor means the anchor
+# is in the wrong chapter, not merely a page or two late. See compute_page_offset.
+OFFSET_OVERRIDE_GAP = 10
 
 log = logging.getLogger('fiche')
 
@@ -372,31 +377,48 @@ def validate_toc_structure(toc: list) -> dict:
     return {"issues": issues, "ok": len(issues) == 0}
 
 
-def find_intro_toc_page(toc: list) -> Optional[int]:
-    """Find the printed page_start of the 'Introduction' section in the flat TOC."""
-    # Match "Introduction" possibly preceded by a chapter/part marker.
-    # Handles: "Introduction", "1 Introduction", "1. Introduction",
-    # "I. Introduction", "Chapter 1 Introduction", "Chapitre 1 Introduction",
-    # "Part 1 Introduction", "Partie 1 Introduction". Also allows a leading "#"
-    # from markdown extraction.
-    intro_re = re.compile(
-        r"^\s*#*\s*(?:(?:chapter|chapitre|part|partie|kapitel|capítulo)\s+)?"
-        r"[\dIVXivx]*\.?\s*introduction\b",
-        re.IGNORECASE,
-    )
-    candidates: list[tuple[int, int, int]] = []  # (level, index, page_start)
+def _norm_heading(s: str) -> str:
+    """Fold a heading for comparison: strip markdown marks, accents, case,
+    trailing punctuation and runs of whitespace."""
+    s = unicodedata.normalize("NFKD", str(s))
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    s = re.sub(r"^[#*\s]+", "", s)
+    s = re.sub(r"[\s*#:.\-\u2013\u2014]+$", "", s)
+    s = re.sub(r"\s+", " ", s)
+    return s.lower().strip()
 
+
+# Matches "Introduction" possibly preceded by a chapter/part marker, as a
+# PREFIX: "Introduction", "1. Introduction", "Chapitre 1 Introduction", and
+# crucially "Introduction générale". Used on both the TOC side and the body
+# side so the two cannot disagree (see find_intro_parquet_page).
+INTRO_PREFIX_RE = re.compile(
+    r"^\s*#*\s*(?:(?:chapter|chapitre|part|partie|kapitel|cap[ií]tulo)\s+)?"
+    r"[\dIVXivx]*\.?\s*introduction\b",
+    re.IGNORECASE,
+)
+
+
+def find_intro_toc_entry(toc: list) -> Optional[dict]:
+    """The flat-TOC entry for the Introduction: shallowest level wins, ties
+    broken by document order. Returns the entry itself (so callers can use its
+    title as well as its printed page)."""
+    candidates: list[tuple[int, int, dict]] = []
     for i, entry in enumerate(toc):
         title = str(entry.get("title", ""))
         page_start = entry.get("page_start")
-        if isinstance(page_start, int) and intro_re.match(title):
-            candidates.append((entry.get("level", 99), i, page_start))
-
+        if isinstance(page_start, int) and INTRO_PREFIX_RE.match(title):
+            candidates.append((entry.get("level", 99), i, entry))
     if not candidates:
         return None
-    # Prefer the shallowest (lowest-level) match; ties broken by document order
     candidates.sort(key=lambda x: (x[0], x[1]))
     return candidates[0][2]
+
+
+def find_intro_toc_page(toc: list) -> Optional[int]:
+    """Find the printed page_start of the 'Introduction' section in the flat TOC."""
+    entry = find_intro_toc_entry(toc)
+    return entry.get("page_start") if entry else None
 
 
 def find_intro_parquet_page(df: pd.DataFrame, toc: list) -> Optional[int]:
@@ -408,18 +430,24 @@ def find_intro_parquet_page(df: pd.DataFrame, toc: list) -> Optional[int]:
            · Page-header running title "TABLE DES MATIÈRES" blocks
            · List-item blocks that look like TOC entries (leader dots or
              trailing page numbers) in the first STRUCTURE_PAGE_WINDOW pages
-      2. Scan Section-header AND Page-header blocks AFTER that TOC boundary.
-      3. Match the first block whose text is (near-)exactly "Introduction" —
-         tolerant of leading `#` and trailing dots.
-      4. Return the minimum parquet page among the valid matches.
+      2. Scan heading blocks AFTER that TOC boundary, in three tiers of
+         decreasing confidence, and stop at the first tier that matches:
+           a. a Section-header whose folded text equals the TOC's own
+              Introduction title (e.g. « INTRODUCTION GÉNÉRALE »)
+           b. a Section-header that prefix-matches "Introduction"
+           c. a Page-header in either of those forms (running headers are a
+              last resort: they repeat on every page of the chapter and so
+              land one or two pages late)
+      3. Return the minimum parquet page within the winning tier.
+
+    Why tiers: an exact-line match on "Introduction" alone is wrong twice over.
+    It REJECTS the common French « Introduction générale », and the scan then
+    runs on and locks onto the first heading that *is* exactly "Introduction" —
+    in a thèse sur articles that is an embedded paper's introduction, 100 pages
+    in. Observed offsets of 102 (true 5) and 36 (true 1) came from exactly this.
     """
-    # Same coverage as find_intro_toc_page but anchored to a full-line match
-    # so we don't accidentally hit "Introduction to X" body headings.
-    intro_exact_re = re.compile(
-        r"^\s*#*\s*(?:(?:chapter|chapitre|part|partie|kapitel|capítulo)\s+)?"
-        r"[\dIVXivx]*\.?\s*introduction\s*\.{0,3}\s*$",
-        re.IGNORECASE,
-    )
+    toc_entry = find_intro_toc_entry(toc)
+    toc_title_norm = _norm_heading(toc_entry.get("title", "")) if toc_entry else ""
 
     # ── Step 1: locate the last TOC page in the parquet ──────────────────────
     toc_end_page = 0
@@ -430,8 +458,14 @@ def find_intro_parquet_page(df: pd.DataFrame, toc: list) -> Optional[int]:
         r"^\s*sommaire\s*$|^\s*[íi]ndice\s*$",
         re.IGNORECASE,
     )
+    # Bounded to the front matter: some theses print their Table des matières at
+    # the END (2024ESMA0001, pp. 136-138 of 141). Taking the unbounded max then
+    # set the "TOC boundary" past the whole body, the introduction scan found
+    # nothing, and the offset silently fell back to printed-folio.
+    front_matter_limit = max(STRUCTURE_PAGE_WINDOW, int(0.25 * int(df["page"].max())))
     running_hits = df[
         (df["category"] == "Page-header")
+        & (df["page"] <= front_matter_limit)
         & df["text"].str.match(toc_running_re.pattern, case=False, na=False)
     ]
     if not running_hits.empty:
@@ -448,18 +482,31 @@ def find_intro_parquet_page(df: pd.DataFrame, toc: list) -> Optional[int]:
     if not toc_list_hits.empty:
         toc_end_page = max(toc_end_page, int(toc_list_hits["page"].max()))
 
-    # ── Step 2: scan Section-header + Page-header AFTER the TOC end ──────────
-    candidates: list[int] = []
-    for cat in ("Section-header", "Page-header"):
-        sub = df[
-            (df["category"] == cat)
-            & (df["page"] > toc_end_page)
-            & df["text"].str.match(intro_exact_re.pattern, case=False, na=False)
-        ]
-        for _, row in sub.iterrows():
-            candidates.append(int(row["page"]))
+    # ── Step 2: scan heading blocks AFTER the TOC end, in tiers ─────────────
+    body = df[df["page"] > toc_end_page]
+    tiers: list[list[int]] = [[], [], []]
+    for _, row in body.iterrows():
+        cat = row.get("category")
+        if cat not in ("Section-header", "Page-header"):
+            continue
+        text = str(row.get("text", ""))
+        folded = _norm_heading(text)
+        title_match = bool(toc_title_norm) and folded == toc_title_norm
+        prefix_match = bool(INTRO_PREFIX_RE.match(text))
+        if not (title_match or prefix_match):
+            continue
+        if cat == "Section-header" and title_match:
+            tiers[0].append(int(row["page"]))
+        elif cat == "Section-header":
+            tiers[1].append(int(row["page"]))
+        else:
+            tiers[2].append(int(row["page"]))
 
-    return min(candidates) if candidates else None
+    for tier in tiers:
+        if tier:
+            return min(tier)
+    return None
+
 
 
 def folio_offset(df: pd.DataFrame, min_votes: int = 5) -> Optional[int]:
@@ -496,12 +543,39 @@ def compute_page_offset(df: pd.DataFrame, toc: list) -> dict:
     intro_parquet = find_intro_parquet_page(df, toc)
 
     if intro_toc is not None and intro_parquet is not None:
-        return {
+        anchor = intro_parquet - intro_toc
+        folio = folio_offset(df)
+        info = {
             "intro_page_toc": intro_toc,
             "intro_page_parquet": intro_parquet,
-            "offset": intro_parquet - intro_toc,
+            "offset": anchor,
             "method": "introduction-anchor",
         }
+        # Cross-check against the independent folio vote. The two agreed on 6 of
+        # 9 audited theses; every disagreement was the anchor's fault (it had
+        # locked onto an embedded article's "Introduction"). A small gap is
+        # usually a running Page-header landing a page or two late, so we only
+        # record it; a large gap means the anchor is in the wrong chapter
+        # entirely, and the folio vote is then the trustworthy one.
+        if folio is not None and abs(folio - anchor) > 1:
+            info["folio_offset"] = folio
+            info["anchor_offset"] = anchor
+            if abs(folio - anchor) > OFFSET_OVERRIDE_GAP:
+                info["offset"] = folio
+                info["intro_page_parquet"] = intro_toc + folio
+                info["method"] = "printed-folio-override"
+                info["warning"] = (
+                    f"introduction-anchor returned {anchor} but the printed "
+                    f"folios vote {folio} (gap {abs(folio - anchor)} > "
+                    f"{OFFSET_OVERRIDE_GAP}); the anchor almost certainly "
+                    f"matched an embedded article. Using the folio vote."
+                )
+            else:
+                info["warning"] = (
+                    f"introduction-anchor returned {anchor}, printed folios "
+                    f"vote {folio}; keeping the anchor but the gap is suspect."
+                )
+        return info
 
     folio = folio_offset(df)
     if folio is not None:
@@ -520,17 +594,32 @@ def compute_page_offset(df: pd.DataFrame, toc: list) -> dict:
     }
 
 
-def apply_offset_to_toc(toc: list, offset: int) -> list:
+def apply_offset_to_toc(toc: list, offset: int, max_page: Optional[int] = None) -> list:
     """
     Add `page_start_parquet` and `page_end_parquet` to every entry in the
     flat toc list, computed by adding `offset` to the printed values.
     The original `page_start` / `page_end` fields are preserved.
+
+    With `max_page` (the parquet's last page) the projected range is kept inside
+    the document: an end past the last page is clamped, and a *start* past it
+    becomes None because the entry cannot be located at all. Without this, a
+    back-matter entry on a thesis with a large offset lands outside the parquet —
+    2023LYO20128 (offset 30, 433 pages) put « Sitographie » at page 435 and
+    « Bibliographie » end at 434, which makes `pages_to_blob` return nothing and
+    the reading map point at pages that do not exist.
     """
     for entry in toc:
         ps = entry.get("page_start")
         pe = entry.get("page_end")
-        entry["page_start_parquet"] = ps + offset if isinstance(ps, int) else None
-        entry["page_end_parquet"]   = pe + offset if isinstance(pe, int) else None
+        start = ps + offset if isinstance(ps, int) else None
+        end = pe + offset if isinstance(pe, int) else None
+        if max_page is not None:
+            if start is not None and start > max_page:
+                start, end = None, None
+            elif end is not None:
+                end = min(end, max_page)
+        entry["page_start_parquet"] = start
+        entry["page_end_parquet"] = end
     return toc
 
 
@@ -666,10 +755,14 @@ def extract_structure(parquet_path: Path, client: OpenAI) -> dict:
         log.info(f"[{thesis_id}]   intro in TOC: p.{offset_info['intro_page_toc']}  |  "
               f"intro in parquet: p.{offset_info['intro_page_parquet']}  |  "
               f"offset = {offset_info['offset']:+d}  ({offset_info['method']})")
+    if offset_info.get("warning"):
+        # A wrong offset is silent: the fiche still renders, it just describes
+        # the wrong pages. Say so loudly and keep it in 1_structure.json.
+        log.warning(f"[{thesis_id}]   ⚠ OFFSET: {offset_info['warning']}")
 
     # 1d: project the offset onto every TOC entry
     if offset_info.get("offset") is not None:
-        apply_offset_to_toc(toc, offset_info["offset"])
+        apply_offset_to_toc(toc, offset_info["offset"], max_page=int(df["page"].max()))
     else:
         # Offset unknown — emit parquet fields as null on every entry
         for entry in toc:

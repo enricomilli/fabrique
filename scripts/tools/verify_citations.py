@@ -105,15 +105,27 @@ def anchors(text: str):
     for pat in QUOTE_PATTERNS:
         for m in pat.finditer(text):
             quotes.setdefault(m.end(), m.group(1).strip())
+    prev_cite_end = 0
     for m in CITE_RE.finditer(text):
-        cited = int(m.group(1))
+        # A range must be honoured in full: « … » (p. 21-23) with the quote on
+        # p.23 was reported WRONG because only the first number was read.
+        lo = int(m.group(1))
+        hi_txt = re.search(r"[-–]\s?(\d+)", m.group(0))
+        hi = int(hi_txt.group(1)) if hi_txt else lo
+        cited = list(range(min(lo, hi), max(lo, hi) + 1))
         if m.end() in quotes:
             yield cited, quotes[m.end()], "quote"
         else:
-            before = text[max(0, m.start() - 220):m.start()].rstrip(" ,;:.—-")
+            # Clip the window at the previous citation. Without this, the tail of
+            # a long quote that already carries its own `(p. Y)` gets re-matched
+            # against the NEXT page tag and reported WRONG — 3 of 9 flags in the
+            # 2026-10-07 demo audit were this bug, not a real citation error.
+            win = max(0, m.start() - 220, prev_cite_end)
+            before = text[win:m.start()].rstrip(" ,;:.—-")
             words = before.split()
             if words:
                 yield cited, " ".join(words[-16:]), "tail"
+        prev_cite_end = m.end()
 
 
 def locate(phrase: str, pages: dict, max_hits: int = 6):
@@ -153,36 +165,49 @@ def main():
                   f"(printed = parquet - {off})")
         print()
 
-    tally = {"OK": 0, "OFF-1": 0, "WRONG": 0, "UNVERIFIED": 0}
+    tally = {"OK": 0, "OFF-1": 0, "WRONG": 0, "PARAPHRASE": 0, "UNVERIFIED": 0}
     problems = []
 
-    for cited, phrase, kind in anchors(text):
+    for cited_pages, phrase, kind in anchors(text):
+        cited = cited_pages[0]
+        cited_label = (f"{cited_pages[0]}-{cited_pages[-1]}"
+                       if len(cited_pages) > 1 else str(cited))
         real = locate(phrase, pages)
         if not real:
             verdict = "UNVERIFIED"
-        elif cited in real:
+        elif any(p in real for p in cited_pages):
             verdict = "OK"
-        elif (cited - 1) in real or (cited + 1) in real:
+        elif any((p - 1) in real or (p + 1) in real for p in cited_pages):
             verdict = "OFF-1"
+        elif kind == "tail":
+            # G1 covers verbatim quotes. A `tail` is the prose before a bare
+            # `(p. X)` — i.e. the model's own paraphrase — so a page mismatch
+            # there is drift worth seeing, not a fabricated citation.
+            verdict = "PARAPHRASE"
         else:
             verdict = "WRONG"
         tally[verdict] += 1
         if verdict in ("WRONG", "OFF-1"):
-            problems.append((verdict, cited, real, phrase))
+            problems.append((verdict, cited_label, real, phrase))
         if not args.quiet:
-            print(f"[{verdict:<10}] cited p.{cited:<5} found {str(real):<20} "
+            print(f"[{verdict:<10}] cited p.{cited_label:<7} found {str(real):<20} "
                   f"({kind}) {phrase[:70]}")
 
     total = sum(tally.values())
     print("\n" + "=" * 66)
     print(f"{total} citations   "
           f"OK={tally['OK']}  OFF-1={tally['OFF-1']}  "
-          f"WRONG={tally['WRONG']}  UNVERIFIED={tally['UNVERIFIED']}")
+          f"WRONG={tally['WRONG']}  PARAPHRASE={tally['PARAPHRASE']}  "
+          f"UNVERIFIED={tally['UNVERIFIED']}")
     if problems:
         print("-" * 66)
         print("NEEDS FIXING (verify each by hand — the matcher has false positives):")
         for v, cited, real, ph in problems:
             print(f"  {v:<6} cited p.{cited} -> likely p.{real}  « {ph[:60]} »")
+    if tally["PARAPHRASE"]:
+        print("-" * 66)
+        print(f"{tally['PARAPHRASE']} PARAPHRASE — a bare (p. X) whose surrounding "
+              f"prose sits elsewhere. Advisory: not a G1 failure.")
     if tally["UNVERIFIED"]:
         print("-" * 66)
         print(f"{tally['UNVERIFIED']} UNVERIFIED — usually French paraphrase of an "

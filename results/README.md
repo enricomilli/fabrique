@@ -43,3 +43,37 @@ Earlier v3 reference material: the recorded v3 runs (2026-08-19 14:5x) live in
 
 How to read a run: `python3 scripts/tools/build_explorer.py --thesis-dir results/<thesis> --out explorer/<thesis>`
 (local HTML: every step / iteration with prompt · thinking · output · stdout).
+
+## Demo set — 10 theses, 2026-10-07/08
+
+A ten-thesis set (7 humanities + 3 sciences, 2022-2024, all under 500 pp.) drawn
+from `science_commons` to exercise the pipeline across disciplines. **Their run
+artifacts are deliberately NOT in the repo** — 82 MB, mostly per-iteration note
+traces — and neither are the thesis PDFs (241 MB). Both are gitignored
+explicitly; the parquets (`data/<nnt>.parquet`) and the browsable views
+(`explorer/<nnt>/`) are committed and are enough to read or regenerate.
+
+| nnt | discipline | pp. |
+|---|---|---|
+| 2022LORR0062 | Sociologie | 370 |
+| 2022LORR0183 | Énergie et Mécanique | 153 |
+| 2022LYO10153 | Biologie cellulaire | 155 |
+| 2023LYO20128 | Histoire | 435 |
+| 2023TOU20042 | Philosophie | 275 |
+| 2024ESMA0001 | Informatique | 141 |
+| 2024LYO20081 | Arts de la scène | 317 |
+| 2024PA100032 | Ethnologie | 465 |
+| 2024PA100054 | Sciences du langage | 222 |
+| 2024SORUL013 | Archéologie | 488 |
+
+State of the set: 14/14 fiche sections on all ten, **0 WRONG citations across all
+twenty artifacts**, **0 BLIND** citations in all ten notes, 0 invented authors
+(93 named entities checked against their parquets). Notes 1 581-2 470 words,
+6-7 paragraphs each.
+
+**Caveat for anyone reusing these fiches as model output:** nine blank sections
+were later filled by hand so the set could be shown without visible gaps, and
+four citations were corrected. The pristine model-only fiches, their checksums
+and a manifest of every edit are kept outside the repo
+(`fiches_original_premanual_2026-10-07/`). Use those, not `results/`, to score
+the model.

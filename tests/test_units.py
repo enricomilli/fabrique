@@ -187,7 +187,8 @@ def test_verify_citations_engine(tiny_parquet):
     assert vc.locate("texte introuvable dans le parquet entier vraiment", pages) == []
     text = "« La métamorphose textuelle procède par standardisation » (p. 2) et *sans rapport qui remplit la page* (p. 1)."
     found = list(vc.anchors(text))
-    assert [(c, k) for c, _, k in found] == [(2, "quote"), (1, "quote")]
+    # `anchors` yields the FULL cited page list (a range expands); 2026-10-07
+    assert [(c, k) for c, _, k in found] == [([2], "quote"), ([1], "quote")]
     assert vc.norm("L’« éNergie » — test/ok") == "l energie test ok"
 
 
@@ -276,3 +277,219 @@ def test_compute_page_offset_uses_folio_only_when_anchor_fails():
     with_heading = pd.DataFrame(folios + [{"page": 23, "block_index": 1, "category": "Section-header", "text": "Introduction"}])
     off = compute_page_offset(with_heading, toc)
     assert off["method"] == "introduction-anchor" and off["offset"] == 22   # anchor wins even if folios disagree
+
+
+# ── regressions from the demo-set audit, 2026-10-07 ──────────────────────────
+
+def test_intro_anchor_is_not_stolen_by_an_embedded_article():
+    """Failure mode 3: a French « Introduction générale » was rejected by an
+    exact-line regex, so the scan ran on and anchored to the introduction of an
+    embedded English paper 100 pages later (observed offsets 102 vs a true 5,
+    and 36 vs a true 1)."""
+    find_intro_parquet_page = g("find_intro_parquet_page")
+    toc = [{"title": "INTRODUCTION GENERALE", "level": 0, "page_start": 7}]
+    df = pd.DataFrame([
+        {"page": 3, "block_index": 0, "category": "Page-header", "text": "TABLE DES MATIÈRES"},
+        {"page": 12, "block_index": 0, "category": "Section-header", "text": "# Introduction générale"},
+        {"page": 109, "block_index": 0, "category": "Section-header", "text": "## Introduction"},
+    ])
+    assert find_intro_parquet_page(df, toc) == 12          # not 109
+    # a trailing colon must not disqualify it either (2022LYO10153)
+    df2 = df.copy()
+    df2.loc[df2["page"] == 12, "text"] = "## Introduction générale :"
+    assert find_intro_parquet_page(df2, toc) == 12
+
+
+def test_intro_anchor_prefers_section_header_over_running_page_header():
+    """A running Page-header repeats on every page of the chapter, so it lands
+    one or two pages late (2023TOU20042: offset 4 where the truth was 2)."""
+    find_intro_parquet_page = g("find_intro_parquet_page")
+    toc = [{"title": "INTRODUCTION GÉNÉRALE", "level": 0, "page_start": 13}]
+    df = pd.DataFrame([
+        {"page": 3, "block_index": 0, "category": "Page-header", "text": "TABLE DES MATIÈRES"},
+        {"page": 15, "block_index": 0, "category": "Section-header", "text": "# INTRODUCTION GÉNÉRALE"},
+        {"page": 17, "block_index": 0, "category": "Page-header", "text": "Introduction"},
+    ])
+    assert find_intro_parquet_page(df, toc) == 15          # not 17
+
+
+def test_compute_page_offset_folio_overrides_a_catastrophic_anchor():
+    """A small anchor/folio gap keeps the anchor (a late running header); a large
+    one means the anchor is in the wrong chapter, so the folio vote wins."""
+    compute_page_offset = g("compute_page_offset")
+    toc = [{"title": "Introduction", "level": 0, "page_start": 7}]
+    folios = [{"page": p, "block_index": 9, "category": "Page-footer", "text": str(p - 5)}
+              for p in range(20, 30)]
+    bad = pd.DataFrame(folios + [
+        {"page": 109, "block_index": 0, "category": "Section-header", "text": "Introduction"}])
+    off = compute_page_offset(bad, toc)
+    assert off["method"] == "printed-folio-override"
+    assert off["offset"] == 5 and off["anchor_offset"] == 102 and off["warning"]
+    # within the tolerance band the anchor still wins, but the gap is recorded
+    mild = pd.DataFrame(folios + [
+        {"page": 14, "block_index": 0, "category": "Section-header", "text": "Introduction"}])
+    off = compute_page_offset(mild, toc)
+    assert off["method"] == "introduction-anchor" and off["offset"] == 7
+    assert off["folio_offset"] == 5 and off["warning"]
+
+
+def test_render_cleans_bullet_level_nulls():
+    """parse_section_markdown only nulls a body that is entirely `[NULL]`, so
+    `- **Cadre principal** : [NULL]` shipped verbatim in 2022LYO10153."""
+    clean = g("_clean_inline_nulls")
+    assert clean("- **Cadre principal** : [NULL]\n- **Cadres secondaires** : [NULL]") is None
+    assert clean("- **A** : du contenu\n- **B** : [NULL]") == (
+        "- **A** : du contenu\n- **B** : *[Non renseigné]*")
+    assert clean("texte normal") == "texte normal"
+
+
+def test_verify_citations_tail_does_not_cross_an_earlier_citation():
+    """A long quote's tail was re-matched against the NEXT page tag: 3 of 9
+    WRONG flags in the audit were this, not real citation errors."""
+    from tools import verify_citations as vc
+    text = ('Il écrit « une citation assez longue pour être retenue par le '
+            'matcher ici » (p. 162). La section suivante (p. 182) développe.')
+    kinds = {tuple(cited): kind for cited, _phrase, kind in vc.anchors(text)}
+    assert kinds[(162,)] == "quote"
+    # the p.182 tail must stop after "(p. 162)", not swallow the quote's tail
+    tail = [ph for cited, ph, kind in vc.anchors(text) if cited == [182]][0]
+    assert "citation assez longue" not in tail
+    assert "section suivante" in tail
+
+
+def test_verify_citations_honours_a_cited_page_range():
+    """« … » (p. 21-23) with the quote on p.23 was reported WRONG because only
+    the first number of the range was read (2023TOU20042)."""
+    from tools import verify_citations as vc
+    text = 'Il écrit « une citation bien assez longue pour le matcher » (p. 21-23).'
+    cited, _phrase, kind = next(iter(vc.anchors(text)))
+    assert cited == [21, 22, 23] and kind == "quote"
+
+
+def test_repair_lost_latex_escapes():
+    """$lpha$ / $rac{d}{dt}$ — LaTeX commands whose leading backslash was eaten
+    as a Python string escape (\\a, \\f). Repair inside $…$ spans only."""
+    from note.pipeline import repair_lost_latex_escapes as r
+    assert r("le gain $lpha$ et $rac{d}{dt} X$")[0] == "le gain $\\alpha$ et $\\frac{d}{dt} X$"
+    assert r("le gain $lpha$ et $rac{d}{dt} X$")[1] == 2
+    assert r("prose: la rache, un rateau, l'etat, beta hors maths")[1] == 0   # no $…$ span
+    assert r("$\\alpha$ deja correct")[1] == 0                                # idempotent
+    assert r("$X_{\\omega}$ intact")[1] == 0
+
+
+def test_conclusion_blob_takes_the_closing_conclusion_not_the_first():
+    """Theses that end every chapter with a level-0 "Conclusion" handed step 2b
+    a one-page chapter wrap-up from the first quarter (2024PA100032: p.74 of
+    464; 2023TOU20042: pp.78-80 of 274)."""
+    import pandas as pd
+    from fiche.blobs import extract_conclusion_blob
+    rows = [{"page": p, "block_index": 0, "category": "Text", "text": f"page {p}"}
+            for p in range(1, 400)]
+    df = pd.DataFrame(rows)
+    structure = {"toc": [
+        {"title": "Conclusion", "level": 0, "page_start_parquet": 74, "page_end_parquet": 74},
+        {"title": "Conclusion", "level": 0, "page_start_parquet": 229, "page_end_parquet": 229},
+        {"title": "Conclusion", "level": 0, "page_start_parquet": 380, "page_end_parquet": 389},
+    ]}
+    _blob, a, b = extract_conclusion_blob(df, structure)
+    assert (a, b) == (380, 389)
+
+
+def test_conclusion_blob_accepts_discussion_generale_and_merges_contiguous():
+    """« DISCUSSION GENERALE » is the closing chapter in 2024PA100054 and the
+    word "conclusion" appears nowhere, so 2b was skipped entirely. And in
+    2022LYO10153 the closing movement is two contiguous entries."""
+    import pandas as pd
+    from fiche.blobs import extract_conclusion_blob, CONCLUSION_TITLE_RE
+    df = pd.DataFrame([{"page": p, "block_index": 0, "category": "Text", "text": f"page {p}"}
+                       for p in range(1, 220)])
+    only_discussion = {"toc": [
+        {"title": "PARTIE THÉORIQUE", "level": 0, "page_start_parquet": 14, "page_end_parquet": 14},
+        {"title": "DISCUSSION GENERALE", "level": 0, "page_start_parquet": 189, "page_end_parquet": 205},
+    ]}
+    assert extract_conclusion_blob(df, only_discussion)[1:] == (189, 205)
+    contiguous = {"toc": [
+        {"title": "Discussion générale et perspectives", "level": 0,
+         "page_start_parquet": 140, "page_end_parquet": 145},
+        {"title": "Conclusion générale", "level": 0,
+         "page_start_parquet": 146, "page_end_parquet": 147},
+    ]}
+    assert extract_conclusion_blob(df, contiguous)[1:] == (140, 147)
+    # a mid-thesis chapter must NOT be mistaken for the conclusion
+    assert not CONCLUSION_TITLE_RE.search("5. synthèse des objectifs de recherche")
+    assert not CONCLUSION_TITLE_RE.search("perspectives de recherche")
+
+
+def test_keyword_extraction_variants():
+    """Mots-clés was empty on 4 of 10 demo fiches. Two of those were real
+    extraction misses: the « Mots clefs » spelling (2023TOU20042) and the
+    label-on-its-own-line layout (2024PA100054)."""
+    k = g("extract_keywords_from_abstract")
+    assert k("Mots clefs** : Erreur, concept, philosophie") == ["Erreur", "concept", "philosophie"]
+    assert k("Keywords\nLSF, lexical database, familiarity") == ["LSF", "lexical database", "familiarity"]
+    assert k("Keywords.**  Sign Language, late signers") == ["Sign Language", "late signers"]
+    assert k("**Mots clés** : Générateurs distribués, contrôle distribué") == [
+        "Générateurs distribués", "contrôle distribué"]
+    assert k("Keywords: solidarity, blood donation; ethics") == [
+        "solidarity", "blood donation", "ethics"]
+    # a `.` separator must not harvest ordinary prose as keywords
+    assert k("These keywords. The study then proceeds to examine the corpus") == []
+    # French first, then English, deduplicated
+    assert k("Mots clés : don, sang\nKeywords : don, gift") == ["don", "sang", "gift"]
+
+
+def test_build_reasoning_parse_extracts_tolerates_marker_variants():
+    """The note prompt asks for « ===== EXTRAIT [p.N] → [p.M] ===== » but the
+    model does not always comply, and the Raisonnement view then reported
+    "0 pages consulted" although the REPL had returned the text
+    (2024LYO20081, 2024PA100032, 2024GRALY003)."""
+    from tools.build_reasoning import parse_extracts as pe
+    assert pe("===== EXTRAIT [p.10] → [p.12] =====") == [(10, 12)]
+    assert pe("===== EXTRAIT [p.23] - Introduction =====") == [(23, 23)]
+    assert pe("--- INTRODUCTION (p.13-24) ---") == [(13, 24)]
+    assert pe("blob [p.5] text [p.6] more [p.5]") == [(5, 5), (6, 6)]
+    # the canonical marker wins outright when present
+    assert pe("===== EXTRAIT [p.1] → [p.2] ===== (p.90-99) [p.400]") == [(1, 2)]
+    # a span that wide is a parse artefact, not a read
+    assert pe("(p.1-900)") == []
+    # a range inside PROSE is one of the model's own citations, not an extract.
+    # Matching it inflated the hand-verified Bourse reference 112 -> 116 pages.
+    assert pe("contextuels (tableaux de cotation) (p. 123-129). Au-delà de la collecte") == []
+    # REPL output that is the drafted note echoed back means nothing was read
+    assert pe("=== PARAGRAPHE 1 ===\nla thèse (p. 12-13) montre [p.44]") == []
+
+
+def test_intro_anchor_ignores_a_back_matter_table_of_contents():
+    """Some theses print their Table des matières at the END (2024ESMA0001,
+    pp.136-138 of 141). The unbounded TOC-boundary scan then placed the
+    boundary past the whole body, the introduction was never found, and the
+    offset silently fell back to printed-folio."""
+    find_intro_parquet_page = g("find_intro_parquet_page")
+    toc = [{"title": "Introduction générale", "level": 0, "page_start": 1}]
+    rows = [{"page": p, "block_index": 0, "category": "Text", "text": f"body {p}"}
+            for p in range(1, 142)]
+    rows += [
+        {"page": 20, "block_index": 1, "category": "List-item", "text": "Chapitre 1 ........ 1"},
+        {"page": 28, "block_index": 1, "category": "Section-header", "text": "# Introduction générale"},
+        # the back-matter TOC: must not become the boundary
+        {"page": 137, "block_index": 1, "category": "Page-header", "text": "Table des matières"},
+    ]
+    assert find_intro_parquet_page(pd.DataFrame(rows), toc) == 28
+
+
+def test_apply_offset_to_toc_keeps_ranges_inside_the_document():
+    """A back-matter entry on a thesis with a large offset landed outside the
+    parquet: 2023LYO20128 (offset 30, 433 pages) put « Sitographie » at page 435
+    and « Bibliographie » end at 434, so pages_to_blob returned nothing and the
+    reading map linked to pages that do not exist."""
+    apply_offset_to_toc = g("apply_offset_to_toc")
+    toc = [{"page_start": 1, "page_end": 10},
+           {"page_start": 394, "page_end": 404},
+           {"page_start": 405, "page_end": 405}]
+    out = apply_offset_to_toc([dict(e) for e in toc], 30, max_page=433)
+    assert (out[0]["page_start_parquet"], out[0]["page_end_parquet"]) == (31, 40)
+    assert (out[1]["page_start_parquet"], out[1]["page_end_parquet"]) == (424, 433)   # end clamped
+    assert (out[2]["page_start_parquet"], out[2]["page_end_parquet"]) == (None, None)  # start outside
+    # without max_page the legacy behaviour is unchanged
+    legacy = apply_offset_to_toc([dict(e) for e in toc], 30)
+    assert legacy[2]["page_start_parquet"] == 435

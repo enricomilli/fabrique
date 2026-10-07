@@ -212,6 +212,41 @@ def run_note_once(thesis: str, fiche: pathlib.Path, parquet: pathlib.Path,
     return metadata
 
 
+# ── LaTeX escape repair ──────────────────────────────────────────────────────
+# A handful of LaTeX commands reach the note with the backslash eaten: $lpha$ for
+# $\alpha$, $rac{d}{dt}$ for $\frac{d}{dt}$ (2022LORR0183, 2026-10-07). The set
+# is exactly the commands whose first letter is a Python string escape that
+# silently collapses — \a \b \f \n \r \t \v — so the damage is predictable and
+# reversible. Repair only inside $…$ math spans, where these stems are never
+# ordinary prose, and only for an unambiguous table.
+_MATH_SPAN_RE = re.compile(r"\$[^$\n]{1,200}?\$")
+_LOST_ESCAPES = [
+    ("lpha", "alpha"), ("rac{", "frac{"), ("eta", "beta"), ("abla", "nabla"),
+    ("heta", "theta"), ("imes", "times"), ("au", "tau"), ("ho", "rho"),
+    ("ec{", "vec{"), ("ar{", "bar{"),
+]
+
+
+def repair_lost_latex_escapes(md: str) -> tuple[str, int]:
+    """Restore backslashes eaten from LaTeX commands inside $…$ spans.
+    Returns (text, n_repairs)."""
+    n = 0
+
+    def fix_span(m):
+        nonlocal n
+        span = m.group(0)
+        for stem, cmd in _LOST_ESCAPES:
+            # only a stem that is NOT already preceded by a backslash or letter
+            pat = re.compile(r"(?<![\\A-Za-z])" + re.escape(stem))
+            # function replacement: a plain string would have its own
+            # backslash re-interpreted by re (\\a -> BEL), reintroducing the bug
+            span, k = pat.subn(lambda _m, c=cmd: "\\" + c, span)
+            n += k
+        return span
+
+    return _MATH_SPAN_RE.sub(fix_span, md), n
+
+
 # ── Run + degenerate-loop guard ──────────────────────────────────────────────
 
 def run_note(thesis: str, fiche, parquet, structure=None, run_id: str | None = None,
@@ -230,10 +265,40 @@ def run_note(thesis: str, fiche, parquet, structure=None, run_id: str | None = N
         iters = meta.get("iterations", meta.get("trace_root_calls", 99))
         ok = words >= min_words and iters >= min_iters
         if ok or attempt >= max_retries:
+            meta["degenerate"] = not ok
             if not ok:
-                log.warning(f"[note] ⚠ DEGENERATE run kept ({words} words, {iters} iterations) — retries exhausted")
+                # Do NOT promote a degenerate run. A dead tunnel yields a 38-byte
+                # "[API Error] 530" note; promoting it overwrote four good
+                # deliverables and still exited 0, so the driver reported success.
+                # Leave the previous deliverable in place and fail loudly instead.
+                log.error(f"[note] ✗ DEGENERATE run NOT promoted ({words} words, "
+                          f"{iters} iterations) — retries exhausted; kept run is "
+                          f"{meta['run_dir']}, deliverable left untouched")
+                return meta
             deliverable = pathlib.Path(meta["deliverable"])
-            deliverable.write_text((pathlib.Path(meta["run_dir"]) / "note.md").read_text(encoding="utf-8"), encoding="utf-8")
+            run_dir = pathlib.Path(meta["run_dir"])
+            note_md = (run_dir / "note.md").read_text(encoding="utf-8")
+            # Same deterministic citation gate the fiche gets. It was never
+            # applied to the note, so a verbatim quote tagged with the wrong
+            # page shipped as-is (2 of 5 audited notes, 2026-10-07). Raw model
+            # output stays in the run dir as note_before_gate.md.
+            try:
+                from fiche.gate import postcheck_fiche_citations
+                gated, fixes = postcheck_fiche_citations(note_md, parquet)
+            except Exception as e:                       # never fail a good note on the gate
+                log.warning(f"[note] citation gate skipped: {e}")
+                gated, fixes = note_md, []
+            if fixes:
+                (run_dir / "note_before_gate.md").write_text(note_md, encoding="utf-8")
+                (run_dir / "citation_fixes.json").write_text(
+                    json.dumps(fixes, indent=2, ensure_ascii=False), encoding="utf-8")
+                log.info(f"[note] citation gate: {len(fixes)} page binding(s) corrected")
+            meta["citation_fixes"] = len(fixes)
+            gated, n_latex = repair_lost_latex_escapes(gated)
+            if n_latex:
+                log.info(f"[note] repaired {n_latex} lost LaTeX escape(s)")
+            meta["latex_repairs"] = n_latex
+            deliverable.write_text(gated, encoding="utf-8")
             log.info(f"[note] deliverable → {deliverable}")
             return meta
         attempt += 1
@@ -261,10 +326,13 @@ def main(argv=None):
     for noisy in ("httpx", "httpcore", "openai"):      # keep third-party request logs out of the console
         logging.getLogger(noisy).setLevel(logging.WARNING)
     try:
-        run_note(a.thesis, a.fiche, a.parquet, a.structure, a.run_id, a.model, a.results_root,
-                 a.min_words, a.min_iters, a.max_retries)
+        meta = run_note(a.thesis, a.fiche, a.parquet, a.structure, a.run_id, a.model, a.results_root,
+                        a.min_words, a.min_iters, a.max_retries)
     except (FileNotFoundError, ConnectionError) as e:
         sys.exit(f"ERROR: {e}")
+    if meta.get("degenerate"):
+        sys.exit("ERROR: note run was degenerate and was not promoted "
+                 "(see the run dir above); the deliverable is unchanged.")
 
 
 if __name__ == "__main__":
