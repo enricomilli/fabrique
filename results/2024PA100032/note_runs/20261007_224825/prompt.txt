@@ -1,0 +1,303 @@
+Tu rédiges une NOTE DE LECTURE (compte rendu universitaire) d'une thèse de doctorat, dans la tradition académique française.
+
+La variable `context` (déjà chargée) contient le texte intégral de la thèse.
+
+## Format du blob `context`
+
+- Des marqueurs de page `[p.NNN]` sont insérés à chaque changement de page. Pour trouver le numéro de page d'un extrait, cherche sa position avec `.find()`, puis remonte jusqu'au marqueur `[p.NNN]` le plus proche.
+- Les notes de bas de page sont préfixées `[fn]` et placées à la fin de chaque page. Elles contiennent souvent les références scientifiques internes de la thèse.
+- Exemple de snippet pour trouver la page d'une phrase donnée :
+```python
+phrase = "conditions d'acceptabilité"
+pos = context.find(phrase)
+# remonter au dernier marqueur [p.XXX] avant pos
+marker_start = context.rfind("[p.", 0, pos)
+marker_end = context.find("]", marker_start) + 1
+page_tag = context[marker_start:marker_end]   # e.g. "[p.21]"
+print(f"Phrase « {phrase} » → {page_tag}")
+```
+
+
+## CARTE DE LA THÈSE (index de navigation)
+
+Index hiérarchique issu de la table des matières. Les pages sont les
+numéros des marqueurs `[p.NNN]` du blob `context` — pour atteindre
+directement un chapitre, saute à son marqueur :
+```python
+pos = context.find("[p.236]")     # début du chapitre visé
+extrait = context[pos:pos+3000]
+```
+ATTENTION : ne cherche PAS un titre de chapitre avec `context.find("titre")`
+— tu risques de tomber sur la table des matières de la thèse elle-même.
+Utilise toujours le saut par marqueur de page ci-dessous.
+
+- Résumé  [p.6]–[p.7]
+- Abstract  [p.8]–[p.17]
+- Remerciements  [p.18]–[p.20]
+- Notices  [p.21]–[p.22]
+- Introduction  [p.23]–[p.23]
+- 1. La Mandchourie : un territoire singulier  [p.23]–[p.24]
+- 2. L'importance actuelle de la Grande Muraille comme délimitation  [p.25]–[p.26]
+- 3. La ville de Qiqihar  [p.27]–[p.33]
+- Première partie La Mandchourie se transforme en « Nord-est de la Chine » : Un temple singulier dans un territoire frontalier  [p.34]–[p.34]
+- Chapitre 1 Territoire rebaptisé « Le Nord-Est », territoire (en partie seulement) sinisé ?  [p.35]–[p.73]
+  - 1.1 La passe Shanzhai de la Grande Muraille : une passe, deux mondes  [p.36]–[p.40]
+  - 1.2 Qiqihar, un nom daur - « la pâture naturelle »  [p.41]–[p.45]
+  - 1.3 L'arrivée des migrants Chinois Han  [p.46]–[p.48]
+  - 1.4 La Mandchourie sous le régime communiste  [p.49]–[p.73]
+- Conclusion  [p.74]–[p.74]
+- Epilogue : Une consultation au temple taoïste Daode  [p.75]–[p.77]
+- Chapitre 2 Qu'est-ce qui fait encore que les gens sont Mandchous ?  [p.78]–[p.101]
+  - 2.1 Les mélanges de populations au niveau local  [p.79]–[p.90]
+  - 2.2 Les patronymes, la langue, et les caractéristiques physiques manifestées aujourd'hui chez certaines personnes d'origine mandchoue  [p.91]–[p.97]
+  - 2.3 « S'agit-il vraiment d'une sinisation juste parce que l'on parle le mandarin ? » : à qui revient-il de définir la sinisation ?  [p.98]–[p.101]
+- Conclusion  [p.102]–[p.103]
+- Epilogue : A propos d'une boutique d'artisanat spécialisée dans la vente des statuettes de divinités et autres objets rituels  [p.104]–[p.186]
+- Conclusion  [p.187]–[p.188]
+- Epilogue : Une journaliste chrétienne (protestante) fait un malaise en visitant le temple Daode de nos jours  [p.189]–[p.191]
+- Deuxième partie Un paysage religieux composite : Les consultations, les pratiques religieuses, et les rituels  [p.192]–[p.192]
+- Chapitre 5 La vie monacale et les temples taoïstes en réseau  [p.193]–[p.228]
+  - 5.1 Chacun a ses affinités prédestinées : De la perception des moines de leur entrée en religion au fonctionnement des temples taoïstes en réseau  [p.194]–[p.219]
+  - 5.2 Les fidèles et les différents temples du réseau  [p.220]–[p.228]
+- Conclusion  [p.229]–[p.229]
+- Chapitre 6 Quelques services rituels et leur mode d'acheminement  [p.230]–[p.270]
+  - 6.1 Les textes de requête shuwen  [p.230]–[p.233]
+  - 6.2 Quand les parents sont préoccupés, la bureaucratie céleste et la bureaucratie terrestre interfèrent l'une avec l'autre : Le cas d'une consultation au sujet du Concours de recrutement des fonctionnaires  [p.234]–[p.258]
+  - 6.3 Acquitter les dettes d'amour huan qingzhai 还情债  [p.259]–[p.268]
+  - 6.4 Le rituel Shegu 赦孤  [p.269]–[p.270]
+- Conclusion  [p.271]–[p.271]
+- Troisième partie Les interactions entre la religion taoïste Quanzhen et les éléments relevant du chamanisme local  [p.272]–[p.272]
+- Chapitre 7 La présence des animaux Esprits-Immortels et ses définitions locales  [p.273]–[p.322]
+  - 7.1 Quand on n'est pas encore en mesure de maîtriser les animaux Esprits-Immortels...  [p.276]–[p.302]
+  - 7.2 Devenir chamane à travers « une démarche administrative taoïste » : Un cas d'étude  [p.303]–[p.306]
+  - 7.3 Quand la personne peut bien s'entendre avec son renard Esprit-Immortel: Un cas d'étude  [p.307]–[p.313]
+  - 7.4 Les animaux Esprits-Immortels et l'être humain vivent ensemble et s'attachent l'un à l'autre: Une jeune manucure et ses « vieux animaux Esprits-Immortels»  [p.314]–[p.319]
+  - 7.5 « Les animaux Esprits-Immortels ne dépassent pas la passe de Shanhaiguan » (仙家不过山海矣)  [p.320]–[p.322]
+- Conclusion  [p.323]–[p.323]
+- Chapitre 8 Le culte à la Mère Noire Heimama : Une divinité féminine inscrite dans le système taoïste en Mandchourie  [p.324]–[p.379]
+  - 8.1 Des récits sur la Mère Noire et sur Guo Shouzhen, fondateur d'une lignée monastique taoïste en Mandchourie...  [p.326]–[p.357]
+  - 8.2 ...à l'importance de la Mère noire au sein des consultations, des demandes des requérants, des rituels d'envoi des requêtes, et de déconsécration de tangdan  [p.358]–[p.379]
+- Conclusion  [p.380]–[p.382]
+- Conclusion  [p.383]–[p.389]
+- Références bibliographiques  [p.390]–[p.390]
+- Sources primaires  [p.390]–[p.390]
+- Littérature secondaire  [p.391]–[p.407]
+- Annexes  [p.408]–[p.408]
+- Annexe 1. Rapport de construction rédigé et publié par l'ancien temple Daode aux cinq religions  [p.408]–[p.428]
+- Annexe 2. Extraits d'autres textes imprimés par l'ancien temple Daode aux cinq religion  [p.429]–[p.437]
+- Annexe 3. Anthologie des cas véridiques de recherche de l'aide des Immortels (Qiuxian yingyan shili xuan 求仙应验事例选) - le livret sur la Mère Noire emprunté au moine Cheng Zonghe  [p.438]–[p.438]
+
+Tu disposes aussi, ci-dessous, de deux ressources dans ton prompt :
+  1. La FICHE structurée de la thèse — ton plan de travail, ce que tu dois couvrir
+  2. Un EXEMPLE DE STYLE — le registre, la longueur et le flux que tu dois imiter
+
+## Règles de référence
+
+**Auteurs externes (hors thèse) : STRICTEMENT INTERDITS.** Ne cite aucun auteur, ouvrage ou revue qui ne figure pas dans le texte de la thèse. Si un compte rendu standard écrirait « comme le montre Habermas » ou « selon Bourdieu » alors que ni Habermas ni Bourdieu n'est cité par l'auteur de la thèse, tu reformules sans nommer.
+
+**Auteurs internes (cités PAR la thèse) : autorisés sous condition.** Si tu veux nommer un auteur que la thèse elle-même mobilise (ex. Foucault, Moretti, Bakhtine, Lavoinne, Tetlock), tu DOIS :
+  1. Vérifier via `context.find("Nom")` qu'il est bien présent dans la thèse — SAUF si l'auteur figure déjà dans la FICHE avec une citation et une page : dans ce cas reprends l'ancrage de la fiche tel quel, sans revérification.
+  2. Accompagner la mention d'une courte citation verbatim (entre guillemets « ») extraite de la thèse.
+  3. Indiquer le numéro de page, obtenu via la méthode du marqueur `[p.NNN]` décrite ci-dessus.
+  Exemple : « Comme le rappelle Lavoinne, "cette croissance n'est pas justifiée économiquement" (p. 34). »
+
+**Chapitres et passages de la thèse** : cite-les librement (ex. « dans le premier chapitre », « p. 612 »). Les pages doivent être vérifiées via les marqueurs `[p.NNN]` — JAMAIS une position en caractères (offset à 4+ chiffres).
+
+**Notes de bas de page** : tu n'en rédiges pas dans la note. Les `[fn]` du blob sont uniquement un outil de recherche pour toi.
+
+**Cible : au moins 8 références de page précises dans la note finale** pour étayer tes affirmations.
+
+## Structure à produire (~2000 mots)
+
+```markdown
+# [Titre complet de la thèse, en italique après l'auteur]
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-10-07
+
+**Référence :** [Auteur], *[Titre]*, [Établissement], [Année], [Nombre de pages] p.
+
+---
+
+[Paragraphe 1 — Ouverture (~250 mots) : situe la thèse, l'auteur, la discipline,
+la période étudiée, la thèse centrale, le corpus principal. Annonce le fil
+directeur et la périodisation.]
+
+[Paragraphe 2 — Méthodologie et démarche (~300 mots) : approche,
+outillage, corpus, sondages, corpus contextuels. Souligne l'originalité
+méthodologique.]
+
+[Paragraphe 3 — Première partie ou premier axe (~350 mots) : en citant les pages.]
+
+[Paragraphe 4 — Deuxième partie ou deuxième axe (~300 mots).]
+
+[Paragraphe 5 — Troisième partie ou troisième axe (~350 mots).]
+
+[Paragraphe 6 — Portée, apport et tensions (~300-400 mots) : synthèse
+critique. L'apport empirique, théorique, méthodologique. Les tensions,
+les limites. Ouverture sur ce que la thèse permet de penser.]
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de [Titre court] », [Date].
+```
+
+## Consignes RLM
+
+- **Les pages et citations de la FICHE ont déjà été vérifiées automatiquement contre la source.** Reprends-les telles quelles, SANS les revérifier via `context.find(...)`. Ne vérifie que ce que tu introduis TOI-MÊME et qui ne figure pas dans la fiche (nouvel auteur, nouvelle citation, nouvelle page).
+- Si tu as besoin d'un passage spécifique, utilise `context[start:end]` ou `context.find("phrase")` pour le localiser, puis extrait une tranche de 500-1500 caractères autour.
+- **Travaille en LOTS SERRÉS** : toute l'exploration initiale (squelette : introduction, méthodologie, ouvertures de parties, conclusion, exemples fondateurs) doit tenir en AU PLUS 3 exécutions de code, chacune extrayant PLUSIEURS passages d'un coup (5 à 8 extraits par exécution). Jamais une exécution par passage. Les extractions complémentaires entre les passes de rédaction (cœur des parties) comptent à part : au plus 1 exécution d'extraction par passe de rédaction.
+- **LIAISON PAGE-EXTRAIT (obligatoire dans les lots)** : quand une exécution imprime plusieurs extraits, fais-la précéder CHAQUE extrait d'une ligne `===== EXTRAIT [p.N] → [p.M] =====` (les marqueurs réels de début et de fin de l'extrait). Au moment de citer, reprends le numéro depuis la ligne `=====` ou le marqueur `[p.N]` visible IMMÉDIATEMENT au-dessus du passage cité — jamais de mémoire. Une citation dont tu ne retrouves pas le marqueur exact dans tes sorties ne doit PAS porter de numéro de page.
+- **RÉDACTION EN PLUSIEURS PASSES (OBLIGATOIRE)** : ne rédige JAMAIS la note entière en une seule exécution. Rédige AU PLUS 2 paragraphes par exécution de code. Avant de rédiger les paragraphes 3, 4 et 5, extrais d'abord de NOUVEAUX passages du cœur de la partie concernée (pas seulement son ouverture) — puis rédige. Assemble le tout à la fin seulement.
+- **CITATION ET AFFIRMATION CO-PRÉSENTES** : une citation verbatim « … » (p. N) ne peut étayer QUE l'affirmation du passage d'où elle provient (le texte visible sous le même marqueur `[p.N]`). N'emploie JAMAIS une phrase de la thèse pour un argument qu'elle ne porte pas dans son contexte d'origine (une hypothèse formulée sur X ne sert pas à commenter Y ; un nom de fonction, de concept ou de liste se reprend tel que le passage le donne, sans le recomposer). Si une affirmation a besoin d'un appui, va chercher le passage qui la porte et cite-le avec sa propre page.
+- **Densité d'ancrage** : chaque paragraphe de partie (3, 4 et 5) doit citer AU MOINS 3 pages distinctes. Une partie racontée sans pages précises est un paragraphe raté.
+- Ne saute pas les exemples fondateurs que la fiche met en avant (comparaison inaugurale, cas paradigmatique, date fondatrice) : s'ils motivent la thèse, ils appartiennent à la note.
+- `llm_query` est réservé aux RECHERCHES ponctuelles (localiser un thème, résumer un long passage pour toi-même). NE L'UTILISE JAMAIS pour rédiger les paragraphes de la note : la rédaction se fait TOI-MÊME, dans cette boucle, avec les marqueurs `[p.NNN]` sous les yeux — c'est la seule façon de garantir des numéros de page exacts.
+- À la fin, assemble le markdown complet dans une variable puis appelle `FINAL(markdown_complet)`.
+
+## FICHE DE LA THÈSE
+
+```markdown
+# FICHE DE SYNTHÈSE DE THÈSE
+
+## Métadonnées
+
+- **Titre** : Religion taoïste et société locale au nord de la Grande Muraille : ethnographie d'un réseau de temples taoïstes en Mandchourie du Nord
+- **Auteur** : Binqi Cui
+- **Année** : 2024
+- **Établissement** : Université Paris Nanterre, Laboratoire d'Ethnologie et de Sociologie Comparative
+- **Discipline** : Ethnologie
+- **Pages** : 465
+
+## Mots-clés
+
+religion taoïste ; vie monacale ; consultations ; pratiques rituelles ; Grande Muraille ; Mandchourie ; ethnographie
+
+## Thèse centrale
+
+La religion taoïste Quanzhen s'est profondément enracinée en Mandchourie non pas par une simple « sinisation », mais grâce à une « mandchourisation » réciproque qui intègre les éléments chamaniques locaux, notamment le culte à la Mère Noire et aux animaux Esprits-Immortels (p. 381). Cette interaction dynamique permet aux pratiques chamaniques d'être institutionnalisées sous l'égide taoïste, tout en conférant aux temples taoïstes une légitimité et une prospérité locales (p. 381). En retour, le taoïsme doit s'adapter au chamanisme pour survivre et se développer dans cette région, créant ainsi une identité religieuse et territoriale singulière au nord de la Grande Muraille (p. 389). Le réseau de temples est structuré autour du culte à la Mère Noire, divinité centrale reliant les sites depuis l'empire Qing jusqu'à l'époque contemporaine, tandis que la Passe Shanhai fonctionne comme une « ligne de partage des eaux qui sépare les lignées taoïstes » (p. 6).
+
+## Questions de recherche
+
+- « étudier les dynamiques complexes, les interactions et les interdépendances entre les pratiques relevant du système taoïste local et celles liées à l'évolution des comportements socio-politiques de la Mandchourie » (p. 23)
+- « comprendre le rôle de ces temples dans la société d'aujourd'hui » (p. 23)
+
+## Réponses aux questions de recherche
+
+- Pour la question sur les dynamiques et interactions : « l'interaction dynamique entre le chamanisme à caractère local et les pratiques taoïstes paraît propice à l'ancrage régional du taoïsme, le culte à la Mère Noire est alors important, voire central dans la production de ce type d'interaction » (p. 381) ; « la religion taoïste permet aux éléments propres aux pratiques chamaniques de perdurer tout en les plaçant sous son égide et alors que ailleurs, la religion taoïste ne peut s'enraciner et se répandre en Mandchourie qu'à condition que les strates des éléments chamaniques s'inscrivent dans les activités religieuses du taoïsme local » (p. 389).
+- Pour la question sur le rôle des temples : « les temples sont des lieux destinés à guérir les maladies, qu'elles soient visibles ou invisibles » (p. 383) ; « grâce à elle [la Mère Noire], les communautés taoïstes prospèrent et confortent ainsi leur place dans l'orthodoxie locale au fils du temps » (p. 388) ; « les officiants taoïstes et les fidèles indiquent que les animaux Esprits-Immortels se trouvent partout dans ces régions du Nord-est mais qu'à priori ils ne peuvent pas aller au sud de la passe Shanhai » (p. 387).
+
+## Hypothèses
+
+*[Non renseigné]*
+
+## Méthodologie
+
+- **Approche** : « Cette thèse ethnographique porte sur la religion taoïste en Mandchourie » (p. 23) ; « étude ethnographique » (p. 383)
+- **Méthode** : « observations participantes » (p. 23) ; « observations ethnographiques récentes » (p. 383)
+- **Corpus/Données** : « deux enquêtes de terrain menées pendant seize mois au total, dans plusieurs temples taoïstes situés respectivement à Qiqihar, au Heilongjiang, et à Liuhe, dans le Jilin » (p. 23) ; « consultations qui ont lieu dans les temples entre les officiants taoïstes et les fidèles » (p. 23) ; « plusieurs temples taoïstes en réseau » (p. 383) ; réseau centré sur le temple Daode à Qiqihar, ancien temple aux cinq religions fermé en 1947 et rouvert en 2014 en tant que temple taoïste (p. 6)
+- **Justification** : « Les matériaux résultant des observations participantes ont montré qu'il sera important d'appréhender les expériences des requérants et les rituels aujourd'hui à la lumière des changements sociaux et politiques connus par cette région durant les dernières décennies et dans l'histoire » (p. 23) ; « cela a permis d'observer et d'aborder les différents aspects et particularités de la société au nord de la Grande Muraille à l'heure actuelle » (p. 383)
+
+## Fil rouge
+
+La passe Shanhai comme frontière symbolique et religieuse structurante (p. 387), reliant la transformation identitaire et politique de la Mandchourie (Partie 1) aux consultations et pratiques rituelles quotidiennes (Partie 2) et aux interactions institutionnelles entre taoïsme et chamanisme (Partie 3) via la délimitation des compétences territoriales des esprits et la légitimation du culte à la Mère Noire (p. 388). Le réseau de temples centré sur le temple Daode et articulé autour du culte à la Mère Noire sert de maillage concret à cette dynamique depuis l'empire Qing jusqu'à l'époque contemporaine (p. 6).
+
+## Plan (Structure)
+
+- **Première partie La Mandchourie se transforme en « Nord-est de la Chine » : Un temple singulier dans un territoire frontalier** : Démontre que la Mandchourie a forgé une identité collective distincte malgré l'effacement politique du terme, en montrant comment la passe Shanhai fonctionne comme frontière symbolique entre « chez soi » et « ailleurs » pour les habitants (p. 384).
+- **Epilogue : Une consultation au temple taoïste Daode** : *[Non renseigné]*
+- **Deuxième partie Un paysage religieux composite : Les consultations, les pratiques religieuses, et les rituels** : Démontre que les temples taoïstes répondent à des problèmes quotidiens et historiques profonds, en montrant comment les moines agissent comme médiateurs entre le monde terrestre, le monde céleste et les divinités pour résoudre des maux visibles ou invisibles (p. 383).
+- **Troisième partie Les interactions entre la religion taoïste Quanzhen et les éléments relevant du chamanisme local** : Démontre que le taoïsme ne s'enracine qu'en intégrant le chamanisme local, en montrant comment le culte à la Mère Noire institutionnalise les animaux Esprits-Immortels et produit une « mandchourisation » réciproque (p. 389).
+
+## Cadre théorique
+
+- **Cadre principal** : Ethnographie religieuse / Anthropologie des religions — observation participante et analyse des interactions rituelles (p. 383) — structure l'analyse globale en reliant les pratiques micro-sociales des temples aux transformations macro-socio-politiques de la région.
+- **Cadres secondaires** :
+  - Géographie culturelle / Études frontalières — la frontière symbolique et la construction identitaire territoriale (p. 386) — sert à analyser comment la passe Shanhai délimite les appartenances ethniques, politiques et religieuses.
+  - Sociologie de la religion / Institutionnalisation — légitimation et orthodoxie locale (p. 388) — permet d'étudier comment les temples taoïstes intègrent et codifient des pratiques chamaniques pour assurer leur pérennité.
+  - Histoire politique / Nationalisme d'État — effacement toponymique et récit officiel (p. 384) — éclaire les motivations de la RPC à remplacer « Mandchourie » par « Nord-est » pour renforcer sa légitimité territoriale.
+
+## Concepts clés
+
+**CONCEPT** : CHAMANISME À CARACTÈRE LOCAL
+**SENS** : « le chamanisme à caractère local » (p. 303) — [NON DÉFINI EXPLICITEMENT] désigne par l'auteur l'ensemble des pratiques et croyances régionales du Nord-Est fondées sur la possession par des animaux Esprits-Immortels et leur intégration ritualisée au sein des temples taoïstes contemporains.
+**ORIGINE** : propre à l'auteur, construit pour distinguer les pratiques de possession actuelles (souvent qualifiées de *chuma* ou de superstition) du chamanisme historique des peuples indigènes, et souligner leur métamorphose institutionnelle.
+
+**CONCEPT** : MANDCHOURISATION
+**SENS** : « la religion taoïste doit s'adapter au chamanisme local pour pouvoir se développer en Mandchourie. D'où une véritable « mandchourisation », et non pas seulement une sinisation » (p. 389)
+**ORIGINE** : propre à l'auteur, conceptualisé comme processus d'ancrage religieux et identitaire réciproque où le taoïsme institutionnel s'adosse aux pratiques chamaniques locales pour s'enraciner, en rupture avec le discours dominant de sinisation.
+
+**CONCEPT** : MÈRE NOIRE (DIVINITÉ INTERFACIALE)
+**SENS** : « la Mère Noire est perçue par les gens en Mandchourie comme une divinité très importante car elle est à la fois en charge de la gestion des animaux Esprits-Immortels dans le chamanisme et à la tête du panthéon taoïste local » (p. 388)
+**ORIGINE** : propre à l'auteur, requalifiée en nœud institutionnel et rituel permettant l'articulation et la légitimation croisée entre l'orthodoxie taoïste et le culte populaire des esprits animaux.
+
+**CONCEPT** : PASSES SHANHAI (FRONTIÈRE SYMBOLIQUE)
+**SENS** : « la passe Shanhai, continuent à exister chez les gens, non plus en tant que frontière physique et administrative entre les deux côtés de la Grande Muraille, comme par le passé, mais bien comme une frontière religieuse qui pose les limites des compétences territoriales des animaux Esprits-Immortels xianjia » (p. 388)
+**ORIGINE** : propre à l'auteur, redéfini à partir d'un marqueur géographique et touristique pour en faire un opérateur de démarcation identitaire, rituelle et de compétence spirituelle.
+
+**CONCEPT** : SINISATION (CRITIQUÉE)
+**SENS** : « S'agit-il vraiment d'une sinisation juste parce que l'on parle le mandarin ? [...] est-ce vraiment ça la sinisation ? » (p. 99-100)
+**ORIGINE** : emprunté au discours nationaliste et institutionnel, retravaillé par l'auteur pour en révéler les limites en Mandchourie, où l'identité et les pratiques religieuses persistent au-delà des critères linguistiques ou vestimentaires supposés.
+
+## Ancrage empirique (ou concret)
+
+- Temples taoïstes de l'ordre monastique Quanzhen 全真 à Qiqihar (Heilongjiang) et Liuhe (Jilin), dirigés par la même supérieure taoïste (p. 23)
+- Consultations entre officiants taoïstes et fidèles servant de cas d'étude (p. 23)
+- Liste rouge vouée au culte des Esprits-Immortels renard et putois (« 供俸 有求必应 胡仙黄仙 保家平安 胡黄二仙保家仙之位 ») brûlée au temple (p. 380)
+- Papiers de dédouanement rituels « tongguan wendie 通关文牒 » vendus comme souvenirs touristiques à Shanhai mais investis d'une efficacité rituelle pour les esprits d'animaux (p. 387)
+
+## Opposition / Contre-argumentation
+
+- **Sinisation unidirectionnelle** : « ce n'est pas une simple question de sinisation comme cela pourrait paraître, mais aussi une sorte de « mandchourisation » » (p. 381) ; la thèse rejette l'idée que le taoïsme ait simplement remplacé ou absorbé passivement le chamanisme, montrant au contraire une adaptation mutuelle et une conservation des strates chamaniques (p. 389).
+- **Déclin attribué uniquement à des facteurs endogènes** : « on va jusqu'à entendre des discours [...] qui laissent entendre que le déclin de la Mandchourie est en grande partie de de son fait, attribué à un esprit fermé et retardataire, à une idéologie anti-marché, et sur un autre registre au climat froid » (p. 385) ; l'auteur nuance cette vision en rappelant l'exploitation historique des ressources et le sentiment d'abandon face aux réformes économiques (p. 385).
+- **Effacement politique du terme « Mandchourie » comme simple neutralité** : « si la RPC tend à priver la Mandchourie de son appellation, ce n'est pas seulement pour minimiser la souveraineté de l'empire Qing ou pour délégitimer le Mandchoukouo, mais aussi pour justifier et renforcer sa propre autorité » (p. 384) ; l'auteur oppose cette interprétation géopolitique active aux discours officiels qui présentent le changement comme anodin ou technique.
+
+## Apport principal
+
+- **Théorique** : Introduce le concept de « mandchourisation » réciproque pour dépasser le paradigme dominant de la « sinisation » unidirectionnelle, montrant comment le taoïsme Quanzhen doit s'adapter au chamanisme local pour s'enraciner (p. 389).
+- **Empirique** : Documente pour la première fois le rôle structurant du culte à la Mère Noire comme interface institutionnelle légitimant les animaux Esprits-Immortels dans les temples taoïstes du Nord-Est, ainsi que l'usage rituel contemporain des papiers de dédouanement de Shanhai (p. 387).
+- **Critique** : Démontre que la frontière religieuse de la passe Shanhai persiste comme opérateur identitaire et territorial malgré l'effacement politique du nom « Mandchourie », révélant une altérité culturelle et spirituelle résiliente face au récit national unificateur (p. 386).
+
+```
+
+## EXEMPLE DE STYLE (à imiter pour le registre, la longueur des paragraphes, le flux)
+
+```markdown
+# [Titre complet de l'ouvrage : nom des directeurs et titre/sous-titre en italique]
+
+**Compte rendu par** [Auteur du compte rendu]
+
+**Date :** 2026-04-24
+
+**Source :** [URL si disponible]
+
+**Référence :** [Auteur·e·s], *Titre complet*, Ville, Éditeur, coll. « Collection », année, xxx p., ISBN : xxx.
+
+---
+
+Quatorze auteurs, parmi lesquels des sociologues clés de l'analyse du secteur social et médico-social analysent, dans cet ouvrage important, les transformations de la « morale » de l'intervention sociale de divers pays (France dont Mayotte, Suisse, Maroc, Québec), ceci à la suite d'un congrès sociologique international tenu à Tunis en 2021. Le texte décrit les tensions traversant l'intervention sociale, entre idéaux de justice sociale, d'égalité et de solidarisme d'une part, et les principes de responsabilisation et d'activation dans un contexte marqué par l'emprise croissante d'une logique managériale, d'autre part. Disons-le d'emblée, le principe de « responsabilisation » mérite d'être interrogé : il renvoie généralement non pas tant à un transfert de pouvoir aux usagers ou citoyens, comme il l'affirme, mais souvent à une « normalisation » du contrôle social reposant, désormais, sur l'individu lui-même. C'est notamment le cas dans les dispositifs de parentalité ou dans la justice restaurative, où la volonté des individus devient l'opérateur du contrôle social.
+
+Notre lecture questionne implicitement les mots-clefs contemporains de l'intervention sociale que sont « responsabiliser » et « activer ». Ces termes sont aussi les items centraux de la Nouvelle Gouvernance Publique (NGP), laquelle tend, pour l'action sociale, à substituer la « relation de service » reposant sur l'efficience et le résultat au « modèle de service public d'action » fondateur. S'impose, alors, un glissement progressif vers un paradigme managérial qui met la focale sur les difficultés de financement, d'efficacité, la qualité du service et le questionnement de la légitimité de l'État social.
+
+Dans le premier chapitre, Jean-Pierre Tabin et ses collègues explorent, à partir de la rhétorique de l'État depuis les années 2000, les politiques suisses en direction des personnes invalides. Ils identifient finement une logique « capacitiste » visant la re-marchandisation à tout prix, via un nouvel ordre d'employabilité passant par l'acceptation d'une norme d'emploi « médiocre » et, de fait, réduisant la « crédibilité épistémique » de la personne en situation de handicap psychique. Dans les Structures d'Insertion par l'Activité Économique (SIAE) analysées par Hervé Jory dans le cinquième chapitre, la prévalence des compétences d'adaptation sociale sur la formation didactique et le savoir-faire professionnel correspond à une précarisation du profil attendu des publics. L'inversion du statut de la formation, dans ces structures d'insertion, tend à favoriser des conditions d'acceptation de conditions de travail pénibles pour des emplois sous-qualifiés. Ce nouveau cadre normatif de l'inclusion professionnelle repose sur le postulat « d'insérer pour former » où l'insertion se suffit en elle-même. Il s'agit de privilégier l'adaptation quasi immédiate à l'emploi et ses difficultés, en particulier la capacité à supporter des conditions de travail éprouvantes (port de charges lourdes, intempéries…) plutôt que l'intégration de savoirs professionnels et une qualification capitalisable.
+
+L'analyse de tous ces segments de l'intervention sociale est à même d'identifier une logique de responsabilisation des publics et un tournant managérial souvent pénalisants. Mais la grammaire managériale reste fortement questionnée dans les pratiques concrètes des acteurs. Un deuxième grand apport de l'ouvrage est donc d'étudier les engagements moraux et les micro-résistances éthiques des intervenants·es infléchissant parfois certaines modalités de l'intervention sociale. Au-delà des cadres normatifs, des professionnels inventent dès lors des pratiques d'écarts éthiques pour redonner sens à leur action.
+
+Ainsi, dans l'urgence sociale présentée par Hélène Marin et Béatrice Bertho (chapitre 3), la mobilisation bénévole de professionnels illustre la volonté de participer à la neutralisation d'un déficit d'action publique récurrent, en contradiction avec les principes moraux de l'État social. Un engagement solidaire, fait en parallèle de leur travail salarié, s'instaure dans une ville de Suisse romane afin de faire face à une « politique de la pénurie » (p. 48) de l'accueil national des personnes sans-abris. Ce « bénévolat solidaire » définit ce que l'on peut appeler une « résistivité morale », des micro-résistances enracinées dans les principes de justice sociale au regard des besoins de ce public en grande vulnérabilité psychique et sociale.
+
+En définitive, l'intérêt majeur des thèses de cet ouvrage est de souligner une mutation des cadres normatifs et moraux de l'intervention sociale qui mettent désormais essentiellement l'accent sur une responsabilisation des individus vulnérables, une activation étrécie et pénalisante et privilégiant parfois l'immédiateté de l'insertion par le travail, voire des pratiques de culpabilisation-stigmatisation et des dispositifs d'activation définis par une grammaire managériale. Par contre, ces mutations ne doivent pas oblitérer, car s'exprimant à bas bruit dans les interstices de l'accompagnement, la présence modeste d'un cadre moral et cognitif secondaire d'élargissement du pouvoir d'agir pour les personnes en difficulté. Une responsabilisation que l'on peut qualifier d'« habilitante » est encore visible dans nombre des pratiques d'accompagnement. Ainsi, le Revenu de Solidarité Active (RSA) agricole représente une reconnaissance nouvelle de la vulnérabilité d'une population et un levier d'action potentiel pour des agriculteurs immergés des décennies dans une grande précarité. L'action sociale n'est pas réductible au seul tournant néo-libéral et l'on observe non pas une « nouvelle » morale de l'intervention sociale mais une hybridation de morales dont certaines fondatrices de l'État social et du travail social. Malgré tout, force est de constater que la NGP encadre l'intervention sociale par des normes managériales dissonantes au regard des idéaux universalistes, de l'éthique et de la vulnérabilité des publics et de leurs besoins. Ces nouvelles normes conduisent à une détérioration de l'action pour les usagers et le personnel que l'on retrouve aussi dans l'ensemble des services publics.
+
+---
+
+## Pour citer cet article
+
+**[Auteur]**, « [Titre court de l'ouvrage] », *Comptes rendus*, mis en ligne le [date], consulté le [date].
+
+```
+
+---
+
+Rédige maintenant la note de lecture. Vise ~2000 mots, six paragraphes denses, français académique soutenu. Termine par `FINAL(note_markdown)`.

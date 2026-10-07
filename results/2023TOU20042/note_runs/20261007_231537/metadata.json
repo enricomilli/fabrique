@@ -1,0 +1,12 @@
+{
+  "wall_time_s": 201.3,
+  "note_word_count": 2209,
+  "rlm_time_s": 200.9,
+  "iterations": 16,
+  "sub_queries": 0,
+  "rlm_status": "success",
+  "trace_files": 16,
+  "trace_root_calls": 16,
+  "trace_subquery_calls": 0,
+  "run_dir": "/Users/rosas/claude_theses/current_repo/results/2023TOU20042/note_runs/20261007_231537"
+}

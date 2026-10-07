@@ -1,0 +1,693 @@
+{
+  "thesis_id": "2022LORR0183",
+  "parquet_blocks": 1351,
+  "parquet_pages": 153,
+  "metadata": {
+    "titre": "Electrical networks in the presence of distributed energy generation - Réseaux électriques en présence de génération d'énergies distribuée",
+    "auteur": "Youssef HENNANE",
+    "annee": "2022",
+    "etablissement": "Université de Lorraine, Université Hassan II, LEMTA, ENSEM",
+    "discipline": "Energie et mécanique, Génie électrique",
+    "mots_cles": [
+      "** Distributed Generators",
+      "Distributed Control",
+      "Secondary control",
+      "Islanded Microgrids",
+      "Grid-connected Microgrids",
+      "Droop control",
+      "Power sharing",
+      "stability analysis",
+      "real-time hardware-in-the-loop implementation"
+    ],
+    "pages": 153
+  },
+  "toc": [
+    {
+      "title": "Liste des figures",
+      "page_start": 9,
+      "level": 0,
+      "page_end": 15,
+      "role": "backmatter",
+      "page_start_parquet": 10,
+      "page_end_parquet": 16
+    },
+    {
+      "title": "Liste des tables",
+      "page_start": 16,
+      "level": 0,
+      "page_end": 17,
+      "role": "backmatter",
+      "page_start_parquet": 17,
+      "page_end_parquet": 18
+    },
+    {
+      "title": "Introduction générale",
+      "page_start": 18,
+      "level": 0,
+      "page_end": 21,
+      "role": "frontmatter",
+      "page_start_parquet": 19,
+      "page_end_parquet": 22
+    },
+    {
+      "title": "Etat de l'art",
+      "page_start": 22,
+      "level": 0,
+      "page_end": 42,
+      "role": "part",
+      "page_start_parquet": 23,
+      "page_end_parquet": 43
+    },
+    {
+      "title": "1.1. Micro-réseaux",
+      "page_start": 23,
+      "level": 1,
+      "page_end": 24,
+      "role": "section",
+      "page_start_parquet": 24,
+      "page_end_parquet": 25
+    },
+    {
+      "title": "1.2. Contrôle des micro-réseaux",
+      "page_start": 25,
+      "level": 1,
+      "page_end": 27,
+      "role": "section",
+      "page_start_parquet": 26,
+      "page_end_parquet": 28
+    },
+    {
+      "title": "1.3. Contrôle local d'un générateur distribué (DG)",
+      "page_start": 28,
+      "level": 1,
+      "page_end": 40,
+      "role": "section",
+      "page_start_parquet": 29,
+      "page_end_parquet": 41
+    },
+    {
+      "title": "1.3.1. Contrôle primaire d'un DG",
+      "page_start": 29,
+      "level": 2,
+      "page_end": 36,
+      "role": "section",
+      "page_start_parquet": 30,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "1.3.1.1. Contrôleur interne du contrôle primaire d'un DG",
+      "page_start": 29,
+      "level": 3,
+      "page_end": 30,
+      "role": "section",
+      "page_start_parquet": 30,
+      "page_end_parquet": 31
+    },
+    {
+      "title": "1.3.1.2. Contrôleur de puissance ou externe",
+      "page_start": 31,
+      "level": 3,
+      "page_end": 36,
+      "role": "section",
+      "page_start_parquet": 32,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "1.3.1.2.1. Méthodes de contrôle décentralisées pour le réglage primaire",
+      "page_start": 35,
+      "level": 4,
+      "page_end": 35,
+      "role": "section",
+      "page_start_parquet": 36,
+      "page_end_parquet": 36
+    },
+    {
+      "title": "1.3.1.2.2. Méthodes de contrôle centralisées pour le réglage primaire",
+      "page_start": 36,
+      "level": 4,
+      "page_end": 36,
+      "role": "section",
+      "page_start_parquet": 37,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "1.3.1.2.3. Méthodes de contrôle distribuées pour le réglage primaire",
+      "page_start": 36,
+      "level": 4,
+      "page_end": 36,
+      "role": "section",
+      "page_start_parquet": 37,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "1.3.2. Le contrôle secondaire",
+      "page_start": 37,
+      "level": 2,
+      "page_end": 40,
+      "role": "section",
+      "page_start_parquet": 38,
+      "page_end_parquet": 41
+    },
+    {
+      "title": "1.3.2.1. Méthodes de contrôle décentralisées pour le réglage secondaire",
+      "page_start": 39,
+      "level": 3,
+      "page_end": 39,
+      "role": "section",
+      "page_start_parquet": 40,
+      "page_end_parquet": 40
+    },
+    {
+      "title": "1.3.2.2. Méthodes de contrôle centralisées pour le réglage secondaire",
+      "page_start": 39,
+      "level": 3,
+      "page_end": 39,
+      "role": "section",
+      "page_start_parquet": 40,
+      "page_end_parquet": 40
+    },
+    {
+      "title": "1.3.2.3. Méthodes de contrôle distribuées pour le réglage secondaire",
+      "page_start": 40,
+      "level": 3,
+      "page_end": 40,
+      "role": "section",
+      "page_start_parquet": 41,
+      "page_end_parquet": 41
+    },
+    {
+      "title": "1.4. Conclusion",
+      "page_start": 41,
+      "level": 1,
+      "page_end": 42,
+      "role": "section",
+      "page_start_parquet": 42,
+      "page_end_parquet": 43
+    },
+    {
+      "title": "Micro-réseaux multi-sources maillés : Equirépartition des puissances et synchronisation",
+      "page_start": 43,
+      "level": 0,
+      "page_end": 91,
+      "role": "part",
+      "page_start_parquet": 44,
+      "page_end_parquet": 92
+    },
+    {
+      "title": "2.1. Introduction",
+      "page_start": 44,
+      "level": 1,
+      "page_end": 46,
+      "role": "section",
+      "page_start_parquet": 45,
+      "page_end_parquet": 47
+    },
+    {
+      "title": "2.2. Stratégies de contrôle de micro-réseaux maillés îlotés",
+      "page_start": 47,
+      "level": 1,
+      "page_end": 64,
+      "role": "section",
+      "page_start_parquet": 48,
+      "page_end_parquet": 65
+    },
+    {
+      "title": "2.2.1. Equirépartition des puissances à l'aide du contrôle Droop",
+      "page_start": 47,
+      "level": 2,
+      "page_end": 52,
+      "role": "section",
+      "page_start_parquet": 48,
+      "page_end_parquet": 53
+    },
+    {
+      "title": "2.2.2. Stratégie de synchronisation dans un micro-réseau maillé îloté",
+      "page_start": 53,
+      "level": 2,
+      "page_end": 53,
+      "role": "section",
+      "page_start_parquet": 54,
+      "page_end_parquet": 54
+    },
+    {
+      "title": "2.2.3. Première validation par simulation des stratégies de commande non-linéaire proposée dans les micro-réseaux maillés îlotés",
+      "page_start": 54,
+      "level": 2,
+      "page_end": 59,
+      "role": "section",
+      "page_start_parquet": 55,
+      "page_end_parquet": 60
+    },
+    {
+      "title": "2.2.4. Validation des stratégies de contrôle proposées dans les micro-réseaux maillés îlotés à l'aide des tests HIL",
+      "page_start": 60,
+      "level": 2,
+      "page_end": 61,
+      "role": "section",
+      "page_start_parquet": 61,
+      "page_end_parquet": 62
+    },
+    {
+      "title": "2.2.5. Impact des délais de communication sur la stabilité du micro-réseau",
+      "page_start": 62,
+      "level": 2,
+      "page_end": 64,
+      "role": "section",
+      "page_start_parquet": 63,
+      "page_end_parquet": 65
+    },
+    {
+      "title": "2.3. Modélisation du système pour son analyse de stabilité",
+      "page_start": 65,
+      "level": 1,
+      "page_end": 69,
+      "role": "section",
+      "page_start_parquet": 66,
+      "page_end_parquet": 70
+    },
+    {
+      "title": "2.3.1. Modèle espace-état d'un générateur distribué (DG)",
+      "page_start": 65,
+      "level": 2,
+      "page_end": 65,
+      "role": "section",
+      "page_start_parquet": 66,
+      "page_end_parquet": 66
+    },
+    {
+      "title": "2.3.2. Structure et modélisation du micro-réseau",
+      "page_start": 66,
+      "level": 2,
+      "page_end": 68,
+      "role": "section",
+      "page_start_parquet": 67,
+      "page_end_parquet": 69
+    },
+    {
+      "title": "2.3.3. Validation du modèle d'état",
+      "page_start": 69,
+      "level": 2,
+      "page_end": 69,
+      "role": "section",
+      "page_start_parquet": 70,
+      "page_end_parquet": 70
+    },
+    {
+      "title": "2.4. Etude de la stabilité du micro-réseau maillé basée sur son modèle d'état",
+      "page_start": 70,
+      "level": 1,
+      "page_end": 84,
+      "role": "section",
+      "page_start_parquet": 71,
+      "page_end_parquet": 85
+    },
+    {
+      "title": "2.4.1. Analyse des trajectoires des valeurs propres et l'étude de leurs sensibilités pour différentes valeurs des paramètres des lignes électriques",
+      "page_start": 72,
+      "level": 2,
+      "page_end": 72,
+      "role": "section",
+      "page_start_parquet": 73,
+      "page_end_parquet": 73
+    },
+    {
+      "title": "2.4.2. Analyse des trajectoires des valeurs propres et l'étude de leurs sensibilités pour différentes valeurs des paramètres des DGs",
+      "page_start": 73,
+      "level": 2,
+      "page_end": 78,
+      "role": "section",
+      "page_start_parquet": 74,
+      "page_end_parquet": 79
+    },
+    {
+      "title": "2.4.3. Analyse de la trajectoire des valeurs propres et de la sensibilité pour différentes valeurs des paramètres de charge",
+      "page_start": 79,
+      "level": 2,
+      "page_end": 80,
+      "role": "section",
+      "page_start_parquet": 80,
+      "page_end_parquet": 81
+    },
+    {
+      "title": "2.4.4. Stabilité du micro-réseau maillé et robustesse de son contrôle en présence des charges à puissance constante (CPL)",
+      "page_start": 81,
+      "level": 2,
+      "page_end": 81,
+      "role": "section",
+      "page_start_parquet": 82,
+      "page_end_parquet": 82
+    },
+    {
+      "title": "2.4.5. Modèle de CPL",
+      "page_start": 82,
+      "level": 2,
+      "page_end": 82,
+      "role": "section",
+      "page_start_parquet": 83,
+      "page_end_parquet": 83
+    },
+    {
+      "title": "2.4.6. Analyse de la trajectoire des valeurs propres et de la sensibilité pour différentes valeurs de CPL",
+      "page_start": 83,
+      "level": 2,
+      "page_end": 83,
+      "role": "section",
+      "page_start_parquet": 84,
+      "page_end_parquet": 84
+    },
+    {
+      "title": "2.4.7. Amélioration de la stabilité",
+      "page_start": 84,
+      "level": 2,
+      "page_end": 84,
+      "role": "section",
+      "page_start_parquet": 85,
+      "page_end_parquet": 85
+    },
+    {
+      "title": "2.5. Synchronisation et partage des puissances dans les micro-réseaux maillés en mode connecté au réseau",
+      "page_start": 85,
+      "level": 1,
+      "page_end": 88,
+      "role": "section",
+      "page_start_parquet": 86,
+      "page_end_parquet": 89
+    },
+    {
+      "title": "2.5.1. Résultats de simulation dans les micro-réseaux maillés en mode connecté au réseau",
+      "page_start": 85,
+      "level": 2,
+      "page_end": 86,
+      "role": "section",
+      "page_start_parquet": 86,
+      "page_end_parquet": 87
+    },
+    {
+      "title": "2.5.2. Validation de la commande Droop non-linéaire des DGs du micro-réseau connecté au réseau par la simulation temps réel Hardware-In-the-Loop",
+      "page_start": 87,
+      "level": 2,
+      "page_end": 87,
+      "role": "section",
+      "page_start_parquet": 88,
+      "page_end_parquet": 88
+    },
+    {
+      "title": "2.5.3. Étude de robustesse du contrôle du micro-réseau maillé dans les modes de fonctionnement îloté et connecté au réseau",
+      "page_start": 87,
+      "level": 2,
+      "page_end": 88,
+      "role": "section",
+      "page_start_parquet": 88,
+      "page_end_parquet": 89
+    },
+    {
+      "title": "2.6. Conclusion",
+      "page_start": 89,
+      "level": 1,
+      "page_end": 91,
+      "role": "section",
+      "page_start_parquet": 90,
+      "page_end_parquet": 92
+    },
+    {
+      "title": "Contrôles primaires et secondaires distribués basés sur le consensus dans les micro-réseaux maillés îlotés.",
+      "page_start": 92,
+      "level": 0,
+      "page_end": 132,
+      "role": "part",
+      "page_start_parquet": 93,
+      "page_end_parquet": 133
+    },
+    {
+      "title": "3.1. Introduction",
+      "page_start": 93,
+      "level": 1,
+      "page_end": 94,
+      "role": "section",
+      "page_start_parquet": 94,
+      "page_end_parquet": 95
+    },
+    {
+      "title": "3.2. Contrôle primaire distribué",
+      "page_start": 95,
+      "level": 1,
+      "page_end": 102,
+      "role": "section",
+      "page_start_parquet": 96,
+      "page_end_parquet": 103
+    },
+    {
+      "title": "3.2.1. Partage de la puissance à l'aide de stratégies de commande Droop",
+      "page_start": 95,
+      "level": 2,
+      "page_end": 95,
+      "role": "section",
+      "page_start_parquet": 96,
+      "page_end_parquet": 96
+    },
+    {
+      "title": "3.2.2. Stratégie de commande Droop basée sur le consensus pour le partage de la puissance",
+      "page_start": 96,
+      "level": 2,
+      "page_end": 98,
+      "role": "section",
+      "page_start_parquet": 97,
+      "page_end_parquet": 99
+    },
+    {
+      "title": "3.2.3. Résultats des simulations",
+      "page_start": 99,
+      "level": 2,
+      "page_end": 100,
+      "role": "section",
+      "page_start_parquet": 100,
+      "page_end_parquet": 101
+    },
+    {
+      "title": "3.2.4. Robustesse du contrôle primaire",
+      "page_start": 101,
+      "level": 2,
+      "page_end": 101,
+      "role": "section",
+      "page_start_parquet": 102,
+      "page_end_parquet": 102
+    },
+    {
+      "title": "3.2.5. Validation à l'aide de simulations en temps réel Hardware In the Loop",
+      "page_start": 101,
+      "level": 2,
+      "page_end": 101,
+      "role": "section",
+      "page_start_parquet": 102,
+      "page_end_parquet": 102
+    },
+    {
+      "title": "3.2.6. Effets du contrôle primaire sur la fréquence et l'amplitude de la tension du micro-réseau",
+      "page_start": 102,
+      "level": 2,
+      "page_end": 102,
+      "role": "section",
+      "page_start_parquet": 103,
+      "page_end_parquet": 103
+    },
+    {
+      "title": "3.3. Contrôle secondaire distribué",
+      "page_start": 103,
+      "level": 1,
+      "page_end": 112,
+      "role": "section",
+      "page_start_parquet": 104,
+      "page_end_parquet": 113
+    },
+    {
+      "title": "3.3.1. Régulation de fréquence distribuée et partage de la puissance active",
+      "page_start": 104,
+      "level": 2,
+      "page_end": 106,
+      "role": "section",
+      "page_start_parquet": 105,
+      "page_end_parquet": 107
+    },
+    {
+      "title": "3.3.2. Régulation de tension distribuée et partage de la puissance réactive",
+      "page_start": 107,
+      "level": 2,
+      "page_end": 109,
+      "role": "section",
+      "page_start_parquet": 108,
+      "page_end_parquet": 110
+    },
+    {
+      "title": "3.3.3. Robustesse du contrôle secondaire de la fréquence et de la tension",
+      "page_start": 110,
+      "level": 2,
+      "page_end": 112,
+      "role": "section",
+      "page_start_parquet": 111,
+      "page_end_parquet": 113
+    },
+    {
+      "title": "3.4. Impact des délais de communication sur la stabilité du micro-réseau",
+      "page_start": 113,
+      "level": 1,
+      "page_end": 115,
+      "role": "section",
+      "page_start_parquet": 114,
+      "page_end_parquet": 116
+    },
+    {
+      "title": "3.5. Modélisation du système pour son analyse de stabilité",
+      "page_start": 116,
+      "level": 1,
+      "page_end": 129,
+      "role": "section",
+      "page_start_parquet": 117,
+      "page_end_parquet": 130
+    },
+    {
+      "title": "3.5.2. Stabilité du micro-réseau maillé et analyse de robustesse de son contrôle primaire avec consensus",
+      "page_start": 118,
+      "level": 2,
+      "page_end": 128,
+      "role": "section",
+      "page_start_parquet": 119,
+      "page_end_parquet": 129
+    },
+    {
+      "title": "3.5.2.1. Valeurs propres de la matrice jacobienne",
+      "page_start": 118,
+      "level": 3,
+      "page_end": 119,
+      "role": "section",
+      "page_start_parquet": 119,
+      "page_end_parquet": 120
+    },
+    {
+      "title": "3.5.2.2. Influence des paramètres des lignes électriques sur la stabilité du micro-réseau",
+      "page_start": 120,
+      "level": 3,
+      "page_end": 120,
+      "role": "section",
+      "page_start_parquet": 121,
+      "page_end_parquet": 121
+    },
+    {
+      "title": "3.5.2.3. Influence des paramètres de contrôle sur la stabilité du micro-réseau",
+      "page_start": 121,
+      "level": 3,
+      "page_end": 126,
+      "role": "section",
+      "page_start_parquet": 122,
+      "page_end_parquet": 127
+    },
+    {
+      "title": "3.5.2.4. Influence des variations de charges sur la stabilité du micro-réseau",
+      "page_start": 127,
+      "level": 3,
+      "page_end": 128,
+      "role": "section",
+      "page_start_parquet": 128,
+      "page_end_parquet": 129
+    },
+    {
+      "title": "3.5.3. Analyse de la stabilité du contrôle secondaire",
+      "page_start": 129,
+      "level": 2,
+      "page_end": 129,
+      "role": "section",
+      "page_start_parquet": 130,
+      "page_end_parquet": 130
+    },
+    {
+      "title": "3.5.3.1. Modélisation du système pour son analyse de stabilité",
+      "page_start": 129,
+      "level": 3,
+      "page_end": 129,
+      "role": "section",
+      "page_start_parquet": 130,
+      "page_end_parquet": 130
+    },
+    {
+      "title": "3.6. Conclusion",
+      "page_start": 130,
+      "level": 1,
+      "page_end": 132,
+      "role": "section",
+      "page_start_parquet": 131,
+      "page_end_parquet": 133
+    },
+    {
+      "title": "Conclusion générale",
+      "page_start": 133,
+      "level": 0,
+      "page_end": 136,
+      "role": "backmatter",
+      "page_start_parquet": 134,
+      "page_end_parquet": 137
+    },
+    {
+      "title": "Liste des publications",
+      "page_start": 137,
+      "level": 0,
+      "page_end": 137,
+      "role": "backmatter",
+      "page_start_parquet": 138,
+      "page_end_parquet": 138
+    },
+    {
+      "title": "Publications dans des journaux internationaux à comité de lecture",
+      "page_start": 138,
+      "level": 0,
+      "page_end": 138,
+      "role": "other",
+      "page_start_parquet": 139,
+      "page_end_parquet": 139
+    },
+    {
+      "title": "Communications, participation congrès, colloques, séminaires",
+      "page_start": 138,
+      "level": 0,
+      "page_end": 140,
+      "role": "other",
+      "page_start_parquet": 139,
+      "page_end_parquet": 141
+    },
+    {
+      "title": "Bibliographie",
+      "page_start": 141,
+      "level": 0,
+      "page_end": 150,
+      "role": "backmatter",
+      "page_start_parquet": 142,
+      "page_end_parquet": 151
+    },
+    {
+      "title": "Abstract",
+      "page_start": 151,
+      "level": 0,
+      "page_end": 151,
+      "role": "frontmatter",
+      "page_start_parquet": 152,
+      "page_end_parquet": 152
+    },
+    {
+      "title": "Résumé",
+      "page_start": 152,
+      "level": 0,
+      "page_end": 152,
+      "role": "frontmatter",
+      "page_start_parquet": 153,
+      "page_end_parquet": 153
+    }
+  ],
+  "page_offset": {
+    "intro_page_toc": 18,
+    "intro_page_parquet": 19,
+    "offset": 1,
+    "method": "printed-folio"
+  },
+  "toc_validation": {
+    "issues": [],
+    "ok": true
+  }
+}

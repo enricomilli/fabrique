@@ -1,0 +1,14 @@
+| section | score | gaps | refs |
+|---|---|---|---|
+| these_centrale | 8 | La formulation est solide mais manque la nuance sur la spécificité de Girsu par rapport aux autres provinces (Umma) soulignée dans la conclusion | 10. Conclusion ; 4.4 Girsu/Lagaš sous Ur III |
+| questions_recherche | 9 | Les questions sont bien identifiées, mais la question sur la nature exacte de l'intégration (volontaire vs forcée) pourrait être plus explicitement formulée comme question centrale | 1. Introduction ; 1.3 Questions de parenté et de filiation |
+| reponses_questions | 7 | La réponse sur le terme *dumu* est présente mais pourrait être enrichie par la distinction précise entre lien biologique et putatif développée dans le corps | 1.3.2 Exprimer la filiation sous la troisième dynastie d'Ur ; 6.7.2 Les fils d'Ur-Lamma |
+| hypotheses | 7 | Les hypothèses sont listées, mais l'hypothèse sur la continuité administrative malgré les ruptures dynastiques pourrait être plus explicitement liée aux données prosopographiques | 1.4 La prosopographie ; 10. Conclusion |
+| methodologie | 9 | La méthode est bien décrite, mais le détail sur la gestion de l'homonymie et la reconstitution des fonds d'archives pourrait être plus précis | 1.4.2 Problèmes d'homonymie ; 2. Les sources textuelles |
+| fil_rouge | 8 | Le fil rouge est bien identifié (agentivité), mais le lien avec la structure administrative centrale (Puzriš-Dagan) pourrait être mentionné | 3.2.4 Le centre de Puzriš-Dagan ; 10. Conclusion |
+| plan | 9 | Le plan est bien résumé, mais la distinction entre les dynasties antérieures et la période Ur III dans la Partie I pourrait être plus claire | 4. Les dynasties de Lagaš ; 1. Introduction |
+| cadre_theorique | 8 | Les cadres sont bien identifiés, mais l'articulation entre prosopographie et anthropologie de la parenté pourrait être plus explicitement décrite | 1.4 La prosopographie ; 1.3.1 Qu'est-ce que la parenté ? |
+| concepts_cles | 7 | Les concepts sont bien définis, mais le concept de *e2-dul-la* pourrait être approfondi avec ses implications juridiques | 6.9 L'e2-du6-la : une propriété saisie par le pouvoir central ? ; 1.3.2 Exprimer la filiation sous la troisième dynastie d'Ur |
+| ancrage_empirique | 8 | Les données empiriques sont bien présentées, mais la typologie des textes (administratifs, judiciaires, etc.) pourrait être plus détaillée | 2.2 Typologie des sources ; 2.1 Provenance des sources : les sites archéologiques |
+| opposition | 9 | Les oppositions sont bien identifiées, mais la position de Maekawa pourrait être nuancée avec plus de détails sur les preuves contradictoires | 6.9 L'e2-du6-la : une propriété saisie par le pouvoir central ? ; 10. Conclusion |
+| apport_principal | 8 | L'apport est bien résumé, mais la portée théorique de l'agentivité féminine pourrait être plus explicitement liée aux débats actuels en histoire sociale | 10. Conclusion ; 5.5 La famille de Lu-Kirizal |

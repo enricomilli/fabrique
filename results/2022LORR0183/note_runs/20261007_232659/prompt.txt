@@ -1,0 +1,275 @@
+Tu rédiges une NOTE DE LECTURE (compte rendu universitaire) d'une thèse de doctorat, dans la tradition académique française.
+
+La variable `context` (déjà chargée) contient le texte intégral de la thèse.
+
+## Format du blob `context`
+
+- Des marqueurs de page `[p.NNN]` sont insérés à chaque changement de page. Pour trouver le numéro de page d'un extrait, cherche sa position avec `.find()`, puis remonte jusqu'au marqueur `[p.NNN]` le plus proche.
+- Les notes de bas de page sont préfixées `[fn]` et placées à la fin de chaque page. Elles contiennent souvent les références scientifiques internes de la thèse.
+- Exemple de snippet pour trouver la page d'une phrase donnée :
+```python
+phrase = "conditions d'acceptabilité"
+pos = context.find(phrase)
+# remonter au dernier marqueur [p.XXX] avant pos
+marker_start = context.rfind("[p.", 0, pos)
+marker_end = context.find("]", marker_start) + 1
+page_tag = context[marker_start:marker_end]   # e.g. "[p.21]"
+print(f"Phrase « {phrase} » → {page_tag}")
+```
+
+
+## CARTE DE LA THÈSE (index de navigation)
+
+Index hiérarchique issu de la table des matières. Les pages sont les
+numéros des marqueurs `[p.NNN]` du blob `context` — pour atteindre
+directement un chapitre, saute à son marqueur :
+```python
+pos = context.find("[p.236]")     # début du chapitre visé
+extrait = context[pos:pos+3000]
+```
+ATTENTION : ne cherche PAS un titre de chapitre avec `context.find("titre")`
+— tu risques de tomber sur la table des matières de la thèse elle-même.
+Utilise toujours le saut par marqueur de page ci-dessous.
+
+- Liste des figures  [p.10]–[p.16]
+- Liste des tables  [p.17]–[p.18]
+- Introduction générale  [p.19]–[p.22]
+- Etat de l'art  [p.23]–[p.43]
+  - 1.1. Micro-réseaux  [p.24]–[p.25]
+  - 1.2. Contrôle des micro-réseaux  [p.26]–[p.28]
+  - 1.3. Contrôle local d'un générateur distribué (DG)  [p.29]–[p.41]
+  - 1.4. Conclusion  [p.42]–[p.43]
+- Micro-réseaux multi-sources maillés : Equirépartition des puissances et synchronisation  [p.44]–[p.92]
+  - 2.1. Introduction  [p.45]–[p.47]
+  - 2.2. Stratégies de contrôle de micro-réseaux maillés îlotés  [p.48]–[p.65]
+  - 2.3. Modélisation du système pour son analyse de stabilité  [p.66]–[p.70]
+  - 2.4. Etude de la stabilité du micro-réseau maillé basée sur son modèle d'état  [p.71]–[p.85]
+  - 2.5. Synchronisation et partage des puissances dans les micro-réseaux maillés en mode connecté au réseau  [p.86]–[p.89]
+  - 2.6. Conclusion  [p.90]–[p.92]
+- Contrôles primaires et secondaires distribués basés sur le consensus dans les micro-réseaux maillés îlotés.  [p.93]–[p.133]
+  - 3.1. Introduction  [p.94]–[p.95]
+  - 3.2. Contrôle primaire distribué  [p.96]–[p.103]
+  - 3.3. Contrôle secondaire distribué  [p.104]–[p.113]
+  - 3.4. Impact des délais de communication sur la stabilité du micro-réseau  [p.114]–[p.116]
+  - 3.5. Modélisation du système pour son analyse de stabilité  [p.117]–[p.130]
+  - 3.6. Conclusion  [p.131]–[p.133]
+- Conclusion générale  [p.134]–[p.137]
+- Liste des publications  [p.138]–[p.138]
+- Publications dans des journaux internationaux à comité de lecture  [p.139]–[p.139]
+- Communications, participation congrès, colloques, séminaires  [p.139]–[p.141]
+- Bibliographie  [p.142]–[p.151]
+- Abstract  [p.152]–[p.152]
+- Résumé  [p.153]–[p.153]
+
+Tu disposes aussi, ci-dessous, de deux ressources dans ton prompt :
+  1. La FICHE structurée de la thèse — ton plan de travail, ce que tu dois couvrir
+  2. Un EXEMPLE DE STYLE — le registre, la longueur et le flux que tu dois imiter
+
+## Règles de référence
+
+**Auteurs externes (hors thèse) : STRICTEMENT INTERDITS.** Ne cite aucun auteur, ouvrage ou revue qui ne figure pas dans le texte de la thèse. Si un compte rendu standard écrirait « comme le montre Habermas » ou « selon Bourdieu » alors que ni Habermas ni Bourdieu n'est cité par l'auteur de la thèse, tu reformules sans nommer.
+
+**Auteurs internes (cités PAR la thèse) : autorisés sous condition.** Si tu veux nommer un auteur que la thèse elle-même mobilise (ex. Foucault, Moretti, Bakhtine, Lavoinne, Tetlock), tu DOIS :
+  1. Vérifier via `context.find("Nom")` qu'il est bien présent dans la thèse — SAUF si l'auteur figure déjà dans la FICHE avec une citation et une page : dans ce cas reprends l'ancrage de la fiche tel quel, sans revérification.
+  2. Accompagner la mention d'une courte citation verbatim (entre guillemets « ») extraite de la thèse.
+  3. Indiquer le numéro de page, obtenu via la méthode du marqueur `[p.NNN]` décrite ci-dessus.
+  Exemple : « Comme le rappelle Lavoinne, "cette croissance n'est pas justifiée économiquement" (p. 34). »
+
+**Chapitres et passages de la thèse** : cite-les librement (ex. « dans le premier chapitre », « p. 612 »). Les pages doivent être vérifiées via les marqueurs `[p.NNN]` — JAMAIS une position en caractères (offset à 4+ chiffres).
+
+**Notes de bas de page** : tu n'en rédiges pas dans la note. Les `[fn]` du blob sont uniquement un outil de recherche pour toi.
+
+**Cible : au moins 8 références de page précises dans la note finale** pour étayer tes affirmations.
+
+## Structure à produire (~2000 mots)
+
+```markdown
+# [Titre complet de la thèse, en italique après l'auteur]
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-10-07
+
+**Référence :** [Auteur], *[Titre]*, [Établissement], [Année], [Nombre de pages] p.
+
+---
+
+[Paragraphe 1 — Ouverture (~250 mots) : situe la thèse, l'auteur, la discipline,
+la période étudiée, la thèse centrale, le corpus principal. Annonce le fil
+directeur et la périodisation.]
+
+[Paragraphe 2 — Méthodologie et démarche (~300 mots) : approche,
+outillage, corpus, sondages, corpus contextuels. Souligne l'originalité
+méthodologique.]
+
+[Paragraphe 3 — Première partie ou premier axe (~350 mots) : en citant les pages.]
+
+[Paragraphe 4 — Deuxième partie ou deuxième axe (~300 mots).]
+
+[Paragraphe 5 — Troisième partie ou troisième axe (~350 mots).]
+
+[Paragraphe 6 — Portée, apport et tensions (~300-400 mots) : synthèse
+critique. L'apport empirique, théorique, méthodologique. Les tensions,
+les limites. Ouverture sur ce que la thèse permet de penser.]
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de [Titre court] », [Date].
+```
+
+## Consignes RLM
+
+- **Les pages et citations de la FICHE ont déjà été vérifiées automatiquement contre la source.** Reprends-les telles quelles, SANS les revérifier via `context.find(...)`. Ne vérifie que ce que tu introduis TOI-MÊME et qui ne figure pas dans la fiche (nouvel auteur, nouvelle citation, nouvelle page).
+- Si tu as besoin d'un passage spécifique, utilise `context[start:end]` ou `context.find("phrase")` pour le localiser, puis extrait une tranche de 500-1500 caractères autour.
+- **Travaille en LOTS SERRÉS** : toute l'exploration initiale (squelette : introduction, méthodologie, ouvertures de parties, conclusion, exemples fondateurs) doit tenir en AU PLUS 3 exécutions de code, chacune extrayant PLUSIEURS passages d'un coup (5 à 8 extraits par exécution). Jamais une exécution par passage. Les extractions complémentaires entre les passes de rédaction (cœur des parties) comptent à part : au plus 1 exécution d'extraction par passe de rédaction.
+- **LIAISON PAGE-EXTRAIT (obligatoire dans les lots)** : quand une exécution imprime plusieurs extraits, fais-la précéder CHAQUE extrait d'une ligne `===== EXTRAIT [p.N] → [p.M] =====` (les marqueurs réels de début et de fin de l'extrait). Au moment de citer, reprends le numéro depuis la ligne `=====` ou le marqueur `[p.N]` visible IMMÉDIATEMENT au-dessus du passage cité — jamais de mémoire. Une citation dont tu ne retrouves pas le marqueur exact dans tes sorties ne doit PAS porter de numéro de page.
+- **RÉDACTION EN PLUSIEURS PASSES (OBLIGATOIRE)** : ne rédige JAMAIS la note entière en une seule exécution. Rédige AU PLUS 2 paragraphes par exécution de code. Avant de rédiger les paragraphes 3, 4 et 5, extrais d'abord de NOUVEAUX passages du cœur de la partie concernée (pas seulement son ouverture) — puis rédige. Assemble le tout à la fin seulement.
+- **CITATION ET AFFIRMATION CO-PRÉSENTES** : une citation verbatim « … » (p. N) ne peut étayer QUE l'affirmation du passage d'où elle provient (le texte visible sous le même marqueur `[p.N]`). N'emploie JAMAIS une phrase de la thèse pour un argument qu'elle ne porte pas dans son contexte d'origine (une hypothèse formulée sur X ne sert pas à commenter Y ; un nom de fonction, de concept ou de liste se reprend tel que le passage le donne, sans le recomposer). Si une affirmation a besoin d'un appui, va chercher le passage qui la porte et cite-le avec sa propre page.
+- **Densité d'ancrage** : chaque paragraphe de partie (3, 4 et 5) doit citer AU MOINS 3 pages distinctes. Une partie racontée sans pages précises est un paragraphe raté.
+- Ne saute pas les exemples fondateurs que la fiche met en avant (comparaison inaugurale, cas paradigmatique, date fondatrice) : s'ils motivent la thèse, ils appartiennent à la note.
+- `llm_query` est réservé aux RECHERCHES ponctuelles (localiser un thème, résumer un long passage pour toi-même). NE L'UTILISE JAMAIS pour rédiger les paragraphes de la note : la rédaction se fait TOI-MÊME, dans cette boucle, avec les marqueurs `[p.NNN]` sous les yeux — c'est la seule façon de garantir des numéros de page exacts.
+- À la fin, assemble le markdown complet dans une variable puis appelle `FINAL(markdown_complet)`.
+
+## FICHE DE LA THÈSE
+
+```markdown
+# FICHE DE SYNTHÈSE DE THÈSE
+
+## Métadonnées
+
+- **Titre** : Electrical networks in the presence of distributed energy generation - Réseaux électriques en présence de génération d'énergies distribuée
+- **Auteur** : Youssef HENNANE
+- **Année** : 2022
+- **Établissement** : Université de Lorraine, Université Hassan II, LEMTA, ENSEM
+- **Discipline** : Energie et mécanique, Génie électrique
+- **Pages** : 153
+
+## Mots-clés
+
+** Distributed Generators ; Distributed Control ; Secondary control ; Islanded Microgrids ; Grid-connected Microgrids ; Droop control ; Power sharing ; stability analysis ; real-time hardware-in-the-loop implementation
+
+## Thèse centrale
+
+Le contrôle précis des micro-réseaux maillés, qu'ils soient îlotés ou connectés, est assuré par une stratégie de commande Droop non linéaire couplée à un contrôle secondaire tertiaire, puis par une approche distribuée fondée sur la théorie du consensus pour éliminer la dépendance à un nœud pilote (p. 135-136). Ces architectures garantissent l'équirépartition des puissances active et réactive, la synchronisation sans à-coup et le rétablissement des grandeurs nominales, tout en maintenant une robustesse démontrée face aux variations de topologie, aux délais de communication et aux charges à puissance constante (p. 135-136). La validité et la stabilité de ces stratégies sont confirmées par des modèles d'état validés et des tests hardware in the loop (p. 135-136). Le déploiement de ces topologies maillées multi-PCC permet de réduire la taille et le coût des systèmes de stockage nécessaires dans les zones rurales et isolées, tout en facilitant l'accès à l'électricité (p. 152).
+
+## Questions de recherche
+
+- Comment assurer le partage précis des puissances active et réactive ainsi que la synchronisation des sources distribuées dans des micro-réseaux à topologie maillée et reconfigurable ? (p. 20)
+- Comment garantir la stabilité et la robustesse des contrôles distribués face aux variations de charges et aux modifications topologiques, tant en mode îloté qu'en mode connecté au réseau ? (p. 20-21)
+- Comment surmonter la dépendance à une information unique du nœud pilote pour le partage de puissance, en se basant sur un échange d'informations entre générateurs voisins ? (p. 21)
+
+## Réponses aux questions de recherche
+
+- Comment assurer le partage précis des puissances active et réactive ainsi que la synchronisation des sources distribuées dans des micro-réseaux à topologie maillée et reconfigurable ? : « une stratégie de contrôle non-linéaire à base de Droop a été proposée et appliquée pour la synchronisation et le partage des puissances active et réactive entre les DGs d'un micro-réseau îloté multi-PCC maillé » (p. 135). Cette commande est ensuite adaptée pour le mode connecté et intègre des termes supplémentaires pour le réglage tertiaire (p. 135).
+- Comment garantir la stabilité et la robustesse des contrôles distribués face aux variations de charges et aux modifications topologiques, tant en mode îloté qu'en mode connecté au réseau ? : « La robustesse de la stratégie de contrôle proposée, par rapport aux changements de la topologie et variations brusques des puissances des charges, est également vérifiée avec succès dans les deux modes de fonctionnement îloté ou connecté au réseau » (p. 135). L'analyse de stabilité via les valeurs propres de la matrice jacobienne montre que les paramètres les plus influents sont « les paramètres de contrôle Droop des DGs et la puissance active des charges à puissance constante (CPL) » (p. 135).
+- Comment surmonter la dépendance à une information unique du nœud pilote pour le partage de puissance, en se basant sur un échange d'informations entre générateurs voisins ? : « en se basant sur cette approche basée le consensus, le contrôle de chaque DG du micro-réseau maillé ne nécessite qu'une communication à bas débit afin de connaitre la tension de sortie des DGs voisins » (p. 136). De plus, « même en cas de perte d'une information sur la tension de sortie d'un DG, les commandes Droop proposée pour les DGs assurent le partage des puissances consommée entre les DGs » (p. 136).
+
+## Hypothèses
+
+**Principale** : Une stratégie de contrôle de « Droop » non linéaire permet le partage précis des puissances active et réactive des DGs et leur synchronisation au micro-réseau maillé pour garantir la fonction « plug and play » (p. 20). Vérifiée : « Cette approche de contrôle Droop permet également d'intégrer le contrôle primaire, secondaire et tertiaire des micro-réseaux en agissant sur le contrôle des convertisseurs de puissance associés à ces DGs » (p. 135).
+**Secondaires** :
+- L'ajout d'un contrôleur tertiaire centralisé utilisant les informations du nœud pilote permet de contrôler indépendamment les puissances échangées avec le réseau principal sans affecter le partage interne (p. 21). Vérifiée : « des termes supplémentaires sont ajoutés à la commande Droop non-linéaire initiale pour assurer le réglage tertiaire afin de contrôler les puissances actives et réactives échangées avec le réseau principal » (p. 135).
+- Un contrôle primaire et secondaire distribué basé sur la théorie du consensus et un réseau de communication à faible débit assure un partage de puissance précis et le rétablissement de la tension et de la fréquence sans dépendre d'une information centrale unique (p. 21). Vérifiée : « un contrôle secondaire basé sur le consensus pour rétablir la fréquence et la tension de chaque DG à leurs valeurs nominales sans affecter les propriétés de partage de la puissance est également proposé » (p. 136).
+
+## Méthodologie
+
+- **Approche** : Ingénierie des systèmes de puissance et automatique, axée sur la modélisation, la commande et la validation expérimentale de micro-réseaux électriques alternatifs (p. 20).
+- **Méthode** : Développement et comparaison de lois de contrôle décentralisées et distribuées (méthode du statisme/« Droop » non linéaire et algorithmes de consensus pour les réglages primaire, secondaire et tertiaire) (p. 20-21). Validation par simulations (Simscape/Matlab), tests en temps réel (hardware in the loop avec Dspace et OPAL-RT), et analyse de stabilité via des modèles d'état globaux (p. 20-21). La conception des régulateurs est effectuée localement sans besoin de connaissance de la topologie du micro-réseau (p. 136). L'efficacité des contrôles proposés est prouvée par simulation et validée par des tests HIL (p. 152).
+- **Corpus/Données** : Micro-réseaux maillés alternatifs à plusieurs générateurs distribués (DGs), lignes électriques et charges, étudiés en mode îloté et connecté au réseau principal (p. 20-21). Modélisation mathématique de deux micro-réseaux maillés différents contrôlés par les deux commandes distribuées proposées (p. 152).
+- **Justification** : Les méthodes de contrôle existantes sont plus efficaces pour les micro-réseaux mono-PCC, laissant un besoin critique de solutions adaptées aux topologies maillées complexes et reconfigurables pour assurer stabilité et partage de puissance (p. 20). La nature intermittente des énergies renouvelables en mode îloté nécessite des éléments de stockage coûteux dans les topologies simples, justifiant le passage à des structures maillées multi-PCC pour une disponibilité énergétique accrue avec un coût réduit (p. 152).
+
+## Fil rouge
+
+Le contrôle distribué des générateurs (DGs) tel que défini par l'auteur (p. 135-136), reliant l'état de l'art à la commande Droop non linéaire puis à l'approche par consensus, via l'articulation progressive de la précision du partage de puissance et de la stabilité de la tension/fréquence dans les topologies maillées.
+
+## Plan (Structure)
+
+- **Etat de l'art** : Démontre que les méthodes de contrôle existantes sont majoritairement efficaces pour les micro-réseaux mono-PCC, justifiant ainsi le développement de stratégies dédiées aux architectures maillées (p. 20).
+- **Micro-réseaux multi-sources maillés : Equirépartition des puissances et synchronisation** : Démontre qu'une stratégie de « Droop » non linéaire couplée à un contrôleur tertiaire centralisé assure un partage précis des puissances, la synchronisation sans à-coup et la robustesse face aux variations topologiques en modes îloté et connecté (p. 20-21).
+- **Contrôles primaires et secondaires distribués basés sur le consensus dans les micro-réseaux maillés îlotés.** : Démontre qu'une approche fondée sur la théorie du consensus et un réseau de communication à faible débit permet de surmonter la dépendance au nœud pilote, en assurant un partage de puissance précis et le rétablissement distribué de la tension et de la fréquence (p. 21).
+
+## Cadre théorique
+
+- **Cadre principal** : Théorie du contrôle des systèmes de puissance (méthode du statisme/« Droop » et théories de consensus) (p. 20-21) — Structure l'analyse globale en fournissant les formalismes mathématiques pour le réglage primaire, secondaire et tertiaire des micro-réseaux maillés.
+- **Cadres secondaires** :
+  - Analyse de stabilité par modélisation d'état (p. 20-21) — Permet d'étudier la robustesse des contrôles distribués en intégrant dynamiquement lignes, charges et générateurs. Les valeurs propres de la matrice jacobienne du modèle d'état permettent d'analyser la stabilité du système non linéaire à chaque point de fonctionnement (p. 135).
+  - Validation par hardware in the loop (Dspace/OPAL-RT) (p. 20) — Sert de cadre expérimental pour prouver l'efficacité et la faisabilité temps réel des stratégies proposées.
+  - Théorie des graphes et réseaux de communication (p. 21) — Fournit le cadre d'échange d'informations entre DGs voisins nécessaire à l'algorithme de consensus.
+
+## Concepts clés
+
+- **CONCEPT** : MICRO-RÉSEAUX MAILLÉS
+- **SENS** : « regroupement de plusieurs unités de production distribuées et de systèmes de stockage interconnectés par des lignes électriques alimentant les différentes charges qui y sont connectés » fonctionnant avec « des topologies plus évoluées à structure maillée avec plusieurs sources distribuées de natures différentes » (p. 20)
+- **ORIGINE** : propre à l'auteur (retravail des concepts de micro-réseaux et de topologies maillées pour l'application aux systèmes alternatifs)
+- **CONCEPT** : DROOP NON LINÉAIRE
+- **SENS** : « stratégie de contrôle de "Droop" non linéaire pour le partage précis des puissances active et réactive des DGs ainsi que leurs synchronisations au micro-réseau maillés » (p. 20)
+- **ORIGINE** : emprunté à la terminologie anglo-saxonne du statisme (p. 20) et retravaillé par l'auteur sous forme non linéaire pour les topologies maillées
+- **CONCEPT** : CONTRÔLE PAR CONSENSUS
+- **SENS** : « approche assurant le contrôle distribué des DGs des micro-réseaux en se basant sur la théorie de consensus adaptée pour le contrôle des micro-réseaux maillés îlotés » via « un réseau de communication à faible débit permettant l'échange d'informations entre les DGs voisins » (p. 21)
+- **ORIGINE** : emprunté à la théorie du consensus et adapté par l'auteur au réglage primaire et secondaire des micro-réseaux
+- **CONCEPT** : MICRO-RÉSEAUX MULTI-PCC
+- **SENS** : « microgrids with mesh structure topologies with several distributed sources of different natures connected to its different connection points » (p. 152)
+- **ORIGINE** : propre à l'auteur (spécification des micro-réseaux maillés à plusieurs points de connexion pour optimiser le stockage et la disponibilité énergétique)
+
+## Ancrage empirique (ou concret)
+
+- Validation par simulations sous Simscape (Matlab) et tests en temps réel (hardware in the loop) avec Dspace et OPAL-RT pour les stratégies de « Droop » non linéaire (p. 20).
+- Développement et validation de modèles d'état globaux intégrant lignes électriques, charges et générateurs avec contrôleurs, utilisés pour l'analyse de stabilité et de robustesse en modes îloté et connecté (p. 20-21).
+- Étude comparative des commandes distribuées du chapitre 2 et du chapitre 3 pour le réglage primaire et le partage des puissances active et réactive (p. 21).
+- Tests considérant différentes valeurs du délai de communication mettant en évidence que la stratégie proposée est « suffisamment robuste face au retard de communication pour être appliquée de manière pratique » (p. 135).
+- Modélisation mathématique et analyse de stabilité de deux micro-réseaux maillés distincts contrôlés par les deux approches distribuées proposées (p. 152).
+
+## Opposition / Contre-argumentation
+
+- Les méthodes de contrôle existantes (décentralisées, centralisées, classiques) : « la plupart des méthodes de contrôle existantes sont souvent plus efficaces dans le cas des micro-réseaux mono-PCC (non maillés) » (p. 20) — Lacune de la littérature justifiant le besoin de nouvelles stratégies pour les topologies maillées.
+- La dépendance à une information centrale unique : « Le point faible de la stratégie de contrôle de "Droop" non linéaire proposée... est sa dépendance à une information unique du nœud pilote pour assurer le partage précis des puissances entre les DGs » (p. 21) — Limite technique identifiée et surmontée par la méthode de consensus.
+- Complexité des impédances de ligne : « elles ne sont souvent pas efficaces pour le contrôle des micro-réseaux maillés, et notamment pour le partage des puissances entre leurs DGs, en raison des complexités et des couplages introduites par les impédances non-négligeables des lignes interconnectant les différents nœuds » (p. 135) — Résultat confirmé par l'auteur expliquant l'échec des méthodes classiques.
+
+## Apport principal
+
+- **Méthodologique** : Développement d'une stratégie de « Droop » non linéaire et d'une approche de contrôle distribué basée sur le consensus, spécifiquement adaptées aux micro-réseaux maillés à topologie complexe et reconfigurable (p. 20-21). La conception des régulateurs est effectuée localement sans besoin de connaissance de la topologie du micro-réseau (p. 136).
+- **Empirique** : Validation expérimentale en temps réel (hardware in the loop) et modélisation d'état complète intégrant lignes, charges et générateurs, prouvant la robustesse et la stabilité du partage de puissance et de la synchronisation en modes îloté et connecté (p. 20-21). Les tests confirment la robustesse face aux délais de communication et aux variations brusques de charges (p. 135).
+- **Théorique** : Extension de la théorie du consensus au réglage primaire et secondaire des micro-réseaux maillés, permettant de supprimer la dépendance au nœud pilote et d'assurer le rétablissement distribué de la tension et de la fréquence (p. 21). L'analyse de stabilité identifie précisément les paramètres critiques (paramètres Droop et charges CPL) influençant la stabilité du système non linéaire (p. 135). Démonstration que les architectures multi-PCC maillées réduisent la dépendance aux grands systèmes de stockage face à l'intermittence des énergies renouvelables en zones isolées (p. 152).
+
+```
+
+## EXEMPLE DE STYLE (à imiter pour le registre, la longueur des paragraphes, le flux)
+
+```markdown
+# [Titre complet de l'ouvrage : nom des directeurs et titre/sous-titre en italique]
+
+**Compte rendu par** [Auteur du compte rendu]
+
+**Date :** 2026-04-24
+
+**Source :** [URL si disponible]
+
+**Référence :** [Auteur·e·s], *Titre complet*, Ville, Éditeur, coll. « Collection », année, xxx p., ISBN : xxx.
+
+---
+
+Quatorze auteurs, parmi lesquels des sociologues clés de l'analyse du secteur social et médico-social analysent, dans cet ouvrage important, les transformations de la « morale » de l'intervention sociale de divers pays (France dont Mayotte, Suisse, Maroc, Québec), ceci à la suite d'un congrès sociologique international tenu à Tunis en 2021. Le texte décrit les tensions traversant l'intervention sociale, entre idéaux de justice sociale, d'égalité et de solidarisme d'une part, et les principes de responsabilisation et d'activation dans un contexte marqué par l'emprise croissante d'une logique managériale, d'autre part. Disons-le d'emblée, le principe de « responsabilisation » mérite d'être interrogé : il renvoie généralement non pas tant à un transfert de pouvoir aux usagers ou citoyens, comme il l'affirme, mais souvent à une « normalisation » du contrôle social reposant, désormais, sur l'individu lui-même. C'est notamment le cas dans les dispositifs de parentalité ou dans la justice restaurative, où la volonté des individus devient l'opérateur du contrôle social.
+
+Notre lecture questionne implicitement les mots-clefs contemporains de l'intervention sociale que sont « responsabiliser » et « activer ». Ces termes sont aussi les items centraux de la Nouvelle Gouvernance Publique (NGP), laquelle tend, pour l'action sociale, à substituer la « relation de service » reposant sur l'efficience et le résultat au « modèle de service public d'action » fondateur. S'impose, alors, un glissement progressif vers un paradigme managérial qui met la focale sur les difficultés de financement, d'efficacité, la qualité du service et le questionnement de la légitimité de l'État social.
+
+Dans le premier chapitre, Jean-Pierre Tabin et ses collègues explorent, à partir de la rhétorique de l'État depuis les années 2000, les politiques suisses en direction des personnes invalides. Ils identifient finement une logique « capacitiste » visant la re-marchandisation à tout prix, via un nouvel ordre d'employabilité passant par l'acceptation d'une norme d'emploi « médiocre » et, de fait, réduisant la « crédibilité épistémique » de la personne en situation de handicap psychique. Dans les Structures d'Insertion par l'Activité Économique (SIAE) analysées par Hervé Jory dans le cinquième chapitre, la prévalence des compétences d'adaptation sociale sur la formation didactique et le savoir-faire professionnel correspond à une précarisation du profil attendu des publics. L'inversion du statut de la formation, dans ces structures d'insertion, tend à favoriser des conditions d'acceptation de conditions de travail pénibles pour des emplois sous-qualifiés. Ce nouveau cadre normatif de l'inclusion professionnelle repose sur le postulat « d'insérer pour former » où l'insertion se suffit en elle-même. Il s'agit de privilégier l'adaptation quasi immédiate à l'emploi et ses difficultés, en particulier la capacité à supporter des conditions de travail éprouvantes (port de charges lourdes, intempéries…) plutôt que l'intégration de savoirs professionnels et une qualification capitalisable.
+
+L'analyse de tous ces segments de l'intervention sociale est à même d'identifier une logique de responsabilisation des publics et un tournant managérial souvent pénalisants. Mais la grammaire managériale reste fortement questionnée dans les pratiques concrètes des acteurs. Un deuxième grand apport de l'ouvrage est donc d'étudier les engagements moraux et les micro-résistances éthiques des intervenants·es infléchissant parfois certaines modalités de l'intervention sociale. Au-delà des cadres normatifs, des professionnels inventent dès lors des pratiques d'écarts éthiques pour redonner sens à leur action.
+
+Ainsi, dans l'urgence sociale présentée par Hélène Marin et Béatrice Bertho (chapitre 3), la mobilisation bénévole de professionnels illustre la volonté de participer à la neutralisation d'un déficit d'action publique récurrent, en contradiction avec les principes moraux de l'État social. Un engagement solidaire, fait en parallèle de leur travail salarié, s'instaure dans une ville de Suisse romane afin de faire face à une « politique de la pénurie » (p. 48) de l'accueil national des personnes sans-abris. Ce « bénévolat solidaire » définit ce que l'on peut appeler une « résistivité morale », des micro-résistances enracinées dans les principes de justice sociale au regard des besoins de ce public en grande vulnérabilité psychique et sociale.
+
+En définitive, l'intérêt majeur des thèses de cet ouvrage est de souligner une mutation des cadres normatifs et moraux de l'intervention sociale qui mettent désormais essentiellement l'accent sur une responsabilisation des individus vulnérables, une activation étrécie et pénalisante et privilégiant parfois l'immédiateté de l'insertion par le travail, voire des pratiques de culpabilisation-stigmatisation et des dispositifs d'activation définis par une grammaire managériale. Par contre, ces mutations ne doivent pas oblitérer, car s'exprimant à bas bruit dans les interstices de l'accompagnement, la présence modeste d'un cadre moral et cognitif secondaire d'élargissement du pouvoir d'agir pour les personnes en difficulté. Une responsabilisation que l'on peut qualifier d'« habilitante » est encore visible dans nombre des pratiques d'accompagnement. Ainsi, le Revenu de Solidarité Active (RSA) agricole représente une reconnaissance nouvelle de la vulnérabilité d'une population et un levier d'action potentiel pour des agriculteurs immergés des décennies dans une grande précarité. L'action sociale n'est pas réductible au seul tournant néo-libéral et l'on observe non pas une « nouvelle » morale de l'intervention sociale mais une hybridation de morales dont certaines fondatrices de l'État social et du travail social. Malgré tout, force est de constater que la NGP encadre l'intervention sociale par des normes managériales dissonantes au regard des idéaux universalistes, de l'éthique et de la vulnérabilité des publics et de leurs besoins. Ces nouvelles normes conduisent à une détérioration de l'action pour les usagers et le personnel que l'on retrouve aussi dans l'ensemble des services publics.
+
+---
+
+## Pour citer cet article
+
+**[Auteur]**, « [Titre court de l'ouvrage] », *Comptes rendus*, mis en ligne le [date], consulté le [date].
+
+```
+
+---
+
+Rédige maintenant la note de lecture. Vise ~2000 mots, six paragraphes denses, français académique soutenu. Termine par `FINAL(note_markdown)`.

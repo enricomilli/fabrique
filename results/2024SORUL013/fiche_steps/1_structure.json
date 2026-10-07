@@ -1,0 +1,2947 @@
+{
+  "thesis_id": "2024SORUL013",
+  "parquet_blocks": 4354,
+  "parquet_pages": 487,
+  "metadata": {
+    "titre": "Les femmes de pouvoir dans le monde maya",
+    "auteur": "Noémie Jouvet",
+    "annee": "2024",
+    "etablissement": "Sorbonne Université, École doctorale 0124, Laboratoire de recherche Cerap",
+    "discipline": "Théorie et pratique de l'archéologie",
+    "mots_cles": [
+      "Archéologie",
+      "Maya",
+      "Femme",
+      "Pouvoir",
+      "Préhispanique",
+      "Archeology",
+      "Women",
+      "Power",
+      "Pre-Columbian"
+    ],
+    "pages": 488
+  },
+  "toc": [
+    {
+      "title": "INTRODUCTION :",
+      "page_start": 20,
+      "level": 0,
+      "page_end": 39,
+      "role": "frontmatter",
+      "page_start_parquet": 21,
+      "page_end_parquet": 40
+    },
+    {
+      "title": "a. La géographie",
+      "page_start": 23,
+      "level": 3,
+      "page_end": 25,
+      "role": "section",
+      "page_start_parquet": 24,
+      "page_end_parquet": 26
+    },
+    {
+      "title": "b. La chronologie",
+      "page_start": 26,
+      "level": 3,
+      "page_end": 27,
+      "role": "section",
+      "page_start_parquet": 27,
+      "page_end_parquet": 28
+    },
+    {
+      "title": "c. Le féminin",
+      "page_start": 28,
+      "level": 3,
+      "page_end": 30,
+      "role": "section",
+      "page_start_parquet": 29,
+      "page_end_parquet": 31
+    },
+    {
+      "title": "d. Le corpus",
+      "page_start": 31,
+      "level": 3,
+      "page_end": 36,
+      "role": "section",
+      "page_start_parquet": 32,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "1. Ramon Pané",
+      "page_start": 34,
+      "level": 4,
+      "page_end": 34,
+      "role": "section",
+      "page_start_parquet": 35,
+      "page_end_parquet": 35
+    },
+    {
+      "title": "2. Bartolomé de las Casas",
+      "page_start": 34,
+      "level": 4,
+      "page_end": 34,
+      "role": "section",
+      "page_start_parquet": 35,
+      "page_end_parquet": 35
+    },
+    {
+      "title": "3. Pietro Martyr d'Anghiera",
+      "page_start": 35,
+      "level": 4,
+      "page_end": 35,
+      "role": "section",
+      "page_start_parquet": 36,
+      "page_end_parquet": 36
+    },
+    {
+      "title": "4. Gonzales Fernández de Oviedo y Valdés",
+      "page_start": 35,
+      "level": 4,
+      "page_end": 35,
+      "role": "section",
+      "page_start_parquet": 36,
+      "page_end_parquet": 36
+    },
+    {
+      "title": "5. Hernan Cortés",
+      "page_start": 35,
+      "level": 4,
+      "page_end": 35,
+      "role": "section",
+      "page_start_parquet": 36,
+      "page_end_parquet": 36
+    },
+    {
+      "title": "6. Francisco López de Gómara",
+      "page_start": 35,
+      "level": 4,
+      "page_end": 35,
+      "role": "section",
+      "page_start_parquet": 36,
+      "page_end_parquet": 36
+    },
+    {
+      "title": "7. Bernal Díaz Del Castillo",
+      "page_start": 36,
+      "level": 4,
+      "page_end": 36,
+      "role": "section",
+      "page_start_parquet": 37,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "8. Diego de Landa",
+      "page_start": 36,
+      "level": 4,
+      "page_end": 36,
+      "role": "section",
+      "page_start_parquet": 37,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "9. Francisco Hernandez Arana Xalijá",
+      "page_start": 36,
+      "level": 4,
+      "page_end": 36,
+      "role": "section",
+      "page_start_parquet": 37,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "e. Un sujet archéologique",
+      "page_start": 37,
+      "level": 3,
+      "page_end": 37,
+      "role": "section",
+      "page_start_parquet": 38,
+      "page_end_parquet": 38
+    },
+    {
+      "title": "1. Un vestige",
+      "page_start": 38,
+      "level": 4,
+      "page_end": 38,
+      "role": "section",
+      "page_start_parquet": 39,
+      "page_end_parquet": 39
+    },
+    {
+      "title": "2. Le contexte archéologique",
+      "page_start": 38,
+      "level": 4,
+      "page_end": 38,
+      "role": "section",
+      "page_start_parquet": 39,
+      "page_end_parquet": 39
+    },
+    {
+      "title": "f. Des vestiges féminins en lien avec le pouvoir",
+      "page_start": 38,
+      "level": 3,
+      "page_end": 39,
+      "role": "section",
+      "page_start_parquet": 39,
+      "page_end_parquet": 40
+    },
+    {
+      "title": "I ....... LES VESTIGES ARCHEOLOGIQUES FEMININS EN ZONE MAYA.",
+      "page_start": 40,
+      "level": 0,
+      "page_end": 220,
+      "role": "part",
+      "page_start_parquet": 41,
+      "page_end_parquet": 221
+    },
+    {
+      "title": "A/ COMMENT DETERMINER QU'UN VESTIGE ARCHEOLOGIQUE MAYA REPRESENTE LE FEMININ",
+      "page_start": 40,
+      "level": 1,
+      "page_end": 112,
+      "role": "section",
+      "page_start_parquet": 41,
+      "page_end_parquet": 113
+    },
+    {
+      "title": "I/ Déterminer qu'un vestige est féminin par l'étude anatomique : le cas des tombes féminines mayas",
+      "page_start": 40,
+      "level": 2,
+      "page_end": 76,
+      "role": "section",
+      "page_start_parquet": 41,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "a. Le cas des sépultures",
+      "page_start": 41,
+      "level": 3,
+      "page_end": 44,
+      "role": "section",
+      "page_start_parquet": 42,
+      "page_end_parquet": 45
+    },
+    {
+      "title": "b. Les sépultures, lieu de contexte archéologique",
+      "page_start": 45,
+      "level": 3,
+      "page_end": 46,
+      "role": "section",
+      "page_start_parquet": 46,
+      "page_end_parquet": 47
+    },
+    {
+      "title": "c. Les tombeaux, partie de l'urbanisme maya",
+      "page_start": 47,
+      "level": 3,
+      "page_end": 48,
+      "role": "section",
+      "page_start_parquet": 48,
+      "page_end_parquet": 49
+    },
+    {
+      "title": "d. Les sépultures un marqueur social",
+      "page_start": 49,
+      "level": 3,
+      "page_end": 51,
+      "role": "section",
+      "page_start_parquet": 50,
+      "page_end_parquet": 52
+    },
+    {
+      "title": "1. Les sacrifiés : un cas particulier",
+      "page_start": 49,
+      "level": 4,
+      "page_end": 50,
+      "role": "section",
+      "page_start_parquet": 50,
+      "page_end_parquet": 51
+    },
+    {
+      "title": "2. Le statut social des individus placés dans des tombes somptueuses",
+      "page_start": 51,
+      "level": 4,
+      "page_end": 51,
+      "role": "section",
+      "page_start_parquet": 52,
+      "page_end_parquet": 52
+    },
+    {
+      "title": "e. Étude de tombes et dépôts funéraires féminins de ceux communs à ceux de l'élite",
+      "page_start": 52,
+      "level": 3,
+      "page_end": 57,
+      "role": "section",
+      "page_start_parquet": 53,
+      "page_end_parquet": 58
+    },
+    {
+      "title": "1. Les Tombes 1 et 2 de Yaxuna",
+      "page_start": 53,
+      "level": 4,
+      "page_end": 53,
+      "role": "section",
+      "page_start_parquet": 54,
+      "page_end_parquet": 54
+    },
+    {
+      "title": "2. La tombe de Nakum",
+      "page_start": 54,
+      "level": 4,
+      "page_end": 56,
+      "role": "section",
+      "page_start_parquet": 55,
+      "page_end_parquet": 57
+    },
+    {
+      "title": "3. La tombe de Tonina",
+      "page_start": 57,
+      "level": 4,
+      "page_end": 57,
+      "role": "section",
+      "page_start_parquet": 58,
+      "page_end_parquet": 58
+    },
+    {
+      "title": "4. Tombe féminine double de Zaculeu",
+      "page_start": 58,
+      "level": 4,
+      "page_end": 58,
+      "role": "section",
+      "page_start_parquet": 59,
+      "page_end_parquet": 59
+    },
+    {
+      "title": "f. Étude de tombes avec des éléments de pouvoir",
+      "page_start": 58,
+      "level": 3,
+      "page_end": 71,
+      "role": "section",
+      "page_start_parquet": 59,
+      "page_end_parquet": 72
+    },
+    {
+      "title": "1. La tombe de la reine « K'abel » à El Perú-Waka",
+      "page_start": 59,
+      "level": 4,
+      "page_end": 63,
+      "role": "section",
+      "page_start_parquet": 60,
+      "page_end_parquet": 64
+    },
+    {
+      "title": "2. La tombe de la « reine rouge » de Palenque : celle d'une ancêtre ou d'un prédécesseur",
+      "page_start": 64,
+      "level": 4,
+      "page_end": 69,
+      "role": "section",
+      "page_start_parquet": 65,
+      "page_end_parquet": 70
+    },
+    {
+      "title": "3. La tombe de Margarita à Copán",
+      "page_start": 70,
+      "level": 4,
+      "page_end": 70,
+      "role": "section",
+      "page_start_parquet": 71,
+      "page_end_parquet": 71
+    },
+    {
+      "title": "4. La tombe féminine de Dzibanché",
+      "page_start": 71,
+      "level": 4,
+      "page_end": 71,
+      "role": "section",
+      "page_start_parquet": 72,
+      "page_end_parquet": 72
+    },
+    {
+      "title": "g. Absence de récits de vie au sein des tombes, le rôle et le but des artefacts funéraires",
+      "page_start": 72,
+      "level": 3,
+      "page_end": 76,
+      "role": "section",
+      "page_start_parquet": 73,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "1. Les objets en lien avec la vie du défunt",
+      "page_start": 73,
+      "level": 4,
+      "page_end": 73,
+      "role": "section",
+      "page_start_parquet": 74,
+      "page_end_parquet": 74
+    },
+    {
+      "title": "2. Les objets mortuaires",
+      "page_start": 73,
+      "level": 4,
+      "page_end": 73,
+      "role": "section",
+      "page_start_parquet": 74,
+      "page_end_parquet": 74
+    },
+    {
+      "title": "3. Les objets indéterminés :",
+      "page_start": 74,
+      "level": 4,
+      "page_end": 76,
+      "role": "section",
+      "page_start_parquet": 75,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "II. Déterminer quels sujets sont féminins dans les figurations mayas.",
+      "page_start": 77,
+      "level": 2,
+      "page_end": 112,
+      "role": "section",
+      "page_start_parquet": 78,
+      "page_end_parquet": 113
+    },
+    {
+      "title": "a. Les figurations sculptées où l'anatomie féminine est mise en avant",
+      "page_start": 77,
+      "level": 3,
+      "page_end": 78,
+      "role": "section",
+      "page_start_parquet": 78,
+      "page_end_parquet": 79
+    },
+    {
+      "title": "b. Les figurations féminines sculptées montrant des poitrines",
+      "page_start": 79,
+      "level": 3,
+      "page_end": 89,
+      "role": "section",
+      "page_start_parquet": 80,
+      "page_end_parquet": 90
+    },
+    {
+      "title": "1. L'autel de Tonina description :",
+      "page_start": 79,
+      "level": 4,
+      "page_end": 80,
+      "role": "section",
+      "page_start_parquet": 80,
+      "page_end_parquet": 81
+    },
+    {
+      "title": "2. L'autel de Tonina interprétation :",
+      "page_start": 81,
+      "level": 4,
+      "page_end": 82,
+      "role": "section",
+      "page_start_parquet": 82,
+      "page_end_parquet": 83
+    },
+    {
+      "title": "3. Le pilier de Chichen Itza description :",
+      "page_start": 83,
+      "level": 4,
+      "page_end": 87,
+      "role": "section",
+      "page_start_parquet": 84,
+      "page_end_parquet": 88
+    },
+    {
+      "title": "4. Étude de l'emplacement du pilier :",
+      "page_start": 88,
+      "level": 4,
+      "page_end": 88,
+      "role": "section",
+      "page_start_parquet": 89,
+      "page_end_parquet": 89
+    },
+    {
+      "title": "5. Le pilier de Chichen Itza, interprétations :",
+      "page_start": 89,
+      "level": 4,
+      "page_end": 89,
+      "role": "section",
+      "page_start_parquet": 90,
+      "page_end_parquet": 90
+    },
+    {
+      "title": "6. La place du féminin dans le jeu de balle méso-américain :",
+      "page_start": 90,
+      "level": 4,
+      "page_end": 90,
+      "role": "section",
+      "page_start_parquet": 91,
+      "page_end_parquet": 91
+    },
+    {
+      "title": "c. Les figurations peintes où l'anatomie féminine est mise en avant",
+      "page_start": 90,
+      "level": 3,
+      "page_end": 103,
+      "role": "section",
+      "page_start_parquet": 91,
+      "page_end_parquet": 104
+    },
+    {
+      "title": "1. Les peintures de Calakmul :",
+      "page_start": 90,
+      "level": 4,
+      "page_end": 90,
+      "role": "section",
+      "page_start_parquet": 91,
+      "page_end_parquet": 91
+    },
+    {
+      "title": "2. Description des peintures de Calakmul :",
+      "page_start": 91,
+      "level": 4,
+      "page_end": 97,
+      "role": "section",
+      "page_start_parquet": 92,
+      "page_end_parquet": 98
+    },
+    {
+      "title": "3. Les peintures de Bonampak :",
+      "page_start": 98,
+      "level": 4,
+      "page_end": 102,
+      "role": "section",
+      "page_start_parquet": 99,
+      "page_end_parquet": 103
+    },
+    {
+      "title": "4. Les Codex :",
+      "page_start": 103,
+      "level": 4,
+      "page_end": 103,
+      "role": "section",
+      "page_start_parquet": 104,
+      "page_end_parquet": 104
+    },
+    {
+      "title": "d. Lorsque l'identité sexuelle est difficilement perceptible",
+      "page_start": 104,
+      "level": 3,
+      "page_end": 105,
+      "role": "section",
+      "page_start_parquet": 105,
+      "page_end_parquet": 106
+    },
+    {
+      "title": "e. L'apport de l'épigraphie dans l'identification des personnages féminins",
+      "page_start": 106,
+      "level": 3,
+      "page_end": 110,
+      "role": "section",
+      "page_start_parquet": 107,
+      "page_end_parquet": 111
+    },
+    {
+      "title": "1. La traduction par les codex",
+      "page_start": 106,
+      "level": 4,
+      "page_end": 109,
+      "role": "section",
+      "page_start_parquet": 107,
+      "page_end_parquet": 110
+    },
+    {
+      "title": "2. La vérification d'un marqueur épigraphique féminin avec l'autel de Tonina.",
+      "page_start": 110,
+      "level": 4,
+      "page_end": 110,
+      "role": "section",
+      "page_start_parquet": 111,
+      "page_end_parquet": 111
+    },
+    {
+      "title": "f. Les mentions de femmes dans les chroniques",
+      "page_start": 111,
+      "level": 3,
+      "page_end": 112,
+      "role": "section",
+      "page_start_parquet": 112,
+      "page_end_parquet": 113
+    },
+    {
+      "title": "B. CORPUS DES VESTIGES ARCHEOLOGIQUES IDENTIFIES COMME FEMININS....",
+      "page_start": 113,
+      "level": 1,
+      "page_end": 220,
+      "role": "section",
+      "page_start_parquet": 114,
+      "page_end_parquet": 221
+    },
+    {
+      "title": "I. Description des principales stèles féminines",
+      "page_start": 113,
+      "level": 2,
+      "page_end": 167,
+      "role": "section",
+      "page_start_parquet": 114,
+      "page_end_parquet": 168
+    },
+    {
+      "title": "a. La stèle 2 de Bonampak",
+      "page_start": 113,
+      "level": 3,
+      "page_end": 115,
+      "role": "section",
+      "page_start_parquet": 114,
+      "page_end_parquet": 116
+    },
+    {
+      "title": "b. Les stèles de Calakmul",
+      "page_start": 116,
+      "level": 3,
+      "page_end": 126,
+      "role": "section",
+      "page_start_parquet": 117,
+      "page_end_parquet": 127
+    },
+    {
+      "title": "1. La stèle 9, une stèle typique de Calakmul :",
+      "page_start": 119,
+      "level": 4,
+      "page_end": 119,
+      "role": "section",
+      "page_start_parquet": 120,
+      "page_end_parquet": 120
+    },
+    {
+      "title": "2. Le duo de stèles 23 - 24:",
+      "page_start": 120,
+      "level": 4,
+      "page_end": 120,
+      "role": "section",
+      "page_start_parquet": 121,
+      "page_end_parquet": 121
+    },
+    {
+      "title": "3. Le duo de stèles 28 - 29 :",
+      "page_start": 121,
+      "level": 4,
+      "page_end": 121,
+      "role": "section",
+      "page_start_parquet": 122,
+      "page_end_parquet": 122
+    },
+    {
+      "title": "4. La stèle 54",
+      "page_start": 122,
+      "level": 4,
+      "page_end": 122,
+      "role": "section",
+      "page_start_parquet": 123,
+      "page_end_parquet": 123
+    },
+    {
+      "title": "5. La stèle 88",
+      "page_start": 123,
+      "level": 4,
+      "page_end": 123,
+      "role": "section",
+      "page_start_parquet": 124,
+      "page_end_parquet": 124
+    },
+    {
+      "title": "6. La stèle 116",
+      "page_start": 124,
+      "level": 4,
+      "page_end": 124,
+      "role": "section",
+      "page_start_parquet": 125,
+      "page_end_parquet": 125
+    },
+    {
+      "title": "7. La stèle de Cleveland",
+      "page_start": 125,
+      "level": 4,
+      "page_end": 126,
+      "role": "section",
+      "page_start_parquet": 126,
+      "page_end_parquet": 127
+    },
+    {
+      "title": "c. La stèle 20 d'Edzna.",
+      "page_start": 127,
+      "level": 3,
+      "page_end": 127,
+      "role": "section",
+      "page_start_parquet": 128,
+      "page_end_parquet": 128
+    },
+    {
+      "title": "d. Les stèles de Naranjo",
+      "page_start": 128,
+      "level": 3,
+      "page_end": 134,
+      "role": "section",
+      "page_start_parquet": 129,
+      "page_end_parquet": 135
+    },
+    {
+      "title": "1. La stèle 3",
+      "page_start": 128,
+      "level": 4,
+      "page_end": 128,
+      "role": "section",
+      "page_start_parquet": 129,
+      "page_end_parquet": 129
+    },
+    {
+      "title": "2. La stèle 18",
+      "page_start": 129,
+      "level": 4,
+      "page_end": 129,
+      "role": "section",
+      "page_start_parquet": 130,
+      "page_end_parquet": 130
+    },
+    {
+      "title": "3. La stèle 24",
+      "page_start": 130,
+      "level": 4,
+      "page_end": 130,
+      "role": "section",
+      "page_start_parquet": 131,
+      "page_end_parquet": 131
+    },
+    {
+      "title": "4. La stèle 29",
+      "page_start": 131,
+      "level": 4,
+      "page_end": 131,
+      "role": "section",
+      "page_start_parquet": 132,
+      "page_end_parquet": 132
+    },
+    {
+      "title": "5. La stèle 31",
+      "page_start": 132,
+      "level": 4,
+      "page_end": 132,
+      "role": "section",
+      "page_start_parquet": 133,
+      "page_end_parquet": 133
+    },
+    {
+      "title": "6. Une femme de Naranjo.",
+      "page_start": 133,
+      "level": 4,
+      "page_end": 134,
+      "role": "section",
+      "page_start_parquet": 134,
+      "page_end_parquet": 135
+    },
+    {
+      "title": "e. Les sculptures de Palenque.",
+      "page_start": 135,
+      "level": 3,
+      "page_end": 142,
+      "role": "section",
+      "page_start_parquet": 136,
+      "page_end_parquet": 143
+    },
+    {
+      "title": "1. Le jambage de l'édifice D.",
+      "page_start": 136,
+      "level": 4,
+      "page_end": 136,
+      "role": "section",
+      "page_start_parquet": 137,
+      "page_end_parquet": 137
+    },
+    {
+      "title": "2. La tablette ovale.",
+      "page_start": 137,
+      "level": 4,
+      "page_end": 137,
+      "role": "section",
+      "page_start_parquet": 138,
+      "page_end_parquet": 138
+    },
+    {
+      "title": "3. Le sarcophage du « temple des inscriptions »",
+      "page_start": 138,
+      "level": 4,
+      "page_end": 138,
+      "role": "section",
+      "page_start_parquet": 139,
+      "page_end_parquet": 139
+    },
+    {
+      "title": "4. « La tablette des esclaves »",
+      "page_start": 139,
+      "level": 4,
+      "page_end": 139,
+      "role": "section",
+      "page_start_parquet": 140,
+      "page_end_parquet": 140
+    },
+    {
+      "title": "5. Panneau du temple XIV",
+      "page_start": 140,
+      "level": 4,
+      "page_end": 140,
+      "role": "section",
+      "page_start_parquet": 141,
+      "page_end_parquet": 141
+    },
+    {
+      "title": "6. Le panneau de Dumbarton Oaks",
+      "page_start": 140,
+      "level": 4,
+      "page_end": 142,
+      "role": "section",
+      "page_start_parquet": 141,
+      "page_end_parquet": 143
+    },
+    {
+      "title": "f. Les stèles de Piedras Negras",
+      "page_start": 143,
+      "level": 3,
+      "page_end": 147,
+      "role": "section",
+      "page_start_parquet": 144,
+      "page_end_parquet": 148
+    },
+    {
+      "title": "g. Les stèles de Tikal",
+      "page_start": 148,
+      "level": 3,
+      "page_end": 150,
+      "role": "section",
+      "page_start_parquet": 149,
+      "page_end_parquet": 151
+    },
+    {
+      "title": "h. La stèle et linteaux de Yaxchilan",
+      "page_start": 151,
+      "level": 3,
+      "page_end": 157,
+      "role": "section",
+      "page_start_parquet": 152,
+      "page_end_parquet": 158
+    },
+    {
+      "title": "1. Linteaux d'offrandes d'un paquet",
+      "page_start": 151,
+      "level": 4,
+      "page_end": 153,
+      "role": "section",
+      "page_start_parquet": 152,
+      "page_end_parquet": 154
+    },
+    {
+      "title": "2. Le rite d'auto-sacrifice",
+      "page_start": 154,
+      "level": 4,
+      "page_end": 156,
+      "role": "section",
+      "page_start_parquet": 155,
+      "page_end_parquet": 157
+    },
+    {
+      "title": "3. Les linteaux inclassables",
+      "page_start": 157,
+      "level": 4,
+      "page_end": 157,
+      "role": "section",
+      "page_start_parquet": 158,
+      "page_end_parquet": 158
+    },
+    {
+      "title": "i. Tableau des sculptures féminines mayas recensées.",
+      "page_start": 158,
+      "level": 3,
+      "page_end": 167,
+      "role": "section",
+      "page_start_parquet": 159,
+      "page_end_parquet": 168
+    },
+    {
+      "title": "II. Analyses et recoupements des vestiges archéologiques féminins :",
+      "page_start": 168,
+      "level": 2,
+      "page_end": 220,
+      "role": "section",
+      "page_start_parquet": 169,
+      "page_end_parquet": 221
+    },
+    {
+      "title": "a. Une quantité de vestiges inégale selon la chronologie.",
+      "page_start": 168,
+      "level": 3,
+      "page_end": 170,
+      "role": "section",
+      "page_start_parquet": 169,
+      "page_end_parquet": 171
+    },
+    {
+      "title": "1. Le choix des vestiges lithiques.",
+      "page_start": 168,
+      "level": 4,
+      "page_end": 169,
+      "role": "section",
+      "page_start_parquet": 169,
+      "page_end_parquet": 170
+    },
+    {
+      "title": "2. Carte des sculptures féminines :",
+      "page_start": 170,
+      "level": 4,
+      "page_end": 170,
+      "role": "section",
+      "page_start_parquet": 171,
+      "page_end_parquet": 171
+    },
+    {
+      "title": "b. Les habits et parures en Méso-Amérique.",
+      "page_start": 171,
+      "level": 3,
+      "page_end": 179,
+      "role": "section",
+      "page_start_parquet": 172,
+      "page_end_parquet": 180
+    },
+    {
+      "title": "1. Des tenues sexuées :",
+      "page_start": 172,
+      "level": 4,
+      "page_end": 172,
+      "role": "section",
+      "page_start_parquet": 173,
+      "page_end_parquet": 173
+    },
+    {
+      "title": "2. Les habits : un marqueur social.",
+      "page_start": 173,
+      "level": 4,
+      "page_end": 173,
+      "role": "section",
+      "page_start_parquet": 174,
+      "page_end_parquet": 174
+    },
+    {
+      "title": "3. Les vêtements de l'élite :",
+      "page_start": 173,
+      "level": 4,
+      "page_end": 173,
+      "role": "section",
+      "page_start_parquet": 174,
+      "page_end_parquet": 174
+    },
+    {
+      "title": "4. Les vêtements portés par des femmes dans les figurations.",
+      "page_start": 174,
+      "level": 4,
+      "page_end": 175,
+      "role": "section",
+      "page_start_parquet": 175,
+      "page_end_parquet": 176
+    },
+    {
+      "title": "5. Le travestissement du masculin au féminin.",
+      "page_start": 176,
+      "level": 4,
+      "page_end": 177,
+      "role": "section",
+      "page_start_parquet": 177,
+      "page_end_parquet": 178
+    },
+    {
+      "title": "6. Le travestissement du féminin au masculin.",
+      "page_start": 178,
+      "level": 4,
+      "page_end": 179,
+      "role": "section",
+      "page_start_parquet": 179,
+      "page_end_parquet": 180
+    },
+    {
+      "title": "c. Comparaisons des symboles propres aux habits féminins.",
+      "page_start": 180,
+      "level": 3,
+      "page_end": 183,
+      "role": "section",
+      "page_start_parquet": 181,
+      "page_end_parquet": 184
+    },
+    {
+      "title": "1. La forme du huipil.",
+      "page_start": 180,
+      "level": 4,
+      "page_end": 181,
+      "role": "section",
+      "page_start_parquet": 181,
+      "page_end_parquet": 182
+    },
+    {
+      "title": "2. Les motifs sur les huipiles :",
+      "page_start": 182,
+      "level": 4,
+      "page_end": 183,
+      "role": "section",
+      "page_start_parquet": 183,
+      "page_end_parquet": 184
+    },
+    {
+      "title": "d. Étude des parures féminines.",
+      "page_start": 184,
+      "level": 3,
+      "page_end": 196,
+      "role": "section",
+      "page_start_parquet": 185,
+      "page_end_parquet": 197
+    },
+    {
+      "title": "1. Les coiffes féminines :",
+      "page_start": 186,
+      "level": 4,
+      "page_end": 187,
+      "role": "section",
+      "page_start_parquet": 187,
+      "page_end_parquet": 188
+    },
+    {
+      "title": "2. Les Bracelets :",
+      "page_start": 188,
+      "level": 4,
+      "page_end": 188,
+      "role": "section",
+      "page_start_parquet": 189,
+      "page_end_parquet": 189
+    },
+    {
+      "title": "3. Les pectoraux :",
+      "page_start": 188,
+      "level": 4,
+      "page_end": 189,
+      "role": "section",
+      "page_start_parquet": 189,
+      "page_end_parquet": 190
+    },
+    {
+      "title": "4. Les chaussures :",
+      "page_start": 190,
+      "level": 4,
+      "page_end": 190,
+      "role": "section",
+      "page_start_parquet": 191,
+      "page_end_parquet": 191
+    },
+    {
+      "title": "5. Les ornements de ceinture :",
+      "page_start": 190,
+      "level": 4,
+      "page_end": 191,
+      "role": "section",
+      "page_start_parquet": 191,
+      "page_end_parquet": 192
+    },
+    {
+      "title": "6. Le symbole de mâchoire supérieure et son lien avec le féminin :",
+      "page_start": 192,
+      "level": 4,
+      "page_end": 193,
+      "role": "section",
+      "page_start_parquet": 193,
+      "page_end_parquet": 194
+    },
+    {
+      "title": "7. Les liens entre le coquillage et le féminin :",
+      "page_start": 194,
+      "level": 4,
+      "page_end": 196,
+      "role": "section",
+      "page_start_parquet": 195,
+      "page_end_parquet": 197
+    },
+    {
+      "title": "e. Hypothèses d'identification de vestiges féminins.",
+      "page_start": 197,
+      "level": 3,
+      "page_end": 201,
+      "role": "section",
+      "page_start_parquet": 198,
+      "page_end_parquet": 202
+    },
+    {
+      "title": "f. Les positions des figures féminines.",
+      "page_start": 202,
+      "level": 3,
+      "page_end": 211,
+      "role": "section",
+      "page_start_parquet": 203,
+      "page_end_parquet": 212
+    },
+    {
+      "title": "1. Seule en majesté :",
+      "page_start": 202,
+      "level": 4,
+      "page_end": 203,
+      "role": "section",
+      "page_start_parquet": 203,
+      "page_end_parquet": 204
+    },
+    {
+      "title": "2. Debout en accompagnatrice :",
+      "page_start": 204,
+      "level": 4,
+      "page_end": 204,
+      "role": "section",
+      "page_start_parquet": 205,
+      "page_end_parquet": 205
+    },
+    {
+      "title": "3. Femme en pleine action :",
+      "page_start": 205,
+      "level": 4,
+      "page_end": 205,
+      "role": "section",
+      "page_start_parquet": 206,
+      "page_end_parquet": 206
+    },
+    {
+      "title": "4. Figuration maternelle :",
+      "page_start": 206,
+      "level": 4,
+      "page_end": 207,
+      "role": "section",
+      "page_start_parquet": 207,
+      "page_end_parquet": 208
+    },
+    {
+      "title": "5. Représentation de la femme décédée :",
+      "page_start": 208,
+      "level": 4,
+      "page_end": 210,
+      "role": "section",
+      "page_start_parquet": 209,
+      "page_end_parquet": 211
+    },
+    {
+      "title": "6. Images d'un groupe de femmes :",
+      "page_start": 211,
+      "level": 4,
+      "page_end": 211,
+      "role": "section",
+      "page_start_parquet": 212,
+      "page_end_parquet": 212
+    },
+    {
+      "title": "g. Les objets féminins, comparaison entre tombes et figurations.",
+      "page_start": 212,
+      "level": 3,
+      "page_end": 217,
+      "role": "section",
+      "page_start_parquet": 213,
+      "page_end_parquet": 218
+    },
+    {
+      "title": "h. Analyse des objets trouvés au fond du cenote de Chichen Itza. Trou d'eau féminin ou masculin ?",
+      "page_start": 218,
+      "level": 3,
+      "page_end": 220,
+      "role": "section",
+      "page_start_parquet": 219,
+      "page_end_parquet": 221
+    },
+    {
+      "title": "II) L'ESPACE EN MESO-AMERIQUE, UN CONCEPT QUI S'INTEGRE AUX MYTHES FEMININS MAYAS.",
+      "page_start": 221,
+      "level": 0,
+      "page_end": 358,
+      "role": "part",
+      "page_start_parquet": 222,
+      "page_end_parquet": 359
+    },
+    {
+      "title": "A. LA CONCEPTION DE L'ESPACE EN MESO-AMERIQUE",
+      "page_start": 221,
+      "level": 1,
+      "page_end": 254,
+      "role": "section",
+      "page_start_parquet": 222,
+      "page_end_parquet": 255
+    },
+    {
+      "title": "I. Les directions en Méso-Amérique",
+      "page_start": 222,
+      "level": 2,
+      "page_end": 231,
+      "role": "section",
+      "page_start_parquet": 223,
+      "page_end_parquet": 232
+    },
+    {
+      "title": "a. L'axis mundi vertical",
+      "page_start": 223,
+      "level": 3,
+      "page_end": 224,
+      "role": "section",
+      "page_start_parquet": 224,
+      "page_end_parquet": 225
+    },
+    {
+      "title": "1. Des axes verticaux",
+      "page_start": 223,
+      "level": 4,
+      "page_end": 223,
+      "role": "section",
+      "page_start_parquet": 224,
+      "page_end_parquet": 224
+    },
+    {
+      "title": "2. Un axe, trois étages.",
+      "page_start": 224,
+      "level": 4,
+      "page_end": 224,
+      "role": "section",
+      "page_start_parquet": 225,
+      "page_end_parquet": 225
+    },
+    {
+      "title": "b. L'espace horizontal",
+      "page_start": 225,
+      "level": 3,
+      "page_end": 229,
+      "role": "section",
+      "page_start_parquet": 226,
+      "page_end_parquet": 230
+    },
+    {
+      "title": "1. Des directions faites par l'Homme pour l'Homme :",
+      "page_start": 225,
+      "level": 4,
+      "page_end": 227,
+      "role": "section",
+      "page_start_parquet": 226,
+      "page_end_parquet": 228
+    },
+    {
+      "title": "2. Les directions cardinales et leurs significations",
+      "page_start": 228,
+      "level": 4,
+      "page_end": 229,
+      "role": "section",
+      "page_start_parquet": 229,
+      "page_end_parquet": 230
+    },
+    {
+      "title": "c. Les valeurs féminines et masculines associées aux directions",
+      "page_start": 230,
+      "level": 3,
+      "page_end": 231,
+      "role": "section",
+      "page_start_parquet": 231,
+      "page_end_parquet": 232
+    },
+    {
+      "title": "1. Les dualités Nord/Sud et Est/Ouest",
+      "page_start": 230,
+      "level": 4,
+      "page_end": 230,
+      "role": "section",
+      "page_start_parquet": 231,
+      "page_end_parquet": 231
+    },
+    {
+      "title": "2. Le Centre est-il associé au masculin ou au féminin ?",
+      "page_start": 231,
+      "level": 4,
+      "page_end": 231,
+      "role": "section",
+      "page_start_parquet": 232,
+      "page_end_parquet": 232
+    },
+    {
+      "title": "3. Des espaces neutres existent-ils en Méso-Amérique ?",
+      "page_start": 231,
+      "level": 4,
+      "page_end": 231,
+      "role": "section",
+      "page_start_parquet": 232,
+      "page_end_parquet": 232
+    },
+    {
+      "title": "II. Les divinités et mythologies des dimensions",
+      "page_start": 232,
+      "level": 2,
+      "page_end": 254,
+      "role": "section",
+      "page_start_parquet": 233,
+      "page_end_parquet": 255
+    },
+    {
+      "title": "a. Les dieux associés aux directions",
+      "page_start": 232,
+      "level": 3,
+      "page_end": 232,
+      "role": "section",
+      "page_start_parquet": 233,
+      "page_end_parquet": 233
+    },
+    {
+      "title": "b. Divinités associées à la dimension temporelle.",
+      "page_start": 233,
+      "level": 3,
+      "page_end": 235,
+      "role": "section",
+      "page_start_parquet": 234,
+      "page_end_parquet": 236
+    },
+    {
+      "title": "1. Une minorité de déesses du temps",
+      "page_start": 233,
+      "level": 4,
+      "page_end": 234,
+      "role": "section",
+      "page_start_parquet": 234,
+      "page_end_parquet": 235
+    },
+    {
+      "title": "2. Une création masculine du monde",
+      "page_start": 235,
+      "level": 4,
+      "page_end": 235,
+      "role": "section",
+      "page_start_parquet": 236,
+      "page_end_parquet": 236
+    },
+    {
+      "title": "3. Un domaine majoritairement féminin ?",
+      "page_start": 235,
+      "level": 4,
+      "page_end": 235,
+      "role": "section",
+      "page_start_parquet": 236,
+      "page_end_parquet": 236
+    },
+    {
+      "title": "c. Le décompte du temps chez les Mayas.",
+      "page_start": 236,
+      "level": 3,
+      "page_end": 240,
+      "role": "section",
+      "page_start_parquet": 237,
+      "page_end_parquet": 241
+    },
+    {
+      "title": "1. Le Tzolk'in",
+      "page_start": 236,
+      "level": 4,
+      "page_end": 238,
+      "role": "section",
+      "page_start_parquet": 237,
+      "page_end_parquet": 239
+    },
+    {
+      "title": "2. Le *Haab* calendrier de 365 jours",
+      "page_start": 239,
+      "level": 4,
+      "page_end": 239,
+      "role": "section",
+      "page_start_parquet": 240,
+      "page_end_parquet": 240
+    },
+    {
+      "title": "3. Le troisième système calendarique se nomme le « compte long »",
+      "page_start": 240,
+      "level": 4,
+      "page_end": 240,
+      "role": "section",
+      "page_start_parquet": 241,
+      "page_end_parquet": 241
+    },
+    {
+      "title": "d. Association temps et espace",
+      "page_start": 241,
+      "level": 3,
+      "page_end": 244,
+      "role": "section",
+      "page_start_parquet": 242,
+      "page_end_parquet": 245
+    },
+    {
+      "title": "1. L'ouest féminin",
+      "page_start": 243,
+      "level": 4,
+      "page_end": 243,
+      "role": "section",
+      "page_start_parquet": 244,
+      "page_end_parquet": 244
+    },
+    {
+      "title": "2. L'est masculin",
+      "page_start": 244,
+      "level": 4,
+      "page_end": 244,
+      "role": "section",
+      "page_start_parquet": 245,
+      "page_end_parquet": 245
+    },
+    {
+      "title": "e. La création du Temps",
+      "page_start": 245,
+      "level": 3,
+      "page_end": 245,
+      "role": "section",
+      "page_start_parquet": 246,
+      "page_end_parquet": 246
+    },
+    {
+      "title": "f. Le glyphe de l'origine du temps",
+      "page_start": 245,
+      "level": 3,
+      "page_end": 253,
+      "role": "section",
+      "page_start_parquet": 246,
+      "page_end_parquet": 254
+    },
+    {
+      "title": "g. Un rôle des élites mayas : l'entretien du monde",
+      "page_start": 254,
+      "level": 3,
+      "page_end": 254,
+      "role": "section",
+      "page_start_parquet": 255,
+      "page_end_parquet": 255
+    },
+    {
+      "title": "B. LES ETRES FEMININS DANS LES MYTHOLOGIES MAYAS.",
+      "page_start": 255,
+      "level": 1,
+      "page_end": 299,
+      "role": "section",
+      "page_start_parquet": 256,
+      "page_end_parquet": 300
+    },
+    {
+      "title": "I. Nos connaissances sur le panthéon maya",
+      "page_start": 255,
+      "level": 2,
+      "page_end": 264,
+      "role": "section",
+      "page_start_parquet": 256,
+      "page_end_parquet": 265
+    },
+    {
+      "title": "a. Pourquoi et comment étudier les femmes mayas mythiques ?",
+      "page_start": 256,
+      "level": 3,
+      "page_end": 256,
+      "role": "section",
+      "page_start_parquet": 257,
+      "page_end_parquet": 257
+    },
+    {
+      "title": "1. L'intérêt des mythes dans une étude archéologique",
+      "page_start": 256,
+      "level": 4,
+      "page_end": 256,
+      "role": "section",
+      "page_start_parquet": 257,
+      "page_end_parquet": 257
+    },
+    {
+      "title": "2. Méthode d'analyse de ces symboles féminins",
+      "page_start": 256,
+      "level": 4,
+      "page_end": 256,
+      "role": "section",
+      "page_start_parquet": 257,
+      "page_end_parquet": 257
+    },
+    {
+      "title": "b. Définition de la religion maya",
+      "page_start": 257,
+      "level": 3,
+      "page_end": 257,
+      "role": "section",
+      "page_start_parquet": 258,
+      "page_end_parquet": 258
+    },
+    {
+      "title": "c. Les sources qui évoquent les mythes mayas.",
+      "page_start": 258,
+      "level": 3,
+      "page_end": 259,
+      "role": "section",
+      "page_start_parquet": 259,
+      "page_end_parquet": 260
+    },
+    {
+      "title": "1. Des sources littéraires",
+      "page_start": 258,
+      "level": 4,
+      "page_end": 258,
+      "role": "section",
+      "page_start_parquet": 259,
+      "page_end_parquet": 259
+    },
+    {
+      "title": "2. Des sources matérielles",
+      "page_start": 259,
+      "level": 4,
+      "page_end": 259,
+      "role": "section",
+      "page_start_parquet": 260,
+      "page_end_parquet": 260
+    },
+    {
+      "title": "d. Historiographie de ces panthéons",
+      "page_start": 260,
+      "level": 3,
+      "page_end": 262,
+      "role": "section",
+      "page_start_parquet": 261,
+      "page_end_parquet": 263
+    },
+    {
+      "title": "e. Des dieux dont on connaît peu la sexualité",
+      "page_start": 263,
+      "level": 3,
+      "page_end": 264,
+      "role": "section",
+      "page_start_parquet": 264,
+      "page_end_parquet": 265
+    },
+    {
+      "title": "II. Les rôles de deux déesses majeures de la mythologie maya",
+      "page_start": 265,
+      "level": 2,
+      "page_end": 278,
+      "role": "section",
+      "page_start_parquet": 266,
+      "page_end_parquet": 279
+    },
+    {
+      "title": "a. La déesse Ixchel",
+      "page_start": 265,
+      "level": 3,
+      "page_end": 269,
+      "role": "section",
+      "page_start_parquet": 266,
+      "page_end_parquet": 270
+    },
+    {
+      "title": "1. Son identité",
+      "page_start": 265,
+      "level": 4,
+      "page_end": 265,
+      "role": "section",
+      "page_start_parquet": 266,
+      "page_end_parquet": 266
+    },
+    {
+      "title": "2. Ixchel divinité positive ou négative.",
+      "page_start": 266,
+      "level": 4,
+      "page_end": 268,
+      "role": "section",
+      "page_start_parquet": 267,
+      "page_end_parquet": 269
+    },
+    {
+      "title": "3. Des déesses similaires sur certains aspects.",
+      "page_start": 269,
+      "level": 4,
+      "page_end": 269,
+      "role": "section",
+      "page_start_parquet": 270,
+      "page_end_parquet": 270
+    },
+    {
+      "title": "b. La déesse lunaire Ix Chebel Yax.",
+      "page_start": 270,
+      "level": 3,
+      "page_end": 275,
+      "role": "section",
+      "page_start_parquet": 271,
+      "page_end_parquet": 276
+    },
+    {
+      "title": "1. Son identité",
+      "page_start": 270,
+      "level": 4,
+      "page_end": 274,
+      "role": "section",
+      "page_start_parquet": 271,
+      "page_end_parquet": 275
+    },
+    {
+      "title": "2. Ses patronages",
+      "page_start": 275,
+      "level": 4,
+      "page_end": 275,
+      "role": "section",
+      "page_start_parquet": 276,
+      "page_end_parquet": 276
+    },
+    {
+      "title": "c. Les possibles transcriptions de cet imaginaire dans le monde humain.....",
+      "page_start": 276,
+      "level": 3,
+      "page_end": 278,
+      "role": "section",
+      "page_start_parquet": 277,
+      "page_end_parquet": 279
+    },
+    {
+      "title": "III. La présence d'autres figures féminines et de déesses mineures",
+      "page_start": 279,
+      "level": 2,
+      "page_end": 287,
+      "role": "section",
+      "page_start_parquet": 280,
+      "page_end_parquet": 288
+    },
+    {
+      "title": "a. Le mythe de création des femmes dans le Popol Vuh.",
+      "page_start": 280,
+      "level": 3,
+      "page_end": 280,
+      "role": "section",
+      "page_start_parquet": 281,
+      "page_end_parquet": 281
+    },
+    {
+      "title": "b. Le mythe des jumeaux et la récurrence du « Ix » dans le Popol Vuh...",
+      "page_start": 280,
+      "level": 3,
+      "page_end": 281,
+      "role": "section",
+      "page_start_parquet": 281,
+      "page_end_parquet": 282
+    },
+    {
+      "title": "c. Des déesses secondaires du Popol Vuh et des codex.",
+      "page_start": 282,
+      "level": 3,
+      "page_end": 287,
+      "role": "section",
+      "page_start_parquet": 283,
+      "page_end_parquet": 288
+    },
+    {
+      "title": "1. Des déesses agraires.",
+      "page_start": 282,
+      "level": 4,
+      "page_end": 282,
+      "role": "section",
+      "page_start_parquet": 283,
+      "page_end_parquet": 283
+    },
+    {
+      "title": "2. La déesse « à la corde »",
+      "page_start": 283,
+      "level": 4,
+      "page_end": 284,
+      "role": "section",
+      "page_start_parquet": 284,
+      "page_end_parquet": 285
+    },
+    {
+      "title": "3. Des déesses dans les trois codex.",
+      "page_start": 285,
+      "level": 4,
+      "page_end": 287,
+      "role": "section",
+      "page_start_parquet": 286,
+      "page_end_parquet": 288
+    },
+    {
+      "title": "4. Une mortelle divinisée ?",
+      "page_start": 288,
+      "level": 4,
+      "page_end": 288,
+      "role": "section",
+      "page_start_parquet": 289,
+      "page_end_parquet": 289
+    },
+    {
+      "title": "IV. Les femmes mythiques représentées sur des vestiges.",
+      "page_start": 288,
+      "level": 2,
+      "page_end": 299,
+      "role": "section",
+      "page_start_parquet": 289,
+      "page_end_parquet": 300
+    },
+    {
+      "title": "a. Quelles sont les identités féminines représentées sur les vestiges ?",
+      "page_start": 288,
+      "level": 3,
+      "page_end": 288,
+      "role": "section",
+      "page_start_parquet": 289,
+      "page_end_parquet": 289
+    },
+    {
+      "title": "1. Humain ou divin ?",
+      "page_start": 288,
+      "level": 4,
+      "page_end": 288,
+      "role": "section",
+      "page_start_parquet": 289,
+      "page_end_parquet": 289
+    },
+    {
+      "title": "b. La question du statut des personnages féminins de la mythologie maya.",
+      "page_start": 289,
+      "level": 3,
+      "page_end": 289,
+      "role": "section",
+      "page_start_parquet": 290,
+      "page_end_parquet": 290
+    },
+    {
+      "title": "c. Des patronages mixtes.",
+      "page_start": 290,
+      "level": 3,
+      "page_end": 290,
+      "role": "section",
+      "page_start_parquet": 291,
+      "page_end_parquet": 291
+    },
+    {
+      "title": "d. Des patronages spécifiquement féminins.",
+      "page_start": 291,
+      "level": 3,
+      "page_end": 291,
+      "role": "section",
+      "page_start_parquet": 292,
+      "page_end_parquet": 292
+    },
+    {
+      "title": "e. D'autres motifs pour évoquer la maternité ?",
+      "page_start": 292,
+      "level": 3,
+      "page_end": 297,
+      "role": "section",
+      "page_start_parquet": 293,
+      "page_end_parquet": 298
+    },
+    {
+      "title": "f. Les éléments naturels qui symbolisent la matrice féconde chez les Mayas.",
+      "page_start": 298,
+      "level": 3,
+      "page_end": 299,
+      "role": "section",
+      "page_start_parquet": 299,
+      "page_end_parquet": 300
+    },
+    {
+      "title": "1. Quid des *cenotes* ?",
+      "page_start": 298,
+      "level": 4,
+      "page_end": 299,
+      "role": "section",
+      "page_start_parquet": 299,
+      "page_end_parquet": 300
+    },
+    {
+      "title": "g. La théorie du « matriarcat »",
+      "page_start": 300,
+      "level": 3,
+      "page_end": 300,
+      "role": "section",
+      "page_start_parquet": 301,
+      "page_end_parquet": 301
+    },
+    {
+      "title": "C. LES VESTIGES FEMININS AU SEIN DE L'ESPACE MESO-AMERICAIN.",
+      "page_start": 300,
+      "level": 1,
+      "page_end": 358,
+      "role": "section",
+      "page_start_parquet": 301,
+      "page_end_parquet": 359
+    },
+    {
+      "title": "I. Les enterrements de femmes et l'organisation spatiale des cités.",
+      "page_start": 300,
+      "level": 2,
+      "page_end": 304,
+      "role": "section",
+      "page_start_parquet": 301,
+      "page_end_parquet": 305
+    },
+    {
+      "title": "a. Les enterrements féminins : où est la place des femmes après leur mort ?",
+      "page_start": 300,
+      "level": 3,
+      "page_end": 303,
+      "role": "section",
+      "page_start_parquet": 301,
+      "page_end_parquet": 304
+    },
+    {
+      "title": "1. Les deux tombeaux de prestige de Palenque.",
+      "page_start": 301,
+      "level": 4,
+      "page_end": 302,
+      "role": "section",
+      "page_start_parquet": 302,
+      "page_end_parquet": 303
+    },
+    {
+      "title": "2. Une mort qui reflète le statut et non le sexe.",
+      "page_start": 303,
+      "level": 4,
+      "page_end": 303,
+      "role": "section",
+      "page_start_parquet": 304,
+      "page_end_parquet": 304
+    },
+    {
+      "title": "b. Dans une cité en Méso-Amérique, où se situent les figurations ?",
+      "page_start": 304,
+      "level": 3,
+      "page_end": 304,
+      "role": "section",
+      "page_start_parquet": 305,
+      "page_end_parquet": 305
+    },
+    {
+      "title": "1. L'importance du centre cérémoniel. Lieu d'affichage du pouvoir",
+      "page_start": 304,
+      "level": 4,
+      "page_end": 304,
+      "role": "section",
+      "page_start_parquet": 305,
+      "page_end_parquet": 305
+    },
+    {
+      "title": "2. Les espaces de vie quotidienne.",
+      "page_start": 304,
+      "level": 4,
+      "page_end": 304,
+      "role": "section",
+      "page_start_parquet": 305,
+      "page_end_parquet": 305
+    },
+    {
+      "title": "c. Des centres cérémoniels sur-représentés.",
+      "page_start": 305,
+      "level": 3,
+      "page_end": 305,
+      "role": "section",
+      "page_start_parquet": 306,
+      "page_end_parquet": 306
+    },
+    {
+      "title": "II. Études de cas par cité",
+      "page_start": 305,
+      "level": 2,
+      "page_end": 358,
+      "role": "section",
+      "page_start_parquet": 306,
+      "page_end_parquet": 359
+    },
+    {
+      "title": "a. Palenque et Calakmul, deux vastes cités mayas.",
+      "page_start": 306,
+      "level": 3,
+      "page_end": 306,
+      "role": "section",
+      "page_start_parquet": 307,
+      "page_end_parquet": 307
+    },
+    {
+      "title": "b. Calakmul des femmes sur la place centrale et une dualité homme-femme.",
+      "page_start": 307,
+      "level": 3,
+      "page_end": 321,
+      "role": "section",
+      "page_start_parquet": 308,
+      "page_end_parquet": 322
+    },
+    {
+      "title": "1. Un recensement des stèles",
+      "page_start": 308,
+      "level": 4,
+      "page_end": 310,
+      "role": "section",
+      "page_start_parquet": 309,
+      "page_end_parquet": 311
+    },
+    {
+      "title": "2. La stèle 9, une stèle duelle",
+      "page_start": 311,
+      "level": 4,
+      "page_end": 314,
+      "role": "section",
+      "page_start_parquet": 312,
+      "page_end_parquet": 315
+    },
+    {
+      "title": "3. L'importance de la dualité sexuée en Méso-Amérique",
+      "page_start": 315,
+      "level": 4,
+      "page_end": 316,
+      "role": "section",
+      "page_start_parquet": 316,
+      "page_end_parquet": 317
+    },
+    {
+      "title": "4. Iconographie de la stèle 9",
+      "page_start": 317,
+      "level": 4,
+      "page_end": 318,
+      "role": "section",
+      "page_start_parquet": 318,
+      "page_end_parquet": 319
+    },
+    {
+      "title": "5. L'ornement de ceinture féminin",
+      "page_start": 319,
+      "level": 4,
+      "page_end": 321,
+      "role": "section",
+      "page_start_parquet": 320,
+      "page_end_parquet": 322
+    },
+    {
+      "title": "c. L'emplacement des stèles de Calakmul.",
+      "page_start": 322,
+      "level": 3,
+      "page_end": 328,
+      "role": "section",
+      "page_start_parquet": 323,
+      "page_end_parquet": 329
+    },
+    {
+      "title": "d. La cité de Palenque",
+      "page_start": 329,
+      "level": 3,
+      "page_end": 345,
+      "role": "section",
+      "page_start_parquet": 330,
+      "page_end_parquet": 346
+    },
+    {
+      "title": "1. Un sud féminin ?",
+      "page_start": 331,
+      "level": 4,
+      "page_end": 332,
+      "role": "section",
+      "page_start_parquet": 332,
+      "page_end_parquet": 333
+    },
+    {
+      "title": "2. Des femmes au Centre ?",
+      "page_start": 333,
+      "level": 4,
+      "page_end": 333,
+      "role": "section",
+      "page_start_parquet": 334,
+      "page_end_parquet": 334
+    },
+    {
+      "title": "3. Quelles figurations de femmes ?",
+      "page_start": 333,
+      "level": 4,
+      "page_end": 336,
+      "role": "section",
+      "page_start_parquet": 334,
+      "page_end_parquet": 337
+    },
+    {
+      "title": "4. La tombe de la « reine rouge »",
+      "page_start": 337,
+      "level": 4,
+      "page_end": 345,
+      "role": "section",
+      "page_start_parquet": 338,
+      "page_end_parquet": 346
+    },
+    {
+      "title": "e. La cité de Yaxchilan",
+      "page_start": 346,
+      "level": 3,
+      "page_end": 352,
+      "role": "section",
+      "page_start_parquet": 347,
+      "page_end_parquet": 353
+    },
+    {
+      "title": "1. Des sculptures féminines formant des récits",
+      "page_start": 346,
+      "level": 4,
+      "page_end": 348,
+      "role": "section",
+      "page_start_parquet": 347,
+      "page_end_parquet": 349
+    },
+    {
+      "title": "2. Une mise en scène féminine",
+      "page_start": 349,
+      "level": 4,
+      "page_end": 349,
+      "role": "section",
+      "page_start_parquet": 350,
+      "page_end_parquet": 350
+    },
+    {
+      "title": "3. Une étude des parures féminines et masculines",
+      "page_start": 350,
+      "level": 4,
+      "page_end": 352,
+      "role": "section",
+      "page_start_parquet": 351,
+      "page_end_parquet": 353
+    },
+    {
+      "title": "f. Le féminin dans la cité de Chichen Itza",
+      "page_start": 353,
+      "level": 3,
+      "page_end": 358,
+      "role": "section",
+      "page_start_parquet": 354,
+      "page_end_parquet": 359
+    },
+    {
+      "title": "1. Des femmes liées à la mort.",
+      "page_start": 354,
+      "level": 4,
+      "page_end": 354,
+      "role": "section",
+      "page_start_parquet": 355,
+      "page_end_parquet": 355
+    },
+    {
+      "title": "2. Des femmes symboliques et non historiques.",
+      "page_start": 355,
+      "level": 4,
+      "page_end": 358,
+      "role": "section",
+      "page_start_parquet": 356,
+      "page_end_parquet": 359
+    },
+    {
+      "title": "III)....LES VESTIGES ARCHEOLOGIQUES EN DIALOGUE AVEC LES RECITS HISTORIQUES",
+      "page_start": 359,
+      "level": 0,
+      "page_end": 443,
+      "role": "part",
+      "page_start_parquet": 360,
+      "page_end_parquet": 444
+    },
+    {
+      "title": "A. L'HISTOIRE DANS LE MONDE MAYA :",
+      "page_start": 359,
+      "level": 1,
+      "page_end": 377,
+      "role": "section",
+      "page_start_parquet": 360,
+      "page_end_parquet": 378
+    },
+    {
+      "title": "I. La retranscription de faits historiques par les Mayas",
+      "page_start": 359,
+      "level": 2,
+      "page_end": 360,
+      "role": "section",
+      "page_start_parquet": 360,
+      "page_end_parquet": 361
+    },
+    {
+      "title": "a. Une évolution dans le temps",
+      "page_start": 359,
+      "level": 3,
+      "page_end": 359,
+      "role": "section",
+      "page_start_parquet": 360,
+      "page_end_parquet": 360
+    },
+    {
+      "title": "b. Les autres limites des récits historiques mayas",
+      "page_start": 360,
+      "level": 3,
+      "page_end": 360,
+      "role": "section",
+      "page_start_parquet": 361,
+      "page_end_parquet": 361
+    },
+    {
+      "title": "II. Des récits de fiction mayas.",
+      "page_start": 361,
+      "level": 2,
+      "page_end": 363,
+      "role": "section",
+      "page_start_parquet": 362,
+      "page_end_parquet": 364
+    },
+    {
+      "title": "a. Le Popol Vuh",
+      "page_start": 362,
+      "level": 3,
+      "page_end": 362,
+      "role": "section",
+      "page_start_parquet": 363,
+      "page_end_parquet": 363
+    },
+    {
+      "title": "b. Le Rabinal Achi",
+      "page_start": 363,
+      "level": 3,
+      "page_end": 363,
+      "role": "section",
+      "page_start_parquet": 364,
+      "page_end_parquet": 364
+    },
+    {
+      "title": "III. Une Histoire écrite par des étrangers",
+      "page_start": 364,
+      "level": 2,
+      "page_end": 377,
+      "role": "section",
+      "page_start_parquet": 365,
+      "page_end_parquet": 378
+    },
+    {
+      "title": "a. Une Histoire espagnole :",
+      "page_start": 365,
+      "level": 3,
+      "page_end": 371,
+      "role": "section",
+      "page_start_parquet": 366,
+      "page_end_parquet": 372
+    },
+    {
+      "title": "1. Ramon Pané, La relacion acerca de las antigüedades de los indios, 1498",
+      "page_start": 366,
+      "level": 4,
+      "page_end": 366,
+      "role": "section",
+      "page_start_parquet": 367,
+      "page_end_parquet": 367
+    },
+    {
+      "title": "2. Pietro Martyr d'Anghiera, *De Orbe Nouo*, d'après des lettres rédigées entre 1494 et 1526",
+      "page_start": 367,
+      "level": 4,
+      "page_end": 367,
+      "role": "section",
+      "page_start_parquet": 368,
+      "page_end_parquet": 368
+    },
+    {
+      "title": "3. Hernán Cortés, Cartas de la Relacion de Hernán Cortés al imperador Carlos V, 1519-1526",
+      "page_start": 367,
+      "level": 4,
+      "page_end": 367,
+      "role": "section",
+      "page_start_parquet": 368,
+      "page_end_parquet": 368
+    },
+    {
+      "title": "4. Gonzalo Fernández Oviedo y Valdés, La Historia general de las Indias, 1535",
+      "page_start": 368,
+      "level": 4,
+      "page_end": 368,
+      "role": "section",
+      "page_start_parquet": 369,
+      "page_end_parquet": 369
+    },
+    {
+      "title": "5. Bartolomé de las Casas, Brevissima relacion de la destruycion de las Indias, 1542-1552",
+      "page_start": 368,
+      "level": 4,
+      "page_end": 368,
+      "role": "section",
+      "page_start_parquet": 369,
+      "page_end_parquet": 369
+    },
+    {
+      "title": "6. Francisco López de Gómara, *Historia general de las indias*, 1552",
+      "page_start": 369,
+      "level": 4,
+      "page_end": 369,
+      "role": "section",
+      "page_start_parquet": 370,
+      "page_end_parquet": 370
+    },
+    {
+      "title": "7. Diego de Landa, Relacion de las cosas de Yucatan, 1566",
+      "page_start": 369,
+      "level": 4,
+      "page_end": 369,
+      "role": "section",
+      "page_start_parquet": 370,
+      "page_end_parquet": 370
+    },
+    {
+      "title": "8. Bernal Díaz Del Castillo, Historia verdadera de la conquista de la Nueva España, 1568 (publié en 1632)",
+      "page_start": 369,
+      "level": 4,
+      "page_end": 369,
+      "role": "section",
+      "page_start_parquet": 370,
+      "page_end_parquet": 370
+    },
+    {
+      "title": "9. Francisco Hernandez Arana Xalijá, *Anales de los Cakchiqueles*, 1560-1583.",
+      "page_start": 370,
+      "level": 4,
+      "page_end": 370,
+      "role": "section",
+      "page_start_parquet": 371,
+      "page_end_parquet": 371
+    },
+    {
+      "title": "10. Diego Lopez de Cogolludo, *Historia de Yucatan*, 1688.",
+      "page_start": 370,
+      "level": 4,
+      "page_end": 371,
+      "role": "section",
+      "page_start_parquet": 371,
+      "page_end_parquet": 372
+    },
+    {
+      "title": "b. Une histoire localisée au Yucatán : Premières explorations.",
+      "page_start": 372,
+      "level": 3,
+      "page_end": 372,
+      "role": "section",
+      "page_start_parquet": 373,
+      "page_end_parquet": 373
+    },
+    {
+      "title": "c. Dans un second temps, des explorations continentales.",
+      "page_start": 373,
+      "level": 3,
+      "page_end": 374,
+      "role": "section",
+      "page_start_parquet": 374,
+      "page_end_parquet": 375
+    },
+    {
+      "title": "d. Les ethnologues.",
+      "page_start": 375,
+      "level": 3,
+      "page_end": 377,
+      "role": "section",
+      "page_start_parquet": 376,
+      "page_end_parquet": 378
+    },
+    {
+      "title": "1. Ralph Roys, The political geography of the Yucatan Maya (1957) ; The Indian Background of Colonial Yucatan (1972) ; Ritual of the bacabs (1965).",
+      "page_start": 375,
+      "level": 4,
+      "page_end": 375,
+      "role": "section",
+      "page_start_parquet": 376,
+      "page_end_parquet": 376
+    },
+    {
+      "title": "2. Jacques Soustelle, Les Maya (1982) ; Les quatre soleils, Souvenirs et réflexions d'un ethnologue au Mexique (1991).",
+      "page_start": 376,
+      "level": 4,
+      "page_end": 377,
+      "role": "section",
+      "page_start_parquet": 377,
+      "page_end_parquet": 378
+    },
+    {
+      "title": "B. LES RECITS DE L'EPOQUE DE LA CONQUETE, SOURCE D'INFORMATIONS SUR LE CONCEPT FEMININ MAYA.",
+      "page_start": 378,
+      "level": 1,
+      "page_end": 394,
+      "role": "section",
+      "page_start_parquet": 379,
+      "page_end_parquet": 395
+    },
+    {
+      "title": "I. Des récits « ethnographiques » durant la Conquête.",
+      "page_start": 378,
+      "level": 2,
+      "page_end": 383,
+      "role": "section",
+      "page_start_parquet": 379,
+      "page_end_parquet": 384
+    },
+    {
+      "title": "a. Hors du monde maya.",
+      "page_start": 378,
+      "level": 3,
+      "page_end": 378,
+      "role": "section",
+      "page_start_parquet": 379,
+      "page_end_parquet": 379
+    },
+    {
+      "title": "b. Un chroniqueur « ethnographe » à Mexico.",
+      "page_start": 379,
+      "level": 3,
+      "page_end": 379,
+      "role": "section",
+      "page_start_parquet": 380,
+      "page_end_parquet": 380
+    },
+    {
+      "title": "c. Ce que Bernardino de Sahagún nous dit des femmes nahuas.",
+      "page_start": 379,
+      "level": 3,
+      "page_end": 383,
+      "role": "section",
+      "page_start_parquet": 380,
+      "page_end_parquet": 384
+    },
+    {
+      "title": "1. Les femmes nobles.",
+      "page_start": 379,
+      "level": 4,
+      "page_end": 382,
+      "role": "section",
+      "page_start_parquet": 380,
+      "page_end_parquet": 383
+    },
+    {
+      "title": "2. Les femmes du peuple.",
+      "page_start": 383,
+      "level": 4,
+      "page_end": 383,
+      "role": "section",
+      "page_start_parquet": 384,
+      "page_end_parquet": 384
+    },
+    {
+      "title": "II. Les femmes et le tissu dans le monde maya.",
+      "page_start": 384,
+      "level": 2,
+      "page_end": 394,
+      "role": "section",
+      "page_start_parquet": 385,
+      "page_end_parquet": 395
+    },
+    {
+      "title": "a. Un acte symbolique de création du monde.",
+      "page_start": 384,
+      "level": 3,
+      "page_end": 387,
+      "role": "section",
+      "page_start_parquet": 385,
+      "page_end_parquet": 388
+    },
+    {
+      "title": "1. Le vêtement huipil.",
+      "page_start": 384,
+      "level": 4,
+      "page_end": 386,
+      "role": "section",
+      "page_start_parquet": 385,
+      "page_end_parquet": 387
+    },
+    {
+      "title": "2. Les motifs féminins.",
+      "page_start": 387,
+      "level": 4,
+      "page_end": 387,
+      "role": "section",
+      "page_start_parquet": 388,
+      "page_end_parquet": 388
+    },
+    {
+      "title": "b. Différence entre femmes communes et femmes liées au pouvoir.",
+      "page_start": 388,
+      "level": 3,
+      "page_end": 390,
+      "role": "section",
+      "page_start_parquet": 389,
+      "page_end_parquet": 391
+    },
+    {
+      "title": "1. Des aiguilles dédicacées.",
+      "page_start": 389,
+      "level": 4,
+      "page_end": 390,
+      "role": "section",
+      "page_start_parquet": 390,
+      "page_end_parquet": 391
+    },
+    {
+      "title": "2. Une différence matérielle.",
+      "page_start": 391,
+      "level": 4,
+      "page_end": 391,
+      "role": "section",
+      "page_start_parquet": 392,
+      "page_end_parquet": 392
+    },
+    {
+      "title": "c. Des vêtements féminins portés par des hommes.",
+      "page_start": 391,
+      "level": 3,
+      "page_end": 393,
+      "role": "section",
+      "page_start_parquet": 392,
+      "page_end_parquet": 394
+    },
+    {
+      "title": "1. Des « travestissements » décrits dans les chroniques espagnoles.",
+      "page_start": 391,
+      "level": 4,
+      "page_end": 392,
+      "role": "section",
+      "page_start_parquet": 392,
+      "page_end_parquet": 393
+    },
+    {
+      "title": "2. Un travestissement rituel",
+      "page_start": 393,
+      "level": 4,
+      "page_end": 393,
+      "role": "section",
+      "page_start_parquet": 394,
+      "page_end_parquet": 394
+    },
+    {
+      "title": "d. Les autres marqueurs sociaux de parure en plus des habits",
+      "page_start": 394,
+      "level": 3,
+      "page_end": 394,
+      "role": "section",
+      "page_start_parquet": 395,
+      "page_end_parquet": 395
+    },
+    {
+      "title": "1. Des tatouages, «piercings» et modifications corporelles féminines",
+      "page_start": 394,
+      "level": 4,
+      "page_end": 394,
+      "role": "section",
+      "page_start_parquet": 395,
+      "page_end_parquet": 395
+    },
+    {
+      "title": "2. Des déformations crâniennes féminines",
+      "page_start": 395,
+      "level": 4,
+      "page_end": 395,
+      "role": "section",
+      "page_start_parquet": 396,
+      "page_end_parquet": 396
+    },
+    {
+      "title": "C. LES LIENS ENTRE FEMMES MAYAS ET RELIGION, RELATES DANS LES CHRONIQUES",
+      "page_start": 395,
+      "level": 1,
+      "page_end": 419,
+      "role": "section",
+      "page_start_parquet": 396,
+      "page_end_parquet": 420
+    },
+    {
+      "title": "I. Des femmes qui participent aux rituels religieux",
+      "page_start": 396,
+      "level": 2,
+      "page_end": 404,
+      "role": "section",
+      "page_start_parquet": 397,
+      "page_end_parquet": 405
+    },
+    {
+      "title": "a. Des femmes religieuses dans les codex",
+      "page_start": 396,
+      "level": 3,
+      "page_end": 396,
+      "role": "section",
+      "page_start_parquet": 397,
+      "page_end_parquet": 397
+    },
+    {
+      "title": "b. Des femmes qui participent à la vie religieuse dans les chroniques",
+      "page_start": 396,
+      "level": 3,
+      "page_end": 398,
+      "role": "section",
+      "page_start_parquet": 397,
+      "page_end_parquet": 399
+    },
+    {
+      "title": "c. Quels domaines pour les rituels féminins ?",
+      "page_start": 399,
+      "level": 3,
+      "page_end": 403,
+      "role": "section",
+      "page_start_parquet": 400,
+      "page_end_parquet": 404
+    },
+    {
+      "title": "1. Rites agraires",
+      "page_start": 399,
+      "level": 4,
+      "page_end": 400,
+      "role": "section",
+      "page_start_parquet": 400,
+      "page_end_parquet": 401
+    },
+    {
+      "title": "2. Rites de fécondités",
+      "page_start": 401,
+      "level": 4,
+      "page_end": 402,
+      "role": "section",
+      "page_start_parquet": 402,
+      "page_end_parquet": 403
+    },
+    {
+      "title": "3. Des rites de «visions»",
+      "page_start": 403,
+      "level": 4,
+      "page_end": 403,
+      "role": "section",
+      "page_start_parquet": 404,
+      "page_end_parquet": 404
+    },
+    {
+      "title": "4. Rites sacrificiels",
+      "page_start": 403,
+      "level": 4,
+      "page_end": 403,
+      "role": "section",
+      "page_start_parquet": 404,
+      "page_end_parquet": 404
+    },
+    {
+      "title": "d. L'autosacrifice comme rituel autour du concept duel homme/femme",
+      "page_start": 404,
+      "level": 3,
+      "page_end": 404,
+      "role": "section",
+      "page_start_parquet": 405,
+      "page_end_parquet": 405
+    },
+    {
+      "title": "II. En zone maya, un panthéon plus paritaire que ce que l'archéologie laisse à penser ?",
+      "page_start": 405,
+      "level": 2,
+      "page_end": 419,
+      "role": "section",
+      "page_start_parquet": 406,
+      "page_end_parquet": 420
+    },
+    {
+      "title": "a. Les déesses des rituels de Bacabs",
+      "page_start": 405,
+      "level": 3,
+      "page_end": 416,
+      "role": "section",
+      "page_start_parquet": 406,
+      "page_end_parquet": 417
+    },
+    {
+      "title": "b. Les femmes dans une épopée",
+      "page_start": 417,
+      "level": 3,
+      "page_end": 419,
+      "role": "section",
+      "page_start_parquet": 418,
+      "page_end_parquet": 420
+    },
+    {
+      "title": "1. Le mythe des jumeaux et la récurrence du « Ix »",
+      "page_start": 417,
+      "level": 4,
+      "page_end": 417,
+      "role": "section",
+      "page_start_parquet": 418,
+      "page_end_parquet": 418
+    },
+    {
+      "title": "2. Des déesses secondaires",
+      "page_start": 418,
+      "level": 4,
+      "page_end": 419,
+      "role": "section",
+      "page_start_parquet": 419,
+      "page_end_parquet": 420
+    },
+    {
+      "title": "D. LES DIFFERENTS POUVOIRS FEMININS MAYAS A L'EPOQUE DE LA CONQUETE",
+      "page_start": 420,
+      "level": 1,
+      "page_end": 443,
+      "role": "section",
+      "page_start_parquet": 421,
+      "page_end_parquet": 444
+    },
+    {
+      "title": "I. Les rôles des femmes dans l'hérédité",
+      "page_start": 420,
+      "level": 2,
+      "page_end": 423,
+      "role": "section",
+      "page_start_parquet": 421,
+      "page_end_parquet": 424
+    },
+    {
+      "title": "a. Leur rôle d'ancêtre",
+      "page_start": 420,
+      "level": 3,
+      "page_end": 421,
+      "role": "section",
+      "page_start_parquet": 421,
+      "page_end_parquet": 422
+    },
+    {
+      "title": "1. Dans la mort",
+      "page_start": 420,
+      "level": 4,
+      "page_end": 421,
+      "role": "section",
+      "page_start_parquet": 421,
+      "page_end_parquet": 422
+    },
+    {
+      "title": "b. La lignée maternelle au temps de la Conquête",
+      "page_start": 422,
+      "level": 3,
+      "page_end": 422,
+      "role": "section",
+      "page_start_parquet": 423,
+      "page_end_parquet": 423
+    },
+    {
+      "title": "c. L'identité sociale des femmes mayas",
+      "page_start": 423,
+      "level": 3,
+      "page_end": 423,
+      "role": "section",
+      "page_start_parquet": 424,
+      "page_end_parquet": 424
+    },
+    {
+      "title": "II. Les rôles politiques des femmes mayas",
+      "page_start": 424,
+      "level": 2,
+      "page_end": 428,
+      "role": "section",
+      "page_start_parquet": 425,
+      "page_end_parquet": 429
+    },
+    {
+      "title": "a. Des femmes mayas qui héritent de pouvoirs",
+      "page_start": 424,
+      "level": 3,
+      "page_end": 427,
+      "role": "section",
+      "page_start_parquet": 425,
+      "page_end_parquet": 428
+    },
+    {
+      "title": "b. Les droits et les devoirs des femmes mayas",
+      "page_start": 428,
+      "level": 3,
+      "page_end": 428,
+      "role": "section",
+      "page_start_parquet": 429,
+      "page_end_parquet": 429
+    },
+    {
+      "title": "1. Les droits fonciers et de propriété",
+      "page_start": 428,
+      "level": 4,
+      "page_end": 428,
+      "role": "section",
+      "page_start_parquet": 429,
+      "page_end_parquet": 429
+    },
+    {
+      "title": "2. Les devoirs des femmes mayas",
+      "page_start": 428,
+      "level": 4,
+      "page_end": 428,
+      "role": "section",
+      "page_start_parquet": 429,
+      "page_end_parquet": 429
+    },
+    {
+      "title": "III. Un rôle combattant des femmes mayas ?",
+      "page_start": 429,
+      "level": 2,
+      "page_end": 433,
+      "role": "section",
+      "page_start_parquet": 430,
+      "page_end_parquet": 434
+    },
+    {
+      "title": "a. Des femmes sur le champ de bataille",
+      "page_start": 429,
+      "level": 3,
+      "page_end": 431,
+      "role": "section",
+      "page_start_parquet": 430,
+      "page_end_parquet": 432
+    },
+    {
+      "title": "b. Les femmes qui accompagnent la guerre",
+      "page_start": 432,
+      "level": 3,
+      "page_end": 433,
+      "role": "section",
+      "page_start_parquet": 433,
+      "page_end_parquet": 434
+    },
+    {
+      "title": "IV. La sexualité des femmes mayas",
+      "page_start": 434,
+      "level": 2,
+      "page_end": 443,
+      "role": "section",
+      "page_start_parquet": 435,
+      "page_end_parquet": 444
+    },
+    {
+      "title": "a. La prostitution chez les Mayas",
+      "page_start": 434,
+      "level": 3,
+      "page_end": 434,
+      "role": "section",
+      "page_start_parquet": 435,
+      "page_end_parquet": 435
+    },
+    {
+      "title": "b. La prostitution en Amérique précolombienne",
+      "page_start": 435,
+      "level": 3,
+      "page_end": 436,
+      "role": "section",
+      "page_start_parquet": 436,
+      "page_end_parquet": 437
+    },
+    {
+      "title": "c. La vision de la liberté sexuelle féminine",
+      "page_start": 437,
+      "level": 3,
+      "page_end": 438,
+      "role": "section",
+      "page_start_parquet": 438,
+      "page_end_parquet": 439
+    },
+    {
+      "title": "d. Leur rôle d'épouse",
+      "page_start": 439,
+      "level": 3,
+      "page_end": 440,
+      "role": "section",
+      "page_start_parquet": 440,
+      "page_end_parquet": 441
+    },
+    {
+      "title": "e. Le rôle des femmes au foyer, rôle maternel",
+      "page_start": 441,
+      "level": 3,
+      "page_end": 443,
+      "role": "section",
+      "page_start_parquet": 442,
+      "page_end_parquet": 444
+    },
+    {
+      "title": "CONCLUSION",
+      "page_start": 444,
+      "level": 0,
+      "page_end": 453,
+      "role": "backmatter",
+      "page_start_parquet": 445,
+      "page_end_parquet": 454
+    },
+    {
+      "title": "a. Un travail d'archéologie",
+      "page_start": 444,
+      "level": 3,
+      "page_end": 444,
+      "role": "section",
+      "page_start_parquet": 445,
+      "page_end_parquet": 445
+    },
+    {
+      "title": "b. Une recherche de tombes, de peintures et de sculptures féminines",
+      "page_start": 445,
+      "level": 3,
+      "page_end": 447,
+      "role": "section",
+      "page_start_parquet": 446,
+      "page_end_parquet": 448
+    },
+    {
+      "title": "c. Une étude sur des femmes de pouvoir",
+      "page_start": 448,
+      "level": 3,
+      "page_end": 448,
+      "role": "section",
+      "page_start_parquet": 449,
+      "page_end_parquet": 449
+    },
+    {
+      "title": "d. La place des femmes mayas",
+      "page_start": 448,
+      "level": 3,
+      "page_end": 448,
+      "role": "section",
+      "page_start_parquet": 449,
+      "page_end_parquet": 449
+    },
+    {
+      "title": "e. Une étude de la place des femmes selon leurs cités",
+      "page_start": 449,
+      "level": 3,
+      "page_end": 450,
+      "role": "section",
+      "page_start_parquet": 450,
+      "page_end_parquet": 451
+    },
+    {
+      "title": "f. Les femmes mayas à l'époque de la Conquête",
+      "page_start": 451,
+      "level": 3,
+      "page_end": 453,
+      "role": "section",
+      "page_start_parquet": 452,
+      "page_end_parquet": 454
+    },
+    {
+      "title": "BIBLIOGRAPHIE",
+      "page_start": 454,
+      "level": 0,
+      "page_end": 474,
+      "role": "backmatter",
+      "page_start_parquet": 455,
+      "page_end_parquet": 475
+    },
+    {
+      "title": "a. Ouvrages généraux :",
+      "page_start": 454,
+      "level": 3,
+      "page_end": 459,
+      "role": "section",
+      "page_start_parquet": 455,
+      "page_end_parquet": 460
+    },
+    {
+      "title": "b. Ouvrages sur l'épigraphie :",
+      "page_start": 460,
+      "level": 3,
+      "page_end": 460,
+      "role": "section",
+      "page_start_parquet": 461,
+      "page_end_parquet": 461
+    },
+    {
+      "title": "c. Thèses et mémoire :",
+      "page_start": 461,
+      "level": 3,
+      "page_end": 461,
+      "role": "section",
+      "page_start_parquet": 462,
+      "page_end_parquet": 462
+    },
+    {
+      "title": "d. Articles :",
+      "page_start": 461,
+      "level": 3,
+      "page_end": 468,
+      "role": "section",
+      "page_start_parquet": 462,
+      "page_end_parquet": 469
+    },
+    {
+      "title": "e. Références données :",
+      "page_start": 469,
+      "level": 3,
+      "page_end": 469,
+      "role": "section",
+      "page_start_parquet": 470,
+      "page_end_parquet": 470
+    },
+    {
+      "title": "f. Sources historiques :",
+      "page_start": 469,
+      "level": 3,
+      "page_end": 470,
+      "role": "section",
+      "page_start_parquet": 470,
+      "page_end_parquet": 471
+    },
+    {
+      "title": "g. Sources ethnologiques :",
+      "page_start": 471,
+      "level": 3,
+      "page_end": 471,
+      "role": "section",
+      "page_start_parquet": 472,
+      "page_end_parquet": 472
+    },
+    {
+      "title": "h. Catalogues et comptes rendus :",
+      "page_start": 472,
+      "level": 3,
+      "page_end": 472,
+      "role": "section",
+      "page_start_parquet": 473,
+      "page_end_parquet": 473
+    },
+    {
+      "title": "i. Sources images :",
+      "page_start": 473,
+      "level": 3,
+      "page_end": 473,
+      "role": "section",
+      "page_start_parquet": 474,
+      "page_end_parquet": 474
+    },
+    {
+      "title": "j. Article médical :",
+      "page_start": 473,
+      "level": 3,
+      "page_end": 473,
+      "role": "section",
+      "page_start_parquet": 474,
+      "page_end_parquet": 474
+    },
+    {
+      "title": "k. Ouvrages de sciences humaines",
+      "page_start": 474,
+      "level": 3,
+      "page_end": 474,
+      "role": "section",
+      "page_start_parquet": 475,
+      "page_end_parquet": 475
+    },
+    {
+      "title": "INDEX",
+      "page_start": 475,
+      "level": 0,
+      "page_end": 478,
+      "role": "backmatter",
+      "page_start_parquet": 476,
+      "page_end_parquet": 479
+    },
+    {
+      "title": "LISTE DES FIGURES",
+      "page_start": 479,
+      "level": 0,
+      "page_end": 479,
+      "role": "backmatter",
+      "page_start_parquet": 480,
+      "page_end_parquet": 480
+    }
+  ],
+  "page_offset": {
+    "intro_page_toc": 20,
+    "intro_page_parquet": 21,
+    "offset": 1,
+    "method": "printed-folio"
+  },
+  "toc_validation": {
+    "issues": [
+      "entry 1: level jump 0 → 3 at 'a. La géographie'",
+      "entry 303: level jump 0 → 3 at 'a. Un travail d'archéologie'",
+      "entry 310: level jump 0 → 3 at 'a. Ouvrages généraux :'"
+    ],
+    "ok": false
+  }
+}

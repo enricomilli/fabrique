@@ -1,0 +1,18 @@
+{
+  "thesis": "2022LYO10153",
+  "run_id": "20261007_231214",
+  "model": "Qwen3.6-27B-Q6_K.gguf",
+  "fiche_path": "results/2022LYO10153/2022LYO10153_fiche.md",
+  "parquet_path": "data/2022LYO10153.parquet",
+  "blob_chars": 246677,
+  "blob_tok_est": 61669,
+  "prompt_chars": 30305,
+  "shim_env": {
+    "SHIM_MODEL_NAME": "Qwen3.6-27B-Q6_K.gguf",
+    "QWEN_SERVER_URL": "https://zoo-oklahoma-stream-hours.trycloudflare.com/v1",
+    "SHIM_TEMPERATURE": "0.6",
+    "SHIM_TOP_P": "0.95",
+    "SHIM_TOP_K": "20"
+  },
+  "rlm_config": "max_iterations: 20\nmax_depth: 1\nmax_sub_queries: 15\ntruncate_len: 20000\nmetadata_preview_lines: 20\n"
+}

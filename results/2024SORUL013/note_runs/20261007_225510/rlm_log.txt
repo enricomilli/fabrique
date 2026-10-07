@@ -1,0 +1,362 @@
+# *Les femmes de pouvoir dans le monde maya* par Noémie Jouvet
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-10-07
+
+**Référence :** Noémie Jouvet, *Les femmes de pouvoir dans le monde maya*, Sorbonne Université, École doctorale 0124 (CERAP), 2024, 488 p.
+
+---
+
+Le rapport entre les femmes et le pouvoir dans le monde maya a longtemps été traité « de manière périphérique voire anecdotique par la recherche » (p. 21). C'est précisément ce déficit que s'emploie à combler Noémie Jouvet dans cette thèse d'archéologie, soutenue en 2024 à la Sorbonne. S'inscrivant à l'intersection de l'archéologie classique des Basses-Terres mayas et des études de genre appliquées au contexte méso-américain, ce travail propose une réinterprétation systématique de l'ensemble des vestiges archéologiques — stèles, sépultures, peintures murales et codex — qui évoquent le féminin dans les sociétés mayas préhispaniques. La thèse centrale est claire : les femmes de l'élite maya ne sont pas des appendices décoratifs du pouvoir masculin, mais des actrices intégrées et hiérarchisées des sphères politique, religieuse et administrative, dont l'insertion varie significativement selon les cités et les périodes (p. 449). Le fil directeur qui traverse les trois grandes parties est la notion de territorialité féminine, telle que l'auteur la définit dès l'introduction : il s'agit de « définir la place des femmes au sein des cités, autant dans le sens social, géographique que symbolique » (p. 30). Cette notion relie l'identification des marqueurs archéologiques (Partie I) à leur intégration mythologique et spatiale (Partie II), puis à leur dialogue avec les récits historiques et leur persistance sociale jusqu'à l'époque de la Conquête (Partie III). La périodisation adoptée, fondée sur le cadre de Christian Duverger, structure l'analyse en cinq époques — de la période formative (Époque II, − 300 à 200 de notre ère) à l'époque de la Conquête —, permettant de suivre les transformations du corpus et du statut féminin à travers un millénaire et demi d'histoire maya.
+
+L'originalité méthodologique de cette thèse réside dans le choix d'aborder le sujet « de manière archéologique », en « part[ant] d'abord de l'analyse factuelle des vestiges avant de présenter une interprétation et d'étayer celle-ci » (p. 38). Jouvet rejette explicitement l'usage du terme « genre », qu'elle estime « particulièrement lié à la pensée occidentale contemporaine » (p. 29), préférant s'appuyer sur la méthodologie d'Anne Augereau distinguant sexe biologique et concepts culturels sans imposer de grille analytique européenne. Le corpus, présenté comme la plus exhaustive compilation possible de vestiges féminins identifiés, repose sur trois catégories principales : les tombes de femmes mayas (dont les sépultures somptueuses d'El Peru-Waka et d'Uaxactun à l'Époque II), les peintures murales (Bonampak, Calakmul), et les sculptures lithiques mettant en scène des personnages féminins (stèles, linteaux, autels, panneaux) (p. 446). Cette focalisation sur le registre lapidaire et funéraire de l'Époque III (200–900 de notre ère) est justifiée par l'état de conservation et la fonction communicative de ces supports : « une stèle en zone maya est un outil de communication des autorités » (p. 32). L'auteur croise ensuite cette analyse archéologique contextuelle — « il est important en archéologie d'analyser le contexte de l'artefact. Le contexte archéologique permet de replacer celui-ci à la fois spatialement, chronologiquement et de le connecter au reste de son environnement » (p. 39) — avec la confrontation de sources ethno-historiques (chroniques espagnoles du XVIe siècle, codex mayas) et d'éléments mythologiques. Cette méthode du double regard, qui va du matériel au symbolique puis à l'historique, permet de dépasser les limites de la conservation du vestige et les biais des sources coloniales, qui « évoquent peu le fonctionnement des sociétés et se contentent de l'aspect anecdotique et militaire » (p. 27).
+
+La première partie, consacrée aux vestiges archéologiques féminins en zone maya, constitue le socle empirique de la thèse et en est aussi l'apport le plus tangible. Jouvet y procède en deux temps : d'abord en définissant les critères d'identification du féminin dans le registre archéologique, puis en présentant le corpus ainsi constitué. Elle énonce quatre classes de vestiges selon leur sexualisation — féminin, masculin, non sexualisé, mixte — ainsi qu'une catégorie résiduelle de vestiges dont l'état de conservation ou l'insuffisance des connaissances sur le système de pensée méso-américain empêche toute détermination. Le critère le plus formel repose sur l'anthropologie biologique : l'os du bassin « permet l'identification la plus formelle (à plus de 93 %) du sexe pour un squelette adulte » (p. 42). Sur ce fondement, les sépultures de prestige féminines — comme celles d'El Peru-Waka et d'Uaxactun — deviennent le repère initial permettant de confirmer qu'« une femme pouvait posséder un statut élevé dans la société » (p. 64). L'auteur examine ensuite les stèles et sculptures féminines, dressant une liste remarquable de monuments identifiés : la stèle 2 de Bonampak, qui figure deux femmes encadrant un personnage masculin dans une scène d'hommage public (p. 115), et les multiples stèles de Calakmul — la stèle 9, jumelées 23–24, 28–29, 54, 88 — dont la disposition en dyades homme-femme autour de la place centrale témoigne d'une visibilité institutionnelle des femmes de l'élite (p. 117–120). L'identification repose ensuite sur des marqueurs vestimentaires précis : le *huipil*, jupe à motif de croisillons, et surtout un double ornement de ceinture — mâchoire supérieure de jaguar et coquillage scié — que l'auteur réinterprète comme matérialisation symbolique de la capacité génitrice féminine. C'est sur ce dernier critère qu'elle fonde sa contribution la plus novatrice : la réidentification de la stèle H de Copán, traditionnellement présentée comme un « roi habillé en dieu du maïs au genre ambigu », en figure féminine à part entière, « portant une tenue féminine avec à la fois l'ornement de ceinture mais aussi le motif de croisillons sur la jupe » (p. 198). Cette réattribution conteste une interprétation consolidée par l'usage muséal et souligne combien les marqueurs féminins ont pu être invisibilisés par la lecture a priori masculine des monuments mayas. Jouvet montre également que le nombre de figurations féminines connues ne constitue qu'un plancher : certaines femmes de pouvoir ont sans doute été représentées sous traits ou atours masculins, à la manière d'Hatchepsout en Égypte (p. 180), ce qui complexifie la tâche de l'archéologue tout en renforçant l'hypothèse d'une présence féminine plus étendue qu'il n'y paraît à la surface du corpus. La partie s'achève sur l'établissement d'un outil d'identification systématique — les critères morphologiques de la parure et de la tenue — qui sera réinvesti dans les parties suivantes pour analyser la symbolique et la portée politique de ces vestiges.
+
+La deuxième partie inscrit les vestiges archéologiques dans le cadre philosophique et mythologique de l'espace méso-américain, démontrant que leur positionnement dans les centres cérémoniels n'est jamais fortuit. Jouvet y établit d'abord la structure conceptuelle de l'espace — dimension verticale tripartite (inframonde, terrestre, céleste) et dimension horizontale quadripartite (nord, est, sud, ouest) autour d'un *axis mundi* — avant d'y intégrer le concept féminin. Le panthéon maya, présenté comme une religion polythéiste dont « les divinités possèdent des variantes ou avatars » dans une « imbrication éloignée des conceptions monothéistes occidentales » (p. 256), fournit le socle mythologique. Deux déesses y sont analysées en profondeur : Ixchel, « déesse du féminin » associée à la maternité, au mariage et au tissage, mais aussi à un déluge destructeur et à une « dimension guerrière » (p. 267–268), et la déesse lunaire Ix Chebel Yax, patronne de la procréation et du maïs, représentée accouchant d'un lapin (p. 275). L'auteur propose l'hypothèse qu'il pourrait s'agir d'une seule entité aux avatars multiples, dont les similitudes de patronage et d'aspects « négatifs » rendent compte d'une complexité propre au féminin mythique maya, à la fois protectrice et destructrice. C'est dans cette deuxième partie que la thèse développe son hypothèse la plus ambitieuse : le lien entre la sémantique spatiale et le statut politique des femmes. L'analyse de la forme du *huipil* — vêtement féminin dont la structure quadripartite rappelle la croix percée, symbole de l'espace anthropique méso-américain — permet à l'auteur de poser que le vêtement féminin « porte » littéralement la conception maya de l'espace (p. 181). L'étude des ornements de ceinture confirme cette liaison : la mâchoire supérieure de jaguar, interprétée non plus comme une gueule de monstre marin mais comme « une figuration de cette matrice originelle en lien avec les grottes où dorment ces animaux » (p. 294), se rattache au mythe olmèque de l'émergence de l'humanité d'une caverne-utérus. Le coquillage scié, second élément de l'ornement, renforce cette symbolique de fertilité, le coquillage étant « un symbole du sexe féminin dans de nombreuses cultures » (p. 299). L'application de ce cadre mythologique à l'espace archéologique produit des résultats éclairants : à Palenque, le tombeau de la « reine rouge », placé à l'ouest du tombeau du « roi Pakal », occupe la direction cardinal associée au féminin et au couchant, et les deux sépultures — toutes deux en sarcophage de pierre, toutes deux accompagnées de sacrifiés et ornées d'un masque de jade — manifestent « un statut similaire » (p. 302) au sein de la même structure cérémonielle. La grotte, « matrice originelle d'où émergent les peuples mayas » (p. 450), apparaît ainsi comme l'élément géographique clé qui relie le concept de fécondité à la territorialité politique des femmes de l'élite, dont les figurations sont systématiquement placées « dans les centres cérémoniels, lieux de pouvoir » (p. 452).
+
+La troisième partie confronte les données matérielles aux récits historiques, établissant un dialogue entre archéologie et sources ethno-historiques pour retracer la persistance ou la rupture des pratiques féminines à travers les époques. Jouvet examine d'abord l'évolution des supports de retranscription historique maya — des stèles et sculptures monumentales de l'Époque I à II aux codex et céramiques de l'Époque IV — pour montrer comment le changement de support corrèle avec une transformation politique (p. 360–361). Les chroniques espagnoles du XVIe siècle, malgré leurs biais évidents, fournissent des informations sur la persistance de certaines coutumes : l'alliance matrimoniale reste un levier d'ascension sociale, comme en témoigne le cas de l'Espagnol Guerrero, marié à une « *muy principal muger* » qui sert à « asseoir le statut social d'un étranger valeureux » (p. 379). L'auteur croise aussi les informations de Bernardino de Sahagún sur les femmes nahuas — dont la liste détaillée des outils textiles révèle la centralité du tissage comme activité noble féminine — avec les vestiges archéologiques mayas. Les femmes de l'élite conservent leur marqueur physique dès l'enfance par la déformation crânienne : « une femme ne peut probablement pas être entièrement déchue de son statut car celui-ci est inscrit sur sa physionomie » (p. 396). Dans la sphère religieuse, les codex mayas — notamment les pages 16 à 20 du *Codex de Dresde* — montrent des femmes humaines, non divines, participant activement aux cérémonies, contredisant la lecture restrictive de Diego de Landa qui les cantonnait à un rôle de spectatrices (p. 397). L'hérédité maternelle apparaît comme un axe structurant : à Palenque, les ancêtres féminins sont honorés au même titre que les masculins, « la référence aux ancêtres féminins du souverain pouvant servir à revendiquer la combinaison de deux nobles lignées » (p. 421). Le squelette d'une femme honorée sur l'autel 5 de Tikal, accompagné d'une cérémonie gravée dans la pierre, confirme que certaines lignées « passent par le père et la mère » (p. 422). À l'époque de la Conquête, la pièce de théâtre *Rabinal Achi* conserve le souvenir de l'ascendance maternelle — « Mère du Quetzal, Mère des Plumes Vertes » — attestant la persistance de la lignée maternelle malgré l'absence de mention systématique par les chroniqueurs (p. 423). Jouvet montre enfin que les femmes de l'époque de la Conquête conservent « un pouvoir effectif au sein de l'organisation sociale » (p. 452), qu'il soit politique, militaire — certaines étant figurées avec des armes, comme sur l'autel 148 de Tonina (p. 453) — ou religieux, via la participation à l'auto-sacrifice et aux rites de semailles.
+
+En définitive, l'apport principal de cette thèse est théorique et méthodologique : elle démontre de manière systématique et documentée que les femmes de l'élite maya ne sont ni des marginales, ni des appendices décoratifs, mais des actrices intégrées et structurantes du pouvoir politique, religieux et administratif. Le résultat le plus percutant de cette enquête est sans doute la mise en lumière d'une disparité citadine du statut féminin : « les femmes ne possédaient pas le même statut social au sein de ces deux cités » — à Calakmul, elles ont des supports autonomes, la même taille que les personnages masculins et sont placées « tout autour de la place centrale aux côtés des figures masculines » (p. 451), tandis qu'à Palenque elles n'apparaissent que secondaires, « toujours partie d'une scène et [sans] être le sujet principal » (p. 451). Ce contraste invalide l'idée d'un modèle uniforme de pouvoir féminin maya et ouvre la voie à des études comparatives de cité en cité. L'apport méthodologique est tout aussi significatif : l'établissement de critères morphologiques précis — *huipil*, jupe à motif de croisillons, ornement de ceinture à mâchoire supérieure et coquillage — constitue un outil opératoire pour les archéologues confrontés à des vestiges érodés ou partiellement conservés (p. 449). La réidentification de la stèle H de Copán en figure féminine illustre combien cette grille peut réviser des interprétations consacrées.
+
+Quelques tensions traversent toutefois le travail. La focalisation sur l'élite, imposée par la nature même des vestiges monumentaux et funéraires, laisse dans l'ombre la condition des femmes non élitaires, comme l'auteur le reconnaît (p. 449). La disparité temporelle — sur-représentation de l'Époque III et de l'époque de la Conquête au détriment des Époques II, IV et V — reflète un état des fouilles plus qu'une réalité historique, mais elle limite la portée des conclusions diachroniques. L'absence de textes coutumiers mayas préhispaniques contraint à des inférences à partir du matériel, et la confrontation avec les chroniques espagnoles reste nécessairement filtrée par les biais coloniaux. Enfin, le refus du terme « genre », motivé par une légitime volonté d'éviter le projet occidental, pourrait aussi priver l'analyse d'un concept opératoire pour articuler sexe biologique et construction sociale — l'auteur reconnaissant elle-même que la question de l'identité sexuelle des femmes figurées en atours masculins mérite d'être posée (p. 180). Néanmoins, ces limites ne diminuent pas la force d'un travail qui, par la rigueur de son inventaire et la finesse de ses interprétations contextuelles, réoriente durablement la manière de penser le pouvoir féminin dans les sociétés mayas préhispaniques. Il ouvre des perspectives fécondes : poursuite de la recherche sur les espaces féminins aux époques mal documentées, étude des femmes du peuple non élitaires, et intégration des avancées en épigraphie maya pour éclairer le rôle des femmes dans les longs textes glyphiqes encore partiellement indéchiffrés.
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de *Les femmes de pouvoir dans le monde maya* », 2026-10-07.
+
+
+---STDERR---
+Reading context from file: /var/folders/17/5nl7_ym976n00yx17526b9ym0000gn/T/note_2024SORUL013_x5ekjuj3.txt
+Context loaded: 863,982 characters
+Model: Qwen3.6-27B-Q6_K.gguf
+Query: Tu rédiges une NOTE DE LECTURE (compte rendu universitaire) d'une thèse de doctorat, dans la tradition académique française.
+
+La variable `context` (déjà chargée) contient le texte intégral de la thèse.
+
+## Format du blob `context`
+
+- Des marqueurs de page `[p.NNN]` sont insérés à chaque changement de page. Pour trouver le numéro de page d'un extrait, cherche sa position avec `.find()`, puis remonte jusqu'au marqueur `[p.NNN]` le plus proche.
+- Les notes de bas de page sont préfixées `[fn]` et placées à la fin de chaque page. Elles contiennent souvent les références scientifiques internes de la thèse.
+- Exemple de snippet pour trouver la page d'une phrase donnée :
+```python
+phrase = "conditions d'acceptabilité"
+pos = context.find(phrase)
+# remonter au dernier marqueur [p.XXX] avant pos
+marker_start = context.rfind("[p.", 0, pos)
+marker_end = context.find("]", marker_start) + 1
+page_tag = context[marker_start:marker_end]   # e.g. "[p.21]"
+print(f"Phrase « {phrase} » → {page_tag}")
+```
+
+
+## CARTE DE LA THÈSE (index de navigation)
+
+Index hiérarchique issu de la table des matières. Les pages sont les
+numéros des marqueurs `[p.NNN]` du blob `context` — pour atteindre
+directement un chapitre, saute à son marqueur :
+```python
+pos = context.find("[p.236]")     # début du chapitre visé
+extrait = context[pos:pos+3000]
+```
+ATTENTION : ne cherche PAS un titre de chapitre avec `context.find("titre")`
+— tu risques de tomber sur la table des matières de la thèse elle-même.
+Utilise toujours le saut par marqueur de page ci-dessous.
+
+- INTRODUCTION :  [p.21]–[p.40]
+- I ....... LES VESTIGES ARCHEOLOGIQUES FEMININS EN ZONE MAYA.  [p.41]–[p.221]
+  - A/ COMMENT DETERMINER QU'UN VESTIGE ARCHEOLOGIQUE MAYA REPRESENTE LE FEMININ  [p.41]–[p.113]
+  - B. CORPUS DES VESTIGES ARCHEOLOGIQUES IDENTIFIES COMME FEMININS....  [p.114]–[p.221]
+- II) L'ESPACE EN MESO-AMERIQUE, UN CONCEPT QUI S'INTEGRE AUX MYTHES FEMININS MAYAS.  [p.222]–[p.359]
+  - A. LA CONCEPTION DE L'ESPACE EN MESO-AMERIQUE  [p.222]–[p.255]
+  - B. LES ETRES FEMININS DANS LES MYTHOLOGIES MAYAS.  [p.256]–[p.300]
+  - C. LES VESTIGES FEMININS AU SEIN DE L'ESPACE MESO-AMERICAIN.  [p.301]–[p.359]
+- III)....LES VESTIGES ARCHEOLOGIQUES EN DIALOGUE AVEC LES RECITS HISTORIQUES  [p.360]–[p.444]
+  - A. L'HISTOIRE DANS LE MONDE MAYA :  [p.360]–[p.378]
+  - B. LES RECITS DE L'EPOQUE DE LA CONQUETE, SOURCE D'INFORMATIONS SUR LE CONCEPT FEMININ MAYA.  [p.379]–[p.395]
+  - C. LES LIENS ENTRE FEMMES MAYAS ET RELIGION, RELATES DANS LES CHRONIQUES  [p.396]–[p.420]
+  - D. LES DIFFERENTS POUVOIRS FEMININS MAYAS A L'EPOQUE DE LA CONQUETE  [p.421]–[p.444]
+- CONCLUSION  [p.445]–[p.454]
+- BIBLIOGRAPHIE  [p.455]–[p.475]
+- INDEX  [p.476]–[p.479]
+- LISTE DES FIGURES  [p.480]–[p.480]
+
+Tu disposes aussi, ci-dessous, de deux ressources dans ton prompt :
+  1. La FICHE structurée de la thèse — ton plan de travail, ce que tu dois couvrir
+  2. Un EXEMPLE DE STYLE — le registre, la longueur et le flux que tu dois imiter
+
+## Règles de référence
+
+**Auteurs externes (hors thèse) : STRICTEMENT INTERDITS.** Ne cite aucun auteur, ouvrage ou revue qui ne figure pas dans le texte de la thèse. Si un compte rendu standard écrirait « comme le montre Habermas » ou « selon Bourdieu » alors que ni Habermas ni Bourdieu n'est cité par l'auteur de la thèse, tu reformules sans nommer.
+
+**Auteurs internes (cités PAR la thèse) : autorisés sous condition.** Si tu veux nommer un auteur que la thèse elle-même mobilise (ex. Foucault, Moretti, Bakhtine, Lavoinne, Tetlock), tu DOIS :
+  1. Vérifier via `context.find("Nom")` qu'il est bien présent dans la thèse — SAUF si l'auteur figure déjà dans la FICHE avec une citation et une page : dans ce cas reprends l'ancrage de la fiche tel quel, sans revérification.
+  2. Accompagner la mention d'une courte citation verbatim (entre guillemets « ») extraite de la thèse.
+  3. Indiquer le numéro de page, obtenu via la méthode du marqueur `[p.NNN]` décrite ci-dessus.
+  Exemple : « Comme le rappelle Lavoinne, "cette croissance n'est pas justifiée économiquement" (p. 34). »
+
+**Chapitres et passages de la thèse** : cite-les librement (ex. « dans le premier chapitre », « p. 612 »). Les pages doivent être vérifiées via les marqueurs `[p.NNN]` — JAMAIS une position en caractères (offset à 4+ chiffres).
+
+**Notes de bas de page** : tu n'en rédiges pas dans la note. Les `[fn]` du blob sont uniquement un outil de recherche pour toi.
+
+**Cible : au moins 8 références de page précises dans la note finale** pour étayer tes affirmations.
+
+## Structure à produire (~2000 mots)
+
+```markdown
+# [Titre complet de la thèse, en italique après l'auteur]
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-10-07
+
+**Référence :** [Auteur], *[Titre]*, [Établissement], [Année], [Nombre de pages] p.
+
+---
+
+[Paragraphe 1 — Ouverture (~250 mots) : situe la thèse, l'auteur, la discipline,
+la période étudiée, la thèse centrale, le corpus principal. Annonce le fil
+directeur et la périodisation.]
+
+[Paragraphe 2 — Méthodologie et démarche (~300 mots) : approche,
+outillage, corpus, sondages, corpus contextuels. Souligne l'originalité
+méthodologique.]
+
+[Paragraphe 3 — Première partie ou premier axe (~350 mots) : en citant les pages.]
+
+[Paragraphe 4 — Deuxième partie ou deuxième axe (~300 mots).]
+
+[Paragraphe 5 — Troisième partie ou troisième axe (~350 mots).]
+
+[Paragraphe 6 — Portée, apport et tensions (~300-400 mots) : synthèse
+critique. L'apport empirique, théorique, méthodologique. Les tensions,
+les limites. Ouverture sur ce que la thèse permet de penser.]
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de [Titre court] », [Date].
+```
+
+## Consignes RLM
+
+- **Les pages et citations de la FICHE ont déjà été vérifiées automatiquement contre la source.** Reprends-les telles quelles, SANS les revérifier via `context.find(...)`. Ne vérifie que ce que tu introduis TOI-MÊME et qui ne figure pas dans la fiche (nouvel auteur, nouvelle citation, nouvelle page).
+- Si tu as besoin d'un passage spécifique, utilise `context[start:end]` ou `context.find("phrase")` pour le localiser, puis extrait une tranche de 500-1500 caractères autour.
+- **Travaille en LOTS SERRÉS** : toute l'exploration initiale (squelette : introduction, méthodologie, ouvertures de parties, conclusion, exemples fondateurs) doit tenir en AU PLUS 3 exécutions de code, chacune extrayant PLUSIEURS passages d'un coup (5 à 8 extraits par exécution). Jamais une exécution par passage. Les extractions complémentaires entre les passes de rédaction (cœur des parties) comptent à part : au plus 1 exécution d'extraction par passe de rédaction.
+- **LIAISON PAGE-EXTRAIT (obligatoire dans les lots)** : quand une exécution imprime plusieurs extraits, fais-la précéder CHAQUE extrait d'une ligne `===== EXTRAIT [p.N] → [p.M] =====` (les marqueurs réels de début et de fin de l'extrait). Au moment de citer, reprends le numéro depuis la ligne `=====` ou le marqueur `[p.N]` visible IMMÉDIATEMENT au-dessus du passage cité — jamais de mémoire. Une citation dont tu ne retrouves pas le marqueur exact dans tes sorties ne doit PAS porter de numéro de page.
+- **RÉDACTION EN PLUSIEURS PASSES (OBLIGATOIRE)** : ne rédige JAMAIS la note entière en une seule exécution. Rédige AU PLUS 2 paragraphes par exécution de code. Avant de rédiger les paragraphes 3, 4 et 5, extrais d'abord de NOUVEAUX passages du cœur de la partie concernée (pas seulement son ouverture) — puis rédige. Assemble le tout à la fin seulement.
+- **CITATION ET AFFIRMATION CO-PRÉSENTES** : une citation verbatim « … » (p. N) ne peut étayer QUE l'affirmation du passage d'où elle provient (le texte visible sous le même marqueur `[p.N]`). N'emploie JAMAIS une phrase de la thèse pour un argument qu'elle ne porte pas dans son contexte d'origine (une hypothèse formulée sur X ne sert pas à commenter Y ; un nom de fonction, de concept ou de liste se reprend tel que le passage le donne, sans le recomposer). Si une affirmation a besoin d'un appui, va chercher le passage qui la porte et cite-le avec sa propre page.
+- **Densité d'ancrage** : chaque paragraphe de partie (3, 4 et 5) doit citer AU MOINS 3 pages distinctes. Une partie racontée sans pages précises est un paragraphe raté.
+- Ne saute pas les exemples fondateurs que la fiche met en avant (comparaison inaugurale, cas paradigmatique, date fondatrice) : s'ils motivent la thèse, ils appartiennent à la note.
+- `llm_query` est réservé aux RECHERCHES ponctuelles (localiser un thème, résumer un long passage pour toi-même). NE L'UTILISE JAMAIS pour rédiger les paragraphes de la note : la rédaction se fait TOI-MÊME, dans cette boucle, avec les marqueurs `[p.NNN]` sous les yeux — c'est la seule façon de garantir des numéros de page exacts.
+- À la fin, assemble le markdown complet dans une variable puis appelle `FINAL(markdown_complet)`.
+
+## FICHE DE LA THÈSE
+
+```markdown
+# FICHE DE SYNTHÈSE DE THÈSE
+
+## Métadonnées
+
+- **Titre** : Les femmes de pouvoir dans le monde maya
+- **Auteur** : Noémie Jouvet
+- **Année** : 2024
+- **Établissement** : Sorbonne Université, École doctorale 0124, Laboratoire de recherche Cerap
+- **Discipline** : Théorie et pratique de l'archéologie
+- **Pages** : 488
+
+## Mots-clés
+
+Archéologie ; Maya ; Femme ; Pouvoir ; Préhispanique ; Archeology ; Women ; Power ; Pre-Columbian
+
+## Thèse centrale
+
+Les femmes mayas, loin d'être marginales, occupent une place structurante et hiérarchisée au sein des sphères de pouvoir politique, religieux et administratif, cette intégration variant significativement selon les cités et les époques (p. 449). Leur pouvoir s'exprime et se légitime à travers une gestion programmée de l'espace cérémoniel et domestique, où leur figuration et leur positionnement obéissent à une sémantique spatiale et mythologique qui les lie à la territorialité et à la perpétuation des lignées élitaires (p. 450, p. 452).
+
+## Questions de recherche
+
+- « définir la place des femmes au sein des cités, autant dans le sens social, géographique que symbolique. » (p. 30)
+- « chercher les rôles que pouvaient avoir les femmes dont l'image est associée à la construction de la cité. » (p. 29)
+- « proposer des hypothèses sur leur symbolique. » (p. 32)
+- « déterminer qu’un vestige archéologique maya est féminin » (p. 39)
+
+## Réponses aux questions de recherche
+
+- **Place des femmes (social, géographique, symbolique)** : « Les femmes de l'élite ont ainsi toujours un pouvoir effectif au sein de l'organisation sociale à l'époque de la Conquête. » (p. 452) ; « Les figurations de femmes sont ainsi placées dans les centres cérémoniels, lieux de pouvoir. » (p. 452) ; « Le concept féminin [...] connaît des articulations au sein [...] des espaces conceptuels [...] des espaces géographiques [...] des espaces anthropiques de pouvoir. » (p. 452)
+- **Rôles des femmes associées à la construction de la cité** : « Dans la cité de Yaxchilan les femmes participent aux devoirs de l'élite : entretenir la dynamique du monde, en auto-sacrifiant leur sang. » (p. 451) ; « Celles-ci pourraient avoir voulu se présenter comme l'incarnation de ce renouvellement de la population (en donnant naissance) et de la perpétuation de la lignée. » (p. 450)
+- **Hypothèses sur leur symbolique** : « la grotte (élément géographique) porte ainsi une charge symbolique féminine. Elle représente la matrice originelle d'où émergent les peuples mayas » (p. 450) ; « la mer et ses coquillages ont ainsi une symbolique de fertilité féminine » (p. 452) ; « l'ouest féminin et parfois le centre ou axis mundi féminin que l'on retrouve figuré davantage sur les motifs des tenues féminines que masculines » (p. 452)
+- **Déterminer qu’un vestige est féminin** : « Nous avons ainsi pu mieux définir les éléments qui permettent de figurer une femme dans la zone maya. » (p. 449) ; « Certaines parties de la tenue sont en revanche définies comme féminines : le huipil, les jupes à motif de croisillons, et l'ornement de ceinture en forme de mâchoire-supérieure et coquillage. » (p. 449)
+
+## Hypothèses
+
+**Principale** : « les femmes mayas s'inscrivent dans toutes ces variations de pouvoirs et de mise en scène de celui-ci. » (p. 40)
+**Secondaires** :
+- « une partie de la parure des femmes est en fait un symbole du féminin alors que d'autres éléments sont indifféremment associés aux hommes et aux femmes. » (p. 29)
+- « la place et la position des vestiges féminins au sein de villes mayas nous permettront d'en apprendre davantage et de proposer des hypothèses sur leur symbolique. » (p. 31)
+- « le lien entre territorialité et féminin qui relie une femme de haut rang à sa cité. » (p. 30)
+- **Validée/Précisée en conclusion** : « En étudiant la disposition des vestiges féminins et leurs figurations à Calakmul et Palenque, nous avons pu proposer comme hypothèse que les femmes ne possédaient pas le même statut social au sein de ces deux cités. » (p. 451)
+
+## Méthodologie
+
+- **Approche** : « traiter celui-ci de manière archéologique. Nous partirons d'abord de l'analyse factuelle des vestiges avant de présenter une interprétation et d'étayer celle-ci. » (p. 38) ; « Dans cette étude nous nous sommes concentrée tout d'abord sur le matériel archéologique. » (p. 445)
+- **Méthode** : Analyse spatiale et sémantique des vestiges dans leur contexte urbain et cérémoniel, croisée avec la confrontation de sources historiques et ethno-historiques. « Il est important en archéologie d'analyser le contexte de l'artefact. Le contexte archéologique permet de replacer celui-ci à la fois spatialement, chronologiquement et de le connecter au reste de son environnement. » (p. 39) ; « Nous avons aussi complété cette recherche par une étude à l'échelle de la cité et non plus de l'ère maya, cette fois-ci en cherchant à déterminer le sens des vestiges féminins au sein d'un système anthropique. » (p. 450)
+- **Corpus/Données** : Stèles et parements lithiques (surtout époque III, Basses-Terres), sépultures féminines somptueuses, peintures murales (Bonampak, Calakmul), trois codex mayas (Dresde, Paris, Madrid), et chroniques espagnoles/autochtones (1494-1688). « Nous fonderons notre réflexion sur l'analyse de vestiges archéologiques comme évoqués plus haut. » (p. 32) ; « J'ai ainsi essayé d'être la plus exhaustive possible concernant trois types de vestiges : Les tombes de femmes mayas [...] Les peintures murales [...] Les sculptures mettant en scène des femmes. » (p. 446) ; « dresser une liste la plus complète possible des différents vestiges : stèles, tombes, offrandes, et peintures mayas liées au féminin. » (p. 488)
+- **Justification** : Privilégier le registre lapidaire pour sa conservation, sa répartition et sa fonction communicative des autorités, tout en compensant les lacunes du matériel funéraire par l'analyse contextuelle et la confrontation avec les textes postérieurs. « Une stèle en zone maya est un outil de communication des autorités. » (p. 32) ; « Le choix d'axer cette étude sur l'archéologie entraîne de fait une disparité dans la représentativité des époques. Cela correspond à une réalité historique, le changement de fonctionnement et l'appauvrissement des cités mayas entre les époques III et IV entraînent une diminution drastique voire une disparition complète des vestiges féminins. » (p. 446)
+
+## Fil rouge
+
+La territorialité féminine telle que définie par l'auteur (p. 30), reliant l'identification des marqueurs archéologiques (Partie I) à leur intégration mythologique et spatiale (Partie II) via leur dialogue avec les récits historiques et leur persistance sociale (Partie III) pour démontrer comment le féminin structure et est structuré par les sphères de pouvoir mayas.
+
+## Plan (Structure)
+
+- **I ....... LES VESTIGES ARCHEOLOGIQUES FEMININS EN ZONE MAYA.** : Démontre que la féminité est identifiable et hiérarchisée dans le registre archéologique en montrant la répartition, les marqueurs morphologiques/symboliques et les contextes de découverte des sépultures et sculptures féminines.
+- **II) L'ESPACE EN MESO-AMERIQUE, UN CONCEPT QUI S'INTEGRE AUX MYTHES FEMININS MAYAS.** : Démontre que la place spatiale des femmes dans les centres cérémoniels n'est pas fortuite en montrant comment leur positionnement obéit à une sémantique cardinal et mythologique liée à la gestion du monde.
+- **III)....LES VESTIGES ARCHEOLOGIQUES EN DIALOGUE AVEC LES RECITS HISTORIQUES** : Démontre que la conception du pouvoir féminin maya présente une continuité ou une rupture avec les périodes postérieures en confrontant les données matérielles aux chroniques espagnoles et aux textes littéraires mayas.
+
+## Cadre théorique
+
+- **Cadre principal** : Christian Duverger — chronologie et périodisation du monde maya (p. 27) — structure l'analyse globale en délimitant les époques II à V et la période de Conquête, servant de repère temporel pour l'évolution du corpus et du pouvoir féminin.
+- **Cadres secondaires** :
+  - André Lalande — identité physique, juridique, temporelle et territoriale (p. 30) — outil d'analyse pour qualifier le statut et la mémoire des femmes mayas au sein de leurs cités.
+  - Anne Augereau — méthodologie du double point de vue en archéologie de genre (p. 29) — cadre méthodologique pour distinguer sexe biologique et concepts culturels sans imposer une grille occidentale.
+  - Aliénor Letouze — sémiologie des temples mayas (p. 31) — cadre spatial et sémantique pour interpréter l'orientation et la place des vestiges féminins dans les centres cérémoniels.
+
+## Concepts clés
+
+**CONCEPT** : PANTHÉON MAYA
+**SENS** : « la religion maya comme ailleurs en Méso-Amérique est une religion polythéiste. [...] Les panthéons méso-américains montrent aussi des liens de parenté entre certaines des divinités [...] Cependant les mythes ne semblent pas souvent reposer sur ces liens de parenté en zone maya [...] Les divinités mayas possèdent des variantes ou avatars [...] il existe une divinité suprême duelle [...] Cette imbrication est éloignée des conceptions monothéistes occidentales. » (p. 256) (p. 258) (p. 291) (p. 292)
+**ORIGINE** : propre à l'auteur, défini par opposition aux modèles gréco-romains et au monothéisme occidental, caractérisé par l'absence de couples divins fixes, la multiplication des avatars et l'imbrication des genres.
+
+**CONCEPT** : IXCHEL
+**SENS** : « C'est la déesse du féminin, à la fois déesse de la maternité, du mariage et des travaux féminins tels que le tissage. [...] Ixchel est plus souvent vue comme une figure positive [...] Toutefois [...] Ixchel est également parfois porteuse de valeurs négatives. [...] Dans la mythologie elle est en effet tenue pour responsable d'un des quatre déluges ayant dévasté le monde. De plus cette déesse est porteuse d'une dimension guerrière. » (p. 267) (p. 268) (p. 267) (p. 268)
+**ORIGINE** : propre à l'auteur, redéfini comme une entité majeure du panthéon maya aux attributions doubles (protectrice/destructrice, maternelle/guerrière), servant de référence pour analyser la complexité des rôles féminins mythiques.
+
+**CONCEPT** : Ix CHEBEL YAX
+**SENS** : « La seconde déesse la plus connue est la déesse lunaire « Ix Chebel Yax ». [...] Elle est la patronne de la procréation et est aussi liée au maïs. [...] La déesse lunaire est représentée portant une jupe au motif de « croisillons » [...] On pourrait par ailleurs confirmer cette fonction de protectrice des récoltes [...] cette jupe ne serait portée que lors de cérémonies. » (p. 271) (p. 273) (p. 277) (p. 279)
+**ORIGINE** : propre à l'auteur, conceptualisé comme avatar ou dénomination régionale de la déesse lunaire, dont la symbolique (lapin, croissant, jupe à croisillons) structure l'analyse des liens entre maternité, maïs et parure rituelle féminine.
+
+**CONCEPT** : MOTIF DE CROISILLONS
+**SENS** : « La déesse lunaire est représentée portant une jupe au motif de « croisillons » sur plusieurs poteries. [...] On peut aussi à l'inverse proposer que ce soit les hommes qui se seraient appropriés peu à peu un rituel féminin. [...] Il ne s'agirait donc pas d'un « costume de roi et de reine » (p. 279) mais davantage d'un costume féminin des femmes de l'élite [...] Pour autant, ce vêtement pourrait tout de même posséder une symbolique féminine par son évocation de la déesse lunaire qui le porte. » (p. 277) (p. 279) (p. 279)
+**ORIGINE** : propre à l'auteur, défini comme un marqueur vestimentaire et rituel d'élite féminin (ou mixte selon le contexte), servant de pont matériel entre la mythologie lunaire et la réalité archéologique des vêtements de prestige.
+
+**CONCEPT** : MATRICE FÉCONDE
+**SENS** : « Nous avons rappelé que les cavernes étaient des symboles de matrices fécondes en Méso-Amérique. [...] La mâchoire supérieure du félin devient une figuration de cette matrice originelle en lien avec les grottes où dorment ces animaux. [...] Cette mâchoire supérieure représenterait ainsi la matrice originelle, l'utérus permettant la maïeutique. [...] Les coquillages sont des symboles du sexe féminin dans de nombreuses cultures. » (p. 299) (p. 293) (p. 294) (p. 299)
+**ORIGINE** : propre à l'auteur, reconstruit à partir de l'analyse iconographique des ceintures féminines (mâchoire de jaguar, coquillage) et des éléments naturels (grottes, eau), défini comme un système symbolique de fécondité et de maternité accomplie propre à la sémantique méso-américaine.
+
+## Ancrage empirique (ou concret)
+
+- Corpus principal centré sur les stèles et sculptures lithiques de l'époque III (200-900 de notre ère), majoritairement issues des Basses-Terres (Tikal, Calakmul, Yaxchilan, Palenque). (p. 28, p. 32)
+- Deux tombes féminines somptueuses de la fin de l'époque II à El Peru-Waka et Uaxactun servant de repère initial sur le statut de l'élite féminine. (p. 27)
+- Répartition géographique du corpus biaisée par la conservation et les investissements nationaux : surreprésentation du Mexique (6 sites UNESCO mayas) face au Guatemala (2), Honduras (1), Salvador (1) et Belize (0 site maya UNESCO). (p. 25)
+- Disparité citadine confirmée : absence de vestiges féminins exploitables à Tulum, Uxmal, Muyil, Cobá (p. 447) contre concentration à Yaxchilan, Calakmul, Palenque, révélant une variation politique et rituelle du statut féminin selon les centres (p. 447).
+- Réidentification de la stèle H de Copán comme figure féminine grâce au double ornement de ceinture (mâchoire-supérieure et coquillage scié), contredisant les interprétations antérieures de travestissement ou de divinité masculine (p. 448).
+
+## Opposition / Contre-argumentation
+
+- « le rapport entre les femmes et le pouvoir dans le monde maya a souvent été abordé de manière périphérique voire anecdotique par la recherche. » (p. 21)
+- « nous essaierons tant que possible de ne pas faire prévaloir notre conception européenne, car elle est trop éloignée des systèmes de pensée méso-américains. Nous n'utiliserons ainsi pas le terme de genre particulièrement lié à la pensée occidentale contemporaine. » (p. 29)
+- « la plupart de ces chroniques évoquent peu le fonctionnement des sociétés et se contentent de l'aspect anecdotique et militaire. » (p. 27)
+- **Résultat contre-intuitif (conclusion)** : « En étudiant la disposition des vestiges féminins et leurs figurations à Calakmul et Palenque, nous avons pu proposer comme hypothèse que les femmes ne possédaient pas le même statut social au sein de ces deux cités. » (p. 451) ; À Calakmul, les femmes ont des supports autonomes et la même taille que les hommes, tandis qu'à Palenque elles sont toujours secondaires dans la scène (p. 451).
+
+## Apport principal
+
+- **Théorique** : Réinterprétation du rôle des femmes mayas non comme figures marginales, mais comme actrices intégrées aux sphères de pouvoir politique, religieux et administratif via une analyse de leur territorialité et de leur symbolique spatiale. « Ce sujet a demandé une identification puis une réinterprétation approfondie des données disponibles, afin de mieux comprendre et restituer cette partie des sociétés Mayas. » (p. 21) ; Démonstration d'une disparité citadine du statut féminin (Calakmul vs Palenque) contredisant l'idée d'un modèle uniforme (p. 451).
+- **Méthodologique** : Croisement systématique de l'analyse archéologique contextuelle (positionnement des vestiges dans les centres cérémoniels) avec la confrontation de sources historiques hétérogènes pour dépasser les limites de la conservation du matériel et des biais des chroniques espagnoles. « Nous partirons d'abord de l'analyse factuelle des vestiges avant de présenter une interprétation et d'étayer celle-ci. » (p. 38) ; Établissement de critères morphologiques précis (parures, tenues) pour identifier les vestiges féminins en l'absence de marques anatomiques explicites (p. 449).
+
+```
+
+## EXEMPLE DE STYLE (à imiter pour le registre, la longueur des paragraphes, le flux)
+
+```markdown
+# [Titre complet de l'ouvrage : nom des directeurs et titre/sous-titre en italique]
+
+**Compte rendu par** [Auteur du compte rendu]
+
+**Date :** 2026-04-24
+
+**Source :** [URL si disponible]
+
+**Référence :** [Auteur·e·s], *Titre complet*, Ville, Éditeur, coll. « Collection », année, xxx p., ISBN : xxx.
+
+---
+
+Quatorze auteurs, parmi lesquels des sociologues clés de l'analyse du secteur social et médico-social analysent, dans cet ouvrage important, les transformations de la « morale » de l'intervention sociale de divers pays (France dont Mayotte, Suisse, Maroc, Québec), ceci à la suite d'un congrès sociologique international tenu à Tunis en 2021. Le texte décrit les tensions traversant l'intervention sociale, entre idéaux de justice sociale, d'égalité et de solidarisme d'une part, et les principes de responsabilisation et d'activation dans un contexte marqué par l'emprise croissante d'une logique managériale, d'autre part. Disons-le d'emblée, le principe de « responsabilisation » mérite d'être interrogé : il renvoie généralement non pas tant à un transfert de pouvoir aux usagers ou citoyens, comme il l'affirme, mais souvent à une « normalisation » du contrôle social reposant, désormais, sur l'individu lui-même. C'est notamment le cas dans les dispositifs de parentalité ou dans la justice restaurative, où la volonté des individus devient l'opérateur du contrôle social.
+
+Notre lecture questionne implicitement les mots-clefs contemporains de l'intervention sociale que sont « responsabiliser » et « activer ». Ces termes sont aussi les items centraux de la Nouvelle Gouvernance Publique (NGP), laquelle tend, pour l'action sociale, à substituer la « relation de service » reposant sur l'efficience et le résultat au « modèle de service public d'action » fondateur. S'impose, alors, un glissement progressif vers un paradigme managérial qui met la focale sur les difficultés de financement, d'efficacité, la qualité du service et le questionnement de la légitimité de l'État social.
+
+Dans le premier chapitre, Jean-Pierre Tabin et ses collègues explorent, à partir de la rhétorique de l'État depuis les années 2000, les politiques suisses en direction des personnes invalides. Ils identifient finement une logique « capacitiste » visant la re-marchandisation à tout prix, via un nouvel ordre d'employabilité passant par l'acceptation d'une norme d'emploi « médiocre » et, de fait, réduisant la « crédibilité épistémique » de la personne en situation de handicap psychique. Dans les Structures d'Insertion par l'Activité Économique (SIAE) analysées par Hervé Jory dans le cinquième chapitre, la prévalence des compétences d'adaptation sociale sur la formation didactique et le savoir-faire professionnel correspond à une précarisation du profil attendu des publics. L'inversion du statut de la formation, dans ces structures d'insertion, tend à favoriser des conditions d'acceptation de conditions de travail pénibles pour des emplois sous-qualifiés. Ce nouveau cadre normatif de l'inclusion professionnelle repose sur le postulat « d'insérer pour former » où l'insertion se suffit en elle-même. Il s'agit de privilégier l'adaptation quasi immédiate à l'emploi et ses difficultés, en particulier la capacité à supporter des conditions de travail éprouvantes (port de charges lourdes, intempéries…) plutôt que l'intégration de savoirs professionnels et une qualification capitalisable.
+
+L'analyse de tous ces segments de l'intervention sociale est à même d'identifier une logique de responsabilisation des publics et un tournant managérial souvent pénalisants. Mais la grammaire managériale reste fortement questionnée dans les pratiques concrètes des acteurs. Un deuxième grand apport de l'ouvrage est donc d'étudier les engagements moraux et les micro-résistances éthiques des intervenants·es infléchissant parfois certaines modalités de l'intervention sociale. Au-delà des cadres normatifs, des professionnels inventent dès lors des pratiques d'écarts éthiques pour redonner sens à leur action.
+
+Ainsi, dans l'urgence sociale présentée par Hélène Marin et Béatrice Bertho (chapitre 3), la mobilisation bénévole de professionnels illustre la volonté de participer à la neutralisation d'un déficit d'action publique récurrent, en contradiction avec les principes moraux de l'État social. Un engagement solidaire, fait en parallèle de leur travail salarié, s'instaure dans une ville de Suisse romane afin de faire face à une « politique de la pénurie » (p. 48) de l'accueil national des personnes sans-abris. Ce « bénévolat solidaire » définit ce que l'on peut appeler une « résistivité morale », des micro-résistances enracinées dans les principes de justice sociale au regard des besoins de ce public en grande vulnérabilité psychique et sociale.
+
+En définitive, l'intérêt majeur des thèses de cet ouvrage est de souligner une mutation des cadres normatifs et moraux de l'intervention sociale qui mettent désormais essentiellement l'accent sur une responsabilisation des individus vulnérables, une activation étrécie et pénalisante et privilégiant parfois l'immédiateté de l'insertion par le travail, voire des pratiques de culpabilisation-stigmatisation et des dispositifs d'activation définis par une grammaire managériale. Par contre, ces mutations ne doivent pas oblitérer, car s'exprimant à bas bruit dans les interstices de l'accompagnement, la présence modeste d'un cadre moral et cognitif secondaire d'élargissement du pouvoir d'agir pour les personnes en difficulté. Une responsabilisation que l'on peut qualifier d'« habilitante » est encore visible dans nombre des pratiques d'accompagnement. Ainsi, le Revenu de Solidarité Active (RSA) agricole représente une reconnaissance nouvelle de la vulnérabilité d'une population et un levier d'action potentiel pour des agriculteurs immergés des décennies dans une grande précarité. L'action sociale n'est pas réductible au seul tournant néo-libéral et l'on observe non pas une « nouvelle » morale de l'intervention sociale mais une hybridation de morales dont certaines fondatrices de l'État social et du travail social. Malgré tout, force est de constater que la NGP encadre l'intervention sociale par des normes managériales dissonantes au regard des idéaux universalistes, de l'éthique et de la vulnérabilité des publics et de leurs besoins. Ces nouvelles normes conduisent à une détérioration de l'action pour les usagers et le personnel que l'on retrouve aussi dans l'ensemble des services publics.
+
+---
+
+## Pour citer cet article
+
+**[Auteur]**, « [Titre court de l'ouvrage] », *Comptes rendus*, mis en ligne le [date], consulté le [date].
+
+```
+
+---
+
+Rédige maintenant la note de lecture. Vise ~2000 mots, six paragraphes denses, français académique soutenu. Termine par `FINAL(note_markdown)`.
+
+---
+[0.0s] Iteration 1/20 | Sub-queries: 0 | Phase: generating_code
+[9.8s] Iteration 1/20 | Sub-queries: 0 | Phase: executing
+[9.8s] Iteration 1/20 | Sub-queries: 0 | Phase: checking_final
+[9.8s] Iteration 2/20 | Sub-queries: 0 | Phase: generating_code
+[17.0s] Iteration 2/20 | Sub-queries: 0 | Phase: executing
+[17.0s] Iteration 2/20 | Sub-queries: 0 | Phase: checking_final
+[17.0s] Iteration 3/20 | Sub-queries: 0 | Phase: generating_code
+[27.6s] Iteration 3/20 | Sub-queries: 0 | Phase: executing
+[27.6s] Iteration 3/20 | Sub-queries: 0 | Phase: checking_final
+[27.6s] Iteration 4/20 | Sub-queries: 0 | Phase: generating_code
+[37.3s] Iteration 4/20 | Sub-queries: 0 | Phase: executing
+[37.3s] Iteration 4/20 | Sub-queries: 0 | Phase: checking_final
+[37.3s] Iteration 5/20 | Sub-queries: 0 | Phase: generating_code
+[49.4s] Iteration 5/20 | Sub-queries: 0 | Phase: executing
+[49.4s] Iteration 5/20 | Sub-queries: 0 | Phase: checking_final
+[49.4s] Iteration 6/20 | Sub-queries: 0 | Phase: generating_code
+[63.6s] Iteration 6/20 | Sub-queries: 0 | Phase: executing
+[63.6s] Iteration 6/20 | Sub-queries: 0 | Phase: checking_final
+[63.6s] Iteration 7/20 | Sub-queries: 0 | Phase: generating_code
+[78.8s] Iteration 7/20 | Sub-queries: 0 | Phase: executing
+[78.8s] Iteration 7/20 | Sub-queries: 0 | Phase: checking_final
+[78.8s] Iteration 8/20 | Sub-queries: 0 | Phase: generating_code
+[103.4s] Iteration 8/20 | Sub-queries: 0 | Phase: executing
+[103.4s] Iteration 8/20 | Sub-queries: 0 | Phase: checking_final
+[103.4s] Iteration 9/20 | Sub-queries: 0 | Phase: generating_code
+[120.4s] Iteration 9/20 | Sub-queries: 0 | Phase: executing
+[120.4s] Iteration 9/20 | Sub-queries: 0 | Phase: checking_final
+[120.4s] Iteration 10/20 | Sub-queries: 0 | Phase: generating_code
+[146.1s] Iteration 10/20 | Sub-queries: 0 | Phase: executing
+[146.1s] Iteration 10/20 | Sub-queries: 0 | Phase: checking_final
+[146.1s] Iteration 11/20 | Sub-queries: 0 | Phase: generating_code
+[166.4s] Iteration 11/20 | Sub-queries: 0 | Phase: executing
+[166.4s] Iteration 11/20 | Sub-queries: 0 | Phase: checking_final
+[166.4s] Iteration 12/20 | Sub-queries: 0 | Phase: generating_code
+[194.0s] Iteration 12/20 | Sub-queries: 0 | Phase: executing
+[194.0s] Iteration 12/20 | Sub-queries: 0 | Phase: checking_final
+[194.0s] Iteration 13/20 | Sub-queries: 0 | Phase: generating_code
+[216.1s] Iteration 13/20 | Sub-queries: 0 | Phase: executing
+[216.1s] Iteration 13/20 | Sub-queries: 0 | Phase: checking_final
+[216.1s] Iteration 14/20 | Sub-queries: 0 | Phase: generating_code
+[244.4s] Iteration 14/20 | Sub-queries: 0 | Phase: executing
+[244.4s] Iteration 14/20 | Sub-queries: 0 | Phase: checking_final
+[244.4s] Iteration 15/20 | Sub-queries: 0 | Phase: generating_code
+[277.9s] Iteration 15/20 | Sub-queries: 0 | Phase: executing
+[277.9s] Iteration 15/20 | Sub-queries: 0 | Phase: checking_final
+[277.9s] Iteration 16/20 | Sub-queries: 0 | Phase: generating_code
+[302.7s] Iteration 16/20 | Sub-queries: 0 | Phase: executing
+[302.7s] Iteration 16/20 | Sub-queries: 0 | Phase: checking_final
+---
+Completed in 302.7s | 16 iterations | 0 sub-queries | success
+---

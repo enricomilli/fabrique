@@ -1,0 +1,12 @@
+{
+  "wall_time_s": 202.1,
+  "note_word_count": 2053,
+  "rlm_time_s": 201.7,
+  "iterations": 14,
+  "sub_queries": 0,
+  "rlm_status": "success",
+  "trace_files": 14,
+  "trace_root_calls": 14,
+  "trace_subquery_calls": 0,
+  "run_dir": "/Users/rosas/claude_theses/current_repo/results/2022LYO10153/note_runs/20261007_231214"
+}

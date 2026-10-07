@@ -1,0 +1,752 @@
+{
+  "thesis_id": "2024PA100032",
+  "parquet_blocks": 3022,
+  "parquet_pages": 464,
+  "metadata": {
+    "titre": "Religion taoïste et société locale au nord de la Grande Muraille : ethnographie d'un réseau de temples taoïstes en Mandchourie du Nord",
+    "auteur": "Binqi Cui",
+    "annee": "2024",
+    "etablissement": "Université Paris Nanterre, Laboratoire d'Ethnologie et de Sociologie Comparative",
+    "discipline": "Ethnologie",
+    "mots_cles": [
+      "religion taoïste",
+      "vie monacale",
+      "consultations",
+      "pratiques rituelles",
+      "Grande Muraille",
+      "Mandchourie",
+      "ethnographie"
+    ],
+    "pages": 465
+  },
+  "toc": [
+    {
+      "title": "Résumé",
+      "page_start": 3,
+      "level": 0,
+      "page_end": 4,
+      "role": "frontmatter",
+      "page_start_parquet": 6,
+      "page_end_parquet": 7
+    },
+    {
+      "title": "Abstract",
+      "page_start": 5,
+      "level": 0,
+      "page_end": 14,
+      "role": "frontmatter",
+      "page_start_parquet": 8,
+      "page_end_parquet": 17
+    },
+    {
+      "title": "Remerciements",
+      "page_start": 15,
+      "level": 0,
+      "page_end": 17,
+      "role": "frontmatter",
+      "page_start_parquet": 18,
+      "page_end_parquet": 20
+    },
+    {
+      "title": "Notices",
+      "page_start": 18,
+      "level": 0,
+      "page_end": 19,
+      "role": "other",
+      "page_start_parquet": 21,
+      "page_end_parquet": 22
+    },
+    {
+      "title": "Introduction",
+      "page_start": 20,
+      "level": 0,
+      "page_end": 20,
+      "role": "frontmatter",
+      "page_start_parquet": 23,
+      "page_end_parquet": 23
+    },
+    {
+      "title": "1. La Mandchourie : un territoire singulier",
+      "page_start": 20,
+      "level": 0,
+      "page_end": 21,
+      "role": "chapter",
+      "page_start_parquet": 23,
+      "page_end_parquet": 24
+    },
+    {
+      "title": "2. L'importance actuelle de la Grande Muraille comme délimitation",
+      "page_start": 22,
+      "level": 0,
+      "page_end": 23,
+      "role": "chapter",
+      "page_start_parquet": 25,
+      "page_end_parquet": 26
+    },
+    {
+      "title": "3. La ville de Qiqihar",
+      "page_start": 24,
+      "level": 0,
+      "page_end": 30,
+      "role": "chapter",
+      "page_start_parquet": 27,
+      "page_end_parquet": 33
+    },
+    {
+      "title": "Première partie La Mandchourie se transforme en « Nord-est de la Chine » : Un temple singulier dans un territoire frontalier",
+      "page_start": 31,
+      "level": 0,
+      "page_end": 31,
+      "role": "part",
+      "page_start_parquet": 34,
+      "page_end_parquet": 34
+    },
+    {
+      "title": "Chapitre 1 Territoire rebaptisé « Le Nord-Est », territoire (en partie seulement) sinisé ?",
+      "page_start": 32,
+      "level": 0,
+      "page_end": 70,
+      "role": "chapter",
+      "page_start_parquet": 35,
+      "page_end_parquet": 73
+    },
+    {
+      "title": "1.1 La passe Shanzhai de la Grande Muraille : une passe, deux mondes",
+      "page_start": 33,
+      "level": 1,
+      "page_end": 37,
+      "role": "section",
+      "page_start_parquet": 36,
+      "page_end_parquet": 40
+    },
+    {
+      "title": "1.2 Qiqihar, un nom daur - « la pâture naturelle »",
+      "page_start": 38,
+      "level": 1,
+      "page_end": 42,
+      "role": "section",
+      "page_start_parquet": 41,
+      "page_end_parquet": 45
+    },
+    {
+      "title": "1.3 L'arrivée des migrants Chinois Han",
+      "page_start": 43,
+      "level": 1,
+      "page_end": 45,
+      "role": "section",
+      "page_start_parquet": 46,
+      "page_end_parquet": 48
+    },
+    {
+      "title": "1.4 La Mandchourie sous le régime communiste",
+      "page_start": 46,
+      "level": 1,
+      "page_end": 70,
+      "role": "section",
+      "page_start_parquet": 49,
+      "page_end_parquet": 73
+    },
+    {
+      "title": "a) Comment « la Mandchourie » est devenue « le Nord-est de la Chine »",
+      "page_start": 46,
+      "level": 3,
+      "page_end": 54,
+      "role": "section",
+      "page_start_parquet": 49,
+      "page_end_parquet": 57
+    },
+    {
+      "title": "b) « Les fils aînés de la RPC » : un concept inventé sur la base des héritages industriels du passé",
+      "page_start": 55,
+      "level": 3,
+      "page_end": 61,
+      "role": "section",
+      "page_start_parquet": 58,
+      "page_end_parquet": 64
+    },
+    {
+      "title": "c) « Le Nord-est est une poule tombée malade » : un territoire épuisé par les pouvoirs d'Etat contemporain",
+      "page_start": 62,
+      "level": 3,
+      "page_end": 66,
+      "role": "section",
+      "page_start_parquet": 65,
+      "page_end_parquet": 69
+    },
+    {
+      "title": "d) « L'excès appelle la révolte » : L'émergence d'une nouvelle identité commune et la formation d'une prise de conscience collective",
+      "page_start": 67,
+      "level": 3,
+      "page_end": 68,
+      "role": "section",
+      "page_start_parquet": 70,
+      "page_end_parquet": 71
+    },
+    {
+      "title": "e) « le nouveau phénomène du Nord-est » xin dongbei xianxiang 新东北现象",
+      "page_start": 69,
+      "level": 3,
+      "page_end": 70,
+      "role": "section",
+      "page_start_parquet": 72,
+      "page_end_parquet": 73
+    },
+    {
+      "title": "Conclusion",
+      "page_start": 71,
+      "level": 0,
+      "page_end": 71,
+      "role": "backmatter",
+      "page_start_parquet": 74,
+      "page_end_parquet": 74
+    },
+    {
+      "title": "Epilogue : Une consultation au temple taoïste Daode",
+      "page_start": 72,
+      "level": 0,
+      "page_end": 74,
+      "role": "part",
+      "page_start_parquet": 75,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "Chapitre 2 Qu'est-ce qui fait encore que les gens sont Mandchous ?",
+      "page_start": 75,
+      "level": 0,
+      "page_end": 98,
+      "role": "chapter",
+      "page_start_parquet": 78,
+      "page_end_parquet": 101
+    },
+    {
+      "title": "2.1 Les mélanges de populations au niveau local",
+      "page_start": 76,
+      "level": 1,
+      "page_end": 87,
+      "role": "section",
+      "page_start_parquet": 79,
+      "page_end_parquet": 90
+    },
+    {
+      "title": "a) Les Mandchou·e·s et le système des huit bannières",
+      "page_start": 76,
+      "level": 3,
+      "page_end": 84,
+      "role": "section",
+      "page_start_parquet": 79,
+      "page_end_parquet": 87
+    },
+    {
+      "title": "b) La hiérarchie et les mélanges de populations au sein du système des huit bannières",
+      "page_start": 85,
+      "level": 3,
+      "page_end": 87,
+      "role": "section",
+      "page_start_parquet": 88,
+      "page_end_parquet": 90
+    },
+    {
+      "title": "2.2 Les patronymes, la langue, et les caractéristiques physiques manifestées aujourd'hui chez certaines personnes d'origine mandchoue",
+      "page_start": 88,
+      "level": 1,
+      "page_end": 94,
+      "role": "section",
+      "page_start_parquet": 91,
+      "page_end_parquet": 97
+    },
+    {
+      "title": "2.3 « S'agit-il vraiment d'une sinisation juste parce que l'on parle le mandarin ? » : à qui revient-il de définir la sinisation ?",
+      "page_start": 95,
+      "level": 1,
+      "page_end": 98,
+      "role": "section",
+      "page_start_parquet": 98,
+      "page_end_parquet": 101
+    },
+    {
+      "title": "Conclusion",
+      "page_start": 99,
+      "level": 0,
+      "page_end": 100,
+      "role": "backmatter",
+      "page_start_parquet": 102,
+      "page_end_parquet": 103
+    },
+    {
+      "title": "Epilogue : A propos d'une boutique d'artisanat spécialisée dans la vente des statuettes de divinités et autres objets rituels",
+      "page_start": 101,
+      "level": 0,
+      "page_end": 183,
+      "role": "other",
+      "page_start_parquet": 104,
+      "page_end_parquet": 186
+    },
+    {
+      "title": "Conclusion",
+      "page_start": 184,
+      "level": 0,
+      "page_end": 185,
+      "role": "backmatter",
+      "page_start_parquet": 187,
+      "page_end_parquet": 188
+    },
+    {
+      "title": "Epilogue : Une journaliste chrétienne (protestante) fait un malaise en visitant le temple Daode de nos jours",
+      "page_start": 186,
+      "level": 0,
+      "page_end": 188,
+      "role": "other",
+      "page_start_parquet": 189,
+      "page_end_parquet": 191
+    },
+    {
+      "title": "Deuxième partie Un paysage religieux composite : Les consultations, les pratiques religieuses, et les rituels",
+      "page_start": 189,
+      "level": 0,
+      "page_end": 189,
+      "role": "part",
+      "page_start_parquet": 192,
+      "page_end_parquet": 192
+    },
+    {
+      "title": "Chapitre 5 La vie monacale et les temples taoïstes en réseau",
+      "page_start": 190,
+      "level": 0,
+      "page_end": 225,
+      "role": "chapter",
+      "page_start_parquet": 193,
+      "page_end_parquet": 228
+    },
+    {
+      "title": "5.1 Chacun a ses affinités prédestinées : De la perception des moines de leur entrée en religion au fonctionnement des temples taoïstes en réseau",
+      "page_start": 191,
+      "level": 1,
+      "page_end": 216,
+      "role": "section",
+      "page_start_parquet": 194,
+      "page_end_parquet": 219
+    },
+    {
+      "title": "a) Une Supérieure hors du commun et le chemin parcouru",
+      "page_start": 191,
+      "level": 3,
+      "page_end": 197,
+      "role": "section",
+      "page_start_parquet": 194,
+      "page_end_parquet": 200
+    },
+    {
+      "title": "b) Les disciples vivant dans les temples et leur participation aux pratiques religieuses",
+      "page_start": 198,
+      "level": 3,
+      "page_end": 216,
+      "role": "section",
+      "page_start_parquet": 201,
+      "page_end_parquet": 219
+    },
+    {
+      "title": "b.1). Zhao Zongqing - une vocation monastique révélée en rêve",
+      "page_start": 198,
+      "level": 4,
+      "page_end": 201,
+      "role": "section",
+      "page_start_parquet": 201,
+      "page_end_parquet": 204
+    },
+    {
+      "title": "b.2). Le rituel de consécration des statues kaiguang",
+      "page_start": 202,
+      "level": 4,
+      "page_end": 206,
+      "role": "section",
+      "page_start_parquet": 205,
+      "page_end_parquet": 209
+    },
+    {
+      "title": "b.3). Luo Zonghua et Cheng Zonghe",
+      "page_start": 207,
+      "level": 4,
+      "page_end": 216,
+      "role": "section",
+      "page_start_parquet": 210,
+      "page_end_parquet": 219
+    },
+    {
+      "title": "b.3.1). Une médium qui devient moniale taoïste",
+      "page_start": 207,
+      "level": 5,
+      "page_end": 207,
+      "role": "section",
+      "page_start_parquet": 210,
+      "page_end_parquet": 210
+    },
+    {
+      "title": "b.3.2). Un moine devenu ritualiste",
+      "page_start": 208,
+      "level": 5,
+      "page_end": 216,
+      "role": "section",
+      "page_start_parquet": 211,
+      "page_end_parquet": 219
+    },
+    {
+      "title": "5.2 Les fidèles et les différents temples du réseau",
+      "page_start": 217,
+      "level": 1,
+      "page_end": 225,
+      "role": "section",
+      "page_start_parquet": 220,
+      "page_end_parquet": 228
+    },
+    {
+      "title": "a). La manière dont les temples sont perçus",
+      "page_start": 217,
+      "level": 3,
+      "page_end": 217,
+      "role": "section",
+      "page_start_parquet": 220,
+      "page_end_parquet": 220
+    },
+    {
+      "title": "b). Quand le lien entre un fidèle et le réseau de temples se renforce au moyen du rituel",
+      "page_start": 218,
+      "level": 3,
+      "page_end": 225,
+      "role": "section",
+      "page_start_parquet": 221,
+      "page_end_parquet": 228
+    },
+    {
+      "title": "Conclusion",
+      "page_start": 226,
+      "level": 0,
+      "page_end": 226,
+      "role": "backmatter",
+      "page_start_parquet": 229,
+      "page_end_parquet": 229
+    },
+    {
+      "title": "Chapitre 6 Quelques services rituels et leur mode d'acheminement",
+      "page_start": 227,
+      "level": 0,
+      "page_end": 267,
+      "role": "chapter",
+      "page_start_parquet": 230,
+      "page_end_parquet": 270
+    },
+    {
+      "title": "6.1 Les textes de requête shuwen",
+      "page_start": 227,
+      "level": 1,
+      "page_end": 230,
+      "role": "section",
+      "page_start_parquet": 230,
+      "page_end_parquet": 233
+    },
+    {
+      "title": "6.2 Quand les parents sont préoccupés, la bureaucratie céleste et la bureaucratie terrestre interfèrent l'une avec l'autre : Le cas d'une consultation au sujet du Concours de recrutement des fonctionnaires",
+      "page_start": 231,
+      "level": 1,
+      "page_end": 255,
+      "role": "section",
+      "page_start_parquet": 234,
+      "page_end_parquet": 258
+    },
+    {
+      "title": "6.3 Acquitter les dettes d'amour huan qingzhai 还情债",
+      "page_start": 256,
+      "level": 1,
+      "page_end": 265,
+      "role": "section",
+      "page_start_parquet": 259,
+      "page_end_parquet": 268
+    },
+    {
+      "title": "6.4 Le rituel Shegu 赦孤",
+      "page_start": 266,
+      "level": 1,
+      "page_end": 267,
+      "role": "section",
+      "page_start_parquet": 269,
+      "page_end_parquet": 270
+    },
+    {
+      "title": "Conclusion",
+      "page_start": 268,
+      "level": 0,
+      "page_end": 268,
+      "role": "backmatter",
+      "page_start_parquet": 271,
+      "page_end_parquet": 271
+    },
+    {
+      "title": "Troisième partie Les interactions entre la religion taoïste Quanzhen et les éléments relevant du chamanisme local",
+      "page_start": 269,
+      "level": 0,
+      "page_end": 269,
+      "role": "part",
+      "page_start_parquet": 272,
+      "page_end_parquet": 272
+    },
+    {
+      "title": "Chapitre 7 La présence des animaux Esprits-Immortels et ses définitions locales",
+      "page_start": 270,
+      "level": 0,
+      "page_end": 319,
+      "role": "chapter",
+      "page_start_parquet": 273,
+      "page_end_parquet": 322
+    },
+    {
+      "title": "7.1 Quand on n'est pas encore en mesure de maîtriser les animaux Esprits-Immortels...",
+      "page_start": 273,
+      "level": 1,
+      "page_end": 299,
+      "role": "section",
+      "page_start_parquet": 276,
+      "page_end_parquet": 302
+    },
+    {
+      "title": "7.2 Devenir chamane à travers « une démarche administrative taoïste » : Un cas d'étude",
+      "page_start": 300,
+      "level": 1,
+      "page_end": 303,
+      "role": "section",
+      "page_start_parquet": 303,
+      "page_end_parquet": 306
+    },
+    {
+      "title": "7.3 Quand la personne peut bien s'entendre avec son renard Esprit-Immortel: Un cas d'étude",
+      "page_start": 304,
+      "level": 1,
+      "page_end": 310,
+      "role": "section",
+      "page_start_parquet": 307,
+      "page_end_parquet": 313
+    },
+    {
+      "title": "7.4 Les animaux Esprits-Immortels et l'être humain vivent ensemble et s'attachent l'un à l'autre: Une jeune manucure et ses « vieux animaux Esprits-Immortels»",
+      "page_start": 311,
+      "level": 1,
+      "page_end": 316,
+      "role": "section",
+      "page_start_parquet": 314,
+      "page_end_parquet": 319
+    },
+    {
+      "title": "7.5 « Les animaux Esprits-Immortels ne dépassent pas la passe de Shanhaiguan » (仙家不过山海矣)",
+      "page_start": 317,
+      "level": 1,
+      "page_end": 319,
+      "role": "section",
+      "page_start_parquet": 320,
+      "page_end_parquet": 322
+    },
+    {
+      "title": "Conclusion",
+      "page_start": 320,
+      "level": 0,
+      "page_end": 320,
+      "role": "backmatter",
+      "page_start_parquet": 323,
+      "page_end_parquet": 323
+    },
+    {
+      "title": "Chapitre 8 Le culte à la Mère Noire Heimama : Une divinité féminine inscrite dans le système taoïste en Mandchourie",
+      "page_start": 321,
+      "level": 0,
+      "page_end": 376,
+      "role": "chapter",
+      "page_start_parquet": 324,
+      "page_end_parquet": 379
+    },
+    {
+      "title": "8.1 Des récits sur la Mère Noire et sur Guo Shouzhen, fondateur d'une lignée monastique taoïste en Mandchourie...",
+      "page_start": 323,
+      "level": 1,
+      "page_end": 354,
+      "role": "section",
+      "page_start_parquet": 326,
+      "page_end_parquet": 357
+    },
+    {
+      "title": "a) Qui est la Mère Noire ?",
+      "page_start": 323,
+      "level": 3,
+      "page_end": 327,
+      "role": "section",
+      "page_start_parquet": 326,
+      "page_end_parquet": 330
+    },
+    {
+      "title": "b) Une renarde ou une femme ?",
+      "page_start": 328,
+      "level": 3,
+      "page_end": 341,
+      "role": "section",
+      "page_start_parquet": 331,
+      "page_end_parquet": 344
+    },
+    {
+      "title": "c) Guo Shouzhen et le mont Tiecha : le fondateur et le centre d'origine de l'ordre monastique Quanzhen en Mandchourie",
+      "page_start": 342,
+      "level": 3,
+      "page_end": 346,
+      "role": "section",
+      "page_start_parquet": 345,
+      "page_end_parquet": 349
+    },
+    {
+      "title": "d) « La passe Shanhaiguan constitue aussi une ligne de partage des eaux entre les lignées taoïstes. »",
+      "page_start": 347,
+      "level": 3,
+      "page_end": 352,
+      "role": "section",
+      "page_start_parquet": 350,
+      "page_end_parquet": 355
+    },
+    {
+      "title": "e) Entrer dans un temple taoïste pour rendre le culte à la Mère Noire",
+      "page_start": 353,
+      "level": 3,
+      "page_end": 354,
+      "role": "section",
+      "page_start_parquet": 356,
+      "page_end_parquet": 357
+    },
+    {
+      "title": "8.2 ...à l'importance de la Mère noire au sein des consultations, des demandes des requérants, des rituels d'envoi des requêtes, et de déconsécration de tangdan",
+      "page_start": 355,
+      "level": 1,
+      "page_end": 376,
+      "role": "section",
+      "page_start_parquet": 358,
+      "page_end_parquet": 379
+    },
+    {
+      "title": "a) Par l'entremise des temples taoïstes, la Mère Noire régit les problèmes qui relèvent des esprits d'animaux",
+      "page_start": 357,
+      "level": 3,
+      "page_end": 365,
+      "role": "section",
+      "page_start_parquet": 360,
+      "page_end_parquet": 368
+    },
+    {
+      "title": "b) De quelques perceptions de la charge de la Mère Noire aux interprétations de l'expression chuma",
+      "page_start": 366,
+      "level": 3,
+      "page_end": 369,
+      "role": "section",
+      "page_start_parquet": 369,
+      "page_end_parquet": 372
+    },
+    {
+      "title": "c) Les gestes du fidèle Zhao et d'autres rituels relatifs au culte à la Mère Noire",
+      "page_start": 370,
+      "level": 3,
+      "page_end": 376,
+      "role": "section",
+      "page_start_parquet": 373,
+      "page_end_parquet": 379
+    },
+    {
+      "title": "Conclusion",
+      "page_start": 377,
+      "level": 0,
+      "page_end": 379,
+      "role": "backmatter",
+      "page_start_parquet": 380,
+      "page_end_parquet": 382
+    },
+    {
+      "title": "Conclusion",
+      "page_start": 380,
+      "level": 0,
+      "page_end": 386,
+      "role": "backmatter",
+      "page_start_parquet": 383,
+      "page_end_parquet": 389
+    },
+    {
+      "title": "Références bibliographiques",
+      "page_start": 387,
+      "level": 0,
+      "page_end": 387,
+      "role": "backmatter",
+      "page_start_parquet": 390,
+      "page_end_parquet": 390
+    },
+    {
+      "title": "Sources primaires",
+      "page_start": 387,
+      "level": 0,
+      "page_end": 387,
+      "role": "other",
+      "page_start_parquet": 390,
+      "page_end_parquet": 390
+    },
+    {
+      "title": "Littérature secondaire",
+      "page_start": 388,
+      "level": 0,
+      "page_end": 404,
+      "role": "other",
+      "page_start_parquet": 391,
+      "page_end_parquet": 407
+    },
+    {
+      "title": "Annexes",
+      "page_start": 405,
+      "level": 0,
+      "page_end": 405,
+      "role": "backmatter",
+      "page_start_parquet": 408,
+      "page_end_parquet": 408
+    },
+    {
+      "title": "Annexe 1. Rapport de construction rédigé et publié par l'ancien temple Daode aux cinq religions",
+      "page_start": 405,
+      "level": 0,
+      "page_end": 425,
+      "role": "backmatter",
+      "page_start_parquet": 408,
+      "page_end_parquet": 428
+    },
+    {
+      "title": "Annexe 2. Extraits d'autres textes imprimés par l'ancien temple Daode aux cinq religion",
+      "page_start": 426,
+      "level": 0,
+      "page_end": 434,
+      "role": "backmatter",
+      "page_start_parquet": 429,
+      "page_end_parquet": 437
+    },
+    {
+      "title": "Annexe 3. Anthologie des cas véridiques de recherche de l'aide des Immortels (Qiuxian yingyan shili xuan 求仙应验事例选) - le livret sur la Mère Noire emprunté au moine Cheng Zonghe",
+      "page_start": 435,
+      "level": 0,
+      "page_end": 435,
+      "role": "backmatter",
+      "page_start_parquet": 438,
+      "page_end_parquet": 438
+    }
+  ],
+  "page_offset": {
+    "intro_page_toc": 20,
+    "intro_page_parquet": 23,
+    "offset": 3,
+    "method": "introduction-anchor"
+  },
+  "toc_validation": {
+    "issues": [
+      "entry 14: level jump 1 → 3 at 'a) Comment « la Mandchourie » est devenue « le Nord-est de l'",
+      "entry 23: level jump 1 → 3 at 'a) Les Mandchou·e·s et le système des huit bannières'",
+      "entry 34: level jump 1 → 3 at 'a) Une Supérieure hors du commun et le chemin parcouru'",
+      "entry 42: level jump 1 → 3 at 'a). La manière dont les temples sont perçus'",
+      "entry 61: level jump 1 → 3 at 'a) Qui est la Mère Noire ?'",
+      "entry 67: level jump 1 → 3 at 'a) Par l'entremise des temples taoïstes, la Mère Noire régit'"
+    ],
+    "ok": false
+  }
+}

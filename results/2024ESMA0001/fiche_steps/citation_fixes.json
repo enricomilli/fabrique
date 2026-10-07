@@ -1,0 +1,38 @@
+[
+  {
+    "quote": "configurer l'ordonnancement des flux dans TSN peut mener à un problème NP-difficile",
+    "tag": "(p. 30)",
+    "cited": [
+      30
+    ],
+    "to": 29,
+    "how": "rewrite"
+  },
+  {
+    "quote": "cette configuration se doit d'être dynamique. Pour relever ces défis un algorithme capable de déterminer rapidement les ",
+    "tag": "(p. 30)",
+    "cited": [
+      30
+    ],
+    "to": 29,
+    "how": "rewrite"
+  },
+  {
+    "quote": "Cette étude confirme l'intérêt d'utiliser le RL afin de trouver l'ordonnancement du TAS dans les réseaux TSN.",
+    "tag": "(p. 117)",
+    "cited": [
+      117
+    ],
+    "to": 116,
+    "how": "rewrite"
+  },
+  {
+    "quote": "cette configuration se doit d'être dynamique.",
+    "tag": "(p. 30)",
+    "cited": [
+      30
+    ],
+    "to": 29,
+    "how": "rewrite"
+  }
+]
