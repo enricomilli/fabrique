@@ -55,9 +55,9 @@ Things to know:
 `explorer/<nnt>/` is committed for the ten demo-set theses (both views each).
 Two things to know about them:
 
-- **The thesis PDFs are not in the repo** (241 MB), so `source.pdf_file` resolves
-  only on a machine that has `demo_candidates/pdfs/`. The page *numbers* are
-  still correct and usable.
+- **The thesis PDFs are committed** under `data/pdf/`, so `source.pdf_file`
+  resolves from a clone. Note that `build_reasoning.py` writes that path relative
+  to the directory it was generated in; regenerate if you move things.
 - **`pdf_page_offset` is 0 for all ten** — parquet page N is PDF page N. Verified
   two ways: every parquet's `page` column spans exactly `1 … PDF page_count`, and
   138 of 140 sampled pages best-match at offset 0 by text overlap (the two
