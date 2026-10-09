@@ -18,8 +18,18 @@ export const publicDocumentsFilter = and(
 );
 
 async function lookupPdf(id: string): Promise<{ size: number } | null> {
-	const { findStoredPdf } = await import("./s3-pdf.server.ts");
-	return findStoredPdf(id);
+	try {
+		const { findStoredPdf } = await import("./s3-pdf.server.ts");
+		return await findStoredPdf(id);
+	} catch (error: unknown) {
+		console.error("Cannot read the document PDF.", {
+			documentId: id,
+			errorName: error instanceof Error ? error.name : "UnknownError",
+			errorMessage:
+				error instanceof Error ? error.message : "Unknown storage error.",
+		});
+		throw new Error("Cannot read the document PDF.");
+	}
 }
 
 function validateDocument(data: unknown): Docs {
@@ -270,12 +280,8 @@ export async function loadDocument(
 	const summary = summarize(id, document, record.public);
 	let pdfUrl = document.pdf_url ?? null;
 	if (!pdfUrl) {
-		try {
-			const pdf = await lookupPdf(id);
-			if (pdf) pdfUrl = `/api/pdfs/${encodeURIComponent(id)}`;
-		} catch {
-			throw new Error("Cannot read the document PDF.");
-		}
+		const pdf = await lookupPdf(id);
+		if (pdf) pdfUrl = `/api/pdfs/${encodeURIComponent(id)}`;
 	}
 	return {
 		...summary,
