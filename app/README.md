@@ -39,9 +39,14 @@ Keep the repository root as the build context for the app, document exports, and
 `infra/compose.prod.yaml` runs the web app, fake worker, PostgreSQL, Redis, SeaweedFS, and migrations.
 The production project uses separate volumes from development.
 The services do not publish host ports. The web app exposes port `3000` on the container network.
+All services share the project-scoped `default` network with explicit aliases for PostgreSQL, Redis, and SeaweedFS.
+These aliases avoid common service names on Dokploy's shared network.
 In Dokploy, add a domain for the `web` service with container port `3000` and HTTPS enabled.
 Set `SERVER_URL` to that domain's HTTPS URL.
 Let Dokploy configure Traefik. Do not add a host port mapping for the web app.
+Check Preview Compose before deployment.
+The `web` service must keep `default` and also connect to Dokploy's Traefik network.
+The other services need only `default`.
 Configure Traefik to permit PDF uploads up to 1.5 GB.
 
 Create the production environment file from `app/`:
