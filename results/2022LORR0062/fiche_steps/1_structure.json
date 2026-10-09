@@ -1,0 +1,426 @@
+{
+  "thesis_id": "2022LORR0062",
+  "parquet_blocks": 2482,
+  "parquet_pages": 370,
+  "metadata": {
+    "titre": "Sociologie de la construction du don : le cas paradigmatique du don de sang",
+    "auteur": "Aurore MALRIAT",
+    "annee": "2022",
+    "etablissement": "Université de Lorraine, SLTC",
+    "discipline": "Sociologie",
+    "mots_cles": [
+      "don de sang",
+      "solidarité",
+      "éthique",
+      "lien social",
+      "réciprocité",
+      "économie sociale",
+      "sociologie du don",
+      "corps",
+      "représentations sociales",
+      "temps",
+      "devenir",
+      "imaginaire"
+    ],
+    "pages": 370
+  },
+  "toc": [
+    {
+      "title": "Remerciements",
+      "page_start": 4,
+      "level": 0,
+      "page_end": 4,
+      "role": "frontmatter",
+      "page_start_parquet": 6,
+      "page_end_parquet": 6
+    },
+    {
+      "title": "Résumé et mots-clés",
+      "page_start": 5,
+      "level": 0,
+      "page_end": 5,
+      "role": "frontmatter",
+      "page_start_parquet": 7,
+      "page_end_parquet": 7
+    },
+    {
+      "title": "Abstract and key words",
+      "page_start": 6,
+      "level": 0,
+      "page_end": 11,
+      "role": "frontmatter",
+      "page_start_parquet": 8,
+      "page_end_parquet": 13
+    },
+    {
+      "title": "INTRODUCTION GENERALE",
+      "page_start": 12,
+      "level": 0,
+      "page_end": 65,
+      "role": "frontmatter",
+      "page_start_parquet": 14,
+      "page_end_parquet": 67
+    },
+    {
+      "title": "PREMIERE PARTIE : CONSTRUCTION THEORIQUE DE L'OBJET",
+      "page_start": null,
+      "level": 0,
+      "page_end": null,
+      "role": "other",
+      "page_start_parquet": null,
+      "page_end_parquet": null
+    },
+    {
+      "title": "CHAPITRE 1 : définitions des termes et problématisation de l'objet sociologique",
+      "page_start": null,
+      "level": 0,
+      "page_end": null,
+      "role": "part",
+      "page_start_parquet": null,
+      "page_end_parquet": null
+    },
+    {
+      "title": "1. LES CONCEPTS",
+      "page_start": 24,
+      "level": 1,
+      "page_end": 46,
+      "role": "section",
+      "page_start_parquet": 26,
+      "page_end_parquet": 48
+    },
+    {
+      "title": "La solidarité et le lien social",
+      "page_start": 24,
+      "level": 2,
+      "page_end": 27,
+      "role": "section",
+      "page_start_parquet": 26,
+      "page_end_parquet": 29
+    },
+    {
+      "title": "Le don et les sciences sociales",
+      "page_start": 28,
+      "level": 2,
+      "page_end": 33,
+      "role": "section",
+      "page_start_parquet": 30,
+      "page_end_parquet": 35
+    },
+    {
+      "title": "Éthique et conduites sociales",
+      "page_start": 34,
+      "level": 2,
+      "page_end": 46,
+      "role": "section",
+      "page_start_parquet": 36,
+      "page_end_parquet": 48
+    },
+    {
+      "title": "2. PROBLÉMATIQUE SOCIOLOGIQUE",
+      "page_start": 47,
+      "level": 1,
+      "page_end": 55,
+      "role": "section",
+      "page_start_parquet": 49,
+      "page_end_parquet": 57
+    },
+    {
+      "title": "3. HYPOTHÈSES",
+      "page_start": 56,
+      "level": 1,
+      "page_end": 57,
+      "role": "section",
+      "page_start_parquet": 58,
+      "page_end_parquet": 59
+    },
+    {
+      "title": "4. QUESTIONS ÉPISTÉMOLOGIQUES CONCERNANT LA SOCIOLOGIE MORALE",
+      "page_start": 58,
+      "level": 1,
+      "page_end": 61,
+      "role": "section",
+      "page_start_parquet": 60,
+      "page_end_parquet": 63
+    },
+    {
+      "title": "5. L'IMAGINAIRE AU TRAVERS DES REPRÉSENTATIONS SOCIALES",
+      "page_start": 62,
+      "level": 1,
+      "page_end": 65,
+      "role": "section",
+      "page_start_parquet": 64,
+      "page_end_parquet": 67
+    },
+    {
+      "title": "CHAPITRE 2 : brève histoire croisée de la transfusion sanguine, du don de sang et de la santé publique en France",
+      "page_start": 66,
+      "level": 0,
+      "page_end": 91,
+      "role": "part",
+      "page_start_parquet": 68,
+      "page_end_parquet": 93
+    },
+    {
+      "title": "1. HISTOIRE DE LA MÉDECINE ET DE LA TRANSFUSION SANGUINE",
+      "page_start": 67,
+      "level": 1,
+      "page_end": 76,
+      "role": "section",
+      "page_start_parquet": 69,
+      "page_end_parquet": 78
+    },
+    {
+      "title": "2. LES ANNÉES 1981-1992 : « L’AFFAIRE DU SANG CONTAMINÉ »",
+      "page_start": 77,
+      "level": 1,
+      "page_end": 85,
+      "role": "section",
+      "page_start_parquet": 79,
+      "page_end_parquet": 87
+    },
+    {
+      "title": "3. L’ÉTABLISSEMENT FRANÇAIS DU SANG ET L’ÉTABLISSEMENT RÉGIONAL GRAND EST",
+      "page_start": 86,
+      "level": 1,
+      "page_end": 91,
+      "role": "section",
+      "page_start_parquet": 88,
+      "page_end_parquet": 93
+    },
+    {
+      "title": "CHAPITRE 3 : construction de la méthodologie",
+      "page_start": 92,
+      "level": 0,
+      "page_end": 108,
+      "role": "part",
+      "page_start_parquet": 94,
+      "page_end_parquet": 110
+    },
+    {
+      "title": "1 SOCIOLOGIE COMPREHENSIVE ET DEMARCHE HYPOTHETICO-INDUCTIVE",
+      "page_start": 93,
+      "level": 1,
+      "page_end": 97,
+      "role": "section",
+      "page_start_parquet": 95,
+      "page_end_parquet": 99
+    },
+    {
+      "title": "2.L'OBSERVATION PARTICIPANTE",
+      "page_start": 98,
+      "level": 1,
+      "page_end": 103,
+      "role": "section",
+      "page_start_parquet": 100,
+      "page_end_parquet": 105
+    },
+    {
+      "title": "3. LES ENTRETIENS SEMI-DIRECTIFS",
+      "page_start": 104,
+      "level": 1,
+      "page_end": 108,
+      "role": "section",
+      "page_start_parquet": 106,
+      "page_end_parquet": 110
+    },
+    {
+      "title": "DEUXIEME PARTIE : ANALYSE DE TERRAIN",
+      "page_start": 109,
+      "level": 0,
+      "page_end": 110,
+      "role": "other",
+      "page_start_parquet": 111,
+      "page_end_parquet": 112
+    },
+    {
+      "title": "CHAPITRE 1 : méthodologie",
+      "page_start": 111,
+      "level": 0,
+      "page_end": 127,
+      "role": "other",
+      "page_start_parquet": 113,
+      "page_end_parquet": 129
+    },
+    {
+      "title": "CHAPITRE 2 : analyse des entretiens",
+      "page_start": 128,
+      "level": 0,
+      "page_end": 210,
+      "role": "part",
+      "page_start_parquet": 130,
+      "page_end_parquet": 212
+    },
+    {
+      "title": "1. PROPOS GENERAUX",
+      "page_start": 129,
+      "level": 1,
+      "page_end": 143,
+      "role": "section",
+      "page_start_parquet": 131,
+      "page_end_parquet": 145
+    },
+    {
+      "title": "2. FAIRE UN DON DE SANG POUR LA PREMIERE FOIS",
+      "page_start": 144,
+      "level": 1,
+      "page_end": 146,
+      "role": "section",
+      "page_start_parquet": 146,
+      "page_end_parquet": 148
+    },
+    {
+      "title": "3. LES DONNEURS DE SANG TOTAL",
+      "page_start": 147,
+      "level": 1,
+      "page_end": 162,
+      "role": "section",
+      "page_start_parquet": 149,
+      "page_end_parquet": 164
+    },
+    {
+      "title": "4. LE DONNEUR DE PLASMA, UNE CATÉGORIE DE DONNEURS À PART ENTIÈRE",
+      "page_start": 163,
+      "level": 1,
+      "page_end": 176,
+      "role": "section",
+      "page_start_parquet": 165,
+      "page_end_parquet": 178
+    },
+    {
+      "title": "5. LES BÉNÉVOLES D'AMICALE DE DONNEURS",
+      "page_start": 177,
+      "level": 1,
+      "page_end": 180,
+      "role": "section",
+      "page_start_parquet": 179,
+      "page_end_parquet": 182
+    },
+    {
+      "title": "6. LES DIFFÉRENTS CORPS DE MÉTIER MOBILISES LORS DE LA COLLECTE DE DONS DE SANG",
+      "page_start": 181,
+      "level": 1,
+      "page_end": 210,
+      "role": "section",
+      "page_start_parquet": 183,
+      "page_end_parquet": 212
+    },
+    {
+      "title": "CHAPITRE 3 : analyse des observations participantes",
+      "page_start": 211,
+      "level": 0,
+      "page_end": 251,
+      "role": "part",
+      "page_start_parquet": 213,
+      "page_end_parquet": 253
+    },
+    {
+      "title": "1. LA COLLECTE, UNE ENTITÉ EN SOI.",
+      "page_start": 213,
+      "level": 1,
+      "page_end": 235,
+      "role": "section",
+      "page_start_parquet": 215,
+      "page_end_parquet": 237
+    },
+    {
+      "title": "2. OCCUPATION DE L'ESPACE ET ORGANISATION DU TRAVAIL",
+      "page_start": 236,
+      "level": 1,
+      "page_end": 240,
+      "role": "section",
+      "page_start_parquet": 238,
+      "page_end_parquet": 242
+    },
+    {
+      "title": "3. LE RAPPORT AU TEMPS",
+      "page_start": 241,
+      "level": 1,
+      "page_end": 242,
+      "role": "section",
+      "page_start_parquet": 243,
+      "page_end_parquet": 244
+    },
+    {
+      "title": "4. LE DON DE SANG COMME SYSTÈME SOCIAL",
+      "page_start": 243,
+      "level": 1,
+      "page_end": 251,
+      "role": "section",
+      "page_start_parquet": 245,
+      "page_end_parquet": 253
+    },
+    {
+      "title": "CHAPITRE 4 : les représentations sociales et la pratique du don de sang",
+      "page_start": 252,
+      "level": 0,
+      "page_end": 279,
+      "role": "part",
+      "page_start_parquet": 254,
+      "page_end_parquet": 281
+    },
+    {
+      "title": "1. LA COMMUNICATION INSTITUTIONNELLE",
+      "page_start": 253,
+      "level": 1,
+      "page_end": 269,
+      "role": "section",
+      "page_start_parquet": 255,
+      "page_end_parquet": 271
+    },
+    {
+      "title": "2. L'IMAGINAIRE DU DON DE SANG ET SON IMPACT DANS LA FORMATION DES CONDUITES SOCIALES",
+      "page_start": 270,
+      "level": 1,
+      "page_end": 279,
+      "role": "section",
+      "page_start_parquet": 272,
+      "page_end_parquet": 281
+    },
+    {
+      "title": "CHAPITRE 5 : Synthèse",
+      "page_start": 280,
+      "level": 0,
+      "page_end": 299,
+      "role": "other",
+      "page_start_parquet": 282,
+      "page_end_parquet": 301
+    },
+    {
+      "title": "CONCLUSION",
+      "page_start": 300,
+      "level": 0,
+      "page_end": 308,
+      "role": "backmatter",
+      "page_start_parquet": 302,
+      "page_end_parquet": 310
+    },
+    {
+      "title": "BIBLIOGRAPHIE",
+      "page_start": 309,
+      "level": 0,
+      "page_end": 322,
+      "role": "backmatter",
+      "page_start_parquet": 311,
+      "page_end_parquet": 324
+    },
+    {
+      "title": "ANNEXE",
+      "page_start": 323,
+      "level": 0,
+      "page_end": 323,
+      "role": "backmatter",
+      "page_start_parquet": 325,
+      "page_end_parquet": 325
+    }
+  ],
+  "page_offset": {
+    "intro_page_toc": 12,
+    "intro_page_parquet": 14,
+    "offset": 2,
+    "method": "printed-folio"
+  },
+  "toc_validation": {
+    "issues": [],
+    "ok": true
+  }
+}

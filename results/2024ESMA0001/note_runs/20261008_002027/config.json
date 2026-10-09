@@ -1,0 +1,18 @@
+{
+  "thesis": "2024ESMA0001",
+  "run_id": "20261008_002027",
+  "model": "Qwen3.6-27B-Q6_K.gguf",
+  "fiche_path": "results/2024ESMA0001/2024ESMA0001_fiche.md",
+  "parquet_path": "data/2024ESMA0001.parquet",
+  "blob_chars": 257922,
+  "blob_tok_est": 64480,
+  "prompt_chars": 24947,
+  "shim_env": {
+    "SHIM_MODEL_NAME": "Qwen3.6-27B-Q6_K.gguf",
+    "QWEN_SERVER_URL": "https://zoo-oklahoma-stream-hours.trycloudflare.com/v1",
+    "SHIM_TEMPERATURE": "0.6",
+    "SHIM_TOP_P": "0.95",
+    "SHIM_TOP_K": "20"
+  },
+  "rlm_config": "max_iterations: 20\nmax_depth: 1\nmax_sub_queries: 15\ntruncate_len: 20000\nmetadata_preview_lines: 20\n"
+}

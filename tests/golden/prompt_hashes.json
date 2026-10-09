@@ -26,9 +26,9 @@
     "BACKMATTER_RE": "{\"pattern\": \"^(?:CONCLUSION|BIBLIOGRAPHIE|ANNEXE|INDEX|TABLE\\\\s+DES\\\\s+(?:FIGURE|TABLEAU|GRAPHIQUE|ANNEXE|ILLUSTRATION)|LISTE\\\\s+DES|GLOSSAIRE|SIGLES|ACRONYMES|REFERENCES|R[\\u00c9E]F[\\u00c9E]RENCES|LIVRES|ARTICLES|CHAPITRES\\\\s+ET|OUVRAGES)\", \"flags\": 34}",
     "NUMBERED_CHAPTER_RE": "{\"pattern\": \"^(?:\\\\d+[\\\\.\\\\s]|[Cc]hap(?:itre)?[\\\\.\\\\s]|[Cc]hapter[\\\\.\\\\s])\", \"flags\": 32}",
     "INTRO_TITLE_RE": "{\"pattern\": \"^\\\\s*(?:(?:chapter|chapitre|part|partie|kapitel|cap\\u00edtulo)\\\\s+)?[\\\\divx]*\\\\.?\\\\s*introduction\\\\b\", \"flags\": 32}",
-    "CONCLUSION_TITLE_RE": "{\"pattern\": \"\\\\bconclusions?\\\\b\", \"flags\": 32}",
+    "CONCLUSION_TITLE_RE": "{\"pattern\": \"\\\\bconclusions?\\\\b|\\\\bdiscussion\\\\s+(?:g[\\u00e9e]n[\\u00e9e]rale|finale|general)\\\\b|\\\\bgeneral\\\\s+discussion\\\\b|\\\\bdiscussion\\\\s+et\\\\s+perspectives\\\\b\", \"flags\": 32}",
     "ABSTRACT_TITLE_RE": "{\"pattern\": \"^\\\\s*(?:#+\\\\s*)?(?:r[\\u00e9e]sum[\\u00e9e]s?|abstracts?|summary|summaries)\\\\s*$\", \"flags\": 34}",
-    "KEYWORDS_RE": "{\"pattern\": \"\\\\*{0,2}(?:mots[- ]?cl[\\u00e9e]s?|keywords?)\\\\*{0,2}\\\\s*[:\\uff1a]\\\\s*(.+)\", \"flags\": 34}",
+    "KEYWORDS_RE": "{\"pattern\": \"\\\\*{0,2}(?:mots[- ]?cl[\\u00e9e]f?s?|key\\\\s?words?)\\\\*{0,2}\\\\s*([.:\\uff1a])\\\\s*\\\\**\\\\s*(.+)\", \"flags\": 34}",
     "STEP2C_UNCHANGED_RE": "{\"pattern\": \"^\\\\[?\\\\s*(?:INCHANG[\\u00c9E]E?|UNCHANGED)\\\\s*\\\\]?\\\\s*\\\\.?$\", \"flags\": 34}",
     "STRUCTURE_PAGE_WINDOW": 25,
     "REQUEST_TIMEOUT_SECONDS": 900

@@ -1,0 +1,520 @@
+{
+  "thesis_id": "2022LYO10153",
+  "parquet_blocks": 1146,
+  "parquet_pages": 154,
+  "metadata": {
+    "titre": "Reconstruction du cartilage nasal par impression 3D et ingénierie tissulaire : le projet NASALTIS",
+    "auteur": "Delphine Vertu-Ciolino",
+    "annee": "2022",
+    "etablissement": "Université Claude Bernard - Lyon I, École Doctorale ED 340 Biologie Moléculaire, Intégrative et Cellulaire",
+    "discipline": "Biologie cellulaire et ingénierie tissulaire",
+    "mots_cles": [
+      "Cartilage",
+      "Nez",
+      "Ingénierie tissulaire",
+      "Impression 3D",
+      "Mécanique",
+      "Bimatériau",
+      "Biocompatibilité"
+    ],
+    "pages": 155
+  },
+  "toc": [
+    {
+      "title": "Liste des abréviations et terminologie anglophone",
+      "page_start": 17,
+      "level": 0,
+      "page_end": 18,
+      "role": "backmatter",
+      "page_start_parquet": 18,
+      "page_end_parquet": 19
+    },
+    {
+      "title": "Liste des figures",
+      "page_start": 19,
+      "level": 0,
+      "page_end": 24,
+      "role": "backmatter",
+      "page_start_parquet": 20,
+      "page_end_parquet": 25
+    },
+    {
+      "title": "Préambule",
+      "page_start": 25,
+      "level": 0,
+      "page_end": 26,
+      "role": "other",
+      "page_start_parquet": 26,
+      "page_end_parquet": 27
+    },
+    {
+      "title": "Introduction générale",
+      "page_start": 27,
+      "level": 0,
+      "page_end": 30,
+      "role": "frontmatter",
+      "page_start_parquet": 28,
+      "page_end_parquet": 31
+    },
+    {
+      "title": "Introduction bibliographique",
+      "page_start": 31,
+      "level": 0,
+      "page_end": 31,
+      "role": "frontmatter",
+      "page_start_parquet": 32,
+      "page_end_parquet": 32
+    },
+    {
+      "title": "1. Anatomie et embryologie du nez et de la cloison nasale.",
+      "page_start": 31,
+      "level": 0,
+      "page_end": 35,
+      "role": "chapter",
+      "page_start_parquet": 32,
+      "page_end_parquet": 36
+    },
+    {
+      "title": "1.1. Anatomie.",
+      "page_start": 31,
+      "level": 1,
+      "page_end": 31,
+      "role": "section",
+      "page_start_parquet": 32,
+      "page_end_parquet": 32
+    },
+    {
+      "title": "1.2. Embryologie",
+      "page_start": 31,
+      "level": 1,
+      "page_end": 31,
+      "role": "section",
+      "page_start_parquet": 32,
+      "page_end_parquet": 32
+    },
+    {
+      "title": "1.3. Origine embryonnaire des chondrocytes.",
+      "page_start": 31,
+      "level": 1,
+      "page_end": 35,
+      "role": "section",
+      "page_start_parquet": 32,
+      "page_end_parquet": 36
+    },
+    {
+      "title": "2. Histologie du cartilage septal et de la muqueuse respiratoire nasale",
+      "page_start": 36,
+      "level": 0,
+      "page_end": 40,
+      "role": "chapter",
+      "page_start_parquet": 37,
+      "page_end_parquet": 41
+    },
+    {
+      "title": "2.1. Histologie du cartilage.",
+      "page_start": 36,
+      "level": 1,
+      "page_end": 36,
+      "role": "section",
+      "page_start_parquet": 37,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "2.2. Histologie de la muqueuse nasale.",
+      "page_start": 36,
+      "level": 1,
+      "page_end": 40,
+      "role": "section",
+      "page_start_parquet": 37,
+      "page_end_parquet": 41
+    },
+    {
+      "title": "3. Importance de la cloison nasale dans le nez humain",
+      "page_start": 41,
+      "level": 0,
+      "page_end": 41,
+      "role": "chapter",
+      "page_start_parquet": 42,
+      "page_end_parquet": 42
+    },
+    {
+      "title": "4. Les problématiques actuelles liées à l'atteinte du cartilage de la cloison",
+      "page_start": 42,
+      "level": 0,
+      "page_end": 43,
+      "role": "chapter",
+      "page_start_parquet": 43,
+      "page_end_parquet": 44
+    },
+    {
+      "title": "4.1. Les déformations naturelles ou traumatiques.",
+      "page_start": 42,
+      "level": 1,
+      "page_end": 42,
+      "role": "section",
+      "page_start_parquet": 43,
+      "page_end_parquet": 43
+    },
+    {
+      "title": "4.2. Les pertes de substances acquises et les destructions du cartilage septal.",
+      "page_start": 42,
+      "level": 1,
+      "page_end": 43,
+      "role": "section",
+      "page_start_parquet": 43,
+      "page_end_parquet": 44
+    },
+    {
+      "title": "5. Les réparations actuelles des déficits et pertes de substance de la cloison nasale",
+      "page_start": 44,
+      "level": 0,
+      "page_end": 50,
+      "role": "chapter",
+      "page_start_parquet": 45,
+      "page_end_parquet": 51
+    },
+    {
+      "title": "5.1. Le principe du L de Killian.",
+      "page_start": 44,
+      "level": 1,
+      "page_end": 44,
+      "role": "section",
+      "page_start_parquet": 45,
+      "page_end_parquet": 45
+    },
+    {
+      "title": "5.2 Les techniques de greffons structurants.",
+      "page_start": 44,
+      "level": 1,
+      "page_end": 44,
+      "role": "section",
+      "page_start_parquet": 45,
+      "page_end_parquet": 45
+    },
+    {
+      "title": "5.3. La septoplastie extracorporelle.",
+      "page_start": 44,
+      "level": 1,
+      "page_end": 47,
+      "role": "section",
+      "page_start_parquet": 45,
+      "page_end_parquet": 48
+    },
+    {
+      "title": "5.4. Les greffons structurants de conque ou de côte",
+      "page_start": 48,
+      "level": 1,
+      "page_end": 48,
+      "role": "section",
+      "page_start_parquet": 49,
+      "page_end_parquet": 49
+    },
+    {
+      "title": "5.5. Les implants du nez.",
+      "page_start": 48,
+      "level": 1,
+      "page_end": 48,
+      "role": "section",
+      "page_start_parquet": 49,
+      "page_end_parquet": 49
+    },
+    {
+      "title": "5.6. Les épithèses nasales.",
+      "page_start": 48,
+      "level": 1,
+      "page_end": 50,
+      "role": "section",
+      "page_start_parquet": 49,
+      "page_end_parquet": 51
+    },
+    {
+      "title": "6. État de connaissances en ingénierie tissulaire du cartilage nasal",
+      "page_start": 51,
+      "level": 0,
+      "page_end": 57,
+      "role": "chapter",
+      "page_start_parquet": 52,
+      "page_end_parquet": 58
+    },
+    {
+      "title": "7. Apport de l'impression 3D",
+      "page_start": 58,
+      "level": 0,
+      "page_end": 59,
+      "role": "chapter",
+      "page_start_parquet": 59,
+      "page_end_parquet": 60
+    },
+    {
+      "title": "8. Article issu de la thèse",
+      "page_start": 60,
+      "level": 0,
+      "page_end": 76,
+      "role": "chapter",
+      "page_start_parquet": 61,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "Objectif de l'étude : Le concept NASALTIS : Fabrication d'une prothèse de septum nasal",
+      "page_start": 77,
+      "level": 0,
+      "page_end": 82,
+      "role": "other",
+      "page_start_parquet": 78,
+      "page_end_parquet": 83
+    },
+    {
+      "title": "Matériels et Méthodes",
+      "page_start": 83,
+      "level": 0,
+      "page_end": 92,
+      "role": "part",
+      "page_start_parquet": 84,
+      "page_end_parquet": 93
+    },
+    {
+      "title": "1. Protocole de collecte des échantillons cartilagineux.",
+      "page_start": 83,
+      "level": 1,
+      "page_end": 83,
+      "role": "section",
+      "page_start_parquet": 84,
+      "page_end_parquet": 84
+    },
+    {
+      "title": "2. Protocole d'extraction des chondrocytes.",
+      "page_start": 83,
+      "level": 1,
+      "page_end": 84,
+      "role": "section",
+      "page_start_parquet": 84,
+      "page_end_parquet": 85
+    },
+    {
+      "title": "3. Protocole d'amplification des chondrocytes",
+      "page_start": 85,
+      "level": 1,
+      "page_end": 85,
+      "role": "section",
+      "page_start_parquet": 86,
+      "page_end_parquet": 86
+    },
+    {
+      "title": "4. Protocole de préparation du construit cartilagineux : préparation du gel de fibrine puis du gel de chondrocytes, puis coulage dans le moule sur le scaffold, et culture cellulaire.",
+      "page_start": 85,
+      "level": 1,
+      "page_end": 85,
+      "role": "section",
+      "page_start_parquet": 86,
+      "page_end_parquet": 86
+    },
+    {
+      "title": "5. Protocole d'analyse de la viabilité cellulaire par test LIVE/DEAD",
+      "page_start": 86,
+      "level": 1,
+      "page_end": 86,
+      "role": "section",
+      "page_start_parquet": 87,
+      "page_end_parquet": 87
+    },
+    {
+      "title": "6. Protocole d'analyse de l'expression des gènes par Reverse Polymerase Chain Reaction PCR.",
+      "page_start": 86,
+      "level": 1,
+      "page_end": 88,
+      "role": "section",
+      "page_start_parquet": 87,
+      "page_end_parquet": 89
+    },
+    {
+      "title": "6.1. Protocole d'extraction des ARN",
+      "page_start": 86,
+      "level": 2,
+      "page_end": 86,
+      "role": "section",
+      "page_start_parquet": 87,
+      "page_end_parquet": 87
+    },
+    {
+      "title": "6.2. Protocole de transcription inversée.",
+      "page_start": 86,
+      "level": 2,
+      "page_end": 86,
+      "role": "section",
+      "page_start_parquet": 87,
+      "page_end_parquet": 87
+    },
+    {
+      "title": "6.3. Protocole de PCR.",
+      "page_start": 86,
+      "level": 2,
+      "page_end": 88,
+      "role": "section",
+      "page_start_parquet": 87,
+      "page_end_parquet": 89
+    },
+    {
+      "title": "7. Protocole d'analyse des synthèses protéiques par Western Blot",
+      "page_start": 89,
+      "level": 1,
+      "page_end": 89,
+      "role": "section",
+      "page_start_parquet": 90,
+      "page_end_parquet": 90
+    },
+    {
+      "title": "8. Protocole d'analyse par immunomarquage du collagène de type II.",
+      "page_start": 89,
+      "level": 1,
+      "page_end": 90,
+      "role": "section",
+      "page_start_parquet": 90,
+      "page_end_parquet": 91
+    },
+    {
+      "title": "9. Matériel utilisé pour les étapes liées à l'impression 3D",
+      "page_start": 91,
+      "level": 1,
+      "page_end": 92,
+      "role": "section",
+      "page_start_parquet": 92,
+      "page_end_parquet": 93
+    },
+    {
+      "title": "Résultats et discussion",
+      "page_start": 93,
+      "level": 0,
+      "page_end": 93,
+      "role": "other",
+      "page_start_parquet": 94,
+      "page_end_parquet": 94
+    },
+    {
+      "title": "1ère partie : Sélection d'un matériau imprimable et biocompatible à partir de 2 matériaux candidats",
+      "page_start": 93,
+      "level": 0,
+      "page_end": 138,
+      "role": "other",
+      "page_start_parquet": 94,
+      "page_end_parquet": 139
+    },
+    {
+      "title": "R.1. Résultats et discussion",
+      "page_start": 93,
+      "level": 1,
+      "page_end": 93,
+      "role": "section",
+      "page_start_parquet": 94,
+      "page_end_parquet": 94
+    },
+    {
+      "title": "R.1.1 : Développement d'un scaffold centimétrique et imprimabilité des 2 matériaux-candidats",
+      "page_start": 93,
+      "level": 1,
+      "page_end": 96,
+      "role": "section",
+      "page_start_parquet": 94,
+      "page_end_parquet": 97
+    },
+    {
+      "title": "R.1.1.1 : Les matériaux candidats.",
+      "page_start": 93,
+      "level": 2,
+      "page_end": 93,
+      "role": "section",
+      "page_start_parquet": 94,
+      "page_end_parquet": 94
+    },
+    {
+      "title": "R.1.1.2. : Élaboration du scaffold centimétrique.",
+      "page_start": 93,
+      "level": 2,
+      "page_end": 96,
+      "role": "section",
+      "page_start_parquet": 94,
+      "page_end_parquet": 97
+    },
+    {
+      "title": "R.1.2. : Étude de biocompatibilité avec chaque biomatériau",
+      "page_start": 97,
+      "level": 1,
+      "page_end": 131,
+      "role": "section",
+      "page_start_parquet": 98,
+      "page_end_parquet": 132
+    },
+    {
+      "title": "R.1.2.1. : Obtention d'un gel de chondrocytes.",
+      "page_start": 97,
+      "level": 2,
+      "page_end": 99,
+      "role": "section",
+      "page_start_parquet": 98,
+      "page_end_parquet": 100
+    },
+    {
+      "title": "R.1.2.2. : Étude de la biocompatibilité après culture in vitro des construits",
+      "page_start": 100,
+      "level": 2,
+      "page_end": 131,
+      "role": "section",
+      "page_start_parquet": 101,
+      "page_end_parquet": 132
+    },
+    {
+      "title": "R.2.5. Essai sur cadavre pour modèle clinique",
+      "page_start": 132,
+      "level": 1,
+      "page_end": 138,
+      "role": "section",
+      "page_start_parquet": 133,
+      "page_end_parquet": 139
+    },
+    {
+      "title": "Discussion générale et perspectives",
+      "page_start": 139,
+      "level": 0,
+      "page_end": 144,
+      "role": "other",
+      "page_start_parquet": 140,
+      "page_end_parquet": 145
+    },
+    {
+      "title": "Conclusion générale",
+      "page_start": 145,
+      "level": 0,
+      "page_end": 146,
+      "role": "backmatter",
+      "page_start_parquet": 146,
+      "page_end_parquet": 147
+    },
+    {
+      "title": "Bibliographie",
+      "page_start": 147,
+      "level": 0,
+      "page_end": 150,
+      "role": "backmatter",
+      "page_start_parquet": 148,
+      "page_end_parquet": 151
+    },
+    {
+      "title": "Annexes",
+      "page_start": 151,
+      "level": 0,
+      "page_end": 151,
+      "role": "backmatter",
+      "page_start_parquet": 152,
+      "page_end_parquet": 152
+    }
+  ],
+  "page_offset": {
+    "intro_page_toc": 27,
+    "intro_page_parquet": 28,
+    "offset": 1,
+    "method": "introduction-anchor"
+  },
+  "toc_validation": {
+    "issues": [],
+    "ok": true
+  }
+}

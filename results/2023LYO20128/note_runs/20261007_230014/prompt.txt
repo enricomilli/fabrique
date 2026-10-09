@@ -1,0 +1,323 @@
+Tu rédiges une NOTE DE LECTURE (compte rendu universitaire) d'une thèse de doctorat, dans la tradition académique française.
+
+La variable `context` (déjà chargée) contient le texte intégral de la thèse.
+
+## Format du blob `context`
+
+- Des marqueurs de page `[p.NNN]` sont insérés à chaque changement de page. Pour trouver le numéro de page d'un extrait, cherche sa position avec `.find()`, puis remonte jusqu'au marqueur `[p.NNN]` le plus proche.
+- Les notes de bas de page sont préfixées `[fn]` et placées à la fin de chaque page. Elles contiennent souvent les références scientifiques internes de la thèse.
+- Exemple de snippet pour trouver la page d'une phrase donnée :
+```python
+phrase = "conditions d'acceptabilité"
+pos = context.find(phrase)
+# remonter au dernier marqueur [p.XXX] avant pos
+marker_start = context.rfind("[p.", 0, pos)
+marker_end = context.find("]", marker_start) + 1
+page_tag = context[marker_start:marker_end]   # e.g. "[p.21]"
+print(f"Phrase « {phrase} » → {page_tag}")
+```
+
+
+## CARTE DE LA THÈSE (index de navigation)
+
+Index hiérarchique issu de la table des matières. Les pages sont les
+numéros des marqueurs `[p.NNN]` du blob `context` — pour atteindre
+directement un chapitre, saute à son marqueur :
+```python
+pos = context.find("[p.236]")     # début du chapitre visé
+extrait = context[pos:pos+3000]
+```
+ATTENTION : ne cherche PAS un titre de chapitre avec `context.find("titre")`
+— tu risques de tomber sur la table des matières de la thèse elle-même.
+Utilise toujours le saut par marqueur de page ci-dessous.
+
+- Partie I  [p.37]–[p.37]
+- 1. Introduction  [p.37]–[p.56]
+  - 1.1 Objectifs et limites  [p.37]–[p.39]
+  - 1.2 État de l'art  [p.40]–[p.45]
+  - 1.3 Questions de parenté et de filiation  [p.46]–[p.51]
+  - 1.4 La prosopographie  [p.52]–[p.56]
+- 2. Les sources textuelles  [p.57]–[p.88]
+  - 2.1 Provenance des sources : les sites archéologiques  [p.57]–[p.68]
+  - 2.2 Typologie des sources  [p.69]–[p.88]
+- 3. La troisième dynastie d'Ur  [p.89]–[p.115]
+  - 3.1 Contexte historique et géographique  [p.89]–[p.97]
+  - 3.2 L'organisation politique et économique sous Ur III  [p.98]–[p.104]
+  - 3.3 Aperçu des hautes fonctions sous Ur III  [p.105]–[p.115]
+- Partie II : Les ensi2 de Lagaš  [p.116]–[p.116]
+- 4. Les dynasties de Lagaš  [p.116]–[p.131]
+  - 4.1 Les dynasties sumériennes d'après les listes royales  [p.116]–[p.116]
+  - 4.2 La première dynastie de Lagaš  [p.117]–[p.119]
+  - 4.3 La deuxième dynastie de Lagaš  [p.120]–[p.126]
+  - 4.4 Girsu/Lagaš sous Ur III  [p.127]–[p.131]
+- 5. Lu-Kirizal  [p.132]–[p.170]
+  - 5.1 Onomastique  [p.132]–[p.132]
+  - 5.2 La typologie des textes  [p.133]–[p.133]
+  - 5.3 Les affaires traitées par la justice sous le mandat de Lu-Kirizal  [p.133]–[p.134]
+  - 5.4 Gérer la province  [p.135]–[p.142]
+  - 5.5 La famille de Lu-Kirizal  [p.143]–[p.164]
+  - 5.6 Le culte des morts  [p.165]–[p.168]
+  - 5.7 Conclusion  [p.169]–[p.170]
+- 6. Ur-Lamma  [p.171]–[p.265]
+  - 6.1 Onomastique  [p.171]–[p.173]
+  - 6.2 Les fonctions d'Ur-Lamma à Girsu  [p.174]–[p.175]
+  - 6.3 Ur-Lamma : juge ou intendant ?  [p.176]–[p.188]
+  - 6.4 Le rôle d'Ur-Lamma dans la justice à Girsu  [p.189]–[p.196]
+  - 6.5 Administrer la province  [p.197]–[p.203]
+  - 6.6 Les subordonnés du gouverneur  [p.204]–[p.218]
+  - 6.7 La famille d'Ur-Lamma  [p.219]–[p.244]
+  - 6.8 Le mandat d'Alla, gouverneur de Lagaš  [p.245]–[p.249]
+  - 6.9 L'e2-du6-la : une propriété saisie par le pouvoir central ?  [p.250]–[p.258]
+  - 6.10 Le culte des ensi2 à Girsu et la mort d'Ur-Lamma  [p.259]–[p.261]
+  - 6.11 Conclusion  [p.262]–[p.265]
+- 7. Nanna-Zišagal  [p.266]–[p.275]
+  - 7.1 Onomastique  [p.266]–[p.266]
+  - 7.2 Le sceau de Nanna-Zišagal  [p.267]–[p.268]
+  - 7.3 La typologie des textes  [p.269]–[p.274]
+  - 7.4 La famille de Nanna-Zišagal  [p.275]–[p.275]
+- 8. Šarakam  [p.276]–[p.297]
+  - 8.1 Onomastique  [p.276]–[p.276]
+  - 8.2 Les sceaux de Šarakam  [p.276]–[p.279]
+  - 8.3 Šarakam, gouverneur de Girsu/Lagaš  [p.280]–[p.284]
+  - 8.4 La famille de Šarakam  [p.285]–[p.295]
+  - 8.5 Conclusion  [p.296]–[p.297]
+- 9. Arad-Nanna, gouverneur et grand vizir  [p.298]–[p.381]
+  - 9.1 Onomastique : Arad-Nanna et Arad-MU  [p.299]–[p.300]
+  - 9.2 Arad-Nanna/Mu, gouverneur de Girsu  [p.301]–[p.303]
+  - 9.3 Arad-Nanna, grand vizir d'Ur III  [p.304]–[p.307]
+  - 9.4 Arad-Nanna, gestionnaire administratif d'Ur III  [p.308]–[p.315]
+  - 9.5 La supervision des cadeaux  [p.316]–[p.326]
+  - 9.6 Le rôle d'Arad-Nanna dans la justice à Girsu/Lagaš  [p.327]–[p.341]
+  - 9.7 Arad-Nanna, gouverneur de provinces  [p.342]–[p.348]
+  - 9.8 Arad-Nanna, général  [p.349]–[p.356]
+  - 9.9 Arad-Nanna, sanga d'Enki ?  [p.357]–[p.357]
+  - 9.10 La famille d'Arad-Nanna  [p.358]–[p.379]
+  - 9.11 Conclusion  [p.380]–[p.381]
+- 10. Conclusion  [p.382]–[p.390]
+- Index  [p.391]–[p.391]
+- Index des noms propres  [p.391]–[p.391]
+- Index des termes sumériens  [p.392]–[p.392]
+- Index des noms géographiques  [p.393]–[p.393]
+- Bibliographie  [p.394]–[p.434]
+- Sitographie  [p.435]–[p.435]
+
+Tu disposes aussi, ci-dessous, de deux ressources dans ton prompt :
+  1. La FICHE structurée de la thèse — ton plan de travail, ce que tu dois couvrir
+  2. Un EXEMPLE DE STYLE — le registre, la longueur et le flux que tu dois imiter
+
+## Règles de référence
+
+**Auteurs externes (hors thèse) : STRICTEMENT INTERDITS.** Ne cite aucun auteur, ouvrage ou revue qui ne figure pas dans le texte de la thèse. Si un compte rendu standard écrirait « comme le montre Habermas » ou « selon Bourdieu » alors que ni Habermas ni Bourdieu n'est cité par l'auteur de la thèse, tu reformules sans nommer.
+
+**Auteurs internes (cités PAR la thèse) : autorisés sous condition.** Si tu veux nommer un auteur que la thèse elle-même mobilise (ex. Foucault, Moretti, Bakhtine, Lavoinne, Tetlock), tu DOIS :
+  1. Vérifier via `context.find("Nom")` qu'il est bien présent dans la thèse — SAUF si l'auteur figure déjà dans la FICHE avec une citation et une page : dans ce cas reprends l'ancrage de la fiche tel quel, sans revérification.
+  2. Accompagner la mention d'une courte citation verbatim (entre guillemets « ») extraite de la thèse.
+  3. Indiquer le numéro de page, obtenu via la méthode du marqueur `[p.NNN]` décrite ci-dessus.
+  Exemple : « Comme le rappelle Lavoinne, "cette croissance n'est pas justifiée économiquement" (p. 34). »
+
+**Chapitres et passages de la thèse** : cite-les librement (ex. « dans le premier chapitre », « p. 612 »). Les pages doivent être vérifiées via les marqueurs `[p.NNN]` — JAMAIS une position en caractères (offset à 4+ chiffres).
+
+**Notes de bas de page** : tu n'en rédiges pas dans la note. Les `[fn]` du blob sont uniquement un outil de recherche pour toi.
+
+**Cible : au moins 8 références de page précises dans la note finale** pour étayer tes affirmations.
+
+## Structure à produire (~2000 mots)
+
+```markdown
+# [Titre complet de la thèse, en italique après l'auteur]
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-10-07
+
+**Référence :** [Auteur], *[Titre]*, [Établissement], [Année], [Nombre de pages] p.
+
+---
+
+[Paragraphe 1 — Ouverture (~250 mots) : situe la thèse, l'auteur, la discipline,
+la période étudiée, la thèse centrale, le corpus principal. Annonce le fil
+directeur et la périodisation.]
+
+[Paragraphe 2 — Méthodologie et démarche (~300 mots) : approche,
+outillage, corpus, sondages, corpus contextuels. Souligne l'originalité
+méthodologique.]
+
+[Paragraphe 3 — Première partie ou premier axe (~350 mots) : en citant les pages.]
+
+[Paragraphe 4 — Deuxième partie ou deuxième axe (~300 mots).]
+
+[Paragraphe 5 — Troisième partie ou troisième axe (~350 mots).]
+
+[Paragraphe 6 — Portée, apport et tensions (~300-400 mots) : synthèse
+critique. L'apport empirique, théorique, méthodologique. Les tensions,
+les limites. Ouverture sur ce que la thèse permet de penser.]
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de [Titre court] », [Date].
+```
+
+## Consignes RLM
+
+- **Les pages et citations de la FICHE ont déjà été vérifiées automatiquement contre la source.** Reprends-les telles quelles, SANS les revérifier via `context.find(...)`. Ne vérifie que ce que tu introduis TOI-MÊME et qui ne figure pas dans la fiche (nouvel auteur, nouvelle citation, nouvelle page).
+- Si tu as besoin d'un passage spécifique, utilise `context[start:end]` ou `context.find("phrase")` pour le localiser, puis extrait une tranche de 500-1500 caractères autour.
+- **Travaille en LOTS SERRÉS** : toute l'exploration initiale (squelette : introduction, méthodologie, ouvertures de parties, conclusion, exemples fondateurs) doit tenir en AU PLUS 3 exécutions de code, chacune extrayant PLUSIEURS passages d'un coup (5 à 8 extraits par exécution). Jamais une exécution par passage. Les extractions complémentaires entre les passes de rédaction (cœur des parties) comptent à part : au plus 1 exécution d'extraction par passe de rédaction.
+- **LIAISON PAGE-EXTRAIT (obligatoire dans les lots)** : quand une exécution imprime plusieurs extraits, fais-la précéder CHAQUE extrait d'une ligne `===== EXTRAIT [p.N] → [p.M] =====` (les marqueurs réels de début et de fin de l'extrait). Au moment de citer, reprends le numéro depuis la ligne `=====` ou le marqueur `[p.N]` visible IMMÉDIATEMENT au-dessus du passage cité — jamais de mémoire. Une citation dont tu ne retrouves pas le marqueur exact dans tes sorties ne doit PAS porter de numéro de page.
+- **RÉDACTION EN PLUSIEURS PASSES (OBLIGATOIRE)** : ne rédige JAMAIS la note entière en une seule exécution. Rédige AU PLUS 2 paragraphes par exécution de code. Avant de rédiger les paragraphes 3, 4 et 5, extrais d'abord de NOUVEAUX passages du cœur de la partie concernée (pas seulement son ouverture) — puis rédige. Assemble le tout à la fin seulement.
+- **CITATION ET AFFIRMATION CO-PRÉSENTES** : une citation verbatim « … » (p. N) ne peut étayer QUE l'affirmation du passage d'où elle provient (le texte visible sous le même marqueur `[p.N]`). N'emploie JAMAIS une phrase de la thèse pour un argument qu'elle ne porte pas dans son contexte d'origine (une hypothèse formulée sur X ne sert pas à commenter Y ; un nom de fonction, de concept ou de liste se reprend tel que le passage le donne, sans le recomposer). Si une affirmation a besoin d'un appui, va chercher le passage qui la porte et cite-le avec sa propre page.
+- **Densité d'ancrage** : chaque paragraphe de partie (3, 4 et 5) doit citer AU MOINS 3 pages distinctes. Une partie racontée sans pages précises est un paragraphe raté.
+- Ne saute pas les exemples fondateurs que la fiche met en avant (comparaison inaugurale, cas paradigmatique, date fondatrice) : s'ils motivent la thèse, ils appartiennent à la note.
+- `llm_query` est réservé aux RECHERCHES ponctuelles (localiser un thème, résumer un long passage pour toi-même). NE L'UTILISE JAMAIS pour rédiger les paragraphes de la note : la rédaction se fait TOI-MÊME, dans cette boucle, avec les marqueurs `[p.NNN]` sous les yeux — c'est la seule façon de garantir des numéros de page exacts.
+- À la fin, assemble le markdown complet dans une variable puis appelle `FINAL(markdown_complet)`.
+
+## FICHE DE LA THÈSE
+
+```markdown
+# FICHE DE SYNTHÈSE DE THÈSE
+
+## Métadonnées
+
+- **Titre** : Les gouverneurs de Girsu/Lagaš sous la IIIe dynastie d'Ur (2112-2002 AEC).
+- **Auteur** : Sophia WITZIG
+- **Année** : 2023
+- **Établissement** : Université Lumière Lyon 2, ED 483 Sciences sociales
+- **Discipline** : Histoire
+- **Pages** : 435
+
+## Mots-clés
+
+—
+
+## Thèse centrale
+
+La province de Girsu/Lagaš constitue un soutien structurel pour la couronne d'Ur III plutôt qu'une simple province intégrée par la force, conservant son influence politique et religieuse après la chute de la deuxième dynastie de Lagaš (p. 390). Cette continuité s'explique par la pérennité de l'administration locale et l'étendue des prérogatives des gouverneurs et de leurs familles, qui perpétuent le culte des morts réservé aux anciens princes et maintiennent des réseaux économiques et judiciaires stables sur plusieurs décennies (p. 390).
+
+## Questions de recherche
+
+- « dans quelle mesure les gouverneurs de cette province sous Ur III sont les héritiers de leurs prédécesseurs ? » (p. 37)
+- « déterminer la nature des relations entre la couronne et l'administration locale à travers l'étude prosopographique des individus à la tête de Girsu/Lagaš. » (p. 37)
+- « est-il nécessaire d'établir si le terme dumu (enfant) exprime un tel lien, ou un rapport de subordination dans l'administration. » (p. 46)
+
+## Réponses aux questions de recherche
+
+- **Héritage des prédécesseurs** : « la lignée des princes de Lagaš II est interrompue sous Ur III, mais que Lu-Kirizal, voire Ur-Lamma, pourraient y être rattachés » (p. 382). L'auteur précise que « la pérennité de l'administration locale, ainsi que l'étendue des prérogatives des gouverneurs et de leurs familles, donnent l'impression que Girsu/Lagaš conserve son influence après la chute de la deuxième dynastie de Lagaš » (p. 390).
+- **Relations couronne / administration locale** : « la province de Girsu/Lagaš [...] est probablement un soutien pour la couronne, plus qu'une simple province intégrée par la force aux territoires d'Ur III » (p. 390). L'impact des bouleversements centraux reste limité : « le règne d'Amar-Sin est en effet une période troublée, mais son impact sur l'administration semble être limité » (p. 390).
+- **Terme dumu** : « à l'exception de Hala-Lamma, les filles des gouverneurs sont les grandes absentes de ces archives, peut-être car elles-mêmes sont connues par leur lien matrimonial après leur mariage, contrairement aux fils des gouverneurs qui continuent à être identifiés par leur lien de filiation » (p. 390). Le terme marque bien un lien de filiation réel ou putatif structurant la transmission du pouvoir et des biens.
+
+## Hypothèses
+
+**Principale** : « les périodes les plus instables de la troisième dynastie d'Ur seraient les mieux documentées » (p. 39)
+**Secondaires** :
+- « la femme du gouverneur peut être identifiée dans les textes comme ereš-dingir de Bau sous Ur III, poste qu'elle occupe de facto » (p. 41) → Nuancée en conclusion : « il n'est pas possible d'affirmer qu'elle est elle-même une prêtresse ereš-dingir à son service » (p. 383), mais « les femmes de l'élite lagašite sont des agents économiques à travers les transactions auxquelles elles contribuent, les maisonnées qu'elles gèrent, ou encore les offrandes qu'elles font et qu'elles reçoivent » (p. 390).
+- « il est préférable d'en déduire un lien de filiation – comme expliqué plus haut, ce lien peut être réel ou putatif, les individus s'inscrivant dans un lignage, et reconnaissant un ancêtre commun. » (p. 51) → Confirmée par la trajectoire des fils d'Ur-Lamma restant actifs et identifiés par leur lien de filiation bien après le décès de leur père (p. 383 ; p. 390).
+
+## Méthodologie
+
+- **Approche** : Étude prosopographique des gouverneurs de Girsu/Lagaš et de leur entourage direct sous Ur III (p. 37).
+- **Méthode** : Analyse prosopographique structurée par un questionnaire (état-civil, famille, carrière, possessions), exploitation de bases de données en ligne (BDTNS, CDLI), reconstitution d'archives par critères onomastiques et prosopographiques, analyse diachronique des textes et sceaux, et croisement des données administratives, juridiques et cultuelles (p. 38-39 ; p. 52-54 ; p. 384-385).
+- **Corpus/Données** : Plus de sept cents documents administratifs et légendes de sceaux-cylindres couvrant une cinquantaine d'années d'Ur III, principalement originaires de Girsu/Lagaš, organisés en dossiers par gouverneur (Lu-Kirizal, Ur-Lamma, Nanna-Zišagal, Šarakam, Arad-Nanna) (p. 37 ; p. 53). Près de 1500 documents recensés dans la BDTNS portent l'empreinte d'un sceau de gouverneur dédié à un souverain d'Ur III, dont 97,6% concernent Umma, soulignant la spécificité du corpus lagašite (p. 386).
+- **Justification** : L'approche se veut représentative plutôt qu'exhaustive due à la taille variable des corpus et à l'absence quasi systématique de contexte archéologique (provenance des fouilles clandestines/pillages), ce qui oblige à reconstituer les fonds administratifs et à s'appuyer sur des méthodes statistiques et prosopographiques rigoureuses (p. 38-39).
+
+## Fil rouge
+
+L'agentivité des élites familiales (p. 389), reliant la reconstitution des réseaux de parenté et de succession de la Partie I à l'analyse des carrières et des prérogatives des gouverneurs de la Partie II via la démonstration que les maisonnées, les cultes funéraires et les transactions économiques permettent à Girsu/Lagaš de conserver son influence structurelle sous Ur III (p. 390).
+
+## Plan (Structure)
+
+- **Partie I** : Démontre que la reconstitution prosopographique et onomastique rigoureuse des archives administratives d'Ur III est indispensable pour pallier l'absence de contexte archéologique et les biais de conservation, en montrant comment les critères méthodologiques et le « Catastrophe factor » structurent l'analyse des dynasties lagašites antérieures (p. 37-40 ; p. 52-56).
+- **Partie II : Les ensi2 de Lagaš** : Démontre que la province conserve une influence structurelle sous Ur III en montrant comment les gouverneurs successifs perpétuent l'héritage politique et religieux de Lagaš II à travers des carrières continues, des réseaux familiaux actifs et une administration locale pérenne (p. 382-390).
+
+## Cadre théorique
+
+- **Cadre principal** : Prosopographie (K.S.B. Keats Rohan, 2007) — « brosser le portrait d'individus appartenant à une même classe en se concentrant sur ce qu'il existe de plus général, de commun entre eux » (p. 52) — structure l'analyse globale en permettant de relier les trajectoires individuelles des gouverneurs et de leurs proches pour expliquer les dynamiques sociales et politiques de la province.
+- **Cadres secondaires** :
+  - Anthropologie de la parenté (L. H. Morgan, 1871) — « l'importance du vocabulaire de la parenté dans l'étude de la structure d'une société » (p. 46) — sert d'outil pour décoder les termes de filiation (dumu, šeš, etc.) et distinguer liens biologiques, putatifs ou administratifs.
+  - Archivistique des archives vivantes et mortes — « archives vivantes sont les documents utilisés par l'administration... Les archives mortes, en revanche, sont les documents qui n'ont plus d'utilité » (p. 38-39) — permet d'interpréter les biais de conservation et le « Catastrophe factor » dans la formation du corpus.
+  - Analyse onomastique (R.A. Di Vito, 1993 ; H. Limet, 1968) — « les noms propres peuvent révéler l'appartenance à un groupe social ou ethnique » (p. 52) — complète la prosopographie en identifiant les affiliations culturelles ou religieuses des individus.
+  - Théorie de l'agentivité (A. Garcia Ventura & F. Karahashi, 2023) — « la capacité d'un individu ou d'un groupe à agir de façon motivée et réfléchie » (p. 389) — permet d'analyser le rôle économique et rituel des femmes de l'élite lagašite dans la transmission du pouvoir.
+
+## Concepts clés
+
+**CONCEPT** : E2-DU6-LA
+**SENS** : « expression qu'il comprend comme des biens confisqués » (p. 41) — l'auteur rejette cette lecture au profit d'une redéfinition fonctionnelle : « Cette expression qualifie des dépenses dans des billets [...] Elle peut être associée à la propriété [...] d'une personne [...] Elle est à distinguer des inventaires de possessions des fonctionnaires [...] Les textes la mentionnant sont parfois datés de la fin ou du début d'un règne » (p. 258)
+**ORIGINE** : Terme sumérien administratif débattu par la littérature (Maekawa, Heimpel, Stepien) et retravaillé par l'auteur pour désigner un fonds comptable ou une prébende de fin de mandat, plutôt qu'une simple confiscation politique ou un héritage.
+
+**CONCEPT** : DUMU (FILATION)
+**SENS** : « le terme dumu (enfant) indique le lien de parenté... ce lien peut être réel ou putatif, les individus s'inscrivant dans un lignage, et reconnaissant un ancêtre commun. » (p. 50-51)
+**ORIGINE** : Terme sumérien épicène redéfini par l'auteur contre les interprétations purement administratives (agent/subordonné) pour en faire un marqueur d'appartenance clanique et de succession, biologique ou adoptive, structurant les réseaux de pouvoir.
+
+**CONCEPT** : PROSOPOGRAPHIE
+**SENS** : « vise à brosser le portrait d'individus appartenant à une même classe en se concentrant sur ce qu'il existe de plus général, de commun entre eux » (p. 52)
+**ORIGINE** : Empruntée à K.S.B. Keats Rohan (2007) et retravaillée par l'auteur via un questionnaire structuré adapté aux sources néo-sumériennes, servant de cadre méthodologique pour reconstituer les trajectoires des élites de Girsu/Lagaš.
+
+**CONCEPT** : CATASTROPHE FACTOR
+**SENS** : « le nombre de tablettes augmente avant une catastrophe, comme une guerre, ou une phase d'instabilité politique, car celles-ci n'ont pas pu être traitées par l'administration. » (p. 39)
+**ORIGINE** : Concept archivistique de M. Civil (1987) mobilisé et adapté par l'auteur pour expliquer la représentativité biaisée du corpus vers les périodes d'instabilité et valider les silences documentaires.
+
+**CONCEPT** : AGENTIVITÉ (AGENCY)
+**SENS** : « la capacité d'un individu ou d'un groupe à agir de façon motivée et réfléchie » (p. 389)
+**ORIGINE** : Empruntée à A. Garcia Ventura et F. Karahashi (2023) et retravaillée par l'auteur pour analyser le rôle économique, rituel et politique des femmes de l'élite lagašite dans la gestion des maisonnées et la transmission du pouvoir.
+
+## Ancrage empirique (ou concret)
+
+- Corpus de plus de 700 documents couvrant ~50 ans d'Ur III, organisés en dossiers pour 5 gouverneurs successifs : Lu-Kirizal, Ur-Lamma, Nanna-Zišagal, Šarakam, Arad-Nanna (p. 37).
+- Analyse des occurrences de `dumu-munus` (~800 occurrences pour 556 textes, réduites à 326 après déduction des noms d'années royales) vs `dumu ensi₂` (~100 occurrences) dans les sceaux et textes administratifs (p. 50).
+- Inventaire des possessions de la famille d'Ur-Lamma (e₂-dul-la) documenté par des textes de confiscation/succession sous le roi Amar-Sin (p. 41-42).
+- Trajectoires croisées de fonctionnaires comme Nanna-Zišagal (gouverneur d'Irisagrig AS01-AS02 puis de Girsu/Lagaš) et Ur-Mes (gouverneur d'Irisagrig AS03-IS02) illustrant la mobilité administrative et les ruptures de succession (p. 44-45).
+- Près de 1500 documents recensés dans la BDTNS portent l'empreinte d'un sceau de gouverneur dédié à un souverain d'Ur III, parmi lesquels deux documents provenant de Girsu, le reste concernant en grande majorité (97,6%) les gouverneurs d'Umma (p. 386).
+- Longévité administrative exceptionnelle de certains fonctionnaires locaux : Ur-Bau fils d'Ur-Dun et Lu-Utu fils de Bazi suivis pendant plus de trente ans, et le juge Gudea documenté sur 35 ans à Girsu/Lagaš (p. 385-386).
+
+## Opposition / Contre-argumentation
+
+- **Position de K. Maekawa (1996a)** : « la famille d'Ur-Lamma, riche et influente, est tombée en disgrâce et a été destituée par le roi Amar-Sin, qui en a probablement fait exécuter les principaux membres » (p. 41-42). Résultat contre-intuitif en conclusion : « l'étude du corpus de la famille d'Ur-Lamma ne confirme pas la thèse d'une confiscation avancée par K. Maekawa (1996a) et largement soutenue par les assyriologues. Certains fils d'Ur-Lamma semblent encore bien ancrés dans la province sous le règne d'Amar-Sin » (p. 390).
+- **Position de F. Pomponio (2013) et D.M. McGuiness (1982)** : Traduction de `dumu` comme « agent ou gendre » ou lien de subordination administrative plutôt que filiation (p. 51). L'auteur s'en distingue en privilégiant l'interprétation d'un lien de filiation réel ou putatif s'inscrivant dans un lignage (p. 51), confirmée par la persistance de l'identification des fils par leur lien de filiation après le décès du gouverneur (p. 390).
+- **Position sur l'exhaustivité des sources** : Illusion de prétendre à l'exhaustivité face au « hasard des fouilles » ou des pillages, et absence de contexte archéologique systématique privant de l'information sur les fonds d'archives originaux (p. 38-39).
+
+## Apport principal
+
+- **Empirique** : Constitution et analyse d'un corpus représentatif de plus de sept cents documents administratifs et de légendes de sceaux dédiés aux gouverneurs de Girsu/Lagaš et à leur entourage, organisés en dossiers prosopographiques successifs, révélant la spécificité de la province face à Umma (97,6% des sceaux de gouverneurs dédiés aux rois) (p. 37 ; p. 53 ; p. 386).
+- **Critique** : Remise en cause du consensus assyriologique sur la déchéance politique et l'exécution de la famille d'Ur-Lamma sous Amar-Sin, en démontrant que l'inventaire des biens ne constitue pas une confiscation et que les fils du gouverneur restent actifs et identifiés par filiation bien après sa mort (p. 41-42 ; p. 390).
+- **Théorique** : Intégration du concept d'agentivité féminine pour montrer que les épouses et filles des gouverneurs ne sont pas de simples figures rituelles, mais des agents économiques et politiques qui gèrent des maisonnées, contribuent aux offrandes et transmettent le pouvoir, consolidant ainsi l'influence structurelle de la province (p. 389-390).
+
+```
+
+## EXEMPLE DE STYLE (à imiter pour le registre, la longueur des paragraphes, le flux)
+
+```markdown
+# [Titre complet de l'ouvrage : nom des directeurs et titre/sous-titre en italique]
+
+**Compte rendu par** [Auteur du compte rendu]
+
+**Date :** 2026-04-24
+
+**Source :** [URL si disponible]
+
+**Référence :** [Auteur·e·s], *Titre complet*, Ville, Éditeur, coll. « Collection », année, xxx p., ISBN : xxx.
+
+---
+
+Quatorze auteurs, parmi lesquels des sociologues clés de l'analyse du secteur social et médico-social analysent, dans cet ouvrage important, les transformations de la « morale » de l'intervention sociale de divers pays (France dont Mayotte, Suisse, Maroc, Québec), ceci à la suite d'un congrès sociologique international tenu à Tunis en 2021. Le texte décrit les tensions traversant l'intervention sociale, entre idéaux de justice sociale, d'égalité et de solidarisme d'une part, et les principes de responsabilisation et d'activation dans un contexte marqué par l'emprise croissante d'une logique managériale, d'autre part. Disons-le d'emblée, le principe de « responsabilisation » mérite d'être interrogé : il renvoie généralement non pas tant à un transfert de pouvoir aux usagers ou citoyens, comme il l'affirme, mais souvent à une « normalisation » du contrôle social reposant, désormais, sur l'individu lui-même. C'est notamment le cas dans les dispositifs de parentalité ou dans la justice restaurative, où la volonté des individus devient l'opérateur du contrôle social.
+
+Notre lecture questionne implicitement les mots-clefs contemporains de l'intervention sociale que sont « responsabiliser » et « activer ». Ces termes sont aussi les items centraux de la Nouvelle Gouvernance Publique (NGP), laquelle tend, pour l'action sociale, à substituer la « relation de service » reposant sur l'efficience et le résultat au « modèle de service public d'action » fondateur. S'impose, alors, un glissement progressif vers un paradigme managérial qui met la focale sur les difficultés de financement, d'efficacité, la qualité du service et le questionnement de la légitimité de l'État social.
+
+Dans le premier chapitre, Jean-Pierre Tabin et ses collègues explorent, à partir de la rhétorique de l'État depuis les années 2000, les politiques suisses en direction des personnes invalides. Ils identifient finement une logique « capacitiste » visant la re-marchandisation à tout prix, via un nouvel ordre d'employabilité passant par l'acceptation d'une norme d'emploi « médiocre » et, de fait, réduisant la « crédibilité épistémique » de la personne en situation de handicap psychique. Dans les Structures d'Insertion par l'Activité Économique (SIAE) analysées par Hervé Jory dans le cinquième chapitre, la prévalence des compétences d'adaptation sociale sur la formation didactique et le savoir-faire professionnel correspond à une précarisation du profil attendu des publics. L'inversion du statut de la formation, dans ces structures d'insertion, tend à favoriser des conditions d'acceptation de conditions de travail pénibles pour des emplois sous-qualifiés. Ce nouveau cadre normatif de l'inclusion professionnelle repose sur le postulat « d'insérer pour former » où l'insertion se suffit en elle-même. Il s'agit de privilégier l'adaptation quasi immédiate à l'emploi et ses difficultés, en particulier la capacité à supporter des conditions de travail éprouvantes (port de charges lourdes, intempéries…) plutôt que l'intégration de savoirs professionnels et une qualification capitalisable.
+
+L'analyse de tous ces segments de l'intervention sociale est à même d'identifier une logique de responsabilisation des publics et un tournant managérial souvent pénalisants. Mais la grammaire managériale reste fortement questionnée dans les pratiques concrètes des acteurs. Un deuxième grand apport de l'ouvrage est donc d'étudier les engagements moraux et les micro-résistances éthiques des intervenants·es infléchissant parfois certaines modalités de l'intervention sociale. Au-delà des cadres normatifs, des professionnels inventent dès lors des pratiques d'écarts éthiques pour redonner sens à leur action.
+
+Ainsi, dans l'urgence sociale présentée par Hélène Marin et Béatrice Bertho (chapitre 3), la mobilisation bénévole de professionnels illustre la volonté de participer à la neutralisation d'un déficit d'action publique récurrent, en contradiction avec les principes moraux de l'État social. Un engagement solidaire, fait en parallèle de leur travail salarié, s'instaure dans une ville de Suisse romane afin de faire face à une « politique de la pénurie » (p. 48) de l'accueil national des personnes sans-abris. Ce « bénévolat solidaire » définit ce que l'on peut appeler une « résistivité morale », des micro-résistances enracinées dans les principes de justice sociale au regard des besoins de ce public en grande vulnérabilité psychique et sociale.
+
+En définitive, l'intérêt majeur des thèses de cet ouvrage est de souligner une mutation des cadres normatifs et moraux de l'intervention sociale qui mettent désormais essentiellement l'accent sur une responsabilisation des individus vulnérables, une activation étrécie et pénalisante et privilégiant parfois l'immédiateté de l'insertion par le travail, voire des pratiques de culpabilisation-stigmatisation et des dispositifs d'activation définis par une grammaire managériale. Par contre, ces mutations ne doivent pas oblitérer, car s'exprimant à bas bruit dans les interstices de l'accompagnement, la présence modeste d'un cadre moral et cognitif secondaire d'élargissement du pouvoir d'agir pour les personnes en difficulté. Une responsabilisation que l'on peut qualifier d'« habilitante » est encore visible dans nombre des pratiques d'accompagnement. Ainsi, le Revenu de Solidarité Active (RSA) agricole représente une reconnaissance nouvelle de la vulnérabilité d'une population et un levier d'action potentiel pour des agriculteurs immergés des décennies dans une grande précarité. L'action sociale n'est pas réductible au seul tournant néo-libéral et l'on observe non pas une « nouvelle » morale de l'intervention sociale mais une hybridation de morales dont certaines fondatrices de l'État social et du travail social. Malgré tout, force est de constater que la NGP encadre l'intervention sociale par des normes managériales dissonantes au regard des idéaux universalistes, de l'éthique et de la vulnérabilité des publics et de leurs besoins. Ces nouvelles normes conduisent à une détérioration de l'action pour les usagers et le personnel que l'on retrouve aussi dans l'ensemble des services publics.
+
+---
+
+## Pour citer cet article
+
+**[Auteur]**, « [Titre court de l'ouvrage] », *Comptes rendus*, mis en ligne le [date], consulté le [date].
+
+```
+
+---
+
+Rédige maintenant la note de lecture. Vise ~2000 mots, six paragraphes denses, français académique soutenu. Termine par `FINAL(note_markdown)`.

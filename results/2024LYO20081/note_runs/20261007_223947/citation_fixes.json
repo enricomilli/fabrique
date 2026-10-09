@@ -1,0 +1,29 @@
+[
+  {
+    "quote": "renouveler les perspectives",
+    "tag": "(p. 23)",
+    "cited": [
+      23
+    ],
+    "to": 22,
+    "how": "insert"
+  },
+  {
+    "quote": "certaine école d'opérateurs qui est peu importante",
+    "tag": "(p. 274)",
+    "cited": [
+      274
+    ],
+    "to": 275,
+    "how": "rewrite"
+  },
+  {
+    "quote": "en conditionnant le renouvellement des subventions",
+    "tag": "(p. 278)",
+    "cited": [
+      278
+    ],
+    "to": 269,
+    "how": "insert"
+  }
+]

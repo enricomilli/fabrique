@@ -1,0 +1,1898 @@
+{
+  "thesis_id": "2023LYO20128",
+  "parquet_blocks": 3666,
+  "parquet_pages": 433,
+  "metadata": {
+    "titre": "Les gouverneurs de Girsu/Lagaš sous la IIIe dynastie d'Ur (2112-2002 AEC).",
+    "auteur": "Sophia WITZIG",
+    "annee": "2023",
+    "etablissement": "Université Lumière Lyon 2, ED 483 Sciences sociales",
+    "discipline": "Histoire",
+    "mots_cles": [],
+    "pages": 435
+  },
+  "toc": [
+    {
+      "title": "Partie I",
+      "page_start": 7,
+      "level": 0,
+      "page_end": 7,
+      "role": "part",
+      "page_start_parquet": 37,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "1. Introduction",
+      "page_start": 7,
+      "level": 0,
+      "page_end": 26,
+      "role": "chapter",
+      "page_start_parquet": 37,
+      "page_end_parquet": 56
+    },
+    {
+      "title": "1.1 Objectifs et limites",
+      "page_start": 7,
+      "level": 1,
+      "page_end": 9,
+      "role": "section",
+      "page_start_parquet": 37,
+      "page_end_parquet": 39
+    },
+    {
+      "title": "1.2 État de l'art",
+      "page_start": 10,
+      "level": 1,
+      "page_end": 15,
+      "role": "section",
+      "page_start_parquet": 40,
+      "page_end_parquet": 45
+    },
+    {
+      "title": "1.3 Questions de parenté et de filiation",
+      "page_start": 16,
+      "level": 1,
+      "page_end": 21,
+      "role": "section",
+      "page_start_parquet": 46,
+      "page_end_parquet": 51
+    },
+    {
+      "title": "1.3.1 Qu'est-ce que la parenté ?",
+      "page_start": 16,
+      "level": 2,
+      "page_end": 16,
+      "role": "section",
+      "page_start_parquet": 46,
+      "page_end_parquet": 46
+    },
+    {
+      "title": "1.3.2 Exprimer la filiation sous la troisième dynastie d'Ur",
+      "page_start": 17,
+      "level": 2,
+      "page_end": 21,
+      "role": "section",
+      "page_start_parquet": 47,
+      "page_end_parquet": 51
+    },
+    {
+      "title": "1.4 La prosopographie",
+      "page_start": 22,
+      "level": 1,
+      "page_end": 26,
+      "role": "section",
+      "page_start_parquet": 52,
+      "page_end_parquet": 56
+    },
+    {
+      "title": "1.4.1 Le questionnaire prosopographique",
+      "page_start": 23,
+      "level": 2,
+      "page_end": 24,
+      "role": "section",
+      "page_start_parquet": 53,
+      "page_end_parquet": 54
+    },
+    {
+      "title": "1.4.2 Problèmes d'homonymie",
+      "page_start": 25,
+      "level": 2,
+      "page_end": 26,
+      "role": "section",
+      "page_start_parquet": 55,
+      "page_end_parquet": 56
+    },
+    {
+      "title": "2. Les sources textuelles",
+      "page_start": 27,
+      "level": 0,
+      "page_end": 58,
+      "role": "chapter",
+      "page_start_parquet": 57,
+      "page_end_parquet": 88
+    },
+    {
+      "title": "2.1 Provenance des sources : les sites archéologiques",
+      "page_start": 27,
+      "level": 1,
+      "page_end": 38,
+      "role": "section",
+      "page_start_parquet": 57,
+      "page_end_parquet": 68
+    },
+    {
+      "title": "2.1.1 La province de Girsu/Lagaš",
+      "page_start": 27,
+      "level": 2,
+      "page_end": 31,
+      "role": "section",
+      "page_start_parquet": 57,
+      "page_end_parquet": 61
+    },
+    {
+      "title": "2.1.2 Puzriš Dagan",
+      "page_start": 32,
+      "level": 2,
+      "page_end": 32,
+      "role": "section",
+      "page_start_parquet": 62,
+      "page_end_parquet": 62
+    },
+    {
+      "title": "2.1.3 Nippur",
+      "page_start": 33,
+      "level": 2,
+      "page_end": 34,
+      "role": "section",
+      "page_start_parquet": 63,
+      "page_end_parquet": 64
+    },
+    {
+      "title": "2.1.4 Umma",
+      "page_start": 35,
+      "level": 2,
+      "page_end": 35,
+      "role": "section",
+      "page_start_parquet": 65,
+      "page_end_parquet": 65
+    },
+    {
+      "title": "2.1.5 GARšana",
+      "page_start": 36,
+      "level": 2,
+      "page_end": 37,
+      "role": "section",
+      "page_start_parquet": 66,
+      "page_end_parquet": 67
+    },
+    {
+      "title": "2.1.6 Irisagrig",
+      "page_start": 38,
+      "level": 2,
+      "page_end": 38,
+      "role": "section",
+      "page_start_parquet": 68,
+      "page_end_parquet": 68
+    },
+    {
+      "title": "2.2 Typologie des sources",
+      "page_start": 39,
+      "level": 1,
+      "page_end": 58,
+      "role": "section",
+      "page_start_parquet": 69,
+      "page_end_parquet": 88
+    },
+    {
+      "title": "2.2.1 Les documents administratifs",
+      "page_start": 39,
+      "level": 2,
+      "page_end": 47,
+      "role": "section",
+      "page_start_parquet": 69,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "2.2.1.1 Documents relatifs aux mouvements et à la circulation des biens et denrées",
+      "page_start": 39,
+      "level": 3,
+      "page_end": 43,
+      "role": "section",
+      "page_start_parquet": 69,
+      "page_end_parquet": 73
+    },
+    {
+      "title": "2.2.1.2 Les documents internes de gestion",
+      "page_start": 44,
+      "level": 3,
+      "page_end": 44,
+      "role": "section",
+      "page_start_parquet": 74,
+      "page_end_parquet": 74
+    },
+    {
+      "title": "2.2.1.3 Les bullae, étiquettes et pisan-dub-ba",
+      "page_start": 45,
+      "level": 3,
+      "page_end": 47,
+      "role": "section",
+      "page_start_parquet": 75,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "2.2.2 Les comptes-rendus de procès",
+      "page_start": 48,
+      "level": 2,
+      "page_end": 53,
+      "role": "section",
+      "page_start_parquet": 78,
+      "page_end_parquet": 83
+    },
+    {
+      "title": "2.2.2.1 Les acteurs du procès",
+      "page_start": 52,
+      "level": 3,
+      "page_end": 53,
+      "role": "section",
+      "page_start_parquet": 82,
+      "page_end_parquet": 83
+    },
+    {
+      "title": "2.2.3 Les impressions de sceaux",
+      "page_start": 54,
+      "level": 2,
+      "page_end": 57,
+      "role": "section",
+      "page_start_parquet": 84,
+      "page_end_parquet": 87
+    },
+    {
+      "title": "2.2.3.1 Les sceaux arad-2-zu",
+      "page_start": 55,
+      "level": 3,
+      "page_end": 55,
+      "role": "section",
+      "page_start_parquet": 85,
+      "page_end_parquet": 85
+    },
+    {
+      "title": "2.2.3.2 Les sceaux inaba",
+      "page_start": 56,
+      "level": 3,
+      "page_end": 56,
+      "role": "section",
+      "page_start_parquet": 86,
+      "page_end_parquet": 86
+    },
+    {
+      "title": "2.2.3.3 Les sceaux simples",
+      "page_start": 57,
+      "level": 3,
+      "page_end": 57,
+      "role": "section",
+      "page_start_parquet": 87,
+      "page_end_parquet": 87
+    },
+    {
+      "title": "2.2.4 Les dates",
+      "page_start": 58,
+      "level": 2,
+      "page_end": 58,
+      "role": "section",
+      "page_start_parquet": 88,
+      "page_end_parquet": 88
+    },
+    {
+      "title": "2.2.1 Les inscriptions commémoratives",
+      "page_start": 59,
+      "level": 2,
+      "page_end": 59,
+      "role": "section",
+      "page_start_parquet": 89,
+      "page_end_parquet": 89
+    },
+    {
+      "title": "3. La troisième dynastie d'Ur",
+      "page_start": 59,
+      "level": 0,
+      "page_end": 85,
+      "role": "chapter",
+      "page_start_parquet": 89,
+      "page_end_parquet": 115
+    },
+    {
+      "title": "3.1 Contexte historique et géographique",
+      "page_start": 59,
+      "level": 1,
+      "page_end": 67,
+      "role": "section",
+      "page_start_parquet": 89,
+      "page_end_parquet": 97
+    },
+    {
+      "title": "3.2 L'organisation politique et économique sous Ur III",
+      "page_start": 68,
+      "level": 1,
+      "page_end": 74,
+      "role": "section",
+      "page_start_parquet": 98,
+      "page_end_parquet": 104
+    },
+    {
+      "title": "3.2.1 Les provinces centrales",
+      "page_start": 68,
+      "level": 2,
+      "page_end": 68,
+      "role": "section",
+      "page_start_parquet": 98,
+      "page_end_parquet": 98
+    },
+    {
+      "title": "3.2.2 L'impôt-bala",
+      "page_start": 68,
+      "level": 2,
+      "page_end": 69,
+      "role": "section",
+      "page_start_parquet": 98,
+      "page_end_parquet": 99
+    },
+    {
+      "title": "3.2.3 Les provinces périphériques",
+      "page_start": 70,
+      "level": 2,
+      "page_end": 70,
+      "role": "section",
+      "page_start_parquet": 100,
+      "page_end_parquet": 100
+    },
+    {
+      "title": "3.2.4 Le centre de Puzriš-Dagan",
+      "page_start": 71,
+      "level": 2,
+      "page_end": 74,
+      "role": "section",
+      "page_start_parquet": 101,
+      "page_end_parquet": 104
+    },
+    {
+      "title": "3.2.4.1 Le bureau central",
+      "page_start": 73,
+      "level": 3,
+      "page_end": 73,
+      "role": "section",
+      "page_start_parquet": 103,
+      "page_end_parquet": 103
+    },
+    {
+      "title": "3.2.4.2 L'organisation naGaBtum",
+      "page_start": 73,
+      "level": 3,
+      "page_end": 73,
+      "role": "section",
+      "page_start_parquet": 103,
+      "page_end_parquet": 103
+    },
+    {
+      "title": "3.2.4.3 Les autres bureaux",
+      "page_start": 74,
+      "level": 3,
+      "page_end": 74,
+      "role": "section",
+      "page_start_parquet": 104,
+      "page_end_parquet": 104
+    },
+    {
+      "title": "3.3 Aperçu des hautes fonctions sous Ur III",
+      "page_start": 75,
+      "level": 1,
+      "page_end": 85,
+      "role": "section",
+      "page_start_parquet": 105,
+      "page_end_parquet": 115
+    },
+    {
+      "title": "3.3.1 Les fonctions politiques et militaires",
+      "page_start": 75,
+      "level": 2,
+      "page_end": 79,
+      "role": "section",
+      "page_start_parquet": 105,
+      "page_end_parquet": 109
+    },
+    {
+      "title": "3.3.1.1 Le sukkal-mah",
+      "page_start": 75,
+      "level": 3,
+      "page_end": 76,
+      "role": "section",
+      "page_start_parquet": 105,
+      "page_end_parquet": 106
+    },
+    {
+      "title": "3.3.1.2 L'ensi2",
+      "page_start": 77,
+      "level": 3,
+      "page_end": 78,
+      "role": "section",
+      "page_start_parquet": 107,
+      "page_end_parquet": 108
+    },
+    {
+      "title": "3.3.1.3 Le šagin",
+      "page_start": 79,
+      "level": 3,
+      "page_end": 79,
+      "role": "section",
+      "page_start_parquet": 109,
+      "page_end_parquet": 109
+    },
+    {
+      "title": "3.3.2 Les fonctions cultuelles",
+      "page_start": 80,
+      "level": 2,
+      "page_end": 85,
+      "role": "section",
+      "page_start_parquet": 110,
+      "page_end_parquet": 115
+    },
+    {
+      "title": "3.3.2.1 Le zabar-dab5",
+      "page_start": 80,
+      "level": 3,
+      "page_end": 80,
+      "role": "section",
+      "page_start_parquet": 110,
+      "page_end_parquet": 110
+    },
+    {
+      "title": "3.3.2.2 Le sagi",
+      "page_start": 81,
+      "level": 3,
+      "page_end": 81,
+      "role": "section",
+      "page_start_parquet": 111,
+      "page_end_parquet": 111
+    },
+    {
+      "title": "3.3.2.3 Le šabra et le sanga",
+      "page_start": 82,
+      "level": 3,
+      "page_end": 83,
+      "role": "section",
+      "page_start_parquet": 112,
+      "page_end_parquet": 113
+    },
+    {
+      "title": "3.3.2.4 La prêtresse ereš-dingir",
+      "page_start": 84,
+      "level": 3,
+      "page_end": 85,
+      "role": "section",
+      "page_start_parquet": 114,
+      "page_end_parquet": 115
+    },
+    {
+      "title": "Partie II : Les ensi2 de Lagaš",
+      "page_start": 86,
+      "level": 0,
+      "page_end": 86,
+      "role": "part",
+      "page_start_parquet": 116,
+      "page_end_parquet": 116
+    },
+    {
+      "title": "4. Les dynasties de Lagaš",
+      "page_start": 86,
+      "level": 0,
+      "page_end": 101,
+      "role": "chapter",
+      "page_start_parquet": 116,
+      "page_end_parquet": 131
+    },
+    {
+      "title": "4.1 Les dynasties sumériennes d'après les listes royales",
+      "page_start": 86,
+      "level": 1,
+      "page_end": 86,
+      "role": "section",
+      "page_start_parquet": 116,
+      "page_end_parquet": 116
+    },
+    {
+      "title": "4.1.1 La Liste royale sumérienne, ou Chronique de la monarchie Une",
+      "page_start": 86,
+      "level": 2,
+      "page_end": 86,
+      "role": "section",
+      "page_start_parquet": 116,
+      "page_end_parquet": 116
+    },
+    {
+      "title": "4.2 La première dynastie de Lagaš",
+      "page_start": 87,
+      "level": 1,
+      "page_end": 89,
+      "role": "section",
+      "page_start_parquet": 117,
+      "page_end_parquet": 119
+    },
+    {
+      "title": "4.3 La deuxième dynastie de Lagaš",
+      "page_start": 90,
+      "level": 1,
+      "page_end": 96,
+      "role": "section",
+      "page_start_parquet": 120,
+      "page_end_parquet": 126
+    },
+    {
+      "title": "4.3.1 Les souverains de la deuxième dynastie de Lagaš",
+      "page_start": 90,
+      "level": 2,
+      "page_end": 96,
+      "role": "section",
+      "page_start_parquet": 120,
+      "page_end_parquet": 126
+    },
+    {
+      "title": "4.4 Girsu/Lagaš sous Ur III",
+      "page_start": 97,
+      "level": 1,
+      "page_end": 101,
+      "role": "section",
+      "page_start_parquet": 127,
+      "page_end_parquet": 131
+    },
+    {
+      "title": "4.4.1 Géographie de la province",
+      "page_start": 97,
+      "level": 2,
+      "page_end": 98,
+      "role": "section",
+      "page_start_parquet": 127,
+      "page_end_parquet": 128
+    },
+    {
+      "title": "4.4.2 Les maisonnées de Girsu/ Lagaš",
+      "page_start": 99,
+      "level": 2,
+      "page_end": 100,
+      "role": "section",
+      "page_start_parquet": 129,
+      "page_end_parquet": 130
+    },
+    {
+      "title": "4.4.3 Les gouverneurs de Girsu",
+      "page_start": 101,
+      "level": 2,
+      "page_end": 101,
+      "role": "section",
+      "page_start_parquet": 131,
+      "page_end_parquet": 131
+    },
+    {
+      "title": "5. Lu-Kirizal",
+      "page_start": 102,
+      "level": 0,
+      "page_end": 140,
+      "role": "chapter",
+      "page_start_parquet": 132,
+      "page_end_parquet": 170
+    },
+    {
+      "title": "5.1 Onomastique",
+      "page_start": 102,
+      "level": 1,
+      "page_end": 102,
+      "role": "section",
+      "page_start_parquet": 132,
+      "page_end_parquet": 132
+    },
+    {
+      "title": "5.2 La typologie des textes",
+      "page_start": 103,
+      "level": 1,
+      "page_end": 103,
+      "role": "section",
+      "page_start_parquet": 133,
+      "page_end_parquet": 133
+    },
+    {
+      "title": "5.3 Les affaires traitées par la justice sous le mandat de Lu-Kirizal",
+      "page_start": 103,
+      "level": 1,
+      "page_end": 104,
+      "role": "section",
+      "page_start_parquet": 133,
+      "page_end_parquet": 134
+    },
+    {
+      "title": "5.4 Gérer la province",
+      "page_start": 105,
+      "level": 1,
+      "page_end": 112,
+      "role": "section",
+      "page_start_parquet": 135,
+      "page_end_parquet": 142
+    },
+    {
+      "title": "5.4.1 Les documents en date du mandat de Lu-Kirizal",
+      "page_start": 106,
+      "level": 2,
+      "page_end": 106,
+      "role": "section",
+      "page_start_parquet": 136,
+      "page_end_parquet": 136
+    },
+    {
+      "title": "5.4.2 Les subordonnés de Lu-Kirizal",
+      "page_start": 107,
+      "level": 2,
+      "page_end": 110,
+      "role": "section",
+      "page_start_parquet": 137,
+      "page_end_parquet": 140
+    },
+    {
+      "title": "5.4.3 Les inscriptions commémoratives",
+      "page_start": 111,
+      "level": 2,
+      "page_end": 111,
+      "role": "section",
+      "page_start_parquet": 141,
+      "page_end_parquet": 141
+    },
+    {
+      "title": "5.4.4 Le sceau de Lu-Kirizal",
+      "page_start": 112,
+      "level": 2,
+      "page_end": 112,
+      "role": "section",
+      "page_start_parquet": 142,
+      "page_end_parquet": 142
+    },
+    {
+      "title": "5.5 La famille de Lu-Kirizal",
+      "page_start": 113,
+      "level": 1,
+      "page_end": 134,
+      "role": "section",
+      "page_start_parquet": 143,
+      "page_end_parquet": 164
+    },
+    {
+      "title": "5.5.1 Namninanidu",
+      "page_start": 113,
+      "level": 2,
+      "page_end": 122,
+      "role": "section",
+      "page_start_parquet": 143,
+      "page_end_parquet": 152
+    },
+    {
+      "title": "5.5.1.1 Namninanidu, épouse de Lukirizal",
+      "page_start": 113,
+      "level": 3,
+      "page_end": 113,
+      "role": "section",
+      "page_start_parquet": 143,
+      "page_end_parquet": 143
+    },
+    {
+      "title": "5.5.1.2 Le corpus de Namninanidu",
+      "page_start": 114,
+      "level": 3,
+      "page_end": 118,
+      "role": "section",
+      "page_start_parquet": 144,
+      "page_end_parquet": 148
+    },
+    {
+      "title": "5.5.1.3 Le coursier de Namninanidu",
+      "page_start": 119,
+      "level": 3,
+      "page_end": 121,
+      "role": "section",
+      "page_start_parquet": 149,
+      "page_end_parquet": 151
+    },
+    {
+      "title": "5.5.1.4 Conclusion",
+      "page_start": 122,
+      "level": 3,
+      "page_end": 122,
+      "role": "section",
+      "page_start_parquet": 152,
+      "page_end_parquet": 152
+    },
+    {
+      "title": "5.5.2 Hala-Lamma",
+      "page_start": 123,
+      "level": 2,
+      "page_end": 134,
+      "role": "section",
+      "page_start_parquet": 153,
+      "page_end_parquet": 164
+    },
+    {
+      "title": "5.5.2.1 La maisonnée de Hala-Lamma",
+      "page_start": 130,
+      "level": 3,
+      "page_end": 133,
+      "role": "section",
+      "page_start_parquet": 160,
+      "page_end_parquet": 163
+    },
+    {
+      "title": "5.5.2.2 Conclusion",
+      "page_start": 134,
+      "level": 3,
+      "page_end": 134,
+      "role": "section",
+      "page_start_parquet": 164,
+      "page_end_parquet": 164
+    },
+    {
+      "title": "5.6 Le culte des morts",
+      "page_start": 135,
+      "level": 1,
+      "page_end": 138,
+      "role": "section",
+      "page_start_parquet": 165,
+      "page_end_parquet": 168
+    },
+    {
+      "title": "5.7 Conclusion",
+      "page_start": 139,
+      "level": 1,
+      "page_end": 140,
+      "role": "section",
+      "page_start_parquet": 169,
+      "page_end_parquet": 170
+    },
+    {
+      "title": "6. Ur-Lamma",
+      "page_start": 141,
+      "level": 0,
+      "page_end": 235,
+      "role": "chapter",
+      "page_start_parquet": 171,
+      "page_end_parquet": 265
+    },
+    {
+      "title": "6.1 Onomastique",
+      "page_start": 141,
+      "level": 1,
+      "page_end": 143,
+      "role": "section",
+      "page_start_parquet": 171,
+      "page_end_parquet": 173
+    },
+    {
+      "title": "6.2 Les fonctions d'Ur-Lamma à Girsu",
+      "page_start": 144,
+      "level": 1,
+      "page_end": 145,
+      "role": "section",
+      "page_start_parquet": 174,
+      "page_end_parquet": 175
+    },
+    {
+      "title": "6.2.1 Le corpus du gouverneur Ur-Lamma",
+      "page_start": 144,
+      "level": 2,
+      "page_end": 144,
+      "role": "section",
+      "page_start_parquet": 174,
+      "page_end_parquet": 174
+    },
+    {
+      "title": "6.2.2 Le corpus des fils du gouverneur et de son épouse",
+      "page_start": 145,
+      "level": 2,
+      "page_end": 145,
+      "role": "section",
+      "page_start_parquet": 175,
+      "page_end_parquet": 175
+    },
+    {
+      "title": "6.3 Ur-Lamma : juge ou intendant ?",
+      "page_start": 146,
+      "level": 1,
+      "page_end": 158,
+      "role": "section",
+      "page_start_parquet": 176,
+      "page_end_parquet": 188
+    },
+    {
+      "title": "6.3.1 Le sceau d'Ur-Lamma",
+      "page_start": 146,
+      "level": 2,
+      "page_end": 152,
+      "role": "section",
+      "page_start_parquet": 176,
+      "page_end_parquet": 182
+    },
+    {
+      "title": "6.3.2 La fonction de šatam",
+      "page_start": 153,
+      "level": 2,
+      "page_end": 158,
+      "role": "section",
+      "page_start_parquet": 183,
+      "page_end_parquet": 188
+    },
+    {
+      "title": "6.4 Le rôle d'Ur-Lamma dans la justice à Girsu",
+      "page_start": 159,
+      "level": 1,
+      "page_end": 166,
+      "role": "section",
+      "page_start_parquet": 189,
+      "page_end_parquet": 196
+    },
+    {
+      "title": "6.5 Administrer la province",
+      "page_start": 167,
+      "level": 1,
+      "page_end": 173,
+      "role": "section",
+      "page_start_parquet": 197,
+      "page_end_parquet": 203
+    },
+    {
+      "title": "6.5.1 Les transactions avec les bureaux de Puzriš-Dagan",
+      "page_start": 168,
+      "level": 2,
+      "page_end": 171,
+      "role": "section",
+      "page_start_parquet": 198,
+      "page_end_parquet": 201
+    },
+    {
+      "title": "6.5.1.1 Les fonctionnaires du bureau central",
+      "page_start": 168,
+      "level": 3,
+      "page_end": 171,
+      "role": "section",
+      "page_start_parquet": 198,
+      "page_end_parquet": 201
+    },
+    {
+      "title": "6.5.2 Les fonctionnaires de l'organisation naGaBtum",
+      "page_start": 172,
+      "level": 2,
+      "page_end": 173,
+      "role": "section",
+      "page_start_parquet": 202,
+      "page_end_parquet": 203
+    },
+    {
+      "title": "6.6 Les subordonnés du gouverneur",
+      "page_start": 174,
+      "level": 1,
+      "page_end": 188,
+      "role": "section",
+      "page_start_parquet": 204,
+      "page_end_parquet": 218
+    },
+    {
+      "title": "6.6.1 Mani, échanson de Gudea",
+      "page_start": 176,
+      "level": 2,
+      "page_end": 176,
+      "role": "section",
+      "page_start_parquet": 206,
+      "page_end_parquet": 206
+    },
+    {
+      "title": "6.6.2 Gišsa, administrateur en chef du bétail",
+      "page_start": 177,
+      "level": 2,
+      "page_end": 177,
+      "role": "section",
+      "page_start_parquet": 207,
+      "page_end_parquet": 207
+    },
+    {
+      "title": "6.6.3 Ur-Nigar",
+      "page_start": 177,
+      "level": 2,
+      "page_end": 177,
+      "role": "section",
+      "page_start_parquet": 207,
+      "page_end_parquet": 207
+    },
+    {
+      "title": "6.6.4 Utu-Barra",
+      "page_start": 178,
+      "level": 2,
+      "page_end": 178,
+      "role": "section",
+      "page_start_parquet": 208,
+      "page_end_parquet": 208
+    },
+    {
+      "title": "6.6.5 Ur-Bau, fils d'Ur-DUN",
+      "page_start": 178,
+      "level": 2,
+      "page_end": 178,
+      "role": "section",
+      "page_start_parquet": 208,
+      "page_end_parquet": 208
+    },
+    {
+      "title": "6.6.6 Lu-Utu, fils de Bazi",
+      "page_start": 179,
+      "level": 2,
+      "page_end": 181,
+      "role": "section",
+      "page_start_parquet": 209,
+      "page_end_parquet": 211
+    },
+    {
+      "title": "6.6.7 Ur-Bau, fils de Kaamu, sanga de Gišbare",
+      "page_start": 182,
+      "level": 2,
+      "page_end": 182,
+      "role": "section",
+      "page_start_parquet": 212,
+      "page_end_parquet": 212
+    },
+    {
+      "title": "6.6.8 Bazi, scribe, fils de Nadi",
+      "page_start": 182,
+      "level": 2,
+      "page_end": 183,
+      "role": "section",
+      "page_start_parquet": 212,
+      "page_end_parquet": 213
+    },
+    {
+      "title": "6.6.9 Nabasa",
+      "page_start": 184,
+      "level": 2,
+      "page_end": 184,
+      "role": "section",
+      "page_start_parquet": 214,
+      "page_end_parquet": 214
+    },
+    {
+      "title": "6.6.10 Lu-Dingira, fils de Heti",
+      "page_start": 184,
+      "level": 2,
+      "page_end": 185,
+      "role": "section",
+      "page_start_parquet": 214,
+      "page_end_parquet": 215
+    },
+    {
+      "title": "6.6.11 Menišuna",
+      "page_start": 186,
+      "level": 2,
+      "page_end": 186,
+      "role": "section",
+      "page_start_parquet": 216,
+      "page_end_parquet": 216
+    },
+    {
+      "title": "6.6.12 Harbiše, brasseur",
+      "page_start": 187,
+      "level": 2,
+      "page_end": 187,
+      "role": "section",
+      "page_start_parquet": 217,
+      "page_end_parquet": 217
+    },
+    {
+      "title": "6.6.13 Ur-Eninnu, sanga de Nanše et de Ningišzida",
+      "page_start": 187,
+      "level": 2,
+      "page_end": 187,
+      "role": "section",
+      "page_start_parquet": 217,
+      "page_end_parquet": 217
+    },
+    {
+      "title": "6.6.14 Lu-Ningirsu fils d'Ur-Bau",
+      "page_start": 188,
+      "level": 2,
+      "page_end": 188,
+      "role": "section",
+      "page_start_parquet": 218,
+      "page_end_parquet": 218
+    },
+    {
+      "title": "6.7 La famille d'Ur-Lamma",
+      "page_start": 189,
+      "level": 1,
+      "page_end": 214,
+      "role": "section",
+      "page_start_parquet": 219,
+      "page_end_parquet": 244
+    },
+    {
+      "title": "6.7.1 Les épouses du gouverneur",
+      "page_start": 189,
+      "level": 2,
+      "page_end": 197,
+      "role": "section",
+      "page_start_parquet": 219,
+      "page_end_parquet": 227
+    },
+    {
+      "title": "6.7.1.1 Geme-Lamma",
+      "page_start": 192,
+      "level": 3,
+      "page_end": 193,
+      "role": "section",
+      "page_start_parquet": 222,
+      "page_end_parquet": 223
+    },
+    {
+      "title": "6.7.1.2 Bauea",
+      "page_start": 194,
+      "level": 3,
+      "page_end": 195,
+      "role": "section",
+      "page_start_parquet": 224,
+      "page_end_parquet": 225
+    },
+    {
+      "title": "6.7.1.3 Hala-Bau",
+      "page_start": 196,
+      "level": 3,
+      "page_end": 196,
+      "role": "section",
+      "page_start_parquet": 226,
+      "page_end_parquet": 226
+    },
+    {
+      "title": "6.7.1.4 Conclusion",
+      "page_start": 197,
+      "level": 3,
+      "page_end": 197,
+      "role": "section",
+      "page_start_parquet": 227,
+      "page_end_parquet": 227
+    },
+    {
+      "title": "6.7.2 Les fils d'Ur-Lamma",
+      "page_start": 198,
+      "level": 2,
+      "page_end": 214,
+      "role": "section",
+      "page_start_parquet": 228,
+      "page_end_parquet": 244
+    },
+    {
+      "title": "6.7.2.1 Ur-Bau, sanga de NinMAR.KI ?",
+      "page_start": 199,
+      "level": 3,
+      "page_end": 201,
+      "role": "section",
+      "page_start_parquet": 229,
+      "page_end_parquet": 231
+    },
+    {
+      "title": "6.7.2.2 Dudu",
+      "page_start": 202,
+      "level": 3,
+      "page_end": 203,
+      "role": "section",
+      "page_start_parquet": 232,
+      "page_end_parquet": 233
+    },
+    {
+      "title": "6.7.2.3 Ur-Mes",
+      "page_start": 204,
+      "level": 3,
+      "page_end": 206,
+      "role": "section",
+      "page_start_parquet": 234,
+      "page_end_parquet": 236
+    },
+    {
+      "title": "6.7.2.4 Lugal-Zuluhu",
+      "page_start": 207,
+      "level": 3,
+      "page_end": 208,
+      "role": "section",
+      "page_start_parquet": 237,
+      "page_end_parquet": 238
+    },
+    {
+      "title": "6.7.2.5 Ur-Nanše",
+      "page_start": 209,
+      "level": 3,
+      "page_end": 210,
+      "role": "section",
+      "page_start_parquet": 239,
+      "page_end_parquet": 240
+    },
+    {
+      "title": "6.7.2.6 Lu-Ningirsu",
+      "page_start": 211,
+      "level": 3,
+      "page_end": 211,
+      "role": "section",
+      "page_start_parquet": 241,
+      "page_end_parquet": 241
+    },
+    {
+      "title": "6.7.2.7 Ur-Nungal",
+      "page_start": 212,
+      "level": 3,
+      "page_end": 214,
+      "role": "section",
+      "page_start_parquet": 242,
+      "page_end_parquet": 244
+    },
+    {
+      "title": "6.8 Le mandat d'Alla, gouverneur de Lagaš",
+      "page_start": 215,
+      "level": 1,
+      "page_end": 219,
+      "role": "section",
+      "page_start_parquet": 245,
+      "page_end_parquet": 249
+    },
+    {
+      "title": "6.8.1 Homonymie",
+      "page_start": 215,
+      "level": 2,
+      "page_end": 215,
+      "role": "section",
+      "page_start_parquet": 245,
+      "page_end_parquet": 245
+    },
+    {
+      "title": "6.8.2 Alla gouverneur de province",
+      "page_start": 215,
+      "level": 2,
+      "page_end": 215,
+      "role": "section",
+      "page_start_parquet": 245,
+      "page_end_parquet": 245
+    },
+    {
+      "title": "6.8.3.1 Les documents administratifs sous le mandat d'Alla",
+      "page_start": 216,
+      "level": 2,
+      "page_end": 216,
+      "role": "section",
+      "page_start_parquet": 246,
+      "page_end_parquet": 246
+    },
+    {
+      "title": "6.8.1 Les sceaux",
+      "page_start": 217,
+      "level": 2,
+      "page_end": 219,
+      "role": "section",
+      "page_start_parquet": 247,
+      "page_end_parquet": 249
+    },
+    {
+      "title": "6.8.2.1 Les sceaux arad-zu dédiés à Alla, gouverneur de Lagaš",
+      "page_start": 217,
+      "level": 3,
+      "page_end": 219,
+      "role": "section",
+      "page_start_parquet": 247,
+      "page_end_parquet": 249
+    },
+    {
+      "title": "6.8.2 Conclusion",
+      "page_start": 220,
+      "level": 2,
+      "page_end": 220,
+      "role": "section",
+      "page_start_parquet": 250,
+      "page_end_parquet": 250
+    },
+    {
+      "title": "6.9 L'e2-du6-la : une propriété saisie par le pouvoir central ?",
+      "page_start": 220,
+      "level": 1,
+      "page_end": 228,
+      "role": "section",
+      "page_start_parquet": 250,
+      "page_end_parquet": 258
+    },
+    {
+      "title": "6.10 Le culte des ensi2 à Girsu et la mort d'Ur-Lamma",
+      "page_start": 229,
+      "level": 1,
+      "page_end": 231,
+      "role": "section",
+      "page_start_parquet": 259,
+      "page_end_parquet": 261
+    },
+    {
+      "title": "6.11 Conclusion",
+      "page_start": 232,
+      "level": 1,
+      "page_end": 235,
+      "role": "section",
+      "page_start_parquet": 262,
+      "page_end_parquet": 265
+    },
+    {
+      "title": "7. Nanna-Zišagal",
+      "page_start": 236,
+      "level": 0,
+      "page_end": 245,
+      "role": "chapter",
+      "page_start_parquet": 266,
+      "page_end_parquet": 275
+    },
+    {
+      "title": "7.1 Onomastique",
+      "page_start": 236,
+      "level": 1,
+      "page_end": 236,
+      "role": "section",
+      "page_start_parquet": 266,
+      "page_end_parquet": 266
+    },
+    {
+      "title": "7.2 Le sceau de Nanna-Zišagal",
+      "page_start": 237,
+      "level": 1,
+      "page_end": 238,
+      "role": "section",
+      "page_start_parquet": 267,
+      "page_end_parquet": 268
+    },
+    {
+      "title": "7.3 La typologie des textes",
+      "page_start": 239,
+      "level": 1,
+      "page_end": 244,
+      "role": "section",
+      "page_start_parquet": 269,
+      "page_end_parquet": 274
+    },
+    {
+      "title": "7.3.1 Textes en date du mandat de gouverneur à Girsu",
+      "page_start": 240,
+      "level": 2,
+      "page_end": 241,
+      "role": "section",
+      "page_start_parquet": 270,
+      "page_end_parquet": 271
+    },
+    {
+      "title": "7.3.2 Textes sous le mandat de gouverneur de Nanna-Zišagal, agissant en tant que zabar-dab5",
+      "page_start": 242,
+      "level": 2,
+      "page_end": 244,
+      "role": "section",
+      "page_start_parquet": 272,
+      "page_end_parquet": 274
+    },
+    {
+      "title": "7.4 La famille de Nanna-Zišagal",
+      "page_start": 245,
+      "level": 1,
+      "page_end": 245,
+      "role": "section",
+      "page_start_parquet": 275,
+      "page_end_parquet": 275
+    },
+    {
+      "title": "8. Šarakam",
+      "page_start": 246,
+      "level": 0,
+      "page_end": 267,
+      "role": "chapter",
+      "page_start_parquet": 276,
+      "page_end_parquet": 297
+    },
+    {
+      "title": "8.1 Onomastique",
+      "page_start": 246,
+      "level": 1,
+      "page_end": 246,
+      "role": "section",
+      "page_start_parquet": 276,
+      "page_end_parquet": 276
+    },
+    {
+      "title": "8.2 Les sceaux de Šarakam",
+      "page_start": 246,
+      "level": 1,
+      "page_end": 249,
+      "role": "section",
+      "page_start_parquet": 276,
+      "page_end_parquet": 279
+    },
+    {
+      "title": "8.3 Šarakam, gouverneur de Girsu/Lagaš",
+      "page_start": 250,
+      "level": 1,
+      "page_end": 254,
+      "role": "section",
+      "page_start_parquet": 280,
+      "page_end_parquet": 284
+    },
+    {
+      "title": "8.3.1 La justice sous son mandat",
+      "page_start": 250,
+      "level": 2,
+      "page_end": 250,
+      "role": "section",
+      "page_start_parquet": 280,
+      "page_end_parquet": 280
+    },
+    {
+      "title": "8.3.2 L'administration de la province",
+      "page_start": 251,
+      "level": 2,
+      "page_end": 254,
+      "role": "section",
+      "page_start_parquet": 281,
+      "page_end_parquet": 284
+    },
+    {
+      "title": "8.4 La famille de Šarakam",
+      "page_start": 255,
+      "level": 1,
+      "page_end": 265,
+      "role": "section",
+      "page_start_parquet": 285,
+      "page_end_parquet": 295
+    },
+    {
+      "title": "8.4.1 Inim-Šara, arpenteur royal, père de Šarakam",
+      "page_start": 256,
+      "level": 2,
+      "page_end": 256,
+      "role": "section",
+      "page_start_parquet": 286,
+      "page_end_parquet": 286
+    },
+    {
+      "title": "8.4.2 Les frères de Šarakam",
+      "page_start": 256,
+      "level": 2,
+      "page_end": 265,
+      "role": "section",
+      "page_start_parquet": 286,
+      "page_end_parquet": 295
+    },
+    {
+      "title": "8.4.2.1 Lu-Šara/Aabba",
+      "page_start": 257,
+      "level": 3,
+      "page_end": 259,
+      "role": "section",
+      "page_start_parquet": 287,
+      "page_end_parquet": 289
+    },
+    {
+      "title": "8.4.2.2 Ur-Nungal",
+      "page_start": 260,
+      "level": 3,
+      "page_end": 260,
+      "role": "section",
+      "page_start_parquet": 290,
+      "page_end_parquet": 290
+    },
+    {
+      "title": "8.4.2.3 Lu-Dingira",
+      "page_start": 261,
+      "level": 3,
+      "page_end": 261,
+      "role": "section",
+      "page_start_parquet": 291,
+      "page_end_parquet": 291
+    },
+    {
+      "title": "8.4.2.4 Lu-Nanna",
+      "page_start": 262,
+      "level": 3,
+      "page_end": 263,
+      "role": "section",
+      "page_start_parquet": 292,
+      "page_end_parquet": 293
+    },
+    {
+      "title": "8.4.2.5 Lugal-Emahe",
+      "page_start": 264,
+      "level": 3,
+      "page_end": 264,
+      "role": "section",
+      "page_start_parquet": 294,
+      "page_end_parquet": 294
+    },
+    {
+      "title": "8.4.2.6 Ur-Silaluh",
+      "page_start": 265,
+      "level": 3,
+      "page_end": 265,
+      "role": "section",
+      "page_start_parquet": 295,
+      "page_end_parquet": 295
+    },
+    {
+      "title": "8.5 Conclusion",
+      "page_start": 266,
+      "level": 1,
+      "page_end": 267,
+      "role": "section",
+      "page_start_parquet": 296,
+      "page_end_parquet": 297
+    },
+    {
+      "title": "9. Arad-Nanna, gouverneur et grand vizir",
+      "page_start": 268,
+      "level": 0,
+      "page_end": 351,
+      "role": "chapter",
+      "page_start_parquet": 298,
+      "page_end_parquet": 381
+    },
+    {
+      "title": "9.1 Onomastique : Arad-Nanna et Arad-MU",
+      "page_start": 269,
+      "level": 1,
+      "page_end": 270,
+      "role": "section",
+      "page_start_parquet": 299,
+      "page_end_parquet": 300
+    },
+    {
+      "title": "9.2 Arad-Nanna/Mu, gouverneur de Girsu",
+      "page_start": 271,
+      "level": 1,
+      "page_end": 273,
+      "role": "section",
+      "page_start_parquet": 301,
+      "page_end_parquet": 303
+    },
+    {
+      "title": "9.2.1 Le corpus du gouverneur",
+      "page_start": 271,
+      "level": 2,
+      "page_end": 271,
+      "role": "section",
+      "page_start_parquet": 301,
+      "page_end_parquet": 301
+    },
+    {
+      "title": "9.2.2 Arad-Nanna et Arad-Mu, grand vizir",
+      "page_start": 272,
+      "level": 2,
+      "page_end": 273,
+      "role": "section",
+      "page_start_parquet": 302,
+      "page_end_parquet": 303
+    },
+    {
+      "title": "9.3 Arad-Nanna, grand vizir d'Ur III",
+      "page_start": 274,
+      "level": 1,
+      "page_end": 277,
+      "role": "section",
+      "page_start_parquet": 304,
+      "page_end_parquet": 307
+    },
+    {
+      "title": "9.3.1 Les sceaux d'Arad-Nanna",
+      "page_start": 274,
+      "level": 2,
+      "page_end": 277,
+      "role": "section",
+      "page_start_parquet": 304,
+      "page_end_parquet": 307
+    },
+    {
+      "title": "9.3.1.1 Le sceau dédié à Šulgi",
+      "page_start": 275,
+      "level": 3,
+      "page_end": 275,
+      "role": "section",
+      "page_start_parquet": 305,
+      "page_end_parquet": 305
+    },
+    {
+      "title": "9.3.1.2 Le sceau dédié à Šu-Sin",
+      "page_start": 275,
+      "level": 3,
+      "page_end": 275,
+      "role": "section",
+      "page_start_parquet": 305,
+      "page_end_parquet": 305
+    },
+    {
+      "title": "9.3.1.3 Le sceau inaba remis par Ibbi-Sin",
+      "page_start": 276,
+      "level": 3,
+      "page_end": 277,
+      "role": "section",
+      "page_start_parquet": 306,
+      "page_end_parquet": 307
+    },
+    {
+      "title": "9.4 Arad-Nanna, gestionnaire administratif d'Ur III",
+      "page_start": 278,
+      "level": 1,
+      "page_end": 285,
+      "role": "section",
+      "page_start_parquet": 308,
+      "page_end_parquet": 315
+    },
+    {
+      "title": "9.4.1 Les documents scellés par le grand vizir",
+      "page_start": 278,
+      "level": 2,
+      "page_end": 285,
+      "role": "section",
+      "page_start_parquet": 308,
+      "page_end_parquet": 315
+    },
+    {
+      "title": "9.4.1.1 Sous le règne de Šulgi",
+      "page_start": 279,
+      "level": 3,
+      "page_end": 279,
+      "role": "section",
+      "page_start_parquet": 309,
+      "page_end_parquet": 309
+    },
+    {
+      "title": "9.4.1.2 Sous le règne d'Amar-Sin",
+      "page_start": 279,
+      "level": 3,
+      "page_end": 279,
+      "role": "section",
+      "page_start_parquet": 309,
+      "page_end_parquet": 309
+    },
+    {
+      "title": "9.4.1.3 Sous le règne de Šu-Sin",
+      "page_start": 279,
+      "level": 3,
+      "page_end": 284,
+      "role": "section",
+      "page_start_parquet": 309,
+      "page_end_parquet": 314
+    },
+    {
+      "title": "9.4.1.4 Sous le règne d'Ibbi-Sin",
+      "page_start": 285,
+      "level": 3,
+      "page_end": 285,
+      "role": "section",
+      "page_start_parquet": 315,
+      "page_end_parquet": 315
+    },
+    {
+      "title": "9.5 La supervision des cadeaux",
+      "page_start": 286,
+      "level": 1,
+      "page_end": 296,
+      "role": "section",
+      "page_start_parquet": 316,
+      "page_end_parquet": 326
+    },
+    {
+      "title": "9.5.1 Les cadeaux diplomatiques",
+      "page_start": 286,
+      "level": 2,
+      "page_end": 293,
+      "role": "section",
+      "page_start_parquet": 316,
+      "page_end_parquet": 323
+    },
+    {
+      "title": "9.5.2 Les cadeaux royaux",
+      "page_start": 294,
+      "level": 2,
+      "page_end": 296,
+      "role": "section",
+      "page_start_parquet": 324,
+      "page_end_parquet": 326
+    },
+    {
+      "title": "9.6 Le rôle d'Arad-Nanna dans la justice à Girsu/Lagaš",
+      "page_start": 297,
+      "level": 1,
+      "page_end": 311,
+      "role": "section",
+      "page_start_parquet": 327,
+      "page_end_parquet": 341
+    },
+    {
+      "title": "9.6.1 Les juges sous l'autorité d'Arad-Nanna",
+      "page_start": 298,
+      "level": 2,
+      "page_end": 308,
+      "role": "section",
+      "page_start_parquet": 328,
+      "page_end_parquet": 338
+    },
+    {
+      "title": "9.6.2 Les affaires supervisées par Arad-Nanna",
+      "page_start": 309,
+      "level": 2,
+      "page_end": 311,
+      "role": "section",
+      "page_start_parquet": 339,
+      "page_end_parquet": 341
+    },
+    {
+      "title": "9.7 Arad-Nanna, gouverneur de provinces",
+      "page_start": 312,
+      "level": 1,
+      "page_end": 318,
+      "role": "section",
+      "page_start_parquet": 342,
+      "page_end_parquet": 348
+    },
+    {
+      "title": "9.7.1 Gouverneur de Girsu/Lagaš",
+      "page_start": 312,
+      "level": 2,
+      "page_end": 313,
+      "role": "section",
+      "page_start_parquet": 342,
+      "page_end_parquet": 343
+    },
+    {
+      "title": "9.7.2 Gouverneur d'Urum",
+      "page_start": 314,
+      "level": 2,
+      "page_end": 314,
+      "role": "section",
+      "page_start_parquet": 344,
+      "page_end_parquet": 344
+    },
+    {
+      "title": "9.7.3 Les autres provinces gouvernées par Arad-Nanna",
+      "page_start": 315,
+      "level": 2,
+      "page_end": 318,
+      "role": "section",
+      "page_start_parquet": 345,
+      "page_end_parquet": 348
+    },
+    {
+      "title": "9.8 Arad-Nanna, général",
+      "page_start": 319,
+      "level": 1,
+      "page_end": 326,
+      "role": "section",
+      "page_start_parquet": 349,
+      "page_end_parquet": 356
+    },
+    {
+      "title": "9.8.1 Général d'Uṣar-Garšana",
+      "page_start": 319,
+      "level": 2,
+      "page_end": 322,
+      "role": "section",
+      "page_start_parquet": 349,
+      "page_end_parquet": 352
+    },
+    {
+      "title": "9.8.2 Les autres provinces",
+      "page_start": 323,
+      "level": 2,
+      "page_end": 325,
+      "role": "section",
+      "page_start_parquet": 353,
+      "page_end_parquet": 355
+    },
+    {
+      "title": "9.8.3 Arad-Nanna dans la Correspondance Royale d'Ur",
+      "page_start": 326,
+      "level": 2,
+      "page_end": 326,
+      "role": "section",
+      "page_start_parquet": 356,
+      "page_end_parquet": 356
+    },
+    {
+      "title": "9.9 Arad-Nanna, sanga d'Enki ?",
+      "page_start": 327,
+      "level": 1,
+      "page_end": 327,
+      "role": "section",
+      "page_start_parquet": 357,
+      "page_end_parquet": 357
+    },
+    {
+      "title": "9.10 La famille d'Arad-Nanna",
+      "page_start": 328,
+      "level": 1,
+      "page_end": 349,
+      "role": "section",
+      "page_start_parquet": 358,
+      "page_end_parquet": 379
+    },
+    {
+      "title": "9.10.1 Le clan des sukkal-mah",
+      "page_start": 328,
+      "level": 2,
+      "page_end": 335,
+      "role": "section",
+      "page_start_parquet": 358,
+      "page_end_parquet": 365
+    },
+    {
+      "title": "9.10.2 Les fils d'Arad-Nanna",
+      "page_start": 336,
+      "level": 2,
+      "page_end": 342,
+      "role": "section",
+      "page_start_parquet": 366,
+      "page_end_parquet": 372
+    },
+    {
+      "title": "9.10.2.1 Puzur-Sin",
+      "page_start": 336,
+      "level": 3,
+      "page_end": 340,
+      "role": "section",
+      "page_start_parquet": 366,
+      "page_end_parquet": 370
+    },
+    {
+      "title": "9.10.2.2 Šu-Šulgi",
+      "page_start": 341,
+      "level": 3,
+      "page_end": 342,
+      "role": "section",
+      "page_start_parquet": 371,
+      "page_end_parquet": 372
+    },
+    {
+      "title": "9.10.2.3 Nanna-Mansum",
+      "page_start": 343,
+      "level": 3,
+      "page_end": 343,
+      "role": "section",
+      "page_start_parquet": 373,
+      "page_end_parquet": 373
+    },
+    {
+      "title": "9.10.3 Les épouses d'Arad-Nanna",
+      "page_start": 343,
+      "level": 2,
+      "page_end": 348,
+      "role": "section",
+      "page_start_parquet": 373,
+      "page_end_parquet": 378
+    },
+    {
+      "title": "9.10.3.1 Šuba-Dua",
+      "page_start": 343,
+      "level": 3,
+      "page_end": 344,
+      "role": "section",
+      "page_start_parquet": 373,
+      "page_end_parquet": 374
+    },
+    {
+      "title": "9.10.3.2 Geme-Eana",
+      "page_start": 345,
+      "level": 3,
+      "page_end": 345,
+      "role": "section",
+      "page_start_parquet": 375,
+      "page_end_parquet": 375
+    },
+    {
+      "title": "9.10.3.3 Aman-Ili",
+      "page_start": 345,
+      "level": 3,
+      "page_end": 345,
+      "role": "section",
+      "page_start_parquet": 375,
+      "page_end_parquet": 375
+    },
+    {
+      "title": "9.10.3.4 Ninhedu",
+      "page_start": 346,
+      "level": 3,
+      "page_end": 348,
+      "role": "section",
+      "page_start_parquet": 376,
+      "page_end_parquet": 378
+    },
+    {
+      "title": "9.10.4 Les successeurs d'Arad-Nanna",
+      "page_start": 349,
+      "level": 2,
+      "page_end": 349,
+      "role": "section",
+      "page_start_parquet": 379,
+      "page_end_parquet": 379
+    },
+    {
+      "title": "9.11 Conclusion",
+      "page_start": 350,
+      "level": 1,
+      "page_end": 351,
+      "role": "section",
+      "page_start_parquet": 380,
+      "page_end_parquet": 381
+    },
+    {
+      "title": "10. Conclusion",
+      "page_start": 352,
+      "level": 0,
+      "page_end": 360,
+      "role": "chapter",
+      "page_start_parquet": 382,
+      "page_end_parquet": 390
+    },
+    {
+      "title": "Index",
+      "page_start": 361,
+      "level": 0,
+      "page_end": 361,
+      "role": "backmatter",
+      "page_start_parquet": 391,
+      "page_end_parquet": 391
+    },
+    {
+      "title": "Index des noms propres",
+      "page_start": 361,
+      "level": 0,
+      "page_end": 361,
+      "role": "backmatter",
+      "page_start_parquet": 391,
+      "page_end_parquet": 391
+    },
+    {
+      "title": "Index des termes sumériens",
+      "page_start": 362,
+      "level": 0,
+      "page_end": 362,
+      "role": "backmatter",
+      "page_start_parquet": 392,
+      "page_end_parquet": 392
+    },
+    {
+      "title": "Index des noms géographiques",
+      "page_start": 363,
+      "level": 0,
+      "page_end": 363,
+      "role": "backmatter",
+      "page_start_parquet": 393,
+      "page_end_parquet": 393
+    },
+    {
+      "title": "Bibliographie",
+      "page_start": 364,
+      "level": 0,
+      "page_end": 404,
+      "role": "backmatter",
+      "page_start_parquet": 394,
+      "page_end_parquet": 434
+    },
+    {
+      "title": "Sitographie",
+      "page_start": 405,
+      "level": 0,
+      "page_end": 405,
+      "role": "other",
+      "page_start_parquet": 435,
+      "page_end_parquet": 435
+    }
+  ],
+  "page_offset": {
+    "intro_page_toc": 7,
+    "intro_page_parquet": 37,
+    "offset": 30,
+    "method": "introduction-anchor"
+  },
+  "toc_validation": {
+    "issues": [],
+    "ok": true
+  }
+}

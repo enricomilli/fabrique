@@ -1,0 +1,335 @@
+# *Ordonnancer le trafic dans des réseaux déterministes grâce à l'apprentissage par renforcement*
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-10-08
+
+**Référence :** Adrien Roberty, *Ordonnancer le trafic dans des réseaux déterministes grâce à l'apprentissage par renforcement*, ISAE-ENSMA, Laboratoire des Systèmes Communicants, 2024, 141 p.
+
+---
+
+Soutenue en 2024 à l'ISAE-ENSMA de Poitiers, la thèse d'Adrien Roberty se situe au carrefour des réseaux industriels temps-réel et de l'intelligence artificielle. Son objet est de déterminer si un agent d'apprentissage par renforcement profond peut décider dynamiquement un ordonnancement du trafic dans les réseaux Time-Sensitive Networking (TSN), sans nécessiter de connaissance préalable sur les flux de données et en s'adaptant aux changements de topologie. Le contexte général dans lequel s'inscrit cette recherche est celui de l'industrie 4.0 et de ses prolongements en industrie 5.0, qui imposent « une connectivité à faible latence et à haut débit de données pour la surveillance en temps réel » (p. 29). La mise en réseau des installations de production — machines, robots, capteurs — rend indispensable la résolution de problèmes de communication déterministe que les réseaux Ethernet traditionnels « ont souvent du mal à résoudre » (p. 28). L'ensemble des standards TSN, édictés par l'IEEE, fournit un cadre prometteur en ajoutant « des caractéristiques temps-réel à Ethernet en fournissant des capacités de déterminisme, de bande passante garantie et de synchronisation du temps » (p. 29). Cependant, la configuration de ces mécanismes, en particulier celle du Time-Aware Shaper (TAS), se heurte à une difficulté fondamentale : « dans un réseau ouvert (où plus de flux sont ajoutés au réseau et la topologie du réseau est dynamique), l'ordonnancement dans TSN peut entraîner des problèmes NP-difficile » (p. 14). La thèse centrale de Roberty est donc clairement formulée : « Le but de cette thèse est de montrer qu'un agent peut, à l'aide de méthode d'IA, décider un ordonnancement sans connaissances préalables sur les flux, en étant capable de s'adapter à un changement de topologie et dans un délai raisonnable (de l'ordre de la minute) » (p. 30).
+
+La démarche méthodologique s'appuie sur une approche computationnelle et expérimentale, couplant la formulation d'un problème d'apprentissage par renforcement à sa validation dans des environnements de simulation réseau. L'auteur part du constat que « la plupart des méthodes existantes, basées sur des solveurs ou des heuristiques, se heurtent soit au problème du temps nécessaire avant d'arriver à un résultat, soit à la dynamicité du système » (p. 30). En effet, les approches conventionnelles — formulations par programmation linéaire entière (ILP), solveurs SMT, ou méthodes de Design-Space Exploration —, bien qu'efficaces sur de petits réseaux, « nécessitent beaucoup de temps pour converger » et constituent « des techniques hors ligne qui ne conviennent pas aux réseaux ouverts et reconfigurables » (p. 78). Pour surmonter ces limites, Roberty formule le problème de configuration en un Processus de Décision Markovien (MDP), où l'agent explore l'espace des configurations du TAS (durée du cycle, ouverture et fermeture des portes) en recevant une récompense dépendant de la latence de bout en bout du flux critique et du respect de ses échéances. La conception de cet espace d'états et de cette fonction de récompense constitue l'innovation méthodologique centrale de la thèse. Comme l'explique l'auteur dans sa conclusion, « la clé pour atteindre cet objectif consiste à traduire le problème en un MDP adéquat. La bonne formulation de la récompense, en particulier, est critique » (p. 116). L'entraînement de l'agent se fait sur des simulations réalisées avec OMNeT++/INET et NeSTiNg, des environnements fournissant « une modélisation de réseau détaillée et précise » (p. 100). La validation finale des configurations produites par l'agent fait appel à un module de vérification basé sur le calcul réseau (« *Network Calculus* »), une méthode d'analyse pire-cas garantissant que les délais de traversée demeurent dans les limites acceptables avant déploiement effectif (p. 120).
+
+La première contribution de la thèse, développée dans le chapitre 7, consiste à concevoir un agent capable de configurer le TAS de manière identique sur chaque commutateur, dans un environnement simplifié. L'auteur fait l'hypothèse que « l'ordonnancement est le même sur chaque commutateur », ce qui le conduit à ne considérer que des topologies linéaires composées de 1 à 10 commutateurs (p. 92-93). La configuration du TAS se réduit alors à un seul paramètre — la durée du cycle *d*<sub>cycle</sub> en nanosecondes —, tandis que la durée de la séquence réservée au trafic critique est fixée à deux fois le temps nécessaire pour envoyer une trame (p. 93). L'état du MDP est un vecteur à onze entrées, regroupant les paramètres topologiques (nombre de stations émettrices et réceptrices, nombre de commutateurs, capacité des liens), les caractéristiques des flux (longueur des trames, intervalle d'émission) et les contraintes temporelles (latence maximale du trafic critique) (p. 94). L'agent, entraîné sur 50 000 pas de temps avec évaluation tous les 10 000 pas, montre une progression mesurable : la durée moyenne des épisodes diminue (de 27 à 24 essais en moyenne entre la troisième et la cinquième évaluation), et la récompense moyenne s'améliore de −23 à −20, indiquant que « l'agent reçoit moins de récompenses négatives au fil du temps » (p. 97-98). Sur l'environnement de test, l'agent parvient à proposer une configuration valide — cycle de 490 000 ns, séquence critique de 16 000 ns — en environ 34 secondes, dont la majeure partie est consacrée à l'exécution de la simulation de validation (p. 99). Roberty souligne toutefois que « l'agent n'est pas efficace » : il souffre du problème classique des « récompenses clairsemées », « trop d'états qui retournent la même récompense », ce qui l'empêche de bien distinguer les séquences d'actions menant au succès (p. 100). De plus, « l'agent privilégie très clairement les flux critiques au détriment des flux BE », la récompense initiale ne prenant en compte que les flux critiques (p. 117). Cette première contribution demeure néanmoins essentielle : elle « a démontré la pertinence et la faisabilité d'une telle approche » et justifie la poursuite des travaux avec un modèle plus sophistiqué (p. 116).
+
+La deuxième contribution, exposée dans le chapitre 8, lève la restriction de configuration identique et permet à l'agent de décider individuellement les paramètres du TAS sur chaque commutateur. Cette liberté accrue impose cependant de maintenir un nombre constant de commutateurs durant l'entraînement, « car en RL, l'espace des actions ne peut varier au cours de l'entraînement » (p. 105). L'auteur réformule intégralement le problème RL : l'agent ne se contente plus d'ajouter ou de retrancher une valeur au cycle, mais « choisit directement chaque valeur », incluant la durée du décalage (*offset*) et la durée d'ouverture des portes pour chaque file d'attente (p. 106). La récompense a été reconstruite afin de résoudre le problème des récompenses trop maigres de la contribution précédente, en distinguant plus finement les états avec latence acceptable de ceux avec latence excessive. Plusieurs expériences successives testent la robustesse du modèle. La première évalue la capacité de l'agent à s'adapter à un changement applicatif — variation du nombre de clients de 1 à 5 à chaque épisode —, et montre que « l'agent parvient à trouver des configurations acceptables à partir d'environ 30 000 pas d'apprentissage », même si la convergence nécessite plus de temps (p. 109). La seconde fait varier la topologie (maillée, en anneau, linéaire) avec un nombre fixe de clients ; l'auteur observe « l'augmentation drastique du temps d'entraînement » mais constate que « le modèle parvient toujours à trouver la convergence vers des configurations intéressantes », même si ces dernières se stabilisent « vers une configuration moyenne adaptée à différentes topologies sans être excellente dans chaque cas » (p. 110). Une troisième expérience fusionne ces deux dimensions en introduisant à la fois une variation des clients et de la topologie, avec une récompense reformulée visant la minimisation d'une pénalité liée à l'écart entre échéance et latence (p. 111).
+
+L'auteur articule ses perspectives d'amélioration autour de trois axes. Le premier concerne le passage à l'apprentissage multi-agent (MARL), où « chaque commutateur est représenté par un agent » coopérant « afin de trouver leurs ordonnancements respectifs permettant d'atteindre des latences globales basses » (p. 118). Cette piste exige cependant de migrer vers des bibliothèques plus complexes telles que RLlib ou PettingZoo, et de réécrire l'environnement d'apprentissage. Le second axe vise à résoudre le problème récurrent de l'espace d'actions statique : l'agent ne gère actuellement que des GCL à deux entrées, alors que « d'un point de vue théorique, cette GCL pourrait très bien être à trois entrées ou plus, et ce, de manière indépendante sur chaque commutateur » (p. 119). Roberty explore des solutions telles que les actions basées sur la séquence (via des réseaux récurrents), le masquage binaire des actions illégales, ou l'usage de réseaux neuronaux distincts pour chaque espace d'action — autant de pistes qu'il qualifie de « problème complètement ouvert » (p. 119). Le troisième axe, plus appliquée, envisage l'extension aux réseaux sans-fil 5G/6G, où les interférences et les délais variables complexifieront le modèle, ainsi que la configuration conjointe de plusieurs mécanismes TSN, notamment GPTP et TAS (p. 119-120). Sur le plan architectural, l'auteur propose une intégration de l'agent au sein d'une architecture SDN centralisée conforme au modèle IEEE 802.1Qcc, où la Centralized Network Controller (CNC) détecte les changements, interroge l'agent, et soumet la configuration à un module de validation par calcul réseau (p. 120). Si les latences pires-cas excèdent les échéances, la CNC demande une nouvelle configuration avec « des contraintes de temps plus exigeantes » — boucle itérative qui illustre le couplage indispensable entre apprentissage simulé et vérification formelle (p. 121).
+
+En définitive, la thèse d'Adrien Roberty apporte une contribution originale à la question de la configuration dynamique de l'ordonnancement dans les réseaux TSN. Son apport principal est méthodologique : la démonstration qu'un agent d'apprentissage par renforcement profond, entraîné sur des simulations et intégré dans une boucle de validation par calcul réseau, peut déterminer — dans un délai de l'ordre de la minute et sans connaissance préalable des flux — des configurations d'ordonnancement acceptables, y compris sur des topologies variées (maillées, en anneau) et en présence de variations applicatives. La force du travail réside dans l'itération progressive entre les deux contributions : les limites identifiées dans le chapitre 7 (récompenses clairsemées, biais en faveur des flux critiques, espace d'actions trop contraint) servent de fondation à la reformulation plus ambitieuse du chapitre 8 (configurations individuelles par commutateur, réécriture de la récompense, augmentation de la complexité topologique). On peut néanmoins relever plusieurs tensions. La contrainte d'un espace d'actions statique, inhérente aux algorithmes RL courants, limite la généralité des configurations produites et empêche de faire varier le nombre de commutateurs durant l'entraînement (p. 105, p. 119). L'agent, si elle trouve des configurations acceptables, ne recherche pas l'optimalité — il « prend la première qu'il trouve » (p. 100) —, ce qui le distingue fondamentalement des solveurs analytiques. Enfin, le pessimisme inhérent au calcul réseau peut entraîner des itérations inutiles entre l'agent et le module de validation, lorsque le délai pire-cas calculé dépasse l'échéance alors que le délai réel serait acceptable (p. 121). Ces limites n'infirment pas la pertinence de l'approche : elles en dessinent plutôt les contours et ouvrent la voie à des prolongements naturels — apprentissage multi-agent, actions séquentielles, intégration 5G/6G — qui constituent les principaux chantiers de la recherche future dans ce domaine. La thèse réussit ainsi à poser les bases d'une nouvelle approche de configuration réseau, à mi-chemin entre les méthodes analytiques rigides et l'intelligence artificielle adaptative.
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de *Ordonnancer le trafic dans des réseaux déterministes grâce à l'apprentissage par renforcement* », 2026-10-08.
+
+
+---STDERR---
+Reading context from file: /var/folders/17/5nl7_ym976n00yx17526b9ym0000gn/T/note_2024ESMA0001_i_xy0kqu.txt
+Context loaded: 257,922 characters
+Model: Qwen3.6-27B-Q6_K.gguf
+Query: Tu rédiges une NOTE DE LECTURE (compte rendu universitaire) d'une thèse de doctorat, dans la tradition académique française.
+
+La variable `context` (déjà chargée) contient le texte intégral de la thèse.
+
+## Format du blob `context`
+
+- Des marqueurs de page `[p.NNN]` sont insérés à chaque changement de page. Pour trouver le numéro de page d'un extrait, cherche sa position avec `.find()`, puis remonte jusqu'au marqueur `[p.NNN]` le plus proche.
+- Les notes de bas de page sont préfixées `[fn]` et placées à la fin de chaque page. Elles contiennent souvent les références scientifiques internes de la thèse.
+- Exemple de snippet pour trouver la page d'une phrase donnée :
+```python
+phrase = "conditions d'acceptabilité"
+pos = context.find(phrase)
+# remonter au dernier marqueur [p.XXX] avant pos
+marker_start = context.rfind("[p.", 0, pos)
+marker_end = context.find("]", marker_start) + 1
+page_tag = context[marker_start:marker_end]   # e.g. "[p.21]"
+print(f"Phrase « {phrase} » → {page_tag}")
+```
+
+
+## CARTE DE LA THÈSE (index de navigation)
+
+Index hiérarchique issu de la table des matières. Les pages sont les
+numéros des marqueurs `[p.NNN]` du blob `context` — pour atteindre
+directement un chapitre, saute à son marqueur :
+```python
+pos = context.find("[p.236]")     # début du chapitre visé
+extrait = context[pos:pos+3000]
+```
+ATTENTION : ne cherche PAS un titre de chapitre avec `context.find("titre")`
+— tu risques de tomber sur la table des matières de la thèse elle-même.
+Utilise toujours le saut par marqueur de page ci-dessous.
+
+- Introduction générale  [p.28]–[p.31]
+- I Contexte technologique  [p.32]–[p.33]
+- 1 Les délais de bout en bout  [p.34]–[p.37]
+- 2 Time-Sensitive Networking  [p.38]–[p.51]
+- 3 Apprentissage automatique  [p.52]–[p.61]
+- 4 Apprentissage par renforcement  [p.62]–[p.77]
+- 5 État de l'art  [p.78]–[p.85]
+- II Contributions  [p.86]–[p.87]
+- 6 Introduction aux contributions  [p.88]–[p.91]
+- 7 Configurer le TAS de manière identique  [p.92]–[p.103]
+- 8 Configurer le TAS de manière individuelle  [p.104]–[p.115]
+- Conclusion générale et perspectives  [p.116]–[p.123]
+- Bibliographie  [p.124]–[p.131]
+- Glossaire  [p.132]–[p.135]
+- Table des matières  [p.136]–[p.136]
+
+Tu disposes aussi, ci-dessous, de deux ressources dans ton prompt :
+  1. La FICHE structurée de la thèse — ton plan de travail, ce que tu dois couvrir
+  2. Un EXEMPLE DE STYLE — le registre, la longueur et le flux que tu dois imiter
+
+## Règles de référence
+
+**Auteurs externes (hors thèse) : STRICTEMENT INTERDITS.** Ne cite aucun auteur, ouvrage ou revue qui ne figure pas dans le texte de la thèse. Si un compte rendu standard écrirait « comme le montre Habermas » ou « selon Bourdieu » alors que ni Habermas ni Bourdieu n'est cité par l'auteur de la thèse, tu reformules sans nommer.
+
+**Auteurs internes (cités PAR la thèse) : autorisés sous condition.** Si tu veux nommer un auteur que la thèse elle-même mobilise (ex. Foucault, Moretti, Bakhtine, Lavoinne, Tetlock), tu DOIS :
+  1. Vérifier via `context.find("Nom")` qu'il est bien présent dans la thèse — SAUF si l'auteur figure déjà dans la FICHE avec une citation et une page : dans ce cas reprends l'ancrage de la fiche tel quel, sans revérification.
+  2. Accompagner la mention d'une courte citation verbatim (entre guillemets « ») extraite de la thèse.
+  3. Indiquer le numéro de page, obtenu via la méthode du marqueur `[p.NNN]` décrite ci-dessus.
+  Exemple : « Comme le rappelle Lavoinne, "cette croissance n'est pas justifiée économiquement" (p. 34). »
+
+**Chapitres et passages de la thèse** : cite-les librement (ex. « dans le premier chapitre », « p. 612 »). Les pages doivent être vérifiées via les marqueurs `[p.NNN]` — JAMAIS une position en caractères (offset à 4+ chiffres).
+
+**Notes de bas de page** : tu n'en rédiges pas dans la note. Les `[fn]` du blob sont uniquement un outil de recherche pour toi.
+
+**Cible : au moins 8 références de page précises dans la note finale** pour étayer tes affirmations.
+
+## Structure à produire (~2000 mots)
+
+```markdown
+# [Titre complet de la thèse, en italique après l'auteur]
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-10-08
+
+**Référence :** [Auteur], *[Titre]*, [Établissement], [Année], [Nombre de pages] p.
+
+---
+
+[Paragraphe 1 — Ouverture (~250 mots) : situe la thèse, l'auteur, la discipline,
+la période étudiée, la thèse centrale, le corpus principal. Annonce le fil
+directeur et la périodisation.]
+
+[Paragraphe 2 — Méthodologie et démarche (~300 mots) : approche,
+outillage, corpus, sondages, corpus contextuels. Souligne l'originalité
+méthodologique.]
+
+[Paragraphe 3 — Première partie ou premier axe (~350 mots) : en citant les pages.]
+
+[Paragraphe 4 — Deuxième partie ou deuxième axe (~300 mots).]
+
+[Paragraphe 5 — Troisième partie ou troisième axe (~350 mots).]
+
+[Paragraphe 6 — Portée, apport et tensions (~300-400 mots) : synthèse
+critique. L'apport empirique, théorique, méthodologique. Les tensions,
+les limites. Ouverture sur ce que la thèse permet de penser.]
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de [Titre court] », [Date].
+```
+
+## Consignes RLM
+
+- **Les pages et citations de la FICHE ont déjà été vérifiées automatiquement contre la source.** Reprends-les telles quelles, SANS les revérifier via `context.find(...)`. Ne vérifie que ce que tu introduis TOI-MÊME et qui ne figure pas dans la fiche (nouvel auteur, nouvelle citation, nouvelle page).
+- Si tu as besoin d'un passage spécifique, utilise `context[start:end]` ou `context.find("phrase")` pour le localiser, puis extrait une tranche de 500-1500 caractères autour.
+- **Travaille en LOTS SERRÉS** : toute l'exploration initiale (squelette : introduction, méthodologie, ouvertures de parties, conclusion, exemples fondateurs) doit tenir en AU PLUS 3 exécutions de code, chacune extrayant PLUSIEURS passages d'un coup (5 à 8 extraits par exécution). Jamais une exécution par passage. Les extractions complémentaires entre les passes de rédaction (cœur des parties) comptent à part : au plus 1 exécution d'extraction par passe de rédaction.
+- **LIAISON PAGE-EXTRAIT (obligatoire dans les lots)** : quand une exécution imprime plusieurs extraits, fais-la précéder CHAQUE extrait d'une ligne `===== EXTRAIT [p.N] → [p.M] =====` (les marqueurs réels de début et de fin de l'extrait). Au moment de citer, reprends le numéro depuis la ligne `=====` ou le marqueur `[p.N]` visible IMMÉDIATEMENT au-dessus du passage cité — jamais de mémoire. Une citation dont tu ne retrouves pas le marqueur exact dans tes sorties ne doit PAS porter de numéro de page.
+- **RÉDACTION EN PLUSIEURS PASSES (OBLIGATOIRE)** : ne rédige JAMAIS la note entière en une seule exécution. Rédige AU PLUS 2 paragraphes par exécution de code. Avant de rédiger les paragraphes 3, 4 et 5, extrais d'abord de NOUVEAUX passages du cœur de la partie concernée (pas seulement son ouverture) — puis rédige. Assemble le tout à la fin seulement.
+- **CITATION ET AFFIRMATION CO-PRÉSENTES** : une citation verbatim « … » (p. N) ne peut étayer QUE l'affirmation du passage d'où elle provient (le texte visible sous le même marqueur `[p.N]`). N'emploie JAMAIS une phrase de la thèse pour un argument qu'elle ne porte pas dans son contexte d'origine (une hypothèse formulée sur X ne sert pas à commenter Y ; un nom de fonction, de concept ou de liste se reprend tel que le passage le donne, sans le recomposer). Si une affirmation a besoin d'un appui, va chercher le passage qui la porte et cite-le avec sa propre page.
+- **Densité d'ancrage** : chaque paragraphe de partie (3, 4 et 5) doit citer AU MOINS 3 pages distinctes. Une partie racontée sans pages précises est un paragraphe raté.
+- Ne saute pas les exemples fondateurs que la fiche met en avant (comparaison inaugurale, cas paradigmatique, date fondatrice) : s'ils motivent la thèse, ils appartiennent à la note.
+- `llm_query` est réservé aux RECHERCHES ponctuelles (localiser un thème, résumer un long passage pour toi-même). NE L'UTILISE JAMAIS pour rédiger les paragraphes de la note : la rédaction se fait TOI-MÊME, dans cette boucle, avec les marqueurs `[p.NNN]` sous les yeux — c'est la seule façon de garantir des numéros de page exacts.
+- À la fin, assemble le markdown complet dans une variable puis appelle `FINAL(markdown_complet)`.
+
+## FICHE DE LA THÈSE
+
+```markdown
+# FICHE DE SYNTHÈSE DE THÈSE
+
+## Métadonnées
+
+- **Titre** : Ordonnancer le trafic dans des réseaux déterministes grâce à l'apprentissage par renforcement
+- **Auteur** : Adrien Roberty
+- **Année** : 2024
+- **Établissement** : ISAE-ENSMA; Laboratoire des Systèmes Communicants (LSC); École doctorale ED Mathématiques, Informatique, Matériaux, Mécanique, Énergétique (MIMME) n° 651
+- **Discipline** : Informatique et applications
+- **Pages** : 141
+
+## Mots-clés
+
+apprentissage par renforcement (intelligence artificielle) ; apprentissage profond ; industrie 4.0 ; intelligence artificielle ; ordonnancement (informatique) ; temps réel (informatique) ; industrie 5.0 ; time-sensitive networking (tsn) ; time-aware shaper (tas) ; reinforcement learning ; deep learning ; industry 4.0 ; artificial intelligence ; computer scheduling ; real-time data processing ; industry 5.0
+
+## Thèse centrale
+
+Cette thèse démontre qu'un agent basé sur l'apprentissage par renforcement est capable de décider, dynamiquement, un ordonnancement pour les réseaux TSN dans le cadre du mécanisme TAS, sans avoir de connaissances préalables sur les flux (p. 117). Ce résultat est atteint en traduisant le problème de configuration en un processus de décision markovien (MDP) adéquat, où la formulation précise de la fonction de récompense et la maîtrise de l'espace d'actions permettent de générer des configurations valides dans un délai de l'ordre de la minute (p. 116).
+
+## Questions de recherche
+
+- « configurer l'ordonnancement des flux dans TSN peut mener à un problème NP-difficile » (p. 29)
+- « cette configuration se doit d'être dynamique. Pour relever ces défis un algorithme capable de déterminer rapidement les configurations de TSN s'impose. » (p. 29)
+- « Le but de cette thèse est de montrer qu'un agent peut, à l'aide de méthode d'IA, décider un ordonnancement sans connaissances préalables sur les flux, en étant capable de s'adapter à un changement de topologie et dans un délai raisonnable (de l'ordre de la minute). » (p. 30)
+
+## Réponses aux questions de recherche
+
+- **Question 1 (NP-difficile)** : « La clé pour atteindre cet objectif consiste à traduire le problème en un MDP adéquat. La bonne formulation de la récompense, en particulier, est critique. » (p. 116)
+- **Question 2 (Dynamique & rapide)** : « L'agent de configuration est capable de configurer TSN sur des topologies réseaux différentes, dans un temps raisonnable, sans avoir de connaissances préalables sur les flux et sans être affecté par le nombre ni la position dans la topologie des clients/applications. » (p. 117)
+- **Question 3 (But global)** : « En conclusion, cette thèse de doctorat a apporté des contributions significatives à la configuration de l'ordonnancement du trafic dans les réseaux TSN. » (p. 117)
+
+## Hypothèses
+
+**Principale** : « Le but de cette thèse est de montrer qu'un agent peut, à l'aide de méthode d'IA, décider un ordonnancement sans connaissances préalables sur les flux, en étant capable de s'adapter à un changement de topologie et dans un délai raisonnable (de l'ordre de la minute). » (p. 30)
+**Secondaires** :
+- « Une manière d'atteindre tous ces objectifs consiste à utiliser les techniques de l'Intelligence Artificielle (IA). » (p. 30)
+- « l'utilisation de méthodes d'IA permet d'obtenir des résultats adaptés, tout en offrant une grande flexibilité et une prise de décision en rapide » (p. 30)
+- « Cette étude confirme l'intérêt d'utiliser le RL afin de trouver l'ordonnancement du TAS dans les réseaux TSN. » (p. 116)
+
+## Méthodologie
+
+- **Approche** : Expérimentale et computationnelle, centrée sur la configuration dynamique de réseaux industriels via simulation. (p. 29-30)
+- **Méthode** : Apprentissage par renforcement profond (Deep Reinforcement Learning) pour décider de l'ordonnancement des flux dans les réseaux TSN, couplé à une validation a posteriori par calcul réseau (« Network Calculus ») pour garantir la faisabilité des configurations. (p. 14, p. 30, p. 120)
+- **Corpus/Données** : Réseaux TSN simulés avec des commutateurs, des flux de données, des topologies changeantes (maillée, en anneau) et des configurations de flux. (p. 29-30, p. 117)
+- **Justification** : « la plupart des méthodes existantes, basées sur des solveurs ou des heuristiques, se heurtent soit au problème du temps nécessaire avant d'arriver à un résultat, soit à la dynamicité du système. » (p. 30)
+
+## Fil rouge
+
+La formulation d'un MDP (Processus de Décision Markovien) adapté à l'ordonnancement TSN tel que défini par l'auteur (p. 116), reliant la modélisation du problème NP-difficile à la validation expérimentale de l'agent via la conception itérative de sa fonction de récompense.
+
+## Plan (Structure)
+
+- **I Contexte technologique** : Démontre que la transition vers l'industrie 4.0/5.0 impose des défis de latence, d'interopérabilité et de sécurité qui nécessitent le recours aux standards TSN et à l'intelligence artificielle.
+- **II Contributions** : Démontre qu'un agent basé sur l'apprentissage par renforcement peut déterminer dynamiquement un ordonnancement TSN, soit commun à tous les commutateurs, soit spécifique à chaque commutateur, dans un délai raisonnable.
+
+## Cadre théorique
+
+- **Cadre principal** : IEEE 802.1Qbv / Time Sensitive Networking (TSN) — ensemble de standards temps-réel pour Ethernet (p. 29) — structure l'analyse globale en définissant les mécanismes d'ordonnancement (TAS), de synchronisation et de déterminisme à configurer.
+- **Cadres secondaires** :
+  - Apprentissage par renforcement (RL) — paradigme d'IA (p. 116) — sert d'outil d'analyse et de prise de décision pour résoudre le problème NP-difficile de l'ordonnancement TSN via la modélisation en MDP.
+  - Calcul réseau (« Network Calculus ») — méthode d'analyse pire-cas des délais (p. 120) — sert de cadre de validation formelle pour garantir que les configurations générées par l'agent respectent les contraintes temporelles avant déploiement.
+  - Industrie 4.0/5.0 — paradigme de fabrication numérique et collaborative (p. 28-29) — fournit le contexte applicatif et les exigences de connectivité, de latence et de reconfiguration dynamique.
+
+## Concepts clés
+
+- **CONCEPT** : TIME SENSITIVE NETWORKING (TSN)
+- **SENS** : « un ensemble de standards visant à ajouter des caractéristiques temps-réel à Ethernet en fournissant des capacités de déterminisme, de bande passante garantie et de synchronisation du temps dans les réseaux Ethernet traditionnels. » (p. 29)
+- **ORIGINE** : propre à l'auteur (mobilisation du standard IEEE 802.1Qbv)
+- **CONCEPT** : ORDONNANCEMENT DYNAMIQUE
+- **SENS** : « cette configuration se doit d'être dynamique. » (p. 29)
+- **ORIGINE** : propre à l'auteur (redéfini comme capacité de réagir aux changements de topologie et d'introduction de nouveaux flux)
+- **CONCEPT** : AGENT D'IA POUR LA CONFIGURATION RÉSEAU
+- **SENS** : « un agent peut, à l'aide de méthode d'IA, décider un ordonnancement sans connaissances préalables sur les flux » (p. 30)
+- **ORIGINE** : propre à l'auteur (conception d'un agent basé sur l'apprentissage par renforcement)
+- **CONCEPT** : FONCTION DE RÉCOMPENSE (RL)
+- **SENS** : « La bonne formulation de la récompense, en particulier, est critique. » (p. 116)
+- **ORIGINE** : propre à l'auteur (redéfinie comme levier central pour guider l'agent vers des configurations valides et résoudre le problème des récompenses trop maigres)
+- **CONCEPT** : RÉSEAUX OUVERTS VS FERMÉS
+- **SENS** : « Ces méthodes sont bonnes pour les réseaux fermés (lorsque tous les flux sont identifiés à l'avance et que la topologie du réseau est fixe). Cependant, dans un réseau ouvert (où plus de flux sont ajoutés au réseau et la topologie du réseau est dynamique), l'ordonnancement dans TSN peut entraîner des problèmes NP-difficile. » (p. 14)
+- **ORIGINE** : propre à l'auteur (distinction opérationnelle pour justifier le passage des solveurs exacts/heuristiques à l'apprentissage par renforcement)
+
+## Ancrage empirique (ou concret)
+
+- L'agent privilégie très clairement les flux critiques au détriment des flux BE (Best Effort), car la récompense initiale ne prenait en compte que les flux critiques (p. 117).
+- La configuration nécessite un module de validation par calcul réseau pour vérifier les latences pires cas ; si elles sont supérieures aux échéances, la CNC redemande une configuration avec des contraintes de temps plus exigeantes (p. 121).
+- L'agent est efficace sur un nombre de commutateurs fixe, car l'espace des actions ne peut varier au cours de l'entraînement (p. 117).
+
+## Opposition / Contre-argumentation
+
+- « la plupart des méthodes existantes, basées sur des solveurs ou des heuristiques, se heurtent soit au problème du temps nécessaire avant d'arriver à un résultat, soit à la dynamicité du système. » (p. 30) [Lacune de la littérature]
+- « Les réseaux Ethernet traditionnels ont souvent du mal à répondre à ces exigences. » (p. 28) [Lacune technologique]
+- « Tout d'abord, comme on l'a vu au chapitre précédent, l'agent privilégie très clairement les flux critiques au détriment des flux BE. » (p. 117) [Résultat contre-intuitif / limite empirique]
+
+## Apport principal
+
+- **Méthodologique** : L'intégration d'un agent RL dans une architecture SDN centralisée, couplée à un module de validation par calcul réseau, permettant de générer et vérifier dynamiquement des configurations TSN sans connaissances préalables des flux. (p. 117, p. 120)
+- **Théorique** : La démonstration qu'une formulation précise de MDP et de fonction de récompense permet de contourner les limitations temporelles des solveurs analytiques face au problème NP-difficile de l'ordonnancement TSN, tout en s'adaptant à des topologies maillées ou en anneau. (p. 116, p. 117)
+
+```
+
+## EXEMPLE DE STYLE (à imiter pour le registre, la longueur des paragraphes, le flux)
+
+```markdown
+# [Titre complet de l'ouvrage : nom des directeurs et titre/sous-titre en italique]
+
+**Compte rendu par** [Auteur du compte rendu]
+
+**Date :** 2026-04-24
+
+**Source :** [URL si disponible]
+
+**Référence :** [Auteur·e·s], *Titre complet*, Ville, Éditeur, coll. « Collection », année, xxx p., ISBN : xxx.
+
+---
+
+Quatorze auteurs, parmi lesquels des sociologues clés de l'analyse du secteur social et médico-social analysent, dans cet ouvrage important, les transformations de la « morale » de l'intervention sociale de divers pays (France dont Mayotte, Suisse, Maroc, Québec), ceci à la suite d'un congrès sociologique international tenu à Tunis en 2021. Le texte décrit les tensions traversant l'intervention sociale, entre idéaux de justice sociale, d'égalité et de solidarisme d'une part, et les principes de responsabilisation et d'activation dans un contexte marqué par l'emprise croissante d'une logique managériale, d'autre part. Disons-le d'emblée, le principe de « responsabilisation » mérite d'être interrogé : il renvoie généralement non pas tant à un transfert de pouvoir aux usagers ou citoyens, comme il l'affirme, mais souvent à une « normalisation » du contrôle social reposant, désormais, sur l'individu lui-même. C'est notamment le cas dans les dispositifs de parentalité ou dans la justice restaurative, où la volonté des individus devient l'opérateur du contrôle social.
+
+Notre lecture questionne implicitement les mots-clefs contemporains de l'intervention sociale que sont « responsabiliser » et « activer ». Ces termes sont aussi les items centraux de la Nouvelle Gouvernance Publique (NGP), laquelle tend, pour l'action sociale, à substituer la « relation de service » reposant sur l'efficience et le résultat au « modèle de service public d'action » fondateur. S'impose, alors, un glissement progressif vers un paradigme managérial qui met la focale sur les difficultés de financement, d'efficacité, la qualité du service et le questionnement de la légitimité de l'État social.
+
+Dans le premier chapitre, Jean-Pierre Tabin et ses collègues explorent, à partir de la rhétorique de l'État depuis les années 2000, les politiques suisses en direction des personnes invalides. Ils identifient finement une logique « capacitiste » visant la re-marchandisation à tout prix, via un nouvel ordre d'employabilité passant par l'acceptation d'une norme d'emploi « médiocre » et, de fait, réduisant la « crédibilité épistémique » de la personne en situation de handicap psychique. Dans les Structures d'Insertion par l'Activité Économique (SIAE) analysées par Hervé Jory dans le cinquième chapitre, la prévalence des compétences d'adaptation sociale sur la formation didactique et le savoir-faire professionnel correspond à une précarisation du profil attendu des publics. L'inversion du statut de la formation, dans ces structures d'insertion, tend à favoriser des conditions d'acceptation de conditions de travail pénibles pour des emplois sous-qualifiés. Ce nouveau cadre normatif de l'inclusion professionnelle repose sur le postulat « d'insérer pour former » où l'insertion se suffit en elle-même. Il s'agit de privilégier l'adaptation quasi immédiate à l'emploi et ses difficultés, en particulier la capacité à supporter des conditions de travail éprouvantes (port de charges lourdes, intempéries…) plutôt que l'intégration de savoirs professionnels et une qualification capitalisable.
+
+L'analyse de tous ces segments de l'intervention sociale est à même d'identifier une logique de responsabilisation des publics et un tournant managérial souvent pénalisants. Mais la grammaire managériale reste fortement questionnée dans les pratiques concrètes des acteurs. Un deuxième grand apport de l'ouvrage est donc d'étudier les engagements moraux et les micro-résistances éthiques des intervenants·es infléchissant parfois certaines modalités de l'intervention sociale. Au-delà des cadres normatifs, des professionnels inventent dès lors des pratiques d'écarts éthiques pour redonner sens à leur action.
+
+Ainsi, dans l'urgence sociale présentée par Hélène Marin et Béatrice Bertho (chapitre 3), la mobilisation bénévole de professionnels illustre la volonté de participer à la neutralisation d'un déficit d'action publique récurrent, en contradiction avec les principes moraux de l'État social. Un engagement solidaire, fait en parallèle de leur travail salarié, s'instaure dans une ville de Suisse romane afin de faire face à une « politique de la pénurie » (p. 48) de l'accueil national des personnes sans-abris. Ce « bénévolat solidaire » définit ce que l'on peut appeler une « résistivité morale », des micro-résistances enracinées dans les principes de justice sociale au regard des besoins de ce public en grande vulnérabilité psychique et sociale.
+
+En définitive, l'intérêt majeur des thèses de cet ouvrage est de souligner une mutation des cadres normatifs et moraux de l'intervention sociale qui mettent désormais essentiellement l'accent sur une responsabilisation des individus vulnérables, une activation étrécie et pénalisante et privilégiant parfois l'immédiateté de l'insertion par le travail, voire des pratiques de culpabilisation-stigmatisation et des dispositifs d'activation définis par une grammaire managériale. Par contre, ces mutations ne doivent pas oblitérer, car s'exprimant à bas bruit dans les interstices de l'accompagnement, la présence modeste d'un cadre moral et cognitif secondaire d'élargissement du pouvoir d'agir pour les personnes en difficulté. Une responsabilisation que l'on peut qualifier d'« habilitante » est encore visible dans nombre des pratiques d'accompagnement. Ainsi, le Revenu de Solidarité Active (RSA) agricole représente une reconnaissance nouvelle de la vulnérabilité d'une population et un levier d'action potentiel pour des agriculteurs immergés des décennies dans une grande précarité. L'action sociale n'est pas réductible au seul tournant néo-libéral et l'on observe non pas une « nouvelle » morale de l'intervention sociale mais une hybridation de morales dont certaines fondatrices de l'État social et du travail social. Malgré tout, force est de constater que la NGP encadre l'intervention sociale par des normes managériales dissonantes au regard des idéaux universalistes, de l'éthique et de la vulnérabilité des publics et de leurs besoins. Ces nouvelles normes conduisent à une détérioration de l'action pour les usagers et le personnel que l'on retrouve aussi dans l'ensemble des services publics.
+
+---
+
+## Pour citer cet article
+
+**[Auteur]**, « [Titre court de l'ouvrage] », *Comptes rendus*, mis en ligne le [date], consulté le [date].
+
+```
+
+---
+
+Rédige maintenant la note de lecture. Vise ~2000 mots, six paragraphes denses, français académique soutenu. Termine par `FINAL(note_markdown)`.
+
+---
+[0.0s] Iteration 1/20 | Sub-queries: 0 | Phase: generating_code
+[9.3s] Iteration 1/20 | Sub-queries: 0 | Phase: executing
+[9.3s] Iteration 1/20 | Sub-queries: 0 | Phase: checking_final
+[9.3s] Iteration 2/20 | Sub-queries: 0 | Phase: generating_code
+[17.0s] Iteration 2/20 | Sub-queries: 0 | Phase: executing
+[17.0s] Iteration 2/20 | Sub-queries: 0 | Phase: checking_final
+[17.0s] Iteration 3/20 | Sub-queries: 0 | Phase: generating_code
+[24.3s] Iteration 3/20 | Sub-queries: 0 | Phase: executing
+[24.3s] Iteration 3/20 | Sub-queries: 0 | Phase: checking_final
+[24.3s] Iteration 4/20 | Sub-queries: 0 | Phase: generating_code
+[34.0s] Iteration 4/20 | Sub-queries: 0 | Phase: executing
+[34.0s] Iteration 4/20 | Sub-queries: 0 | Phase: checking_final
+[34.0s] Iteration 5/20 | Sub-queries: 0 | Phase: generating_code
+[46.0s] Iteration 5/20 | Sub-queries: 0 | Phase: executing
+[46.0s] Iteration 5/20 | Sub-queries: 0 | Phase: checking_final
+[46.0s] Iteration 6/20 | Sub-queries: 0 | Phase: generating_code
+[58.2s] Iteration 6/20 | Sub-queries: 0 | Phase: executing
+[58.2s] Iteration 6/20 | Sub-queries: 0 | Phase: checking_final
+[58.2s] Iteration 7/20 | Sub-queries: 0 | Phase: generating_code
+[71.5s] Iteration 7/20 | Sub-queries: 0 | Phase: executing
+[71.5s] Iteration 7/20 | Sub-queries: 0 | Phase: checking_final
+[71.5s] Iteration 8/20 | Sub-queries: 0 | Phase: generating_code
+[99.0s] Iteration 8/20 | Sub-queries: 0 | Phase: executing
+[99.0s] Iteration 8/20 | Sub-queries: 0 | Phase: checking_final
+[99.0s] Iteration 9/20 | Sub-queries: 0 | Phase: generating_code
+[126.5s] Iteration 9/20 | Sub-queries: 0 | Phase: executing
+[126.5s] Iteration 9/20 | Sub-queries: 0 | Phase: checking_final
+[126.5s] Iteration 10/20 | Sub-queries: 0 | Phase: generating_code
+[144.4s] Iteration 10/20 | Sub-queries: 0 | Phase: executing
+[144.4s] Iteration 10/20 | Sub-queries: 0 | Phase: checking_final
+[144.4s] Iteration 11/20 | Sub-queries: 0 | Phase: generating_code
+[175.8s] Iteration 11/20 | Sub-queries: 0 | Phase: executing
+[175.8s] Iteration 11/20 | Sub-queries: 0 | Phase: checking_final
+[175.8s] Iteration 12/20 | Sub-queries: 0 | Phase: generating_code
+[196.6s] Iteration 12/20 | Sub-queries: 0 | Phase: executing
+[196.6s] Iteration 12/20 | Sub-queries: 0 | Phase: checking_final
+---
+Completed in 196.6s | 12 iterations | 0 sub-queries | success
+---

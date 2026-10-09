@@ -6,3 +6,55 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv/
+cli/rlm-cli/node_modules/
+cli/rlm-cli/dist/
+
+# internal findings note, not part of the repo
+notes_structure_gate.md
+notes_demo_audit.md
+fiches_original_premanual_2026-10-07/
+notes_manual_repairs.md
+retired_2026-10-08/
+
+# smaniotto: local test thesis, not part of the reference set
+data/smaniotto_these.parquet
+data/smaniotto_these.raw_ocr.parquet
+results/smaniotto_these/
+
+# demo set 2026-10. Nine of the ten thesis PDFs are committed (134 MB);
+# 2024LYO20081 is excluded at 64 MB — high-resolution archive scans, and the
+# only file over GitHub's 50 MB warning threshold.
+#
+# Runs: the SHIPPING run only, as for 2027Bourse and daley_thesis. The
+# superseded note runs below are kept locally as evidence but not committed —
+# the 19:26 runs are 38-byte "[API Error] 530" stubs from a dead Cloudflare
+# tunnel, the rest are pre-fix runs superseded by a rerun, plus one degenerate
+# retry. Listed explicitly so the shipping run of each thesis stays tracked.
+# The parquets and the explorer outputs are committed and are enough to
+# browse or regenerate the views. PDFs live in demo_candidates/pdfs/.
+# Listed explicitly rather than by pattern so future reference PDFs are
+# not silently excluded (data/pdf/{2027Bourse,daley_thesis,2024LORR0201} stay tracked).
+data/pdf/2024LYO20081.pdf
+results/2022LORR0062/note_runs/20261007_192633/
+results/2022LORR0062/note_runs/20261007_192636/
+results/2022LORR0062/note_runs/latest/
+results/2022LORR0183/note_runs/20261007_191938/
+results/2022LORR0183/note_runs/latest/
+results/2022LYO10153/note_runs/20261007_192106/
+results/2022LYO10153/note_runs/latest/
+results/2023LYO20128/note_runs/20261007_192644/
+results/2023LYO20128/note_runs/20261007_192647/
+results/2023LYO20128/note_runs/latest/
+results/2023TOU20042/note_runs/20261007_192420/
+results/2023TOU20042/note_runs/latest/
+results/2024ESMA0001/note_runs/latest/
+results/2024LYO20081/note_runs/latest/
+results/2024PA100032/note_runs/20261007_192543/
+results/2024PA100032/note_runs/20261007_192630/
+results/2024PA100032/note_runs/20261007_224324/
+results/2024PA100032/note_runs/latest/
+results/2024PA100054/note_runs/20261007_192236/
+results/2024PA100054/note_runs/latest/
+results/2024SORUL013/note_runs/20261007_192638/
+results/2024SORUL013/note_runs/20261007_192641/
+results/2024SORUL013/note_runs/latest/

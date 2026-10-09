@@ -1,0 +1,480 @@
+{
+  "thesis_id": "2024LYO20081",
+  "parquet_blocks": 2318,
+  "parquet_pages": 317,
+  "metadata": {
+    "titre": "Former c'est normer. Le développement de l'enseignement technique cinématographique en France (1915-1937).",
+    "auteur": "René OSI",
+    "annee": "2024",
+    "etablissement": "Université Lumière Lyon 2 ; Université de Montréal",
+    "discipline": "Arts de la scène et de l'image",
+    "mots_cles": [
+      "histoire du cinéma français",
+      "enseignement technique",
+      "Troisième République"
+    ],
+    "pages": 317
+  },
+  "toc": [
+    {
+      "title": "RÉSUMÉ",
+      "page_start": 3,
+      "level": 0,
+      "page_end": 3,
+      "role": "frontmatter",
+      "page_start_parquet": 5,
+      "page_end_parquet": 5
+    },
+    {
+      "title": "ABSTRACT",
+      "page_start": 4,
+      "level": 0,
+      "page_end": 4,
+      "role": "frontmatter",
+      "page_start_parquet": 6,
+      "page_end_parquet": 6
+    },
+    {
+      "title": "TABLES DES MATIÈRES",
+      "page_start": 5,
+      "level": 0,
+      "page_end": 7,
+      "role": "other",
+      "page_start_parquet": 7,
+      "page_end_parquet": 9
+    },
+    {
+      "title": "FIGURES",
+      "page_start": 8,
+      "level": 0,
+      "page_end": 10,
+      "role": "other",
+      "page_start_parquet": 10,
+      "page_end_parquet": 12
+    },
+    {
+      "title": "INTRODUCTION",
+      "page_start": 11,
+      "level": 0,
+      "page_end": 22,
+      "role": "frontmatter",
+      "page_start_parquet": 13,
+      "page_end_parquet": 24
+    },
+    {
+      "title": "Première partie L'École nationale de photographie et de cinématographie Chronique d'un échec (1915-1919)",
+      "page_start": 23,
+      "level": 0,
+      "page_end": 29,
+      "role": "part",
+      "page_start_parquet": 25,
+      "page_end_parquet": 31
+    },
+    {
+      "title": "Chapitre 1 Le contexte règlementaire",
+      "page_start": 30,
+      "level": 0,
+      "page_end": 44,
+      "role": "chapter",
+      "page_start_parquet": 32,
+      "page_end_parquet": 46
+    },
+    {
+      "title": "1. Les mesures d'exception",
+      "page_start": 31,
+      "level": 1,
+      "page_end": 37,
+      "role": "section",
+      "page_start_parquet": 33,
+      "page_end_parquet": 39
+    },
+    {
+      "title": "2. La mobilisation de l'industrie",
+      "page_start": 38,
+      "level": 1,
+      "page_end": 44,
+      "role": "section",
+      "page_start_parquet": 40,
+      "page_end_parquet": 46
+    },
+    {
+      "title": "Chapitre 2 La tutelle de l'État sur les sections photographiques et cinématographiques",
+      "page_start": 45,
+      "level": 0,
+      "page_end": 114,
+      "role": "chapter",
+      "page_start_parquet": 47,
+      "page_end_parquet": 116
+    },
+    {
+      "title": "1. Interventions préalables",
+      "page_start": 46,
+      "level": 1,
+      "page_end": 50,
+      "role": "section",
+      "page_start_parquet": 48,
+      "page_end_parquet": 52
+    },
+    {
+      "title": "2. La création des sections",
+      "page_start": 51,
+      "level": 1,
+      "page_end": 55,
+      "role": "section",
+      "page_start_parquet": 53,
+      "page_end_parquet": 57
+    },
+    {
+      "title": "3. L'articulation des échelons administratifs",
+      "page_start": 56,
+      "level": 1,
+      "page_end": 64,
+      "role": "section",
+      "page_start_parquet": 58,
+      "page_end_parquet": 66
+    },
+    {
+      "title": "4. L'ingérence de l'État",
+      "page_start": 65,
+      "level": 1,
+      "page_end": 78,
+      "role": "section",
+      "page_start_parquet": 67,
+      "page_end_parquet": 80
+    },
+    {
+      "title": "5. L'expansion commerciale des sections",
+      "page_start": 79,
+      "level": 1,
+      "page_end": 86,
+      "role": "section",
+      "page_start_parquet": 81,
+      "page_end_parquet": 88
+    },
+    {
+      "title": "6. La transformation des sections",
+      "page_start": 87,
+      "level": 1,
+      "page_end": 114,
+      "role": "section",
+      "page_start_parquet": 89,
+      "page_end_parquet": 116
+    },
+    {
+      "title": "Deuxième partie L'École technique de photographie et de cinématographie Membres et principes fondateurs (1919-1923)",
+      "page_start": 115,
+      "level": 0,
+      "page_end": 118,
+      "role": "part",
+      "page_start_parquet": 117,
+      "page_end_parquet": 120
+    },
+    {
+      "title": "Chapitre 3 Paul Montel",
+      "page_start": 119,
+      "level": 0,
+      "page_end": 145,
+      "role": "chapter",
+      "page_start_parquet": 121,
+      "page_end_parquet": 147
+    },
+    {
+      "title": "1. Données biographiques",
+      "page_start": 120,
+      "level": 1,
+      "page_end": 126,
+      "role": "section",
+      "page_start_parquet": 122,
+      "page_end_parquet": 128
+    },
+    {
+      "title": "2. Correspondances Montel-Lumière : Courtisaneries",
+      "page_start": 127,
+      "level": 1,
+      "page_end": 135,
+      "role": "section",
+      "page_start_parquet": 129,
+      "page_end_parquet": 137
+    },
+    {
+      "title": "3. Correspondances Montel-Lumière : Le ralliement des industriels",
+      "page_start": 136,
+      "level": 1,
+      "page_end": 145,
+      "role": "section",
+      "page_start_parquet": 138,
+      "page_end_parquet": 147
+    },
+    {
+      "title": "Chapitre 4 La Chambre syndicale des fabricants et négociants de la photographie",
+      "page_start": 146,
+      "level": 0,
+      "page_end": 158,
+      "role": "chapter",
+      "page_start_parquet": 148,
+      "page_end_parquet": 160
+    },
+    {
+      "title": "1. Statuts",
+      "page_start": 147,
+      "level": 1,
+      "page_end": 150,
+      "role": "section",
+      "page_start_parquet": 149,
+      "page_end_parquet": 152
+    },
+    {
+      "title": "2. Microcosme",
+      "page_start": 151,
+      "level": 1,
+      "page_end": 154,
+      "role": "section",
+      "page_start_parquet": 153,
+      "page_end_parquet": 156
+    },
+    {
+      "title": "3. La CSFNP et l'enseignement",
+      "page_start": 155,
+      "level": 1,
+      "page_end": 158,
+      "role": "section",
+      "page_start_parquet": 157,
+      "page_end_parquet": 160
+    },
+    {
+      "title": "Chapitre 5 Des visites d'écoles en Europe à l'élaboration du programme",
+      "page_start": 159,
+      "level": 0,
+      "page_end": 186,
+      "role": "chapter",
+      "page_start_parquet": 161,
+      "page_end_parquet": 188
+    },
+    {
+      "title": "1. Le panel d'écoles",
+      "page_start": 161,
+      "level": 1,
+      "page_end": 169,
+      "role": "section",
+      "page_start_parquet": 163,
+      "page_end_parquet": 171
+    },
+    {
+      "title": "2. Les plans et le programme de l'ETPC",
+      "page_start": 170,
+      "level": 1,
+      "page_end": 186,
+      "role": "section",
+      "page_start_parquet": 172,
+      "page_end_parquet": 188
+    },
+    {
+      "title": "Troisième partie L'École technique de photographie et de cinématographie Premier cycle d'activité (1924-1937)",
+      "page_start": 187,
+      "level": 0,
+      "page_end": 192,
+      "role": "part",
+      "page_start_parquet": 189,
+      "page_end_parquet": 194
+    },
+    {
+      "title": "Chapitre 6 Vers l'ouverture de l'école",
+      "page_start": 193,
+      "level": 0,
+      "page_end": 215,
+      "role": "chapter",
+      "page_start_parquet": 195,
+      "page_end_parquet": 217
+    },
+    {
+      "title": "1. 1924, consolider des partenariats",
+      "page_start": 194,
+      "level": 1,
+      "page_end": 200,
+      "role": "section",
+      "page_start_parquet": 196,
+      "page_end_parquet": 202
+    },
+    {
+      "title": "2. 1925 et 1926, contretemps",
+      "page_start": 201,
+      "level": 1,
+      "page_end": 215,
+      "role": "section",
+      "page_start_parquet": 203,
+      "page_end_parquet": 217
+    },
+    {
+      "title": "Chapitre 7 Données d'activité",
+      "page_start": 216,
+      "level": 0,
+      "page_end": 265,
+      "role": "chapter",
+      "page_start_parquet": 218,
+      "page_end_parquet": 267
+    },
+    {
+      "title": "1. Le rapprochement entre l'ETPC et la Direction générale de l'enseignement technique",
+      "page_start": 218,
+      "level": 1,
+      "page_end": 223,
+      "role": "section",
+      "page_start_parquet": 220,
+      "page_end_parquet": 225
+    },
+    {
+      "title": "2. Décisions administratives et évènements protocolaires",
+      "page_start": 224,
+      "level": 1,
+      "page_end": 233,
+      "role": "section",
+      "page_start_parquet": 226,
+      "page_end_parquet": 235
+    },
+    {
+      "title": "3. Les cycles complets",
+      "page_start": 234,
+      "level": 1,
+      "page_end": 257,
+      "role": "section",
+      "page_start_parquet": 236,
+      "page_end_parquet": 259
+    },
+    {
+      "title": "4. Les cycles complémentaires et le laboratoire de recherches",
+      "page_start": 258,
+      "level": 1,
+      "page_end": 265,
+      "role": "section",
+      "page_start_parquet": 260,
+      "page_end_parquet": 267
+    },
+    {
+      "title": "Chapitre 8 La nationalisation de l'ETPC",
+      "page_start": 266,
+      "level": 0,
+      "page_end": 284,
+      "role": "chapter",
+      "page_start_parquet": 268,
+      "page_end_parquet": 286
+    },
+    {
+      "title": "1. La situation financière de l'ETPC",
+      "page_start": 267,
+      "level": 1,
+      "page_end": 271,
+      "role": "section",
+      "page_start_parquet": 269,
+      "page_end_parquet": 273
+    },
+    {
+      "title": "2. L'intervention de Jean Zay",
+      "page_start": 272,
+      "level": 1,
+      "page_end": 275,
+      "role": "section",
+      "page_start_parquet": 274,
+      "page_end_parquet": 277
+    },
+    {
+      "title": "3. Les tractations autour de la nationalisation de l'ETPC",
+      "page_start": 276,
+      "level": 1,
+      "page_end": 284,
+      "role": "section",
+      "page_start_parquet": 278,
+      "page_end_parquet": 286
+    },
+    {
+      "title": "CONCLUSION",
+      "page_start": 285,
+      "level": 0,
+      "page_end": 294,
+      "role": "backmatter",
+      "page_start_parquet": 287,
+      "page_end_parquet": 296
+    },
+    {
+      "title": "SOURCES",
+      "page_start": 295,
+      "level": 0,
+      "page_end": 295,
+      "role": "other",
+      "page_start_parquet": 297,
+      "page_end_parquet": 297
+    },
+    {
+      "title": "Fonds d'archives",
+      "page_start": 295,
+      "level": 0,
+      "page_end": 296,
+      "role": "other",
+      "page_start_parquet": 297,
+      "page_end_parquet": 298
+    },
+    {
+      "title": "Bases de données en ligne",
+      "page_start": 297,
+      "level": 0,
+      "page_end": 297,
+      "role": "other",
+      "page_start_parquet": 299,
+      "page_end_parquet": 299
+    },
+    {
+      "title": "BIBLIOGRAPHIE",
+      "page_start": 298,
+      "level": 0,
+      "page_end": 298,
+      "role": "backmatter",
+      "page_start_parquet": 300,
+      "page_end_parquet": 300
+    },
+    {
+      "title": "Ouvrages",
+      "page_start": 298,
+      "level": 0,
+      "page_end": 299,
+      "role": "backmatter",
+      "page_start_parquet": 300,
+      "page_end_parquet": 301
+    },
+    {
+      "title": "Sections d'ouvrages",
+      "page_start": 300,
+      "level": 0,
+      "page_end": 300,
+      "role": "other",
+      "page_start_parquet": 302,
+      "page_end_parquet": 302
+    },
+    {
+      "title": "Articles",
+      "page_start": 301,
+      "level": 0,
+      "page_end": 301,
+      "role": "backmatter",
+      "page_start_parquet": 303,
+      "page_end_parquet": 303
+    },
+    {
+      "title": "Travaux universitaires",
+      "page_start": 302,
+      "level": 0,
+      "page_end": 302,
+      "role": "other",
+      "page_start_parquet": 304,
+      "page_end_parquet": 304
+    }
+  ],
+  "page_offset": {
+    "intro_page_toc": 11,
+    "intro_page_parquet": 13,
+    "offset": 2,
+    "method": "introduction-anchor"
+  },
+  "toc_validation": {
+    "issues": [],
+    "ok": true
+  }
+}

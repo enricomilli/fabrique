@@ -1,0 +1,38 @@
+[
+  {
+    "quote": "définir la place des femmes au sein des cités, autant dans le sens social, géographique que symbolique.",
+    "tag": "(p. 29)",
+    "cited": [
+      29
+    ],
+    "to": 30,
+    "how": "rewrite"
+  },
+  {
+    "quote": "proposer des hypothèses sur leur symbolique.",
+    "tag": "(p. 31)",
+    "cited": [
+      31
+    ],
+    "to": 32,
+    "how": "rewrite"
+  },
+  {
+    "quote": "costume de roi et de reine",
+    "tag": "(p. 277)",
+    "cited": [
+      277
+    ],
+    "to": 279,
+    "how": "insert"
+  },
+  {
+    "quote": "la plupart de ces chroniques évoquent peu le fonctionnement des sociétés et se contentent de l'aspect anecdotique et mil",
+    "tag": "(p. 26)",
+    "cited": [
+      26
+    ],
+    "to": 27,
+    "how": "rewrite"
+  }
+]

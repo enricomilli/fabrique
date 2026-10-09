@@ -1,0 +1,338 @@
+Tu rédiges une NOTE DE LECTURE (compte rendu universitaire) d'une thèse de doctorat, dans la tradition académique française.
+
+La variable `context` (déjà chargée) contient le texte intégral de la thèse.
+
+## Format du blob `context`
+
+- Des marqueurs de page `[p.NNN]` sont insérés à chaque changement de page. Pour trouver le numéro de page d'un extrait, cherche sa position avec `.find()`, puis remonte jusqu'au marqueur `[p.NNN]` le plus proche.
+- Les notes de bas de page sont préfixées `[fn]` et placées à la fin de chaque page. Elles contiennent souvent les références scientifiques internes de la thèse.
+- Exemple de snippet pour trouver la page d'une phrase donnée :
+```python
+phrase = "conditions d'acceptabilité"
+pos = context.find(phrase)
+# remonter au dernier marqueur [p.XXX] avant pos
+marker_start = context.rfind("[p.", 0, pos)
+marker_end = context.find("]", marker_start) + 1
+page_tag = context[marker_start:marker_end]   # e.g. "[p.21]"
+print(f"Phrase « {phrase} » → {page_tag}")
+```
+
+
+## CARTE DE LA THÈSE (index de navigation)
+
+Index hiérarchique issu de la table des matières. Les pages sont les
+numéros des marqueurs `[p.NNN]` du blob `context` — pour atteindre
+directement un chapitre, saute à son marqueur :
+```python
+pos = context.find("[p.236]")     # début du chapitre visé
+extrait = context[pos:pos+3000]
+```
+ATTENTION : ne cherche PAS un titre de chapitre avec `context.find("titre")`
+— tu risques de tomber sur la table des matières de la thèse elle-même.
+Utilise toujours le saut par marqueur de page ci-dessous.
+
+- Remerciements  [p.6]–[p.6]
+- Résumé et mots-clés  [p.7]–[p.7]
+- Abstract and key words  [p.8]–[p.13]
+- INTRODUCTION GENERALE  [p.14]–[p.67]
+  - 1. LES CONCEPTS  [p.26]–[p.48]
+  - 2. PROBLÉMATIQUE SOCIOLOGIQUE  [p.49]–[p.57]
+  - 3. HYPOTHÈSES  [p.58]–[p.59]
+  - 4. QUESTIONS ÉPISTÉMOLOGIQUES CONCERNANT LA SOCIOLOGIE MORALE  [p.60]–[p.63]
+  - 5. L'IMAGINAIRE AU TRAVERS DES REPRÉSENTATIONS SOCIALES  [p.64]–[p.67]
+- CHAPITRE 2 : brève histoire croisée de la transfusion sanguine, du don de sang et de la santé publique en France  [p.68]–[p.93]
+  - 1. HISTOIRE DE LA MÉDECINE ET DE LA TRANSFUSION SANGUINE  [p.69]–[p.78]
+  - 2. LES ANNÉES 1981-1992 : « L’AFFAIRE DU SANG CONTAMINÉ »  [p.79]–[p.87]
+  - 3. L’ÉTABLISSEMENT FRANÇAIS DU SANG ET L’ÉTABLISSEMENT RÉGIONAL GRAND EST  [p.88]–[p.93]
+- CHAPITRE 3 : construction de la méthodologie  [p.94]–[p.110]
+  - 1 SOCIOLOGIE COMPREHENSIVE ET DEMARCHE HYPOTHETICO-INDUCTIVE  [p.95]–[p.99]
+  - 2.L'OBSERVATION PARTICIPANTE  [p.100]–[p.105]
+  - 3. LES ENTRETIENS SEMI-DIRECTIFS  [p.106]–[p.110]
+- DEUXIEME PARTIE : ANALYSE DE TERRAIN  [p.111]–[p.112]
+- CHAPITRE 1 : méthodologie  [p.113]–[p.129]
+- CHAPITRE 2 : analyse des entretiens  [p.130]–[p.212]
+  - 1. PROPOS GENERAUX  [p.131]–[p.145]
+  - 2. FAIRE UN DON DE SANG POUR LA PREMIERE FOIS  [p.146]–[p.148]
+  - 3. LES DONNEURS DE SANG TOTAL  [p.149]–[p.164]
+  - 4. LE DONNEUR DE PLASMA, UNE CATÉGORIE DE DONNEURS À PART ENTIÈRE  [p.165]–[p.178]
+  - 5. LES BÉNÉVOLES D'AMICALE DE DONNEURS  [p.179]–[p.182]
+  - 6. LES DIFFÉRENTS CORPS DE MÉTIER MOBILISES LORS DE LA COLLECTE DE DONS DE SANG  [p.183]–[p.212]
+- CHAPITRE 3 : analyse des observations participantes  [p.213]–[p.253]
+  - 1. LA COLLECTE, UNE ENTITÉ EN SOI.  [p.215]–[p.237]
+  - 2. OCCUPATION DE L'ESPACE ET ORGANISATION DU TRAVAIL  [p.238]–[p.242]
+  - 3. LE RAPPORT AU TEMPS  [p.243]–[p.244]
+  - 4. LE DON DE SANG COMME SYSTÈME SOCIAL  [p.245]–[p.253]
+- CHAPITRE 4 : les représentations sociales et la pratique du don de sang  [p.254]–[p.281]
+  - 1. LA COMMUNICATION INSTITUTIONNELLE  [p.255]–[p.271]
+  - 2. L'IMAGINAIRE DU DON DE SANG ET SON IMPACT DANS LA FORMATION DES CONDUITES SOCIALES  [p.272]–[p.281]
+- CHAPITRE 5 : Synthèse  [p.282]–[p.301]
+- CONCLUSION  [p.302]–[p.310]
+- BIBLIOGRAPHIE  [p.311]–[p.324]
+- ANNEXE  [p.325]–[p.325]
+
+Tu disposes aussi, ci-dessous, de deux ressources dans ton prompt :
+  1. La FICHE structurée de la thèse — ton plan de travail, ce que tu dois couvrir
+  2. Un EXEMPLE DE STYLE — le registre, la longueur et le flux que tu dois imiter
+
+## Règles de référence
+
+**Auteurs externes (hors thèse) : STRICTEMENT INTERDITS.** Ne cite aucun auteur, ouvrage ou revue qui ne figure pas dans le texte de la thèse. Si un compte rendu standard écrirait « comme le montre Habermas » ou « selon Bourdieu » alors que ni Habermas ni Bourdieu n'est cité par l'auteur de la thèse, tu reformules sans nommer.
+
+**Auteurs internes (cités PAR la thèse) : autorisés sous condition.** Si tu veux nommer un auteur que la thèse elle-même mobilise (ex. Foucault, Moretti, Bakhtine, Lavoinne, Tetlock), tu DOIS :
+  1. Vérifier via `context.find("Nom")` qu'il est bien présent dans la thèse — SAUF si l'auteur figure déjà dans la FICHE avec une citation et une page : dans ce cas reprends l'ancrage de la fiche tel quel, sans revérification.
+  2. Accompagner la mention d'une courte citation verbatim (entre guillemets « ») extraite de la thèse.
+  3. Indiquer le numéro de page, obtenu via la méthode du marqueur `[p.NNN]` décrite ci-dessus.
+  Exemple : « Comme le rappelle Lavoinne, "cette croissance n'est pas justifiée économiquement" (p. 34). »
+
+**Chapitres et passages de la thèse** : cite-les librement (ex. « dans le premier chapitre », « p. 612 »). Les pages doivent être vérifiées via les marqueurs `[p.NNN]` — JAMAIS une position en caractères (offset à 4+ chiffres).
+
+**Notes de bas de page** : tu n'en rédiges pas dans la note. Les `[fn]` du blob sont uniquement un outil de recherche pour toi.
+
+**Cible : au moins 8 références de page précises dans la note finale** pour étayer tes affirmations.
+
+## Structure à produire (~2000 mots)
+
+```markdown
+# [Titre complet de la thèse, en italique après l'auteur]
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-10-07
+
+**Référence :** [Auteur], *[Titre]*, [Établissement], [Année], [Nombre de pages] p.
+
+---
+
+[Paragraphe 1 — Ouverture (~250 mots) : situe la thèse, l'auteur, la discipline,
+la période étudiée, la thèse centrale, le corpus principal. Annonce le fil
+directeur et la périodisation.]
+
+[Paragraphe 2 — Méthodologie et démarche (~300 mots) : approche,
+outillage, corpus, sondages, corpus contextuels. Souligne l'originalité
+méthodologique.]
+
+[Paragraphe 3 — Première partie ou premier axe (~350 mots) : en citant les pages.]
+
+[Paragraphe 4 — Deuxième partie ou deuxième axe (~300 mots).]
+
+[Paragraphe 5 — Troisième partie ou troisième axe (~350 mots).]
+
+[Paragraphe 6 — Portée, apport et tensions (~300-400 mots) : synthèse
+critique. L'apport empirique, théorique, méthodologique. Les tensions,
+les limites. Ouverture sur ce que la thèse permet de penser.]
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de [Titre court] », [Date].
+```
+
+## Consignes RLM
+
+- **Les pages et citations de la FICHE ont déjà été vérifiées automatiquement contre la source.** Reprends-les telles quelles, SANS les revérifier via `context.find(...)`. Ne vérifie que ce que tu introduis TOI-MÊME et qui ne figure pas dans la fiche (nouvel auteur, nouvelle citation, nouvelle page).
+- Si tu as besoin d'un passage spécifique, utilise `context[start:end]` ou `context.find("phrase")` pour le localiser, puis extrait une tranche de 500-1500 caractères autour.
+- **Travaille en LOTS SERRÉS** : toute l'exploration initiale (squelette : introduction, méthodologie, ouvertures de parties, conclusion, exemples fondateurs) doit tenir en AU PLUS 3 exécutions de code, chacune extrayant PLUSIEURS passages d'un coup (5 à 8 extraits par exécution). Jamais une exécution par passage. Les extractions complémentaires entre les passes de rédaction (cœur des parties) comptent à part : au plus 1 exécution d'extraction par passe de rédaction.
+- **LIAISON PAGE-EXTRAIT (obligatoire dans les lots)** : quand une exécution imprime plusieurs extraits, fais-la précéder CHAQUE extrait d'une ligne `===== EXTRAIT [p.N] → [p.M] =====` (les marqueurs réels de début et de fin de l'extrait). Au moment de citer, reprends le numéro depuis la ligne `=====` ou le marqueur `[p.N]` visible IMMÉDIATEMENT au-dessus du passage cité — jamais de mémoire. Une citation dont tu ne retrouves pas le marqueur exact dans tes sorties ne doit PAS porter de numéro de page.
+- **RÉDACTION EN PLUSIEURS PASSES (OBLIGATOIRE)** : ne rédige JAMAIS la note entière en une seule exécution. Rédige AU PLUS 2 paragraphes par exécution de code. Avant de rédiger les paragraphes 3, 4 et 5, extrais d'abord de NOUVEAUX passages du cœur de la partie concernée (pas seulement son ouverture) — puis rédige. Assemble le tout à la fin seulement.
+- **CITATION ET AFFIRMATION CO-PRÉSENTES** : une citation verbatim « … » (p. N) ne peut étayer QUE l'affirmation du passage d'où elle provient (le texte visible sous le même marqueur `[p.N]`). N'emploie JAMAIS une phrase de la thèse pour un argument qu'elle ne porte pas dans son contexte d'origine (une hypothèse formulée sur X ne sert pas à commenter Y ; un nom de fonction, de concept ou de liste se reprend tel que le passage le donne, sans le recomposer). Si une affirmation a besoin d'un appui, va chercher le passage qui la porte et cite-le avec sa propre page.
+- **Densité d'ancrage** : chaque paragraphe de partie (3, 4 et 5) doit citer AU MOINS 3 pages distinctes. Une partie racontée sans pages précises est un paragraphe raté.
+- Ne saute pas les exemples fondateurs que la fiche met en avant (comparaison inaugurale, cas paradigmatique, date fondatrice) : s'ils motivent la thèse, ils appartiennent à la note.
+- `llm_query` est réservé aux RECHERCHES ponctuelles (localiser un thème, résumer un long passage pour toi-même). NE L'UTILISE JAMAIS pour rédiger les paragraphes de la note : la rédaction se fait TOI-MÊME, dans cette boucle, avec les marqueurs `[p.NNN]` sous les yeux — c'est la seule façon de garantir des numéros de page exacts.
+- À la fin, assemble le markdown complet dans une variable puis appelle `FINAL(markdown_complet)`.
+
+## FICHE DE LA THÈSE
+
+```markdown
+# FICHE DE SYNTHÈSE DE THÈSE
+
+## Métadonnées
+
+- **Titre** : Sociologie de la construction du don : le cas paradigmatique du don de sang
+- **Auteur** : Aurore MALRIAT
+- **Année** : 2022
+- **Établissement** : Université de Lorraine, SLTC
+- **Discipline** : Sociologie
+- **Pages** : 370
+
+## Mots-clés
+
+don de sang ; solidarité ; éthique ; lien social ; réciprocité ; économie sociale ; sociologie du don ; corps ; représentations sociales ; temps ; devenir ; imaginaire
+
+## Thèse centrale
+
+Le don de sang n'est pas une pratique homogène réductible à une logique économique ou altruiste pure, mais une conduite morale située « entre le cœur et la raison » qui articule nécessité vitale, engagement personnel et obligation morale de secourir autrui (p. 303). Cette pratique opère comme un puissant facteur de cohésion sociale et de mutualisation des biens communs, permettant de recréer des liens sociaux et de construire le devenir de la société par des actes quotidiens de solidarité (p. 306, p. 308).
+
+## Questions de recherche
+
+- « comment donne-t-on un produit de son corps ? » (p. 16)
+- « si le don de sang, lors duquel un produit du corps est donné à autrui, a une fonction similaire à la fonction du don objet (ou d'argent) ? » (p. 18)
+- « Peut-on penser le don de sang à la lumière des théories des économistes, sociologues et anthropologues ? » (p. 18)
+- « Peut-on parler du don et contre-don à travers le seul prisme économique en négligeant la relation d'aide et de la solidarité ? » (p. 18)
+- « Est-ce que le don de sang n'est pas une action de l'engagement ? » (p. 18)
+- « Comment les règles pratiques délimitent-elles les possibilités du don ? » (p. 19)
+- « Est-ce qu'une société peut vivre sans règles morales ? » (p. 19)
+- « Est-ce que le don de sang est révélateur de la définition que l'être humain peut donner dans la définition de son bien être ? » (p. 19)
+- « Est-ce que la sociologie du don de sang ne bouscule pas les conceptions économiques que nous avons du don jusqu'à aujourd'hui ? » (p. 19)
+- « Est-ce que cet acte n'inscrit pas la société dans l'avenir ? » (p. 19)
+- « Est-ce que cette sociologie du don va nous permettre de comprendre ce que signifie que « faire société » ? » (p. 19)
+- « Est-ce qu'en étudiant le don de sang nous ne sommes pas entre les valeurs fondamentales de l'être et ses conceptions de faire société ? » (p. 19)
+- « Est-ce que cette dernière ne s'inscrit pas dans une réciprocité et n'obéit pas à une un intérêt personnel comment un intérêt pour le commun ? » (p. 19)
+- « Peut-on faire société sans solidarité et relation d'aide ? » (p. 19)
+- « Est-ce que le don de sang n'obéit pas un intérêt pour le commun ? » (p. 19)
+- « comment ses trois notions s'articulent dans le but de favoriser une pratique du don du corps tandis que l'échange économique est omniprésent en ce début de XXIe siècle. » (p. 49)
+- « Comment se saisissent les acteurs de ces questions morales liées à la pratique du don ? » (p. 49)
+- « comment les déterminants sociaux influencent la pratique sociale du don de sang, et comment prendre en compte la subjectivité des comportements sociaux ? » (p. 51)
+- « comment les contraintes sociales liées à l'éthique cadrent les pratiques sociales de solidarité. » (p. 53)
+- « si le don de sang a une fonction sociale. » (p. 53)
+- « Est-ce qu'une société peut vivre sans expression de solidarité ? » (p. 56)
+- « Le don de sang peut-il être un facteur de lien social ? » (p. 56)
+- « Quel « sens » peut-on donner à l'action de don ? » (p. 56)
+- « Peut-on mobiliser la notion de care afin d'enrichir la grille de lecture des conduites sociales du don de sang ? » (p. 57)
+- « Comment le commun (ta koina en grec) est-il saisi par les acteurs pour permettre l'acte de don ? » (p. 57)
+
+## Réponses aux questions de recherche
+
+- « comment donne-t-on un produit de son corps ? » (p. 16) : « Cette pratique tout à fait particulière se différencie du don économique car le donneur donne mais ne se prive pas. » (p. 306)
+- « si le don de sang, lors duquel un produit du corps est donné à autrui, a une fonction similaire à la fonction du don objet (ou d'argent) ? » (p. 18) : « il n'y a pas représentation culturelle car sur ce don se greffe la volonté de l'être humain de dépasser le présent. » (p. 303)
+- « Peut-on penser le don de sang à la lumière des théories des économistes, sociologues et anthropologues ? » (p. 18) : « Nous avons prouvé qu'il n'existe non pas une catégorie de donneurs homogène mais plusieurs catégories de donneurs. » (p. 303)
+- « Peut-on parler du don et contre-don à travers le seul prisme économique en négligeant la relation d'aide et de la solidarité ? » (p. 18) : « Les sociologues ont mis l'accent sur l'intérêt mais il ne peut pas y avoir d'intérêt dans le don de produits sanguins. » (p. 304)
+- « Est-ce que le don de sang n'est pas une action de l'engagement ? » (p. 18) : « Ainsi on constate cet engagement de rompre avec le repli sur soi c'est-à-dire le piétinement de la pensée dans le présent et de libérer l'individu de ces peurs car l'individu sait qu'il peut intervenir et réparer l'irréparable dans la vie de l'autre. » (p. 308)
+- « Comment les règles pratiques délimitent-elles les possibilités du don ? » (p. 19) : « La gestion du temps et de l'espace varie en fonction du type de collecte offrant une expérience diverse aux donneurs. » (p. 304)
+- « Est-ce qu'une société peut vivre sans règles morales ? » (p. 19) : « La morale d'abord puis les lois de bioéthique ont régi son utilisation et sa pratique, faisant du produit sanguin un bien à valeur commune. » (p. 305)
+- « Est-ce que le don de sang est révélateur de la définition que l'être humain peut donner dans la définition de son bien être ? » (p. 19) : Pas de réponse explicite dans la conclusion.
+- « Est-ce que la sociologie du don de sang ne bouscule pas les conceptions économiques que nous avons du don jusqu'à aujourd'hui ? » (p. 19) : « Cette pratique tout à fait particulière se différencie du don économique car le donneur donne mais ne se prive pas. » (p. 306)
+- « Est-ce que cet acte n'inscrit pas la société dans l'avenir ? » (p. 19) : « Et quant au devenir de la société, le devenir se construit tous les jours par les actes de la solidarité humaine, de la mutualisation des biens. » (p. 308)
+- « Est-ce que cette sociologie du don va nous permettre de comprendre ce que signifie que « faire société » ? » : « Il nous semble judicieux de creuser les différences de pratique entre les catégories de donneurs. » (p. 307)
+- « Est-ce qu'en étudiant le don de sang nous ne sommes pas entre les valeurs fondamentales de l'être et ses conceptions de faire société ? » (p. 19) : « Ils savent sans se le dire qu'ils partagent les mêmes valeurs, respectent les mêmes codes moraux, et une envie de participer au bien-être collectif. » (p. 306)
+- « Est-ce que cette dernière ne s'inscrit pas dans une réciprocité et n'obéit pas à une un intérêt personnel comment un intérêt pour le commun ? » (p. 19) : « Le système social du don de sang est propice à la solidarité et à l'entraide. » (p. 304)
+- « Peut-on faire société sans solidarité et relation d'aide ? » (p. 19) : « La mutualisation dans l'invisible de liens sociaux favorise le vivre-ensemble. » (p. 306)
+- « Est-ce que le don de sang n'obéit pas un intérêt pour le commun ? » (p. 19) : « L'envie d'aider, et de manifester son soutien à l'autre est présent chez les acteurs du don. » (p. 304)
+- « comment ses trois notions s'articulent dans le but de favoriser une pratique du don du corps tandis que l'échange économique est omniprésent en ce début de XXIe siècle. » (p. 49) : « Le système social du don de sang est propice à la solidarité et à l'entraide. Il permet d'allier le respect des règles de bioéthiques, un environnement social particulier et une aide technique pour effectuer un don de produits sanguins. » (p. 304)
+- « Comment se saisissent les acteurs de ces questions morales liées à la pratique du don ? » (p. 49) : « Dans une vision durkheimienne de la sociologie morale, il n'y a aucune distinction entre devoir et nécessité. Pourtant dans notre exemple, il y a une distance qui s'établit entre nécessité et obligation parce qu'il y a nécessité et engagement personnel mais pas obligation sociale car morale. » (p. 303)
+- « comment les déterminants sociaux influencent la pratique sociale du don de sang, et comment prendre en compte la subjectivité des comportements sociaux ? » (p. 51) : « Tous ne pratiquent pas le don pour les mêmes raisons ni même de la même manière. » (p. 303)
+- « comment les contraintes sociales liées à l'éthique cadrent les pratiques sociales de solidarité. » (p. 53) : « La morale d'abord puis les lois de bioéthique ont régi son utilisation et sa pratique, faisant du produit sanguin un bien à valeur commune. » (p. 305)
+- « si le don de sang a une fonction sociale. » (p. 53) : « nos travaux révèlent que la pratique du don de sang permettrait une meilleure cohésion sociale. » (p. 306)
+- « Est-ce qu'une société peut vivre sans expression de solidarité ? » (p. 56) : « Une chaîne de solidarité se crée grâce à un partage de valeurs. » (p. 306)
+- « Le don de sang peut-il être un facteur de lien social ? » (p. 56) : « les collectes de sang sont perçues comme un moyen de recréer des liens sociaux en s'appropriant les espaces publics lors des collectes mobiles. » (p. 306)
+- « Quel « sens » peut-on donner à l'action de don ? » : « Le don de sang est un objet dont la valeur est construite. » (p. 305)
+- « Peut-on mobiliser la notion de care afin d'enrichir la grille de lecture des conduites sociales du don de sang ? » (p. 57) : « Les notions de care ont permis de rétablir la relation soin du corps/ soucis de l'autre que les équipes de collecte illustrent parfaitement. » (p. 305)
+- « Comment le commun (ta koina en grec) est-il saisi par les acteurs pour permettre l'acte de don ? » (p. 57) : « Penser le don de sang, c'est aussi penser les communs, c'est pour cela que la problématique de l'éthique appliquée est constamment présente. » (p. 305)
+
+## Hypothèses
+
+**Principale** : « On ne peut penser le don et la solidarité à travers le seul prisme de l'échange économique, car ils inscrivent aussi dans une conduite morale qui opérationnalisent les liens sociaux et la survie de l'individu. » (p. 59)
+**Secondaires** :
+- « L'éthique exprime non seulement une vision du monde, mais aussi une déontologie, et la transfusion sanguine, en tant que pratique transdisciplinaire, s'affirment dans les deux à la fois. » (p. 59)
+- « La sociologie morale n'est pas assez développée, et le concept de solidarité doit lui être associé, car la solidarité est nécessaire au maintien des sociétés, tout comme la morale. » (p. 59)
+- « La solidarité s'exprime grâce à des liens sociaux créés lors des collectes de dons. » (p. 59)
+
+## Méthodologie
+
+- **Approche** : « démarche qualitative » (p. 114), « démarche hypothétique-inductive complétée par une approche de sociologie compréhensive » (p. 18), « individualisme méthodologique » (p. 52) et « microsociologie » (p. 303)
+- **Méthode** : « entretiens semi-directifs » (p. 19) (deux grilles distinctes : « donneur » et « EFS »), « observations participantes » (p. 19) (grille d'observation en trois parties : factuelle, itinéraire de collecte, observations des acteurs), « analyse thématique » (p. 114), « analyse du discours institutionnelle » (p. 19) ; combinaison croisée des deux outils pour « analyser le réel » et « connaître davantage la temporalité dynamique des interactions par la comparaison des différents discours des groupes d'acteurs » (p. 115)
+- **Corpus/Données** : « le début de la chaine de la transfusion sanguine, le moment où a lieu le don de sang » (p. 49), « l'itinéraire des donneurs de sang en milieu rural » (p. 62), « dans le Grand-Est » (p. 303), et les « collectes mobiles » vs « maison du don » (p. 304) ; enquête préalable de « deux collectes mobiles » (p. 117) pour construire les grilles ; collecte de données auprès des « donneurs » et des « salariés EFS » (préleveurs, secrétaires, médecins, chauffeurs) (p. 117)
+- **Justification** : « cette pratique, encore peu connue sociologiquement, est cadrée par des règles d'éthique suffisamment stricte pour offrir des données empiriques observables uniformes, mais suffisamment souples pour permettre aux acteurs de se saisir de la pratique sociale de manière individuelle. » (p. 49) ; recours à l'observation empirique pour « avancer avec une grille de lecture qui permette de prendre davantage de distance » (p. 116) et saisir « l'intentionnalité (Husserl) ainsi que la signification du comportement des individus (Max Weber) » (p. 116) ; référence à « Frédéric Leplay, qui est considéré comme le premier sociologue de terrain » (p. 116) et à « Norbert Elias écrivait « la sociologie est la science de l'intelligible » » (p. 114) pour justifier le choix qualitatif et compréhensif.
+
+## Fil rouge
+
+La générosité telle que défini par l'auteur (p. 303, p. 306), reliant l'histoire institutionnelle, la méthodologie, les entretiens, les observations et les représentations sociales via l'articulation entre nécessité vitale, obligation morale et coopération collective pour penser le don comme une conduite située « entre le cœur et la raison ».
+
+## Plan (Structure)
+
+- **CHAPITRE 2 : brève histoire croisée de la transfusion sanguine, du don de sang et de la santé publique en France** : Démontre que l'évolution institutionnelle et éthique du don de sang en France est structurée par des crises sanitaires et des choix politiques qui ont imposé un modèle altruiste et réglementé.
+- **CHAPITRE 3 : construction de la méthodologie** : Démontre que la démarche hypothético-inductive et le recours à l'individualisme méthodologique permettent de saisir à la fois les contraintes structurelles et la subjectivité des acteurs dans la pratique du don.
+- **CHAPITRE 2 : analyse des entretiens** : Démontre que les motivations et les trajectoires des donneurs révèlent une appropriation individuelle des normes éthiques et une construction identitaire liée à la générosité et à l'entraide.
+- **CHAPITRE 3 : analyse des observations participantes** : Démontre que les interactions lors des collectes de sang matérialisent des liens sociaux et des routines institutionnelles qui encadrent et facilitent l'engagement des donneurs.
+- **CHAPITRE 4 : les représentations sociales et la pratique du don de sang** : Démontre que l'imaginaire collectif et les représentations sociales du sang et du corps conditionnent l'acceptabilité du don et structurent le rapport symbolique entre donneur, receveur et institution.
+
+## Cadre théorique
+
+- **Cadre principal** : Marcel Mauss — « fait social total » et « économie du don » (p. 32) — Structure l'analyse globale en posant le don comme un contrat social fondateur de liens, tout en servant de point de départ pour en montrer les limites face au don corporel anonyme.
+- **Cadres secondaires** :
+  - Raymond Boudon / Karl Popper — « individualisme méthodologique » (p. 52) — Sert d'outil pour expliquer les phénomènes sociaux comme l'agrégation de comportements individuels rationnels ou non logiques, permettant de relier motivations subjectives et contraintes structurelles.
+  - Max Weber — « types d'action » et « éthique de responsabilité/conviction » (p. 56) — Fournit une grille de lecture pour classifier les conduites des donneurs entre rationalité, valeur, tradition et affectivité.
+  - Paul Ricœur — « éthique comme visée d'une vie accomplie » (p. 40) — Offre une définition large de l'éthique pratique reliant l'individu au collectif, mobilisée pour analyser la dimension morale du don de sang.
+  - Talcott Parsons / Robert K. Merton — « structure-fonctionnalisme » (p. 56) et « analyse fonctionnelle » (p. 55) — Utilisés pour examiner la fonction sociale du don de sang au sein des sous-systèmes sociaux et identifier ses fonctions manifestes ou latentes.
+
+## Concepts clés
+
+- **CONCEPT** : DON CORPOREL
+- **SENS** : « donner son sang, un produit de son corps, ne contribue pas à créer une relation économique durable. Le don du corps ne saurait être réduit à une vision utilitariste à l'instar du don d'objets. » (p. 17)
+- **ORIGINE** : Propre à l'auteur, redéfini par opposition au don économique agonistique de Mauss et articulé à l'anonymat et à la générosité.
+- **CONCEPT** : SOLIDARITÉ
+- **SENS** : « relation entre personnes ayant conscience d'une communauté d'intérêts, qui entraine, pour un élément du groupe, l'obligation morale de ne pas desservir les autres et de leur porter assistance » (p. 26)
+- **ORIGINE** : Emprunté à la tradition sociologique (Durkheim, Bourgeois) et retravaillé par l'auteur pour l'associer à la sociologie morale et à la survie collective.
+- **CONCEPT** : ÉTHIQUE PRATIQUE
+- **SENS** : « l'éthique est une discipline morale empirique, conceptualisée et appliquée dans un contexte social déterminé. » (p. 37)
+- **ORIGINE** : Emprunté à Jacques Fontanel (p. 37) et Paul Ricœur (p. 40) et mobilisé pour analyser les conduites réelles des donneurs face aux règles bioéthiques.
+- **CONCEPT** : GÉNÉROSITÉ
+- **SENS** : « une attitude de vie au Moyen-Âge, elle est une idée chevaleresque qui a été définie comme une idéalité propre et le don comme une matérialité. C'était une vertu morale qui était opposée à l'intérêt. » (p. 49)
+- **ORIGINE** : Emprunté à la philosophie morale et retravaillé par l'auteur pour distinguer la pratique du don de sang de l'altruisme économique et la lier à l'entraide kropotkine.
+- **CONCEPT** : CARE
+- **SENS** : « le care embrasse véritablement une dimension matérielle, qui est également le support nécessaire de cette dimension éthique et politique : le care est une éthique parce qu'il est aussi travail. » (p. 58)
+- **ORIGINE** : Emprunté à Hervé Polesi et aux sociologues du soin (Graham, David, Ungerson) et mobilisé pour enrichir la grille de lecture des conduites sociales du don de sang.
+
+## Ancrage empirique (ou concret)
+
+- « le début de la chaine de la transfusion sanguine, le moment où a lieu le don de sang » (p. 49)
+- « l'itinéraire des donneurs de sang en milieu rural » (p. 62)
+- « collectes de dons de sang » (p. 59)
+- « EFS » (Établissement français du sang) comme opérateur unique désigné en 2000 (p. 17)
+- « loi du 21 juillet 1952 » fixant le cadre légal du modèle altruiste (p. 47)
+- « Nous avons prouvé qu'il n'existe non pas une catégorie de donneurs homogène mais plusieurs catégories de donneurs. » (p. 303)
+- « Les collectes en milieu rural sont des collectes mobiles où tout le matériel est amené par l'équipe de collecte et l'équipe ne reste sur place que pendant quelques heures. A contrario, la collecte en maison du don se fait dans les locaux de l'EFS sur un temps plus long. » (p. 304)
+
+## Opposition / Contre-argumentation
+
+- « La vision utilitariste de l'échange gratuit » et le « don économique agonistique de Mauss où un échange est effectué pour favoriser des liens sociaux entre des groupes sociaux » (p. 17, p. 49) : Lacune théorique identifiée par l'auteur qui refuse de réduire le don de sang à une logique de contre-don ou de création de liens économiques durables.
+- « L'homo economicus » qui suppose que « l'individu recherche la maximisation de son plaisir » (p. 30) : Position rejetée au profit d'une sociologie intégrant les choix irrationnels, moraux et les actions non logiques (Pareto/Boudon) pour expliquer l'engagement dans le don corporel.
+- « l'altruisme n'est pas le premier facteur incitatif » (p. 36) : Résultat contre-intuitif issu des recherches de Smith, Matthews et Filder, utilisé par l'auteur pour montrer que le contexte social et le capital communautaire priment sur l'appel pur à l'altruisme.
+- « La fragilisation du lien social à cause du processus d'individuation » (p. 306) : Résultat contre-intuitif démontré par la thèse, qui montre que contrairement aux théories de la solidarité, le don de sang permet une meilleure cohésion sociale et recrée des liens via l'appropriation des espaces publics.
+
+## Apport principal
+
+- **Théorique** : La thèse propose de dissocier le don corporel des analyses du don économique et agonistique en mobilisant un triptyque original « solidarité, éthique et générosité » pour penser le don de sang comme une conduite morale d'engagement plutôt que comme un échange de contreparties.
+- **Critique** : Elle remet en cause la prédominance de l'altruisme comme moteur unique du don de sang en déplaçant l'analyse vers les déterminants sociaux, l'imaginaire collectif et les routines institutionnelles qui cadrent la pratique.
+- **Empirique** : Elle apporte une sociologie compréhensive du moment précis du don et des itinéraires des donneurs (notamment en milieu rural), un champ décrit comme « encore peu connu sociologiquement » (p. 49), en articulant observations participantes et entretiens pour saisir la subjectivité des acteurs face aux contraintes bioéthiques.
+
+```
+
+## EXEMPLE DE STYLE (à imiter pour le registre, la longueur des paragraphes, le flux)
+
+```markdown
+# [Titre complet de l'ouvrage : nom des directeurs et titre/sous-titre en italique]
+
+**Compte rendu par** [Auteur du compte rendu]
+
+**Date :** 2026-04-24
+
+**Source :** [URL si disponible]
+
+**Référence :** [Auteur·e·s], *Titre complet*, Ville, Éditeur, coll. « Collection », année, xxx p., ISBN : xxx.
+
+---
+
+Quatorze auteurs, parmi lesquels des sociologues clés de l'analyse du secteur social et médico-social analysent, dans cet ouvrage important, les transformations de la « morale » de l'intervention sociale de divers pays (France dont Mayotte, Suisse, Maroc, Québec), ceci à la suite d'un congrès sociologique international tenu à Tunis en 2021. Le texte décrit les tensions traversant l'intervention sociale, entre idéaux de justice sociale, d'égalité et de solidarisme d'une part, et les principes de responsabilisation et d'activation dans un contexte marqué par l'emprise croissante d'une logique managériale, d'autre part. Disons-le d'emblée, le principe de « responsabilisation » mérite d'être interrogé : il renvoie généralement non pas tant à un transfert de pouvoir aux usagers ou citoyens, comme il l'affirme, mais souvent à une « normalisation » du contrôle social reposant, désormais, sur l'individu lui-même. C'est notamment le cas dans les dispositifs de parentalité ou dans la justice restaurative, où la volonté des individus devient l'opérateur du contrôle social.
+
+Notre lecture questionne implicitement les mots-clefs contemporains de l'intervention sociale que sont « responsabiliser » et « activer ». Ces termes sont aussi les items centraux de la Nouvelle Gouvernance Publique (NGP), laquelle tend, pour l'action sociale, à substituer la « relation de service » reposant sur l'efficience et le résultat au « modèle de service public d'action » fondateur. S'impose, alors, un glissement progressif vers un paradigme managérial qui met la focale sur les difficultés de financement, d'efficacité, la qualité du service et le questionnement de la légitimité de l'État social.
+
+Dans le premier chapitre, Jean-Pierre Tabin et ses collègues explorent, à partir de la rhétorique de l'État depuis les années 2000, les politiques suisses en direction des personnes invalides. Ils identifient finement une logique « capacitiste » visant la re-marchandisation à tout prix, via un nouvel ordre d'employabilité passant par l'acceptation d'une norme d'emploi « médiocre » et, de fait, réduisant la « crédibilité épistémique » de la personne en situation de handicap psychique. Dans les Structures d'Insertion par l'Activité Économique (SIAE) analysées par Hervé Jory dans le cinquième chapitre, la prévalence des compétences d'adaptation sociale sur la formation didactique et le savoir-faire professionnel correspond à une précarisation du profil attendu des publics. L'inversion du statut de la formation, dans ces structures d'insertion, tend à favoriser des conditions d'acceptation de conditions de travail pénibles pour des emplois sous-qualifiés. Ce nouveau cadre normatif de l'inclusion professionnelle repose sur le postulat « d'insérer pour former » où l'insertion se suffit en elle-même. Il s'agit de privilégier l'adaptation quasi immédiate à l'emploi et ses difficultés, en particulier la capacité à supporter des conditions de travail éprouvantes (port de charges lourdes, intempéries…) plutôt que l'intégration de savoirs professionnels et une qualification capitalisable.
+
+L'analyse de tous ces segments de l'intervention sociale est à même d'identifier une logique de responsabilisation des publics et un tournant managérial souvent pénalisants. Mais la grammaire managériale reste fortement questionnée dans les pratiques concrètes des acteurs. Un deuxième grand apport de l'ouvrage est donc d'étudier les engagements moraux et les micro-résistances éthiques des intervenants·es infléchissant parfois certaines modalités de l'intervention sociale. Au-delà des cadres normatifs, des professionnels inventent dès lors des pratiques d'écarts éthiques pour redonner sens à leur action.
+
+Ainsi, dans l'urgence sociale présentée par Hélène Marin et Béatrice Bertho (chapitre 3), la mobilisation bénévole de professionnels illustre la volonté de participer à la neutralisation d'un déficit d'action publique récurrent, en contradiction avec les principes moraux de l'État social. Un engagement solidaire, fait en parallèle de leur travail salarié, s'instaure dans une ville de Suisse romane afin de faire face à une « politique de la pénurie » (p. 48) de l'accueil national des personnes sans-abris. Ce « bénévolat solidaire » définit ce que l'on peut appeler une « résistivité morale », des micro-résistances enracinées dans les principes de justice sociale au regard des besoins de ce public en grande vulnérabilité psychique et sociale.
+
+En définitive, l'intérêt majeur des thèses de cet ouvrage est de souligner une mutation des cadres normatifs et moraux de l'intervention sociale qui mettent désormais essentiellement l'accent sur une responsabilisation des individus vulnérables, une activation étrécie et pénalisante et privilégiant parfois l'immédiateté de l'insertion par le travail, voire des pratiques de culpabilisation-stigmatisation et des dispositifs d'activation définis par une grammaire managériale. Par contre, ces mutations ne doivent pas oblitérer, car s'exprimant à bas bruit dans les interstices de l'accompagnement, la présence modeste d'un cadre moral et cognitif secondaire d'élargissement du pouvoir d'agir pour les personnes en difficulté. Une responsabilisation que l'on peut qualifier d'« habilitante » est encore visible dans nombre des pratiques d'accompagnement. Ainsi, le Revenu de Solidarité Active (RSA) agricole représente une reconnaissance nouvelle de la vulnérabilité d'une population et un levier d'action potentiel pour des agriculteurs immergés des décennies dans une grande précarité. L'action sociale n'est pas réductible au seul tournant néo-libéral et l'on observe non pas une « nouvelle » morale de l'intervention sociale mais une hybridation de morales dont certaines fondatrices de l'État social et du travail social. Malgré tout, force est de constater que la NGP encadre l'intervention sociale par des normes managériales dissonantes au regard des idéaux universalistes, de l'éthique et de la vulnérabilité des publics et de leurs besoins. Ces nouvelles normes conduisent à une détérioration de l'action pour les usagers et le personnel que l'on retrouve aussi dans l'ensemble des services publics.
+
+---
+
+## Pour citer cet article
+
+**[Auteur]**, « [Titre court de l'ouvrage] », *Comptes rendus*, mis en ligne le [date], consulté le [date].
+
+```
+
+---
+
+Rédige maintenant la note de lecture. Vise ~2000 mots, six paragraphes denses, français académique soutenu. Termine par `FINAL(note_markdown)`.

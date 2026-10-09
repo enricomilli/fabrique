@@ -1,0 +1,241 @@
+{
+  "thesis_id": "2024ESMA0001",
+  "parquet_blocks": 1463,
+  "parquet_pages": 141,
+  "metadata": {
+    "titre": "Ordonnancer le trafic dans des réseaux déterministes grâce à l'apprentissage par renforcement",
+    "auteur": "Adrien Roberty",
+    "annee": "2024",
+    "etablissement": "ISAE-ENSMA; Laboratoire des Systèmes Communicants (LSC); École doctorale ED Mathématiques, Informatique, Matériaux, Mécanique, Énergétique (MIMME) n° 651",
+    "discipline": "Informatique et applications",
+    "mots_cles": [
+      "apprentissage par renforcement (intelligence artificielle)",
+      "apprentissage profond",
+      "industrie 4.0",
+      "intelligence artificielle",
+      "ordonnancement (informatique)",
+      "temps réel (informatique)",
+      "industrie 5.0",
+      "time-sensitive networking (tsn)",
+      "time-aware shaper (tas)",
+      "reinforcement learning",
+      "deep learning",
+      "industry 4.0",
+      "artificial intelligence",
+      "computer scheduling",
+      "real-time data processing",
+      "industry 5.0"
+    ],
+    "pages": 141
+  },
+  "toc": [
+    {
+      "title": "Résumé",
+      "page_start": null,
+      "level": 0,
+      "page_end": null,
+      "role": "frontmatter",
+      "page_start_parquet": null,
+      "page_end_parquet": null
+    },
+    {
+      "title": "Remerciements",
+      "page_start": null,
+      "level": 0,
+      "page_end": null,
+      "role": "frontmatter",
+      "page_start_parquet": null,
+      "page_end_parquet": null
+    },
+    {
+      "title": "Acronymes",
+      "page_start": null,
+      "level": 0,
+      "page_end": null,
+      "role": "backmatter",
+      "page_start_parquet": null,
+      "page_end_parquet": null
+    },
+    {
+      "title": "Symboles",
+      "page_start": null,
+      "level": 0,
+      "page_end": null,
+      "role": "other",
+      "page_start_parquet": null,
+      "page_end_parquet": null
+    },
+    {
+      "title": "Sommaire",
+      "page_start": null,
+      "level": 0,
+      "page_end": null,
+      "role": "frontmatter",
+      "page_start_parquet": null,
+      "page_end_parquet": null
+    },
+    {
+      "title": "Liste des tableaux",
+      "page_start": null,
+      "level": 0,
+      "page_end": null,
+      "role": "backmatter",
+      "page_start_parquet": null,
+      "page_end_parquet": null
+    },
+    {
+      "title": "Table des figures",
+      "page_start": null,
+      "level": 0,
+      "page_end": null,
+      "role": "backmatter",
+      "page_start_parquet": null,
+      "page_end_parquet": null
+    },
+    {
+      "title": "Introduction générale",
+      "page_start": 1,
+      "level": 0,
+      "page_end": 4,
+      "role": "frontmatter",
+      "page_start_parquet": 28,
+      "page_end_parquet": 31
+    },
+    {
+      "title": "I Contexte technologique",
+      "page_start": 5,
+      "level": 0,
+      "page_end": 6,
+      "role": "part",
+      "page_start_parquet": 32,
+      "page_end_parquet": 33
+    },
+    {
+      "title": "1 Les délais de bout en bout",
+      "page_start": 7,
+      "level": 0,
+      "page_end": 10,
+      "role": "chapter",
+      "page_start_parquet": 34,
+      "page_end_parquet": 37
+    },
+    {
+      "title": "2 Time-Sensitive Networking",
+      "page_start": 11,
+      "level": 0,
+      "page_end": 24,
+      "role": "chapter",
+      "page_start_parquet": 38,
+      "page_end_parquet": 51
+    },
+    {
+      "title": "3 Apprentissage automatique",
+      "page_start": 25,
+      "level": 0,
+      "page_end": 34,
+      "role": "chapter",
+      "page_start_parquet": 52,
+      "page_end_parquet": 61
+    },
+    {
+      "title": "4 Apprentissage par renforcement",
+      "page_start": 35,
+      "level": 0,
+      "page_end": 50,
+      "role": "chapter",
+      "page_start_parquet": 62,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "5 État de l'art",
+      "page_start": 51,
+      "level": 0,
+      "page_end": 58,
+      "role": "chapter",
+      "page_start_parquet": 78,
+      "page_end_parquet": 85
+    },
+    {
+      "title": "II Contributions",
+      "page_start": 59,
+      "level": 0,
+      "page_end": 60,
+      "role": "part",
+      "page_start_parquet": 86,
+      "page_end_parquet": 87
+    },
+    {
+      "title": "6 Introduction aux contributions",
+      "page_start": 61,
+      "level": 0,
+      "page_end": 64,
+      "role": "chapter",
+      "page_start_parquet": 88,
+      "page_end_parquet": 91
+    },
+    {
+      "title": "7 Configurer le TAS de manière identique",
+      "page_start": 65,
+      "level": 0,
+      "page_end": 76,
+      "role": "chapter",
+      "page_start_parquet": 92,
+      "page_end_parquet": 103
+    },
+    {
+      "title": "8 Configurer le TAS de manière individuelle",
+      "page_start": 77,
+      "level": 0,
+      "page_end": 88,
+      "role": "chapter",
+      "page_start_parquet": 104,
+      "page_end_parquet": 115
+    },
+    {
+      "title": "Conclusion générale et perspectives",
+      "page_start": 89,
+      "level": 0,
+      "page_end": 96,
+      "role": "backmatter",
+      "page_start_parquet": 116,
+      "page_end_parquet": 123
+    },
+    {
+      "title": "Bibliographie",
+      "page_start": 97,
+      "level": 0,
+      "page_end": 104,
+      "role": "backmatter",
+      "page_start_parquet": 124,
+      "page_end_parquet": 131
+    },
+    {
+      "title": "Glossaire",
+      "page_start": 105,
+      "level": 0,
+      "page_end": 108,
+      "role": "backmatter",
+      "page_start_parquet": 132,
+      "page_end_parquet": 135
+    },
+    {
+      "title": "Table des matières",
+      "page_start": 109,
+      "level": 0,
+      "page_end": 109,
+      "role": "frontmatter",
+      "page_start_parquet": 136,
+      "page_end_parquet": 136
+    }
+  ],
+  "page_offset": {
+    "intro_page_toc": 1,
+    "intro_page_parquet": 28,
+    "offset": 27,
+    "method": "printed-folio"
+  },
+  "toc_validation": {
+    "issues": [],
+    "ok": true
+  }
+}

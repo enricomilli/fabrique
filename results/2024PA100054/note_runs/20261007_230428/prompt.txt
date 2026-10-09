@@ -1,0 +1,278 @@
+Tu rédiges une NOTE DE LECTURE (compte rendu universitaire) d'une thèse de doctorat, dans la tradition académique française.
+
+La variable `context` (déjà chargée) contient le texte intégral de la thèse.
+
+## Format du blob `context`
+
+- Des marqueurs de page `[p.NNN]` sont insérés à chaque changement de page. Pour trouver le numéro de page d'un extrait, cherche sa position avec `.find()`, puis remonte jusqu'au marqueur `[p.NNN]` le plus proche.
+- Les notes de bas de page sont préfixées `[fn]` et placées à la fin de chaque page. Elles contiennent souvent les références scientifiques internes de la thèse.
+- Exemple de snippet pour trouver la page d'une phrase donnée :
+```python
+phrase = "conditions d'acceptabilité"
+pos = context.find(phrase)
+# remonter au dernier marqueur [p.XXX] avant pos
+marker_start = context.rfind("[p.", 0, pos)
+marker_end = context.find("]", marker_start) + 1
+page_tag = context[marker_start:marker_end]   # e.g. "[p.21]"
+print(f"Phrase « {phrase} » → {page_tag}")
+```
+
+
+## CARTE DE LA THÈSE (index de navigation)
+
+Index hiérarchique issu de la table des matières. Les pages sont les
+numéros des marqueurs `[p.NNN]` du blob `context` — pour atteindre
+directement un chapitre, saute à son marqueur :
+```python
+pos = context.find("[p.236]")     # début du chapitre visé
+extrait = context[pos:pos+3000]
+```
+ATTENTION : ne cherche PAS un titre de chapitre avec `context.find("titre")`
+— tu risques de tomber sur la table des matières de la thèse elle-même.
+Utilise toujours le saut par marqueur de page ci-dessous.
+
+- Remerciements  [p.6]–[p.7]
+- Résumé  [p.8]–[p.8]
+- Abstract  [p.9]–[p.9]
+- Glossaire  [p.7]–[p.7]
+- Avant-propos : La LSF, de l'Abbé de l'Épée au statut de langue à part entière  [p.8]–[p.11]
+- INTRODUCTION GENERALE  [p.12]–[p.13]
+- PARTIE THÉORIQUE  [p.14]–[p.14]
+- 1. La langue des signes française et ses locuteurs  [p.15]–[p.31]
+  - 1.1. L'acquisition d'une langue signée  [p.16]–[p.21]
+  - 1.2. Les locuteurs de la LSF aujourd'hui : qui sont-ils ?  [p.22]–[p.31]
+- 2. La linguistique de la Langue des Signes Française  [p.32]–[p.55]
+  - 2.1. Le système phonologique et les paramètres  [p.32]–[p.39]
+  - 2.2. Le lexique en LSF  [p.40]–[p.44]
+  - 2.3. La syntaxe d'une langue signée  [p.45]–[p.55]
+- 3. L'accès lexical : reconnaître et comprendre une unité lexicale de sa langue  [p.56]–[p.88]
+  - 3.1. L'accès lexical : un mécanisme au cœur de la compréhension du langage  [p.56]–[p.59]
+  - 3.2. Les facteurs psycholinguistiques qui influencent l'accès au lexique mental  [p.60]–[p.65]
+  - 3.3. L'apport de la neurophysiologie dans la compréhension des mécanismes de traitement du langage  [p.66]–[p.78]
+  - 3.4. Les modèles théoriques de la reconnaissance lexicale  [p.79]–[p.88]
+- 4. Le traitement du langage  [p.89]–[p.102]
+  - 4.1. Les modèles neurocognitifs du traitement du langage  [p.89]–[p.94]
+  - 4.2. Les modèles de traitement du langage en LS  [p.95]–[p.102]
+- 5. Synthèse des objectifs de recherche  [p.103]–[p.104]
+- PARTIE EXPÉRIMENTALE  [p.105]–[p.105]
+- 1. FLexSign - Fréquence Lexicale des Signes : la première base de données lexicale en LSF  [p.106]–[p.134]
+- 2. Étude de l'accès lexical en LSF  [p.135]–[p.156]
+- 3. Rôle de l'Âge d'acquisition (AoA) sur le traitement du langage : une étude neurophysiologique en LSF  [p.157]–[p.188]
+- DISCUSSION GENERALE  [p.189]–[p.205]
+  - 1. Résumé de nos résultats  [p.189]–[p.191]
+  - 2. Interprétation des résultats et réponses aux questions de recherche  [p.192]–[p.196]
+  - 3. Difficultés rencontrées dans l'étude de l'accès lexical en LSF : défis et perspectives  [p.197]–[p.203]
+  - 4. Conclusion générale  [p.204]–[p.205]
+- BIBLIOGRAPHIE  [p.206]–[p.206]
+
+Tu disposes aussi, ci-dessous, de deux ressources dans ton prompt :
+  1. La FICHE structurée de la thèse — ton plan de travail, ce que tu dois couvrir
+  2. Un EXEMPLE DE STYLE — le registre, la longueur et le flux que tu dois imiter
+
+## Règles de référence
+
+**Auteurs externes (hors thèse) : STRICTEMENT INTERDITS.** Ne cite aucun auteur, ouvrage ou revue qui ne figure pas dans le texte de la thèse. Si un compte rendu standard écrirait « comme le montre Habermas » ou « selon Bourdieu » alors que ni Habermas ni Bourdieu n'est cité par l'auteur de la thèse, tu reformules sans nommer.
+
+**Auteurs internes (cités PAR la thèse) : autorisés sous condition.** Si tu veux nommer un auteur que la thèse elle-même mobilise (ex. Foucault, Moretti, Bakhtine, Lavoinne, Tetlock), tu DOIS :
+  1. Vérifier via `context.find("Nom")` qu'il est bien présent dans la thèse — SAUF si l'auteur figure déjà dans la FICHE avec une citation et une page : dans ce cas reprends l'ancrage de la fiche tel quel, sans revérification.
+  2. Accompagner la mention d'une courte citation verbatim (entre guillemets « ») extraite de la thèse.
+  3. Indiquer le numéro de page, obtenu via la méthode du marqueur `[p.NNN]` décrite ci-dessus.
+  Exemple : « Comme le rappelle Lavoinne, "cette croissance n'est pas justifiée économiquement" (p. 34). »
+
+**Chapitres et passages de la thèse** : cite-les librement (ex. « dans le premier chapitre », « p. 612 »). Les pages doivent être vérifiées via les marqueurs `[p.NNN]` — JAMAIS une position en caractères (offset à 4+ chiffres).
+
+**Notes de bas de page** : tu n'en rédiges pas dans la note. Les `[fn]` du blob sont uniquement un outil de recherche pour toi.
+
+**Cible : au moins 8 références de page précises dans la note finale** pour étayer tes affirmations.
+
+## Structure à produire (~2000 mots)
+
+```markdown
+# [Titre complet de la thèse, en italique après l'auteur]
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-10-07
+
+**Référence :** [Auteur], *[Titre]*, [Établissement], [Année], [Nombre de pages] p.
+
+---
+
+[Paragraphe 1 — Ouverture (~250 mots) : situe la thèse, l'auteur, la discipline,
+la période étudiée, la thèse centrale, le corpus principal. Annonce le fil
+directeur et la périodisation.]
+
+[Paragraphe 2 — Méthodologie et démarche (~300 mots) : approche,
+outillage, corpus, sondages, corpus contextuels. Souligne l'originalité
+méthodologique.]
+
+[Paragraphe 3 — Première partie ou premier axe (~350 mots) : en citant les pages.]
+
+[Paragraphe 4 — Deuxième partie ou deuxième axe (~300 mots).]
+
+[Paragraphe 5 — Troisième partie ou troisième axe (~350 mots).]
+
+[Paragraphe 6 — Portée, apport et tensions (~300-400 mots) : synthèse
+critique. L'apport empirique, théorique, méthodologique. Les tensions,
+les limites. Ouverture sur ce que la thèse permet de penser.]
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de [Titre court] », [Date].
+```
+
+## Consignes RLM
+
+- **Les pages et citations de la FICHE ont déjà été vérifiées automatiquement contre la source.** Reprends-les telles quelles, SANS les revérifier via `context.find(...)`. Ne vérifie que ce que tu introduis TOI-MÊME et qui ne figure pas dans la fiche (nouvel auteur, nouvelle citation, nouvelle page).
+- Si tu as besoin d'un passage spécifique, utilise `context[start:end]` ou `context.find("phrase")` pour le localiser, puis extrait une tranche de 500-1500 caractères autour.
+- **Travaille en LOTS SERRÉS** : toute l'exploration initiale (squelette : introduction, méthodologie, ouvertures de parties, conclusion, exemples fondateurs) doit tenir en AU PLUS 3 exécutions de code, chacune extrayant PLUSIEURS passages d'un coup (5 à 8 extraits par exécution). Jamais une exécution par passage. Les extractions complémentaires entre les passes de rédaction (cœur des parties) comptent à part : au plus 1 exécution d'extraction par passe de rédaction.
+- **LIAISON PAGE-EXTRAIT (obligatoire dans les lots)** : quand une exécution imprime plusieurs extraits, fais-la précéder CHAQUE extrait d'une ligne `===== EXTRAIT [p.N] → [p.M] =====` (les marqueurs réels de début et de fin de l'extrait). Au moment de citer, reprends le numéro depuis la ligne `=====` ou le marqueur `[p.N]` visible IMMÉDIATEMENT au-dessus du passage cité — jamais de mémoire. Une citation dont tu ne retrouves pas le marqueur exact dans tes sorties ne doit PAS porter de numéro de page.
+- **RÉDACTION EN PLUSIEURS PASSES (OBLIGATOIRE)** : ne rédige JAMAIS la note entière en une seule exécution. Rédige AU PLUS 2 paragraphes par exécution de code. Avant de rédiger les paragraphes 3, 4 et 5, extrais d'abord de NOUVEAUX passages du cœur de la partie concernée (pas seulement son ouverture) — puis rédige. Assemble le tout à la fin seulement.
+- **CITATION ET AFFIRMATION CO-PRÉSENTES** : une citation verbatim « … » (p. N) ne peut étayer QUE l'affirmation du passage d'où elle provient (le texte visible sous le même marqueur `[p.N]`). N'emploie JAMAIS une phrase de la thèse pour un argument qu'elle ne porte pas dans son contexte d'origine (une hypothèse formulée sur X ne sert pas à commenter Y ; un nom de fonction, de concept ou de liste se reprend tel que le passage le donne, sans le recomposer). Si une affirmation a besoin d'un appui, va chercher le passage qui la porte et cite-le avec sa propre page.
+- **Densité d'ancrage** : chaque paragraphe de partie (3, 4 et 5) doit citer AU MOINS 3 pages distinctes. Une partie racontée sans pages précises est un paragraphe raté.
+- Ne saute pas les exemples fondateurs que la fiche met en avant (comparaison inaugurale, cas paradigmatique, date fondatrice) : s'ils motivent la thèse, ils appartiennent à la note.
+- `llm_query` est réservé aux RECHERCHES ponctuelles (localiser un thème, résumer un long passage pour toi-même). NE L'UTILISE JAMAIS pour rédiger les paragraphes de la note : la rédaction se fait TOI-MÊME, dans cette boucle, avec les marqueurs `[p.NNN]` sous les yeux — c'est la seule façon de garantir des numéros de page exacts.
+- À la fin, assemble le markdown complet dans une variable puis appelle `FINAL(markdown_complet)`.
+
+## FICHE DE LA THÈSE
+
+```markdown
+# FICHE DE SYNTHÈSE DE THÈSE
+
+## Métadonnées
+
+- **Titre** : Accès au lexique en Langue des Signes Française (LSF) : impact de la modalité visuo-gestuelle et de la privation langagière
+- **Auteur** : Philomène Périn
+- **Année** : 2024
+- **Établissement** : Université Paris Nanterre, École doctorale Connaissance, langage, modélisation (ED139), Laboratoire Modèle, Dynamiques, Corpus (ModyCo, UMR 7114), Laboratoire Fonctionnement et Dysfonctionnement Cognitifs (DysCo)
+- **Discipline** : Sciences du langage
+- **Pages** : 222
+
+## Mots-clés
+
+—
+
+## Thèse centrale
+
+Le mécanisme d'accès lexical et le traitement du langage en LSF sont majoritairement des phénomènes amodaux, partageant les mêmes architectures cognitives et neurophysiologiques que les langues vocales, malgré des spécificités inhérentes à la modalité visuo-gestuelle (p. 204). Cette amodalité se manifeste par la prédominance de la Familiarité sur l'accès lexical et par la présence de composantes EEG (N400, P600) similaires à celles observées en LV (p. 192-193). Toutefois, la privation langagière précoce et l'âge d'acquisition tardif induisent des stratégies de traitement compensatoires, notamment un recours accru à l'Iconicité chez les signeurs non-natifs (p. 194-195).
+
+## Questions de recherche
+
+- « la modalité langagière a-t-elle un rôle particulier dans le traitement du langage ? » (p. 12-13)
+- « plus précisément, peut-on observer des différences dans le mécanisme d'accès lexical en LV et LS ? » (p. 13)
+- « l'âge d'acquisition de la langue par le locuteur a-t-il un impact sur l'efficience des mécanismes de traitement langagier et en particulier de l'accès au lexique ? » (p. 13)
+
+## Réponses aux questions de recherche
+
+- **Modalité langagière & différences LV/LS** : « Nos résultats suggèrent que le mécanisme d'accès lexical et plus globalement le traitement du langage sont majoritairement des phénomènes amodaux, malgré la présence de spécificités, linguistiques et psycholinguistiques, inhérentes à la modalité visuo-gestuelle. » (p. 204)
+- **Impact de l'âge d'acquisition (AoA) / privation langagière** : « En ce qui concerne l'expérience linguistique (privation langagière précoce et âge d'acquisition tardif), bien que les différences observées entre signeurs natifs et non-natifs n'aient pas pu être significativement confirmées, nos résultats nous laissent penser que la privation langagière peut avoir des répercussions sur les stratégies de traitement langagier développées par les locuteurs. » (p. 204)
+
+## Hypothèses
+
+- **Hypothèse principale** : Le traitement lexical en LSF suit des mécanismes amodaux similaires à la LV, où la Familiarité est le facteur prédominant facilitant l'accès au lexique, indépendamment de la modalité (p. 192-193).
+- **Hypothèse secondaire 1** : L'absence d'effet d'Iconicité et de Concrétude sur les temps de réaction en tâche de décision lexicale indique que l'accès lexical en LS repose davantage sur l'expérience linguistique que sur les propriétés intrinsèques du signe (p. 193).
+- **Hypothèse secondaire 2** : La privation langagière précoce et l'acquisition tardive entraînent le développement de stratégies compensatoires, notamment un appui accru sur l'Iconicité pour l'apprentissage et la reconnaissance des signes chez les non-natifs (p. 194-195).
+
+## Méthodologie
+
+- **Approche** : Travail situé « au carrefour de la psycholinguistique et des neurosciences du langage » (p. 13), comparant le traitement du langage en langue vocale (LV) et en langue signée (LS) pour tester l'amodalité des processus cognitifs et l'impact de l'âge d'acquisition.
+- **Méthode** : (1) Élaboration et validation d'une base de données lexicales (FLexSign) évaluant Familiarité, Concrétude et Iconicité ; (2) Expérience comportementale de décision lexicale signes/pseudo-signes mesurant temps de réaction et précision ; (3) Expérience électroencéphalographique (EEG) en temps réel avec tâche de violation sémantique et morphosyntaxique pour observer le décours temporel (N400, P600) (p. 189-191).
+- **Corpus/Données** : 546 signes de la LSF évalués pour FLexSign (p. 189) ; 20 participants sourds (natifs et non-natifs) pour la tâche de décision lexicale (p. 190) ; 25 participants sourds (natifs et tardifs) pour l'expérience EEG (p. 190-191).
+- **Justification** : Remédier à « l'absence d'informations psycholinguistiques et lexicales en LSF » qui constituait « un frein important aux investigations » (p. 189), et explorer des axes de recherche « encore inédits en LSF » (p. 204) pour comprendre les répercussions de la privation langagière sur les stratégies de traitement.
+
+## Fil rouge
+
+L'amodalité des mécanismes de traitement lexical, telle que défini par l'auteure (p. 192-193), reliant la PARTIE THÉORIQUE à la DISCUSSION GENERALE via la démonstration expérimentale que les processus cognitifs et neurophysiologiques de la LSF convergent avec ceux des LV malgré des stratégies compensatoires liées à l'histoire d'acquisition.
+
+## Plan (Structure)
+
+- **PARTIE THÉORIQUE** : Démontre que les LS partagent une architecture langagière commune aux LV tout en possédant des spécificités modales et contextuelles, en présentant la LSF, ses aspects linguistiques, le mécanisme d'accès lexical et les modèles comparatifs de traitement.
+- **PARTIE EXPÉRIMENTALE** : Démontre que l'accès lexical en LSF peut être quantifié et mesuré neurophysiologiquement, en élaborant la base de données FLexSign, en testant des adultes sourds sur l'accès lexical, et en enregistrant leur activité cérébrale via EEG.
+- **DISCUSSION GENERALE** : Démontre que les résultats expérimentaux permettent d'interpréter les similitudes et différences modales du traitement langagier, en confrontant les données à la littérature LV/LS et en dégager des implications cliniques et éducatives.
+
+## Cadre théorique
+
+- **Cadre principal** : Psycholinguistique cognitive et neurolinguistique comparée — modèles de traitement amodal du langage (p. 192-193) — structure l'analyse globale en fournissant le référentiel pour comparer les architectures cognitives et les signatures EEG (N400/P600) entre LV et LS.
+- **Cadres secondaires** :
+  - Acquisition langagière et privation sensorielle — impact de l'âge d'acquisition et de l'exposition précoce (p. 194-195) — permet d'analyser comment la privation langagière induit des stratégies compensatoires (recours à l'iconicité) et modifie l'efficience des mécanismes de traitement.
+  - Indices de potentiel langagier multifactoriels (Puissant-Schontz, 2020 ; Bogliotti, 2023) — Indice de Fonctionnement Linguistique (IFL) et Indice de Potentiel Langagier (IPL) (p. 196) — sert de cadre méthodologique alternatif pour dépasser la variable binaire natif/tardif et saisir la variabilité inter-individuelle des profils de locuteurs.
+
+## Concepts clés
+
+**CONCEPT** : ICONICITÉ
+**SENS** : « l'iconicité est le degré de ressemblance entre la phonologie d'un signe (combinaison de paramètres) et le concept qu'il représente » (p. 42)
+**ORIGINE** : Concept linguistique classique (Cuxac, Taub) retravaillé par l'auteure pour en faire un paramètre structurant le lexique et un facteur psycholinguistique influençant l'accès lexical en LS.
+
+**CONCEPT** : FAMILIARITÉ
+**SENS** : « La familiarité est donc la mesure subjective de la fréquence à laquelle un mot est rencontré et utilisé par ses interlocuteurs. » (p. 61)
+**ORIGINE** : Concept psycholinguistique standard (fréquence subjective) retenu et défini explicitement par l'auteure comme variable plus pertinente que la fréquence objective pour les populations bilingues ou non-natives.
+
+**CONCEPT** : EFFET D'ICONICITÉ
+**SENS** : « l'iconicité correspond à une relation structurée entre deux représentations mentales – forme phonologique et concept sémantique lié – qui se chevauchent plus ou moins » (p. 63)
+**ORIGINE** : Concept propre à l'analyse psycholinguistique de l'auteure, distingué de la notion descriptive d'iconicité pour désigner spécifiquement l'avantage cognitif et neurophysiologique observé lors du traitement lexical des signes.
+
+**CONCEPT** : EFFET DE CONCRÉTUDE
+**SENS** : « La concrétude est une propriété sémantique définie comme "le degré auquel les mots se réfèrent à des individus, des lieux ou des objets qui peuvent être perçus avec n'importe lequel de nos cinq sens" » (p. 62)
+**ORIGINE** : Concept psycholinguistique classique (Paivio, Schwanenflugel) intégré et défini par l'auteure comme l'un des quatre facteurs psycholinguistiques majeurs testés pour leur impact sur l'accès lexical en LS.
+
+## Ancrage empirique (ou concret)
+
+- Création de FLexSign : première base de données lexicales en LSF comprenant 546 signes évalués sur la Familiarité, la Concrétude et l'Iconicité (p. 189).
+- Résultats comportementaux : effet prédominant de la Familiarité sur les temps de réaction et la précision, absence d'effet significatif de l'Iconicité et de la Concrétude sur l'accès lexical direct (p. 190-193).
+- Résultats EEG : présence d'une composante N400 (350-550 ms) et d'une positivité antérieure (~720 ms) chez les signeurs natifs lors de violations sémantiques, contre une positivité centro-pariétale (P600) chez les signeurs tardifs suggérant un processus de réanalyse différent (p. 191-195).
+- Corrélation positive entre Familiarité et Concrétude, et entre Iconicité et Concrétude, mais absence de lien entre Familiarité et Iconicité (p. 189).
+
+## Opposition / Contre-argumentation
+
+- **Position de la littérature/consensus méthodologique** : Utilisation exclusive de l'Âge d'Acquisition (AoA) comme critère de distinction natif/tardif (p. 196). **Résultat contre-intuitif/nuance** : L'AoA seul est insuffisant car « la fréquence d'exposition à une langue, et donc de son utilisation, semble donc un paramètre important à prendre en compte puisqu'il reflète mieux l'exposition globale à la langue pour chaque locuteur et de façon indépendante de l'âge d'acquisition. » (p. 196)
+- **Attente théorique sur les facteurs lexicaux** : L'Iconicité, étant fondamentale en LS, devrait faciliter l'accès lexical comme la Concrétude en LV (p. 193). **Résultat contre-intuitif** : « nous n'avons pas constaté d'effet d'Iconicité sur l'accès lexical dans notre Étude 2 [...] l'accès lexical serait davantage influencé par des processus liés à l'expérience linguistique et psycholinguistique du locuteur [...] plutôt qu'aux caractéristiques lexicales intrinsèques du signe. » (p. 193)
+- **Lacune de la littérature** : « les LS ont peu fait l'objet de recherches comparativement aux LV » (p. 12) et « l'état des connaissances sur le traitement du langage en LS reste encore à approfondir » (p. 12). **Apport** : Démonstration de l'amodalité des processus sémantiques et lexicaux via EEG et mesures comportementales, comblant un vide empirique majeur.
+
+## Apport principal
+
+- **Empirique** : Création de FLexSign, « la première base de données lexicales en LSF » (p. 189), fournissant les premières normes psycholinguistiques (Familiarité, Concrétude, Iconicité) pour 546 signes, et production des premières données EEG en temps réel sur le traitement de phrases en LSF (p. 190-191).
+- **Théorique** : Validation de l'hypothèse d'amodalité du traitement lexical et sémantique en LS, démontrant que les mécanismes d'accès au lexique et les signatures neurophysiologiques (N400, P600) sont « similaires à ceux impliqués en LV » (p. 192-193), tout en identifiant des stratégies compensatoires liées à la privation langagière.
+- **Méthodologique** : Mise en évidence des limites du critère binaire natif/tardif et proposition d'une approche multifactorielle (IFL/IPL) pour évaluer les profils de locuteurs (p. 196), ainsi que développement de protocoles expérimentaux adaptés à la modalité visuo-gestuelle (tâche de décision signes/pseudo-signes, déclenchement EEG sur signe-cible) (p. 198-199).
+
+```
+
+## EXEMPLE DE STYLE (à imiter pour le registre, la longueur des paragraphes, le flux)
+
+```markdown
+# [Titre complet de l'ouvrage : nom des directeurs et titre/sous-titre en italique]
+
+**Compte rendu par** [Auteur du compte rendu]
+
+**Date :** 2026-04-24
+
+**Source :** [URL si disponible]
+
+**Référence :** [Auteur·e·s], *Titre complet*, Ville, Éditeur, coll. « Collection », année, xxx p., ISBN : xxx.
+
+---
+
+Quatorze auteurs, parmi lesquels des sociologues clés de l'analyse du secteur social et médico-social analysent, dans cet ouvrage important, les transformations de la « morale » de l'intervention sociale de divers pays (France dont Mayotte, Suisse, Maroc, Québec), ceci à la suite d'un congrès sociologique international tenu à Tunis en 2021. Le texte décrit les tensions traversant l'intervention sociale, entre idéaux de justice sociale, d'égalité et de solidarisme d'une part, et les principes de responsabilisation et d'activation dans un contexte marqué par l'emprise croissante d'une logique managériale, d'autre part. Disons-le d'emblée, le principe de « responsabilisation » mérite d'être interrogé : il renvoie généralement non pas tant à un transfert de pouvoir aux usagers ou citoyens, comme il l'affirme, mais souvent à une « normalisation » du contrôle social reposant, désormais, sur l'individu lui-même. C'est notamment le cas dans les dispositifs de parentalité ou dans la justice restaurative, où la volonté des individus devient l'opérateur du contrôle social.
+
+Notre lecture questionne implicitement les mots-clefs contemporains de l'intervention sociale que sont « responsabiliser » et « activer ». Ces termes sont aussi les items centraux de la Nouvelle Gouvernance Publique (NGP), laquelle tend, pour l'action sociale, à substituer la « relation de service » reposant sur l'efficience et le résultat au « modèle de service public d'action » fondateur. S'impose, alors, un glissement progressif vers un paradigme managérial qui met la focale sur les difficultés de financement, d'efficacité, la qualité du service et le questionnement de la légitimité de l'État social.
+
+Dans le premier chapitre, Jean-Pierre Tabin et ses collègues explorent, à partir de la rhétorique de l'État depuis les années 2000, les politiques suisses en direction des personnes invalides. Ils identifient finement une logique « capacitiste » visant la re-marchandisation à tout prix, via un nouvel ordre d'employabilité passant par l'acceptation d'une norme d'emploi « médiocre » et, de fait, réduisant la « crédibilité épistémique » de la personne en situation de handicap psychique. Dans les Structures d'Insertion par l'Activité Économique (SIAE) analysées par Hervé Jory dans le cinquième chapitre, la prévalence des compétences d'adaptation sociale sur la formation didactique et le savoir-faire professionnel correspond à une précarisation du profil attendu des publics. L'inversion du statut de la formation, dans ces structures d'insertion, tend à favoriser des conditions d'acceptation de conditions de travail pénibles pour des emplois sous-qualifiés. Ce nouveau cadre normatif de l'inclusion professionnelle repose sur le postulat « d'insérer pour former » où l'insertion se suffit en elle-même. Il s'agit de privilégier l'adaptation quasi immédiate à l'emploi et ses difficultés, en particulier la capacité à supporter des conditions de travail éprouvantes (port de charges lourdes, intempéries…) plutôt que l'intégration de savoirs professionnels et une qualification capitalisable.
+
+L'analyse de tous ces segments de l'intervention sociale est à même d'identifier une logique de responsabilisation des publics et un tournant managérial souvent pénalisants. Mais la grammaire managériale reste fortement questionnée dans les pratiques concrètes des acteurs. Un deuxième grand apport de l'ouvrage est donc d'étudier les engagements moraux et les micro-résistances éthiques des intervenants·es infléchissant parfois certaines modalités de l'intervention sociale. Au-delà des cadres normatifs, des professionnels inventent dès lors des pratiques d'écarts éthiques pour redonner sens à leur action.
+
+Ainsi, dans l'urgence sociale présentée par Hélène Marin et Béatrice Bertho (chapitre 3), la mobilisation bénévole de professionnels illustre la volonté de participer à la neutralisation d'un déficit d'action publique récurrent, en contradiction avec les principes moraux de l'État social. Un engagement solidaire, fait en parallèle de leur travail salarié, s'instaure dans une ville de Suisse romane afin de faire face à une « politique de la pénurie » (p. 48) de l'accueil national des personnes sans-abris. Ce « bénévolat solidaire » définit ce que l'on peut appeler une « résistivité morale », des micro-résistances enracinées dans les principes de justice sociale au regard des besoins de ce public en grande vulnérabilité psychique et sociale.
+
+En définitive, l'intérêt majeur des thèses de cet ouvrage est de souligner une mutation des cadres normatifs et moraux de l'intervention sociale qui mettent désormais essentiellement l'accent sur une responsabilisation des individus vulnérables, une activation étrécie et pénalisante et privilégiant parfois l'immédiateté de l'insertion par le travail, voire des pratiques de culpabilisation-stigmatisation et des dispositifs d'activation définis par une grammaire managériale. Par contre, ces mutations ne doivent pas oblitérer, car s'exprimant à bas bruit dans les interstices de l'accompagnement, la présence modeste d'un cadre moral et cognitif secondaire d'élargissement du pouvoir d'agir pour les personnes en difficulté. Une responsabilisation que l'on peut qualifier d'« habilitante » est encore visible dans nombre des pratiques d'accompagnement. Ainsi, le Revenu de Solidarité Active (RSA) agricole représente une reconnaissance nouvelle de la vulnérabilité d'une population et un levier d'action potentiel pour des agriculteurs immergés des décennies dans une grande précarité. L'action sociale n'est pas réductible au seul tournant néo-libéral et l'on observe non pas une « nouvelle » morale de l'intervention sociale mais une hybridation de morales dont certaines fondatrices de l'État social et du travail social. Malgré tout, force est de constater que la NGP encadre l'intervention sociale par des normes managériales dissonantes au regard des idéaux universalistes, de l'éthique et de la vulnérabilité des publics et de leurs besoins. Ces nouvelles normes conduisent à une détérioration de l'action pour les usagers et le personnel que l'on retrouve aussi dans l'ensemble des services publics.
+
+---
+
+## Pour citer cet article
+
+**[Auteur]**, « [Titre court de l'ouvrage] », *Comptes rendus*, mis en ligne le [date], consulté le [date].
+
+```
+
+---
+
+Rédige maintenant la note de lecture. Vise ~2000 mots, six paragraphes denses, français académique soutenu. Termine par `FINAL(note_markdown)`.

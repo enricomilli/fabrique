@@ -1,0 +1,285 @@
+Tu rédiges une NOTE DE LECTURE (compte rendu universitaire) d'une thèse de doctorat, dans la tradition académique française.
+
+La variable `context` (déjà chargée) contient le texte intégral de la thèse.
+
+## Format du blob `context`
+
+- Des marqueurs de page `[p.NNN]` sont insérés à chaque changement de page. Pour trouver le numéro de page d'un extrait, cherche sa position avec `.find()`, puis remonte jusqu'au marqueur `[p.NNN]` le plus proche.
+- Les notes de bas de page sont préfixées `[fn]` et placées à la fin de chaque page. Elles contiennent souvent les références scientifiques internes de la thèse.
+- Exemple de snippet pour trouver la page d'une phrase donnée :
+```python
+phrase = "conditions d'acceptabilité"
+pos = context.find(phrase)
+# remonter au dernier marqueur [p.XXX] avant pos
+marker_start = context.rfind("[p.", 0, pos)
+marker_end = context.find("]", marker_start) + 1
+page_tag = context[marker_start:marker_end]   # e.g. "[p.21]"
+print(f"Phrase « {phrase} » → {page_tag}")
+```
+
+
+## CARTE DE LA THÈSE (index de navigation)
+
+Index hiérarchique issu de la table des matières. Les pages sont les
+numéros des marqueurs `[p.NNN]` du blob `context` — pour atteindre
+directement un chapitre, saute à son marqueur :
+```python
+pos = context.find("[p.236]")     # début du chapitre visé
+extrait = context[pos:pos+3000]
+```
+ATTENTION : ne cherche PAS un titre de chapitre avec `context.find("titre")`
+— tu risques de tomber sur la table des matières de la thèse elle-même.
+Utilise toujours le saut par marqueur de page ci-dessous.
+
+- RÉSUMÉ  [p.5]–[p.5]
+- ABSTRACT  [p.6]–[p.6]
+- TABLES DES MATIÈRES  [p.7]–[p.9]
+- FIGURES  [p.10]–[p.12]
+- INTRODUCTION  [p.13]–[p.24]
+- Première partie L'École nationale de photographie et de cinématographie Chronique d'un échec (1915-1919)  [p.25]–[p.31]
+- Chapitre 1 Le contexte règlementaire  [p.32]–[p.46]
+  - 1. Les mesures d'exception  [p.33]–[p.39]
+  - 2. La mobilisation de l'industrie  [p.40]–[p.46]
+- Chapitre 2 La tutelle de l'État sur les sections photographiques et cinématographiques  [p.47]–[p.116]
+  - 1. Interventions préalables  [p.48]–[p.52]
+  - 2. La création des sections  [p.53]–[p.57]
+  - 3. L'articulation des échelons administratifs  [p.58]–[p.66]
+  - 4. L'ingérence de l'État  [p.67]–[p.80]
+  - 5. L'expansion commerciale des sections  [p.81]–[p.88]
+  - 6. La transformation des sections  [p.89]–[p.116]
+- Deuxième partie L'École technique de photographie et de cinématographie Membres et principes fondateurs (1919-1923)  [p.117]–[p.120]
+- Chapitre 3 Paul Montel  [p.121]–[p.147]
+  - 1. Données biographiques  [p.122]–[p.128]
+  - 2. Correspondances Montel-Lumière : Courtisaneries  [p.129]–[p.137]
+  - 3. Correspondances Montel-Lumière : Le ralliement des industriels  [p.138]–[p.147]
+- Chapitre 4 La Chambre syndicale des fabricants et négociants de la photographie  [p.148]–[p.160]
+  - 1. Statuts  [p.149]–[p.152]
+  - 2. Microcosme  [p.153]–[p.156]
+  - 3. La CSFNP et l'enseignement  [p.157]–[p.160]
+- Chapitre 5 Des visites d'écoles en Europe à l'élaboration du programme  [p.161]–[p.188]
+  - 1. Le panel d'écoles  [p.163]–[p.171]
+  - 2. Les plans et le programme de l'ETPC  [p.172]–[p.188]
+- Troisième partie L'École technique de photographie et de cinématographie Premier cycle d'activité (1924-1937)  [p.189]–[p.194]
+- Chapitre 6 Vers l'ouverture de l'école  [p.195]–[p.217]
+  - 1. 1924, consolider des partenariats  [p.196]–[p.202]
+  - 2. 1925 et 1926, contretemps  [p.203]–[p.217]
+- Chapitre 7 Données d'activité  [p.218]–[p.267]
+  - 1. Le rapprochement entre l'ETPC et la Direction générale de l'enseignement technique  [p.220]–[p.225]
+  - 2. Décisions administratives et évènements protocolaires  [p.226]–[p.235]
+  - 3. Les cycles complets  [p.236]–[p.259]
+  - 4. Les cycles complémentaires et le laboratoire de recherches  [p.260]–[p.267]
+- Chapitre 8 La nationalisation de l'ETPC  [p.268]–[p.286]
+  - 1. La situation financière de l'ETPC  [p.269]–[p.273]
+  - 2. L'intervention de Jean Zay  [p.274]–[p.277]
+  - 3. Les tractations autour de la nationalisation de l'ETPC  [p.278]–[p.286]
+- CONCLUSION  [p.287]–[p.296]
+- SOURCES  [p.297]–[p.297]
+- Fonds d'archives  [p.297]–[p.298]
+- Bases de données en ligne  [p.299]–[p.299]
+- BIBLIOGRAPHIE  [p.300]–[p.300]
+- Ouvrages  [p.300]–[p.301]
+- Sections d'ouvrages  [p.302]–[p.302]
+- Articles  [p.303]–[p.303]
+- Travaux universitaires  [p.304]–[p.304]
+
+Tu disposes aussi, ci-dessous, de deux ressources dans ton prompt :
+  1. La FICHE structurée de la thèse — ton plan de travail, ce que tu dois couvrir
+  2. Un EXEMPLE DE STYLE — le registre, la longueur et le flux que tu dois imiter
+
+## Règles de référence
+
+**Auteurs externes (hors thèse) : STRICTEMENT INTERDITS.** Ne cite aucun auteur, ouvrage ou revue qui ne figure pas dans le texte de la thèse. Si un compte rendu standard écrirait « comme le montre Habermas » ou « selon Bourdieu » alors que ni Habermas ni Bourdieu n'est cité par l'auteur de la thèse, tu reformules sans nommer.
+
+**Auteurs internes (cités PAR la thèse) : autorisés sous condition.** Si tu veux nommer un auteur que la thèse elle-même mobilise (ex. Foucault, Moretti, Bakhtine, Lavoinne, Tetlock), tu DOIS :
+  1. Vérifier via `context.find("Nom")` qu'il est bien présent dans la thèse — SAUF si l'auteur figure déjà dans la FICHE avec une citation et une page : dans ce cas reprends l'ancrage de la fiche tel quel, sans revérification.
+  2. Accompagner la mention d'une courte citation verbatim (entre guillemets « ») extraite de la thèse.
+  3. Indiquer le numéro de page, obtenu via la méthode du marqueur `[p.NNN]` décrite ci-dessus.
+  Exemple : « Comme le rappelle Lavoinne, "cette croissance n'est pas justifiée économiquement" (p. 34). »
+
+**Chapitres et passages de la thèse** : cite-les librement (ex. « dans le premier chapitre », « p. 612 »). Les pages doivent être vérifiées via les marqueurs `[p.NNN]` — JAMAIS une position en caractères (offset à 4+ chiffres).
+
+**Notes de bas de page** : tu n'en rédiges pas dans la note. Les `[fn]` du blob sont uniquement un outil de recherche pour toi.
+
+**Cible : au moins 8 références de page précises dans la note finale** pour étayer tes affirmations.
+
+## Structure à produire (~2000 mots)
+
+```markdown
+# [Titre complet de la thèse, en italique après l'auteur]
+
+**Compte rendu par** Note générée automatiquement (Qwen3.6-27B-Q6_K.gguf)
+
+**Date :** 2026-10-07
+
+**Référence :** [Auteur], *[Titre]*, [Établissement], [Année], [Nombre de pages] p.
+
+---
+
+[Paragraphe 1 — Ouverture (~250 mots) : situe la thèse, l'auteur, la discipline,
+la période étudiée, la thèse centrale, le corpus principal. Annonce le fil
+directeur et la périodisation.]
+
+[Paragraphe 2 — Méthodologie et démarche (~300 mots) : approche,
+outillage, corpus, sondages, corpus contextuels. Souligne l'originalité
+méthodologique.]
+
+[Paragraphe 3 — Première partie ou premier axe (~350 mots) : en citant les pages.]
+
+[Paragraphe 4 — Deuxième partie ou deuxième axe (~300 mots).]
+
+[Paragraphe 5 — Troisième partie ou troisième axe (~350 mots).]
+
+[Paragraphe 6 — Portée, apport et tensions (~300-400 mots) : synthèse
+critique. L'apport empirique, théorique, méthodologique. Les tensions,
+les limites. Ouverture sur ce que la thèse permet de penser.]
+
+---
+
+## Pour citer ce document
+
+**Note générée automatiquement**, « Compte rendu de [Titre court] », [Date].
+```
+
+## Consignes RLM
+
+- **Les pages et citations de la FICHE ont déjà été vérifiées automatiquement contre la source.** Reprends-les telles quelles, SANS les revérifier via `context.find(...)`. Ne vérifie que ce que tu introduis TOI-MÊME et qui ne figure pas dans la fiche (nouvel auteur, nouvelle citation, nouvelle page).
+- Si tu as besoin d'un passage spécifique, utilise `context[start:end]` ou `context.find("phrase")` pour le localiser, puis extrait une tranche de 500-1500 caractères autour.
+- **Travaille en LOTS SERRÉS** : toute l'exploration initiale (squelette : introduction, méthodologie, ouvertures de parties, conclusion, exemples fondateurs) doit tenir en AU PLUS 3 exécutions de code, chacune extrayant PLUSIEURS passages d'un coup (5 à 8 extraits par exécution). Jamais une exécution par passage. Les extractions complémentaires entre les passes de rédaction (cœur des parties) comptent à part : au plus 1 exécution d'extraction par passe de rédaction.
+- **LIAISON PAGE-EXTRAIT (obligatoire dans les lots)** : quand une exécution imprime plusieurs extraits, fais-la précéder CHAQUE extrait d'une ligne `===== EXTRAIT [p.N] → [p.M] =====` (les marqueurs réels de début et de fin de l'extrait). Au moment de citer, reprends le numéro depuis la ligne `=====` ou le marqueur `[p.N]` visible IMMÉDIATEMENT au-dessus du passage cité — jamais de mémoire. Une citation dont tu ne retrouves pas le marqueur exact dans tes sorties ne doit PAS porter de numéro de page.
+- **RÉDACTION EN PLUSIEURS PASSES (OBLIGATOIRE)** : ne rédige JAMAIS la note entière en une seule exécution. Rédige AU PLUS 2 paragraphes par exécution de code. Avant de rédiger les paragraphes 3, 4 et 5, extrais d'abord de NOUVEAUX passages du cœur de la partie concernée (pas seulement son ouverture) — puis rédige. Assemble le tout à la fin seulement.
+- **CITATION ET AFFIRMATION CO-PRÉSENTES** : une citation verbatim « … » (p. N) ne peut étayer QUE l'affirmation du passage d'où elle provient (le texte visible sous le même marqueur `[p.N]`). N'emploie JAMAIS une phrase de la thèse pour un argument qu'elle ne porte pas dans son contexte d'origine (une hypothèse formulée sur X ne sert pas à commenter Y ; un nom de fonction, de concept ou de liste se reprend tel que le passage le donne, sans le recomposer). Si une affirmation a besoin d'un appui, va chercher le passage qui la porte et cite-le avec sa propre page.
+- **Densité d'ancrage** : chaque paragraphe de partie (3, 4 et 5) doit citer AU MOINS 3 pages distinctes. Une partie racontée sans pages précises est un paragraphe raté.
+- Ne saute pas les exemples fondateurs que la fiche met en avant (comparaison inaugurale, cas paradigmatique, date fondatrice) : s'ils motivent la thèse, ils appartiennent à la note.
+- `llm_query` est réservé aux RECHERCHES ponctuelles (localiser un thème, résumer un long passage pour toi-même). NE L'UTILISE JAMAIS pour rédiger les paragraphes de la note : la rédaction se fait TOI-MÊME, dans cette boucle, avec les marqueurs `[p.NNN]` sous les yeux — c'est la seule façon de garantir des numéros de page exacts.
+- À la fin, assemble le markdown complet dans une variable puis appelle `FINAL(markdown_complet)`.
+
+## FICHE DE LA THÈSE
+
+```markdown
+# FICHE DE SYNTHÈSE DE THÈSE
+
+## Métadonnées
+
+- **Titre** : Former c'est normer. Le développement de l'enseignement technique cinématographique en France (1915-1937).
+- **Auteur** : René OSI
+- **Année** : 2024
+- **Établissement** : Université Lumière Lyon 2 ; Université de Montréal
+- **Discipline** : Arts de la scène et de l'image
+- **Pages** : 317
+
+## Mots-clés
+
+histoire du cinéma français ; enseignement technique ; Troisième République
+
+## Thèse centrale
+
+La scolarisation de l'apprentissage des techniques cinématographiques (1915-1937) ne répond pas à des impératifs pédagogiques, mais constitue un levier de négociation institutionnelle permettant aux industriels de consolider leur autonomie face aux velléités de contrôle de l'État. En analysant l'échec du projet d'école nationale (1919) puis la création et l'évolution de l'ETPC, la thèse démontre que l'enseignement technique a servi à fédérer les professionnels, à calibrer les compétences selon une logique malthusienne et à anticiper une normalisation sectorielle progressive, culminant avec une nationalisation consensuelle en 1937. Le résumé précise que cette dynamique s'est réalisée « en l'absence d'impératifs économiques ou technologiques majeurs » (p. 5) et que la formation, bien que « déconnectée des besoins immédiats du marché » (p. 5), a révélé que « les différentes parties cherchent à renforcer leur influence sur l'industrie du film » (p. 5).
+
+## Questions de recherche
+
+- « Quels sont les motifs derrière ces tentatives de scolarisation ? » (p. 17)
+- « La formation est-elle la préoccupation principale ou sert-elle un autre objectif ? » (p. 17)
+- « Le contrôle de la formation influence-t-il d'autres aspects des pratiques cinématographiques, et si oui, lesquels ? » (p. 17)
+
+## Réponses aux questions de recherche
+
+- **Motifs de la scolarisation** : L'initiative étatique de 1919 révèle « une volonté claire de prolonger l'ingérence de l'État dans des secteurs traditionnellement privés, bien au-delà des impératifs de guerre » (p. 288), visant à « préserver un contrôle acquis en temps de crise plutôt qu'à développer l'enseignement technique cinématographique » (p. 288). Pour les professionnels, le motif est inverse : ils perçoivent l'école « comme une initiative visant à fédérer les professionnels » (p. 290) et à reprendre la main sur leurs intérêts face à l'État.
+- **Objectif principal de la formation** : La formation technique n'est pas une fin en soi ; elle sert à « former un profil intermédiaire, ni ouvrier ni ingénieur, mais un cadre technique apte à répondre aux exigences croissantes de l'industrie » (p. 290), s'inscrivant dans « une logique malthusienne, où les compétences transmises sont soigneusement calibrées, probablement dans le but de limiter les coûts liés à la formation et d'éviter une hausse des salaires dans le secteur » (p. 290).
+- **Influence sur d'autres aspects** : Le contrôle de la formation influence la structuration corporative et les normes de production, en « rassembl[ant] un large éventail de représentants du cinéma, y compris des exploitants traditionnellement distants des autres branches du secteur » (p. 290), et en participant à un « processus de normalisation du cinéma » (p. 23) qui précède et dépasse les réformes du Front populaire.
+
+## Hypothèses
+
+**Principale** : « l'enseignement technique pourrait être un facteur supplémentaire dans les interactions entre l'État et les industriels, visant à façonner, orienter et contrôler les normes du secteur cinématographique. » (p. 18)
+**Secondaires** :
+- « la proposition d'une école nationale [...] semble être une tentative de maintenir le contrôle de l'État sur le cinéma en se réorientant vers un domaine d'intervention plus légitime comme l'enseignement. » (p. 18)
+- « les professionnels [...] aient perçu dans le soutien et la création de l'ETPC une opportunité de reprendre en main leurs intérêts et de se prémunir contre toute tentative de réappropriation de leur domaine par l'État. » (p. 18)
+- **Vérification/Précision issue de la conclusion** : L'hypothèse de la logique malthusienne des industriels est confirmée : « Cette approche s'inscrit dans une logique malthusienne, où les compétences transmises sont soigneusement calibrées, probablement dans le but de limiter les coûts liés à la formation et d'éviter une hausse des salaires dans le secteur. » (p. 290)
+
+## Méthodologie
+
+- **Approche** : « approche interdisciplinaire, mêlant l'analyse des archives historiques, l'étude des institutions et l'interprétation critique des discours produits par les acteurs impliqués dans la scolarisation des techniques cinématographiques. » (p. 22)
+- **Méthode** : « L'analyse des documents s'est effectuée par une lecture croisée, visant à confronter les différentes sources pour détecter les éventuels biais ou contradictions. » (p. 22) ; reconstruction chronologique et analyse des dynamiques institutionnelles à partir de fonds d'archives privés et publics.
+- **Corpus/Données** : Archives de la Médiathèque du patrimoine et de la photographie (sections de l'armée, procès-verbaux de la commission de transformation) (p. 21) ; archives de Paul Montel, revues *Le Photographe* et *L'Informateur de la photographie* (p. 21-22) ; fonds Paul Montel à la Société française de photographie (correspondances avec la famille Lumière) (p. 22) ; fonds Léon Gaumont à la Cinémathèque française (p. 22) ; quatre brochures de l'ENSLL (p. 21) ; note de réunion du 25 octobre 1937 sur la création d'enseignements cinématographiques artistiques (p. 294-295).
+- **Justification** : « privilégier des archives peu explorées pour renouveler les perspectives sur ce processus, tout en incluant l'exemple de l'ETPC comme cas d'étude représentatif. » (p. 22) ; limitation à 1915-1937 pour « construire une analyse approfondie sur un corpus restreint mais riche, plutôt que de privilégier une approche comparative qui aurait été plus superficielle. » (p. 23) ; découverte tardive de certains fonds (Grieshaber-As de Trèfle, note de 1937) intégrée en perspective (p. 289, 296). Le résumé confirme que la recherche s'appuie sur « des archives inédites ou peu exploitées » (p. 5) pour examiner ce développement.
+
+## Fil rouge
+
+La négociation du contrôle institutionnel et normatif du cinéma tel que défini par l'auteur (p. 18), reliant l'échec du projet d'école nationale (1915-1919) à la fondation patronale de l'ETPC (1919-1923) puis à son cycle d'activité et sa nationalisation (1924-1937) via la scolarisation technique comme levier de compromis entre velléités étatiques et autonomie industrielle. Le résumé synthétise ce fil en montrant comment « les différentes parties cherchent à renforcer leur influence sur l'industrie du film » et comment la formation, « d'apparence neutre et dénuée de poids normatif, est en réalité un espace stratégique que chacun souhaite contrôler pour orienter l'évolution du secteur ».
+
+## Plan (Structure)
+
+- **Première partie L'École nationale de photographie et de cinématographie Chronique d'un échec (1915-1919)** : Démontre que la tentative étatique de pérenniser le contrôle des sections de l'armée via une école nationale échoue face à la méfiance des professionnels et au retour aux logiques libérales d'après-guerre, révélant « une volonté claire de prolonger l'ingérence de l'État dans des secteurs traditionnellement privés » (p. 288).
+- **Deuxième partie L'École technique de photographie et de cinématographie Membres et principes fondateurs (1919-1923)** : Démontre que la création de l'ETPC par les industriels, majoritairement issus de la CSFNP, vise à reprendre la main sur leurs intérêts et à se prémunir contre les intrusions de l'État en « fédér[ant] les professionnels » (p. 290) autour d'un programme calibré.
+- **Troisième partie L'École technique de photographie et de cinématographie Premier cycle d'activité (1924-1937)** : Démontre que le rôle de l'ETPC dépasse la simple formation technique pour participer à l'orientation des normes du secteur, culminant avec une nationalisation consensuelle en 1937 qui « facilite une prise en main sans avoir à tout reconstruire » (p. 292) tout en préservant la légitimité des pionniers.
+
+## Cadre théorique
+
+*[Non renseigné]*
+
+## Concepts clés
+
+- **SCOLARISATION DE L'APPRENTISSAGE** : « scolarisation de l'apprentissage des techniques cinématographiques » (p. 15) — [NON DÉFINI EXPLICITEMENT] : processus de transfert de la formation des techniques cinématographiques vers un cadre scolaire ou apparenté, en opposition à l'apprentissage sur le lieu de production ou l'autoformation. — propre à l'auteur
+- **ENSEIGNEMENT TECHNIQUE** : « enseignement technique, dont l'acceptation est stable depuis la fin du XIXe siècle et dont le caractère formel offrait un accès potentiel à des archives. » (p. 14) — [NON DÉFINI EXPLICITEMENT] : forme d'enseignement institutionnalisé et structuré administrativement, servant de levier de contrôle et de normalisation sectorielle. — propre à l'auteur
+- **NORMALISATION DU CINÉMA** : « processus de normalisation du cinéma, en révélant l'impact structurel que ces débats ont eu sur l'évolution de la profession et de l'industrie. » (p. 23) — [NON DÉFINI EXPLICITEMENT] : dynamique graduelle par laquelle les normes professionnelles, techniques et institutionnelles du cinéma sont façonnées par les interactions entre pouvoirs publics et acteurs économiques. — propre à l'auteur
+- **LOGIQUE MALTHUSIENNE (de formation)** : « Cette approche s'inscrit dans une logique malthusienne, où les compétences transmises sont soigneusement calibrées, probablement dans le but de limiter les coûts liés à la formation et d'éviter une hausse des salaires dans le secteur. » (p. 290) — [NON DÉFINI EXPLICITEMENT] : stratégie de régulation de l'offre de main-d'œuvre qualifiée visant à contenir les coûts et les revendications salariales. — propre à l'auteur
+- **ESPACE STRATÉGIQUE (de la formation)** : « La formation, d'apparence neutre et dénuée de poids normatif, est en réalité un espace stratégique que chacun souhaite contrôler pour orienter l'évolution du secteur. » (p. 5) — [NON DÉFINI EXPLICITEMENT] : reconfiguration du champ éducatif technique comme terrain de négociation du pouvoir institutionnel, dépassant sa fonction pédagogique apparente. — propre à l'auteur
+
+## Ancrage empirique (ou concret)
+
+- Projet d'école nationale de photographie et de cinématographie (1919) : « entre le 17 février et le 14 avril 1919 [...] les pouvoirs publics envisagent la création d'une école nationale [...] finalement abandonné » (p. 17) ; rejet par l'administration des Finances (p. 288).
+- École technique de photographie et de cinématographie (ETPC) : « à partir de 1926, devient le premier établissement dont la structure administrative est dédiée à l'enseignement technique photographique et cinématographique. » (p. 15) ; nationalisée en 1937 (p. 15) ; déficit gérable mais refus des professionnels de le couvrir (p. 291).
+- Archives spécifiques : « procès-verbaux de la commission dédiée à la transformation des sections en service civil » (p. 21) ; correspondances Paul Montel / famille Lumière (p. 22) ; fonds Léon Gaumont (p. 22) ; note de réunion du 25 octobre 1937 sur les enseignements cinématographiques artistiques (p. 294-295).
+- Critique terrain : témoignage de Marcel Carné sur les lacunes de l'ETPC pour les métiers de plateau (opérateur, électricien) vs efficacité pour les labos et la photo (p. 292-293).
+
+## Opposition / Contre-argumentation
+
+- « les données concernant leur enseignement et leur apprentissage [...] demeurent dans l'angle mort de ces études : potentiellement présentes, mais invisibles. » (p. 14) — lacune historiographique comblée par le corpus.
+- « les travaux existants convergent pour indiquer que l'ETPC est fondée avec le soutien d'industriels et de commerçants [...] les conditions favorables à la scolarisation [...] ne sont pas réunies [...] Cette situation soulève donc des interrogations sur les motivations réelles des industriels à soutenir ce projet. » (p. 16) — nuancé par la découverte d'une logique de fédération corporative et de contrôle malthusien (p. 290).
+- « si l'on associe souvent l'émergence d'enjeux dépassant les considérations fiscales et réglementaires à la victoire du Front populaire [...] ce processus s'inscrit, peut-être, dans une dynamique plus graduelle. » (p. 24) — résultat contre-intuitif confirmé par la conclusion : la normalisation et la nationalisation s'amorcent bien avant 1936 via les compromis techniques de l'entre-deux-guerres.
+
+## Apport principal
+
+- **Empirique** : « La constitution du corpus autour des sections photographiques et cinématographiques de l'armée visait un renouvellement des sources [...] accès à des documents administratifs peu explorés [...] procès-verbaux [...] dévoilent le programme d'une école jusqu'alors inconnue. » (p. 21) ; mise au jour de la logique malthusienne et des correspondances privées éclairant les fondations de l'ETPC (p. 290-291).
+- **Théorique** : « L'enseignement technique [...] a peut-être contribué à décentrer les discussions, nous incitant à repenser les dynamiques institutionnelles de manière plus progressive. » (p. 24) ; réinterprétation de la nationalisation de 1937 non comme une rupture, mais comme l'aboutissement d'un compromis graduel entre État et industrie (p. 292).
+- **Critique** : « si l'on associe souvent l'émergence d'enjeux dépassant les considérations fiscales et réglementaires à la victoire du Front populaire [...] ce processus s'inscrit, peut-être, dans une dynamique plus graduelle. » (p. 24) ; démontre que la scolarisation technique a précédé et préparé les réformes culturelles de l'État, relativisant le rôle exclusif du Front populaire dans la structuration institutionnelle du cinéma français.
+
+```
+
+## EXEMPLE DE STYLE (à imiter pour le registre, la longueur des paragraphes, le flux)
+
+```markdown
+# [Titre complet de l'ouvrage : nom des directeurs et titre/sous-titre en italique]
+
+**Compte rendu par** [Auteur du compte rendu]
+
+**Date :** 2026-04-24
+
+**Source :** [URL si disponible]
+
+**Référence :** [Auteur·e·s], *Titre complet*, Ville, Éditeur, coll. « Collection », année, xxx p., ISBN : xxx.
+
+---
+
+Quatorze auteurs, parmi lesquels des sociologues clés de l'analyse du secteur social et médico-social analysent, dans cet ouvrage important, les transformations de la « morale » de l'intervention sociale de divers pays (France dont Mayotte, Suisse, Maroc, Québec), ceci à la suite d'un congrès sociologique international tenu à Tunis en 2021. Le texte décrit les tensions traversant l'intervention sociale, entre idéaux de justice sociale, d'égalité et de solidarisme d'une part, et les principes de responsabilisation et d'activation dans un contexte marqué par l'emprise croissante d'une logique managériale, d'autre part. Disons-le d'emblée, le principe de « responsabilisation » mérite d'être interrogé : il renvoie généralement non pas tant à un transfert de pouvoir aux usagers ou citoyens, comme il l'affirme, mais souvent à une « normalisation » du contrôle social reposant, désormais, sur l'individu lui-même. C'est notamment le cas dans les dispositifs de parentalité ou dans la justice restaurative, où la volonté des individus devient l'opérateur du contrôle social.
+
+Notre lecture questionne implicitement les mots-clefs contemporains de l'intervention sociale que sont « responsabiliser » et « activer ». Ces termes sont aussi les items centraux de la Nouvelle Gouvernance Publique (NGP), laquelle tend, pour l'action sociale, à substituer la « relation de service » reposant sur l'efficience et le résultat au « modèle de service public d'action » fondateur. S'impose, alors, un glissement progressif vers un paradigme managérial qui met la focale sur les difficultés de financement, d'efficacité, la qualité du service et le questionnement de la légitimité de l'État social.
+
+Dans le premier chapitre, Jean-Pierre Tabin et ses collègues explorent, à partir de la rhétorique de l'État depuis les années 2000, les politiques suisses en direction des personnes invalides. Ils identifient finement une logique « capacitiste » visant la re-marchandisation à tout prix, via un nouvel ordre d'employabilité passant par l'acceptation d'une norme d'emploi « médiocre » et, de fait, réduisant la « crédibilité épistémique » de la personne en situation de handicap psychique. Dans les Structures d'Insertion par l'Activité Économique (SIAE) analysées par Hervé Jory dans le cinquième chapitre, la prévalence des compétences d'adaptation sociale sur la formation didactique et le savoir-faire professionnel correspond à une précarisation du profil attendu des publics. L'inversion du statut de la formation, dans ces structures d'insertion, tend à favoriser des conditions d'acceptation de conditions de travail pénibles pour des emplois sous-qualifiés. Ce nouveau cadre normatif de l'inclusion professionnelle repose sur le postulat « d'insérer pour former » où l'insertion se suffit en elle-même. Il s'agit de privilégier l'adaptation quasi immédiate à l'emploi et ses difficultés, en particulier la capacité à supporter des conditions de travail éprouvantes (port de charges lourdes, intempéries…) plutôt que l'intégration de savoirs professionnels et une qualification capitalisable.
+
+L'analyse de tous ces segments de l'intervention sociale est à même d'identifier une logique de responsabilisation des publics et un tournant managérial souvent pénalisants. Mais la grammaire managériale reste fortement questionnée dans les pratiques concrètes des acteurs. Un deuxième grand apport de l'ouvrage est donc d'étudier les engagements moraux et les micro-résistances éthiques des intervenants·es infléchissant parfois certaines modalités de l'intervention sociale. Au-delà des cadres normatifs, des professionnels inventent dès lors des pratiques d'écarts éthiques pour redonner sens à leur action.
+
+Ainsi, dans l'urgence sociale présentée par Hélène Marin et Béatrice Bertho (chapitre 3), la mobilisation bénévole de professionnels illustre la volonté de participer à la neutralisation d'un déficit d'action publique récurrent, en contradiction avec les principes moraux de l'État social. Un engagement solidaire, fait en parallèle de leur travail salarié, s'instaure dans une ville de Suisse romane afin de faire face à une « politique de la pénurie » (p. 48) de l'accueil national des personnes sans-abris. Ce « bénévolat solidaire » définit ce que l'on peut appeler une « résistivité morale », des micro-résistances enracinées dans les principes de justice sociale au regard des besoins de ce public en grande vulnérabilité psychique et sociale.
+
+En définitive, l'intérêt majeur des thèses de cet ouvrage est de souligner une mutation des cadres normatifs et moraux de l'intervention sociale qui mettent désormais essentiellement l'accent sur une responsabilisation des individus vulnérables, une activation étrécie et pénalisante et privilégiant parfois l'immédiateté de l'insertion par le travail, voire des pratiques de culpabilisation-stigmatisation et des dispositifs d'activation définis par une grammaire managériale. Par contre, ces mutations ne doivent pas oblitérer, car s'exprimant à bas bruit dans les interstices de l'accompagnement, la présence modeste d'un cadre moral et cognitif secondaire d'élargissement du pouvoir d'agir pour les personnes en difficulté. Une responsabilisation que l'on peut qualifier d'« habilitante » est encore visible dans nombre des pratiques d'accompagnement. Ainsi, le Revenu de Solidarité Active (RSA) agricole représente une reconnaissance nouvelle de la vulnérabilité d'une population et un levier d'action potentiel pour des agriculteurs immergés des décennies dans une grande précarité. L'action sociale n'est pas réductible au seul tournant néo-libéral et l'on observe non pas une « nouvelle » morale de l'intervention sociale mais une hybridation de morales dont certaines fondatrices de l'État social et du travail social. Malgré tout, force est de constater que la NGP encadre l'intervention sociale par des normes managériales dissonantes au regard des idéaux universalistes, de l'éthique et de la vulnérabilité des publics et de leurs besoins. Ces nouvelles normes conduisent à une détérioration de l'action pour les usagers et le personnel que l'on retrouve aussi dans l'ensemble des services publics.
+
+---
+
+## Pour citer cet article
+
+**[Auteur]**, « [Titre court de l'ouvrage] », *Comptes rendus*, mis en ligne le [date], consulté le [date].
+
+```
+
+---
+
+Rédige maintenant la note de lecture. Vise ~2000 mots, six paragraphes denses, français académique soutenu. Termine par `FINAL(note_markdown)`.

@@ -79,9 +79,23 @@ INTRO_TITLE_RE = re.compile(
     r"^\s*(?:(?:chapter|chapitre|part|partie|kapitel|capítulo)\s+)?"
     r"[\divx]*\.?\s*introduction\b"
 )
-# Applied to level-0 titles only, so matching anywhere is safe: "Conclusion",
-# "Conclusion générale", "Summary and Conclusions", "Chapter N Conclusions and Future Work".
-CONCLUSION_TITLE_RE = re.compile(r"\bconclusions?\b")
+# Applied to level-0 titles only (already lower-cased by extract_chapter_blob),
+# so matching anywhere is safe: "Conclusion", "Conclusion générale",
+# "Summary and Conclusions", "Chapter N Conclusions and Future Work".
+#
+# French theses often close on a « DISCUSSION GÉNÉRALE » instead of a chapter
+# called "Conclusion" (2024PA100054). The word "conclusion" alone then matches
+# nothing, step 2b is skipped, and `these_centrale` / `reponses_questions` /
+# `fil_rouge` — the sections the conclusion exists to fill — stay [NULL].
+# Deliberately NOT matching a bare "synthèse" or "perspectives": "5. Synthèse
+# des objectifs de recherche" is a mid-thesis level-0 chapter in that same
+# thesis, and would be picked ahead of the real closing chapter.
+CONCLUSION_TITLE_RE = re.compile(
+    r"\bconclusions?\b"
+    r"|\bdiscussion\s+(?:g[ée]n[ée]rale|finale|general)\b"
+    r"|\bgeneral\s+discussion\b"
+    r"|\bdiscussion\s+et\s+perspectives\b"
+)
 
 
 def extract_intro_blob(df: pd.DataFrame, structure: dict) -> tuple[str, int, int]:
@@ -89,7 +103,38 @@ def extract_intro_blob(df: pd.DataFrame, structure: dict) -> tuple[str, int, int
 
 
 def extract_conclusion_blob(df: pd.DataFrame, structure: dict) -> tuple[str, int, int]:
-    return extract_chapter_blob(df, structure, lambda t: bool(CONCLUSION_TITLE_RE.search(t)), "Conclusion")
+    """The CLOSING conclusion, not the first one.
+
+    `extract_chapter_blob` takes the first level-0 match, which is right for an
+    introduction and wrong for a conclusion: theses that end each chapter with a
+    level-0 "Conclusion" then hand step 2b a one-page chapter wrap-up from the
+    first quarter of the thesis. Measured on the demo set: 2024PA100032 read
+    p.74 of 464 (real conclusion pp. 380-389) and 2023TOU20042 read pp. 78-80
+    of 274 (real conclusion pp. 239-252).
+
+    So: take the match with the latest page range, then absorb any immediately
+    preceding contiguous match, which is how « Discussion générale et
+    perspectives » + « Conclusion générale » (2022LYO10153, pp. 140-145 +
+    146-147) get read as the single closing movement they are.
+    """
+    matches = [
+        e for e in (structure.get("toc") or [])
+        if e.get("level") == 0
+        and CONCLUSION_TITLE_RE.search((e.get("title") or "").strip().lower())
+        and isinstance(e.get("page_start_parquet"), int)
+        and isinstance(e.get("page_end_parquet"), int)
+    ]
+    if not matches:
+        raise RuntimeError("No top-level Conclusion entry found in TOC")
+    matches.sort(key=lambda e: e["page_start_parquet"])
+    p_start = matches[-1]["page_start_parquet"]
+    p_end = matches[-1]["page_end_parquet"]
+    for e in reversed(matches[:-1]):
+        if e["page_end_parquet"] + 1 >= p_start:
+            p_start = e["page_start_parquet"]
+        else:
+            break
+    return pages_to_blob(df, p_start, p_end), p_start, p_end
 
 
 # ── Step 2c: abstract / résumé ───────────────────────────────────────────────
@@ -123,23 +168,58 @@ def extract_abstract_blob(df: pd.DataFrame, structure: dict) -> tuple[Optional[s
     return None, None
 
 
+# `cl[ée]f?s?` because « Mots clefs » (with an f) is a common French variant and
+# was silently unmatched (2023TOU20042 shipped an empty Mots-clés although the
+# thesis prints « Mots clefs** : Erreur, concept, philosophie… »).
+# The separator may be `.` as well as `:` — the layout parser turns a bolded
+# label into `Keywords.**  Sign Language, …` — but a `.` only counts when the
+# remainder really is a list (see extract_keywords_from_abstract), otherwise an
+# ordinary sentence containing "keywords." would be harvested as prose.
+_KW_LABEL = r"(?:mots[- ]?cl[ée]f?s?|key\s?words?)"
 KEYWORDS_RE = re.compile(
-    r"\*{0,2}(?:mots[- ]?cl[ée]s?|keywords?)\*{0,2}\s*[:：]\s*(.+)",
+    r"\*{0,2}" + _KW_LABEL + r"\*{0,2}\s*([.:：])\s*\**\s*(.+)",
+    re.IGNORECASE,
+)
+# The label alone on its line, the values in the following block: the layout
+# parser emits « Keywords » and « LSF, lexical database, familiarity… » as two
+# separate blocks with no colon between them (2024PA100054).
+KEYWORDS_LABEL_ONLY_RE = re.compile(
+    r"^\*{0,2}" + _KW_LABEL + r"\*{0,2}\s*[.:：]?\s*$",
     re.IGNORECASE,
 )
 
 
+def _split_keywords(raw: str) -> list[str]:
+    return [kw for kw in (k.strip().strip(".") for k in re.split(r"[,;]", raw.strip())) if kw]
+
+
 def extract_keywords_from_abstract(blob: str) -> list[str]:
     """`**Mots clés** : a, b ; c` / `Keywords: …` lines → deduplicated list
-    (French first, then English when both are present)."""
+    (French first, then English when both are present). Also handles the
+    label-on-its-own-line layout, where the values are the next non-empty line."""
     keywords: list[str] = []
     seen: set[str] = set()
-    for line in blob.splitlines():
-        m = KEYWORDS_RE.search(line.strip())
+
+    def add(items):
+        for kw in items:
+            if kw.lower() not in seen:
+                keywords.append(kw)
+                seen.add(kw.lower())
+
+    lines = [ln.strip() for ln in blob.splitlines()]
+    for i, line in enumerate(lines):
+        m = KEYWORDS_RE.search(line)
         if m:
-            for kw in re.split(r"[,;]", m.group(1).strip()):
-                kw = kw.strip().strip(".")
-                if kw and kw.lower() not in seen:
-                    keywords.append(kw)
-                    seen.add(kw.lower())
+            sep, raw = m.group(1), m.group(2)
+            parsed = _split_keywords(raw)
+            # a `.` separator is only a keyword line if it really introduces a
+            # list; `:` keeps the original, permissive behaviour
+            if sep in ":：" or len(parsed) >= 2:
+                add(parsed)
+                continue
+        if KEYWORDS_LABEL_ONLY_RE.match(line):
+            for nxt in lines[i + 1:]:
+                if nxt:
+                    add(_split_keywords(nxt))
+                    break
     return keywords

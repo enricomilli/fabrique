@@ -1,0 +1,718 @@
+{
+  "thesis_id": "2023TOU20042",
+  "parquet_blocks": 1710,
+  "parquet_pages": 274,
+  "metadata": {
+    "titre": "Le concept d'erreur dans la philosophie biologique de Georges Canguilhem",
+    "auteur": "Jacques Atiogbé KOUDJODJI",
+    "annee": "2023",
+    "etablissement": "Université Toulouse 2 - Jean Jaurès, ERRAPHIS",
+    "discipline": "Philosophie",
+    "mots_cles": [
+      "Erreur",
+      "concept",
+      "philosophie",
+      "biologie",
+      "histoire",
+      "normativité",
+      "normal"
+    ],
+    "pages": 275
+  },
+  "toc": [
+    {
+      "title": "DÉDICACE",
+      "page_start": 2,
+      "level": 0,
+      "page_end": 4,
+      "role": "frontmatter",
+      "page_start_parquet": 4,
+      "page_end_parquet": 6
+    },
+    {
+      "title": "REMERCIEMENTS",
+      "page_start": 5,
+      "level": 0,
+      "page_end": 6,
+      "role": "frontmatter",
+      "page_start_parquet": 7,
+      "page_end_parquet": 8
+    },
+    {
+      "title": "SOMMAIRE",
+      "page_start": 7,
+      "level": 0,
+      "page_end": 12,
+      "role": "frontmatter",
+      "page_start_parquet": 9,
+      "page_end_parquet": 14
+    },
+    {
+      "title": "INTRODUCTION GÉNÉRALE",
+      "page_start": 13,
+      "level": 0,
+      "page_end": 22,
+      "role": "frontmatter",
+      "page_start_parquet": 15,
+      "page_end_parquet": 24
+    },
+    {
+      "title": "1. L'ŒUVRE ET LA DÉMARCHE DE GEORGES CANGUILHEM",
+      "page_start": 23,
+      "level": 0,
+      "page_end": 24,
+      "role": "chapter",
+      "page_start_parquet": 25,
+      "page_end_parquet": 26
+    },
+    {
+      "title": "INTRODUCTION",
+      "page_start": 25,
+      "level": 0,
+      "page_end": 75,
+      "role": "frontmatter",
+      "page_start_parquet": 27,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "1.1. LES PRÉMISSES DE LA PHILOSOPHIE BIOLOGIQUE DE GEORGES CANGUILHEM",
+      "page_start": 27,
+      "level": 1,
+      "page_end": 43,
+      "role": "section",
+      "page_start_parquet": 29,
+      "page_end_parquet": 45
+    },
+    {
+      "title": "1.1.1. La philosophie de la biologie de Georges Canguilhem",
+      "page_start": 28,
+      "level": 2,
+      "page_end": 31,
+      "role": "section",
+      "page_start_parquet": 30,
+      "page_end_parquet": 33
+    },
+    {
+      "title": "1.1.2. Le renversement doctrinal dans la connaissance de la vie",
+      "page_start": 32,
+      "level": 2,
+      "page_end": 36,
+      "role": "section",
+      "page_start_parquet": 34,
+      "page_end_parquet": 38
+    },
+    {
+      "title": "1.1.3. Vers une nouvelle perspective dans la connaissance de la vie",
+      "page_start": 37,
+      "level": 2,
+      "page_end": 39,
+      "role": "section",
+      "page_start_parquet": 39,
+      "page_end_parquet": 41
+    },
+    {
+      "title": "1.1.4. L'héritage conceptuel de Canguilhem dans la philosophie de la biologie",
+      "page_start": 40,
+      "level": 2,
+      "page_end": 43,
+      "role": "section",
+      "page_start_parquet": 42,
+      "page_end_parquet": 45
+    },
+    {
+      "title": "1.2. CANGUILHEM ET LE DÉPASSEMENT DE L'ÉPISTÉMOLOGIE TRADITIONNELLE",
+      "page_start": 44,
+      "level": 1,
+      "page_end": 54,
+      "role": "section",
+      "page_start_parquet": 46,
+      "page_end_parquet": 56
+    },
+    {
+      "title": "1.2.1. De la tension dans la connaissance du vivant",
+      "page_start": 45,
+      "level": 2,
+      "page_end": 47,
+      "role": "section",
+      "page_start_parquet": 47,
+      "page_end_parquet": 49
+    },
+    {
+      "title": "1.2.2. Quelque critique de la biologie moderne",
+      "page_start": 48,
+      "level": 2,
+      "page_end": 51,
+      "role": "section",
+      "page_start_parquet": 50,
+      "page_end_parquet": 53
+    },
+    {
+      "title": "1.2.3. De la connaissance de la vie à la logique de la vie",
+      "page_start": 52,
+      "level": 2,
+      "page_end": 54,
+      "role": "section",
+      "page_start_parquet": 54,
+      "page_end_parquet": 56
+    },
+    {
+      "title": "1.3. CLAUDE BERNARD ET LE DÉVELOPPEMENT DE LA BIOLOGIE MODERNE",
+      "page_start": 55,
+      "level": 1,
+      "page_end": 63,
+      "role": "section",
+      "page_start_parquet": 57,
+      "page_end_parquet": 65
+    },
+    {
+      "title": "1.3.1. L'influence de la méthode expérimentale de Claude Bernard",
+      "page_start": 56,
+      "level": 2,
+      "page_end": 57,
+      "role": "section",
+      "page_start_parquet": 58,
+      "page_end_parquet": 59
+    },
+    {
+      "title": "1.3.2. Le Principe de la méthode expérimentale de Claude Bernard",
+      "page_start": 58,
+      "level": 2,
+      "page_end": 59,
+      "role": "section",
+      "page_start_parquet": 60,
+      "page_end_parquet": 61
+    },
+    {
+      "title": "1.3.3. De la connaissance de la vie à la logique de la vie",
+      "page_start": 60,
+      "level": 2,
+      "page_end": 63,
+      "role": "section",
+      "page_start_parquet": 62,
+      "page_end_parquet": 65
+    },
+    {
+      "title": "1.4. DE LA COMPRÉHENSION DU VIVANT",
+      "page_start": 64,
+      "level": 1,
+      "page_end": 75,
+      "role": "section",
+      "page_start_parquet": 66,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "1.4.1. De la logique du vivant",
+      "page_start": 64,
+      "level": 2,
+      "page_end": 67,
+      "role": "section",
+      "page_start_parquet": 66,
+      "page_end_parquet": 69
+    },
+    {
+      "title": "1.4.2. De la question des valeurs vitales inférieures et supérieures",
+      "page_start": 68,
+      "level": 2,
+      "page_end": 70,
+      "role": "section",
+      "page_start_parquet": 70,
+      "page_end_parquet": 72
+    },
+    {
+      "title": "1.4.3. Le dynamisme des valeurs vitales",
+      "page_start": 71,
+      "level": 2,
+      "page_end": 75,
+      "role": "section",
+      "page_start_parquet": 73,
+      "page_end_parquet": 77
+    },
+    {
+      "title": "CONCLUSION",
+      "page_start": 76,
+      "level": 0,
+      "page_end": 78,
+      "role": "backmatter",
+      "page_start_parquet": 78,
+      "page_end_parquet": 80
+    },
+    {
+      "title": "2. DU STRUCTURAL AU STRUCTUREL CHEZ GEORGES CANGUILHEM",
+      "page_start": 79,
+      "level": 0,
+      "page_end": 80,
+      "role": "chapter",
+      "page_start_parquet": 81,
+      "page_end_parquet": 82
+    },
+    {
+      "title": "INTRODUCTION",
+      "page_start": 81,
+      "level": 0,
+      "page_end": 135,
+      "role": "frontmatter",
+      "page_start_parquet": 83,
+      "page_end_parquet": 137
+    },
+    {
+      "title": "2.1. L'INDIVIDUALITÉ DANS LA PHILOSOPHIE DE GEORGES CANGUILHEM",
+      "page_start": 83,
+      "level": 1,
+      "page_end": 102,
+      "role": "section",
+      "page_start_parquet": 85,
+      "page_end_parquet": 104
+    },
+    {
+      "title": "2.1.1. Le concept d'Individualité Chez Canguilhem",
+      "page_start": 84,
+      "level": 2,
+      "page_end": 86,
+      "role": "section",
+      "page_start_parquet": 86,
+      "page_end_parquet": 88
+    },
+    {
+      "title": "2.1.2. Approche opératoire du concept d'individualité",
+      "page_start": 87,
+      "level": 2,
+      "page_end": 87,
+      "role": "section",
+      "page_start_parquet": 89,
+      "page_end_parquet": 89
+    },
+    {
+      "title": "2.1.3. Individualité : une réalité biologique par excellence",
+      "page_start": 88,
+      "level": 2,
+      "page_end": 90,
+      "role": "section",
+      "page_start_parquet": 90,
+      "page_end_parquet": 92
+    },
+    {
+      "title": "2.1.4. Individualité et discontinuité biologique",
+      "page_start": 91,
+      "level": 2,
+      "page_end": 97,
+      "role": "section",
+      "page_start_parquet": 93,
+      "page_end_parquet": 99
+    },
+    {
+      "title": "2.1.5. De la relation dans l'individuation biologique",
+      "page_start": 98,
+      "level": 2,
+      "page_end": 102,
+      "role": "section",
+      "page_start_parquet": 100,
+      "page_end_parquet": 104
+    },
+    {
+      "title": "2.2. LA QUESTION DES STRUCTURES VITALES DANS LA PHILOSOPHIE BIOLOGIQUE DE CANGUILHEM",
+      "page_start": 103,
+      "level": 1,
+      "page_end": 120,
+      "role": "section",
+      "page_start_parquet": 105,
+      "page_end_parquet": 122
+    },
+    {
+      "title": "2.2.1. Du dynamisme vital",
+      "page_start": 103,
+      "level": 2,
+      "page_end": 106,
+      "role": "section",
+      "page_start_parquet": 105,
+      "page_end_parquet": 108
+    },
+    {
+      "title": "2.2.2. Du structural",
+      "page_start": 107,
+      "level": 2,
+      "page_end": 109,
+      "role": "section",
+      "page_start_parquet": 109,
+      "page_end_parquet": 111
+    },
+    {
+      "title": "2.2.3. Valeur vitale négative",
+      "page_start": 110,
+      "level": 2,
+      "page_end": 112,
+      "role": "section",
+      "page_start_parquet": 112,
+      "page_end_parquet": 114
+    },
+    {
+      "title": "2.2.4. Le positivisme des valeurs vitales",
+      "page_start": 113,
+      "level": 2,
+      "page_end": 115,
+      "role": "section",
+      "page_start_parquet": 115,
+      "page_end_parquet": 117
+    },
+    {
+      "title": "2.2.5. Assurance structurelle",
+      "page_start": 116,
+      "level": 2,
+      "page_end": 120,
+      "role": "section",
+      "page_start_parquet": 118,
+      "page_end_parquet": 122
+    },
+    {
+      "title": "2.3. DE LA NORMATIVITÉ BIOLOGIQUE",
+      "page_start": 121,
+      "level": 1,
+      "page_end": 135,
+      "role": "section",
+      "page_start_parquet": 123,
+      "page_end_parquet": 137
+    },
+    {
+      "title": "2.3.1. Le dépassement normatif",
+      "page_start": 122,
+      "level": 2,
+      "page_end": 126,
+      "role": "section",
+      "page_start_parquet": 124,
+      "page_end_parquet": 128
+    },
+    {
+      "title": "2.3.2. Allure de la vie",
+      "page_start": 127,
+      "level": 2,
+      "page_end": 130,
+      "role": "section",
+      "page_start_parquet": 129,
+      "page_end_parquet": 132
+    },
+    {
+      "title": "2.3.3. L'altérité vitale",
+      "page_start": 131,
+      "level": 2,
+      "page_end": 135,
+      "role": "section",
+      "page_start_parquet": 133,
+      "page_end_parquet": 137
+    },
+    {
+      "title": "CONCLUSION",
+      "page_start": 136,
+      "level": 0,
+      "page_end": 137,
+      "role": "backmatter",
+      "page_start_parquet": 138,
+      "page_end_parquet": 139
+    },
+    {
+      "title": "3. LE PROJET GNOSÉOLOGIQUE : LA THÉORIE DE LA CONNAISSANCE DE LA VIE",
+      "page_start": 138,
+      "level": 0,
+      "page_end": 138,
+      "role": "chapter",
+      "page_start_parquet": 140,
+      "page_end_parquet": 140
+    },
+    {
+      "title": "INTRODUCTION",
+      "page_start": 139,
+      "level": 0,
+      "page_end": 236,
+      "role": "frontmatter",
+      "page_start_parquet": 141,
+      "page_end_parquet": 238
+    },
+    {
+      "title": "3.1. DU RAPPORT DU CONCEPT ET DE LA VIE CHEZ GEORGES CANGUILHEM",
+      "page_start": 141,
+      "level": 1,
+      "page_end": 157,
+      "role": "section",
+      "page_start_parquet": 143,
+      "page_end_parquet": 159
+    },
+    {
+      "title": "3.1.1. Considération problématique et étymologique",
+      "page_start": 142,
+      "level": 2,
+      "page_end": 144,
+      "role": "section",
+      "page_start_parquet": 144,
+      "page_end_parquet": 146
+    },
+    {
+      "title": "3.1.2. De la connaissance de la vie par concept",
+      "page_start": 145,
+      "level": 2,
+      "page_end": 148,
+      "role": "section",
+      "page_start_parquet": 147,
+      "page_end_parquet": 150
+    },
+    {
+      "title": "3.1.3. La double réalité du concept",
+      "page_start": 149,
+      "level": 2,
+      "page_end": 152,
+      "role": "section",
+      "page_start_parquet": 151,
+      "page_end_parquet": 154
+    },
+    {
+      "title": "3.1.4. L'erreur: Une donnée vitale mais aussi logique",
+      "page_start": 153,
+      "level": 2,
+      "page_end": 153,
+      "role": "section",
+      "page_start_parquet": 155,
+      "page_end_parquet": 155
+    },
+    {
+      "title": "3.1.5. De la non-réciprocité entre la vie et le concept",
+      "page_start": 154,
+      "level": 2,
+      "page_end": 157,
+      "role": "section",
+      "page_start_parquet": 156,
+      "page_end_parquet": 159
+    },
+    {
+      "title": "3.2. DES VALEURS VITALES NÉGATIVES : LE CAS DE L'ERREUR INNÉE DU MÉTABOLISME",
+      "page_start": 158,
+      "level": 1,
+      "page_end": 177,
+      "role": "section",
+      "page_start_parquet": 160,
+      "page_end_parquet": 179
+    },
+    {
+      "title": "3.2.1. Canguilhem, philosophe de l'erreur",
+      "page_start": 159,
+      "level": 2,
+      "page_end": 163,
+      "role": "section",
+      "page_start_parquet": 161,
+      "page_end_parquet": 165
+    },
+    {
+      "title": "3.2.2. Le vivant, une réalité erronée par nature",
+      "page_start": 164,
+      "level": 2,
+      "page_end": 167,
+      "role": "section",
+      "page_start_parquet": 166,
+      "page_end_parquet": 169
+    },
+    {
+      "title": "3.2.3. L'Érreur innée comme principe structurel du vivant",
+      "page_start": 168,
+      "level": 2,
+      "page_end": 173,
+      "role": "section",
+      "page_start_parquet": 170,
+      "page_end_parquet": 175
+    },
+    {
+      "title": "3.2.4. De l'erreur biologique du point de vue logique",
+      "page_start": 174,
+      "level": 2,
+      "page_end": 177,
+      "role": "section",
+      "page_start_parquet": 176,
+      "page_end_parquet": 179
+    },
+    {
+      "title": "3.3. DE LA MONSTRUOSITÉ DANS LA CONNAISSANCE DE LA VIE",
+      "page_start": 178,
+      "level": 1,
+      "page_end": 192,
+      "role": "section",
+      "page_start_parquet": 180,
+      "page_end_parquet": 194
+    },
+    {
+      "title": "3.3.1. Le problème de l'Anomalie ou considération sur l'anomalie",
+      "page_start": 178,
+      "level": 2,
+      "page_end": 180,
+      "role": "section",
+      "page_start_parquet": 180,
+      "page_end_parquet": 182
+    },
+    {
+      "title": "3.3.2. De l'extrapolation dans la connaissance de la vie : le cas de l'anomalie",
+      "page_start": 181,
+      "level": 2,
+      "page_end": 187,
+      "role": "section",
+      "page_start_parquet": 183,
+      "page_end_parquet": 189
+    },
+    {
+      "title": "3.3.3. De la monstruosité à la conservation : un dynamisme vital en perspective",
+      "page_start": 188,
+      "level": 2,
+      "page_end": 192,
+      "role": "section",
+      "page_start_parquet": 190,
+      "page_end_parquet": 194
+    },
+    {
+      "title": "3.4. DE L'ONTOLOGIE BIOLOGIQUE CHEZ CANGUILHEM",
+      "page_start": 193,
+      "level": 1,
+      "page_end": 214,
+      "role": "section",
+      "page_start_parquet": 195,
+      "page_end_parquet": 216
+    },
+    {
+      "title": "3.4.1. De la question de l'individu",
+      "page_start": 194,
+      "level": 2,
+      "page_end": 198,
+      "role": "section",
+      "page_start_parquet": 196,
+      "page_end_parquet": 200
+    },
+    {
+      "title": "3.4.2. L'individu comme référence absolue",
+      "page_start": 199,
+      "level": 2,
+      "page_end": 203,
+      "role": "section",
+      "page_start_parquet": 201,
+      "page_end_parquet": 205
+    },
+    {
+      "title": "3.4.3. De la biologie au matérialisme : un pluralisme productif",
+      "page_start": 204,
+      "level": 2,
+      "page_end": 207,
+      "role": "section",
+      "page_start_parquet": 206,
+      "page_end_parquet": 209
+    },
+    {
+      "title": "3.4.4. Homogénéité méthodologique",
+      "page_start": 208,
+      "level": 2,
+      "page_end": 214,
+      "role": "section",
+      "page_start_parquet": 210,
+      "page_end_parquet": 216
+    },
+    {
+      "title": "3.5. DE L'ASSIMILATION DANS LE PROCESSUS VITAL",
+      "page_start": 215,
+      "level": 1,
+      "page_end": 236,
+      "role": "section",
+      "page_start_parquet": 217,
+      "page_end_parquet": 238
+    },
+    {
+      "title": "3.5.1. De la nécessité de l'assimilation dans la vie",
+      "page_start": 216,
+      "level": 2,
+      "page_end": 223,
+      "role": "section",
+      "page_start_parquet": 218,
+      "page_end_parquet": 225
+    },
+    {
+      "title": "3.5.2. De la contingence dans la vie",
+      "page_start": 224,
+      "level": 2,
+      "page_end": 226,
+      "role": "section",
+      "page_start_parquet": 226,
+      "page_end_parquet": 228
+    },
+    {
+      "title": "3.5.3. De la contingence à la création : une question de dépassement",
+      "page_start": 227,
+      "level": 2,
+      "page_end": 230,
+      "role": "section",
+      "page_start_parquet": 229,
+      "page_end_parquet": 232
+    },
+    {
+      "title": "3.5.4. Le logos vital",
+      "page_start": 231,
+      "level": 2,
+      "page_end": 236,
+      "role": "section",
+      "page_start_parquet": 233,
+      "page_end_parquet": 238
+    },
+    {
+      "title": "CONCLUSION",
+      "page_start": 237,
+      "level": 0,
+      "page_end": 250,
+      "role": "backmatter",
+      "page_start_parquet": 239,
+      "page_end_parquet": 252
+    },
+    {
+      "title": "4. BIBLIOGRAPHIE",
+      "page_start": 251,
+      "level": 0,
+      "page_end": 252,
+      "role": "chapter",
+      "page_start_parquet": 253,
+      "page_end_parquet": 254
+    },
+    {
+      "title": "BIBLIOGRAPHIE GÉNÉRALE",
+      "page_start": 253,
+      "level": 0,
+      "page_end": 262,
+      "role": "backmatter",
+      "page_start_parquet": 255,
+      "page_end_parquet": 264
+    },
+    {
+      "title": "4.1. WEBOGRAPHIE OU SITOGRAPHIE",
+      "page_start": 263,
+      "level": 0,
+      "page_end": 264,
+      "role": "chapter",
+      "page_start_parquet": 265,
+      "page_end_parquet": 266
+    },
+    {
+      "title": "5. ANNEXES",
+      "page_start": 265,
+      "level": 0,
+      "page_end": 268,
+      "role": "chapter",
+      "page_start_parquet": 267,
+      "page_end_parquet": 270
+    },
+    {
+      "title": "6. INDEX",
+      "page_start": 269,
+      "level": 0,
+      "page_end": 269,
+      "role": "chapter",
+      "page_start_parquet": 271,
+      "page_end_parquet": 271
+    }
+  ],
+  "page_offset": {
+    "intro_page_toc": 13,
+    "intro_page_parquet": 15,
+    "offset": 2,
+    "method": "introduction-anchor"
+  },
+  "toc_validation": {
+    "issues": [],
+    "ok": true
+  }
+}
