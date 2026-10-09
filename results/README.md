@@ -48,7 +48,7 @@ How to read a run: `python3 scripts/tools/build_explorer.py --thesis-dir results
 
 A ten-thesis set (7 humanities + 3 sciences, 2022-2024, all under 500 pp.) drawn
 from `science_commons` to exercise the pipeline across disciplines. The parquets (`data/<nnt>.parquet`), the shipping run (`results/<nnt>/`), the
-browsable views (`explorer/<nnt>/`) and nine of the ten thesis PDFs (134 MB,
+browsable views (`explorer/<nnt>/`) and all ten thesis PDFs (198 MB,
 `data/pdf/`) are committed. **2024LYO20081's PDF is excluded** at 64 MB — high
 resolution scans of the Montel/Lumière correspondence and Gaumont ledgers, and
 the only file above GitHub's 50 MB warning threshold.
