@@ -23,6 +23,7 @@ import { Route as ProtectedDocumentsDocumentIdIndexRouteImport } from './routes/
 import { Route as ProtectedDocumentsDocumentIdReaderRouteImport } from './routes/_protected/documents/$documentId/_reader'
 import { Route as ProtectedDocumentsDocumentIdReaderFicheRouteImport } from './routes/_protected/documents/$documentId/_reader/fiche'
 import { Route as ProtectedDocumentsDocumentIdReaderNoteRouteImport } from './routes/_protected/documents/$documentId/_reader/note'
+import { Route as ProtectedDocumentsDocumentIdReaderReasoningRouteImport } from './routes/_protected/documents/$documentId/_reader/reasoning'
 
 const ProtectedRoute = ProtectedRouteImport.update({
   id: '/_protected',
@@ -97,6 +98,12 @@ const ProtectedDocumentsDocumentIdReaderNoteRoute =
     path: '/note',
     getParentRoute: () => ProtectedDocumentsDocumentIdReaderRoute,
   } as any)
+const ProtectedDocumentsDocumentIdReaderReasoningRoute =
+  ProtectedDocumentsDocumentIdReaderReasoningRouteImport.update({
+    id: '/reasoning',
+    path: '/reasoning',
+    getParentRoute: () => ProtectedDocumentsDocumentIdReaderRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ProtectedIndexRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/documents/$documentId/': typeof ProtectedDocumentsDocumentIdIndexRoute
   '/documents/$documentId/fiche': typeof ProtectedDocumentsDocumentIdReaderFicheRoute
   '/documents/$documentId/note': typeof ProtectedDocumentsDocumentIdReaderNoteRoute
+  '/documents/$documentId/reasoning': typeof ProtectedDocumentsDocumentIdReaderReasoningRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -124,6 +132,7 @@ export interface FileRoutesByTo {
   '/documents/$documentId': typeof ProtectedDocumentsDocumentIdIndexRoute
   '/documents/$documentId/fiche': typeof ProtectedDocumentsDocumentIdReaderFicheRoute
   '/documents/$documentId/note': typeof ProtectedDocumentsDocumentIdReaderNoteRoute
+  '/documents/$documentId/reasoning': typeof ProtectedDocumentsDocumentIdReaderReasoningRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -141,6 +150,7 @@ export interface FileRoutesById {
   '/_protected/documents/$documentId/': typeof ProtectedDocumentsDocumentIdIndexRoute
   '/_protected/documents/$documentId/_reader/fiche': typeof ProtectedDocumentsDocumentIdReaderFicheRoute
   '/_protected/documents/$documentId/_reader/note': typeof ProtectedDocumentsDocumentIdReaderNoteRoute
+  '/_protected/documents/$documentId/_reader/reasoning': typeof ProtectedDocumentsDocumentIdReaderReasoningRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/documents/$documentId/'
     | '/documents/$documentId/fiche'
     | '/documents/$documentId/note'
+    | '/documents/$documentId/reasoning'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -170,6 +181,7 @@ export interface FileRouteTypes {
     | '/documents/$documentId'
     | '/documents/$documentId/fiche'
     | '/documents/$documentId/note'
+    | '/documents/$documentId/reasoning'
   id:
     | '__root__'
     | '/_protected'
@@ -186,6 +198,7 @@ export interface FileRouteTypes {
     | '/_protected/documents/$documentId/'
     | '/_protected/documents/$documentId/_reader/fiche'
     | '/_protected/documents/$documentId/_reader/note'
+    | '/_protected/documents/$documentId/_reader/reasoning'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -296,12 +309,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedDocumentsDocumentIdReaderNoteRouteImport
       parentRoute: typeof ProtectedDocumentsDocumentIdReaderRoute
     }
+    '/_protected/documents/$documentId/_reader/reasoning': {
+      id: '/_protected/documents/$documentId/_reader/reasoning'
+      path: '/reasoning'
+      fullPath: '/documents/$documentId/reasoning'
+      preLoaderRoute: typeof ProtectedDocumentsDocumentIdReaderReasoningRouteImport
+      parentRoute: typeof ProtectedDocumentsDocumentIdReaderRoute
+    }
   }
 }
 
 interface ProtectedDocumentsDocumentIdReaderRouteChildren {
   ProtectedDocumentsDocumentIdReaderFicheRoute: typeof ProtectedDocumentsDocumentIdReaderFicheRoute
   ProtectedDocumentsDocumentIdReaderNoteRoute: typeof ProtectedDocumentsDocumentIdReaderNoteRoute
+  ProtectedDocumentsDocumentIdReaderReasoningRoute: typeof ProtectedDocumentsDocumentIdReaderReasoningRoute
 }
 
 const ProtectedDocumentsDocumentIdReaderRouteChildren: ProtectedDocumentsDocumentIdReaderRouteChildren =
@@ -310,6 +331,8 @@ const ProtectedDocumentsDocumentIdReaderRouteChildren: ProtectedDocumentsDocumen
       ProtectedDocumentsDocumentIdReaderFicheRoute,
     ProtectedDocumentsDocumentIdReaderNoteRoute:
       ProtectedDocumentsDocumentIdReaderNoteRoute,
+    ProtectedDocumentsDocumentIdReaderReasoningRoute:
+      ProtectedDocumentsDocumentIdReaderReasoningRoute,
   }
 
 const ProtectedDocumentsDocumentIdReaderRouteWithChildren =
