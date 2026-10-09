@@ -31,7 +31,7 @@ export const fichePageOffsetSchema = z.object({
 	intro_page_toc: z.int().nullable(),
 	intro_page_parquet: z.int().nullable(),
 	offset: z.int().nullable(),
-	method: z.enum(["introduction-anchor", "failed"]),
+	method: z.enum(["introduction-anchor", "printed-folio", "failed"]),
 });
 
 export const ficheTocValidationSchema = z.object({
@@ -66,7 +66,7 @@ export const ficheCallMetaSchema = z.object({
 	elapsed_s: z.number(),
 	finish: z.string(),
 	first_content_s: z.number(),
-	looks_cut: z.boolean(),
+	looks_cut: z.boolean().nullable(),
 	max_tokens: z.int(),
 	reasoning_est_tokens: z.int(),
 	retries: z.int(),
@@ -87,7 +87,7 @@ export const ficheCallSchema = z.object({
 export const ficheStepSchema = z.object({
 	calls: z.array(ficheCallSchema),
 	label: z.string(),
-	output_file: z.string(),
+	output_file: z.string().nullable(),
 	title: z.string(),
 });
 
@@ -111,7 +111,7 @@ export const noteConfigSchema = z.object({
 	rlm_config: z.string(),
 	run_id: z.string(),
 	shim_env: z.object({
-		GEMMA_SERVER_URL: z.string(),
+		GEMMA_SERVER_URL: z.string().optional(),
 	}),
 	thesis: z.string(),
 });
@@ -128,7 +128,7 @@ export const noteIterationTimingsSchema = z.object({
 });
 
 export const noteIterationSchema = z.object({
-	budget: z.int(),
+	budget: z.int().nullable(),
 	elapsed_s: z.number(),
 	exec_stdout: z.string(),
 	file: z.string(),

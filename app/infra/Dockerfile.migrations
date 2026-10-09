@@ -1,5 +1,5 @@
 # Build from the repository root: docker build -f app/infra/Dockerfile.migrations -t fabrique-migrations .
-FROM node:24-bookworm-slim
+FROM node:24-alpine
 WORKDIR /srv/app
 
 RUN printf '{"private":true,"type":"module"}\n' > package.json \
@@ -9,12 +9,13 @@ RUN printf '{"private":true,"type":"module"}\n' > package.json \
     pg@8.23.1 \
     @aws-sdk/client-s3@3.1144.0 \
     tsx@4.23.15 \
-    zod@4.6.5
+    zod@4.6.5 \
+    && npm cache clean --force
 
 ENV PATH="/srv/app/node_modules/.bin:${PATH}"
 
 COPY app/src/db/ ./src/db/
-COPY app/src/lib/docs.schema.ts app/src/lib/docs.server.ts app/src/lib/pdf.server.ts app/src/lib/document-log.ts ./src/lib/
+COPY app/src/lib/docs.schema.ts app/src/lib/reasoning.schema.ts app/src/lib/docs.server.ts app/src/lib/pdf.server.ts app/src/lib/document-log.ts ./src/lib/
 COPY app/scripts/seed-documents.ts ./scripts/seed-documents.ts
 COPY app/infra/drizzle.migrate.config.ts ./infra/drizzle.migrate.config.ts
 

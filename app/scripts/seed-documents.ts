@@ -12,6 +12,7 @@ import { type Docs, docsSchema, parseFicheStructure } from "../src/lib/docs.sche
 import { getExplorerDirectory } from "../src/lib/docs.server.ts";
 import { logDocumentEvent, logDocumentError } from "../src/lib/document-log.ts";
 import { findPdf, getPdfDirectory } from "../src/lib/pdf.server.ts";
+import { type Reasoning, reasoningSchema } from "../src/lib/reasoning.schema.ts";
 
 const pathsSchema = z.object({
 	explorerDir: z.string().trim().min(1).transform((value) => resolve(value)),
@@ -40,7 +41,12 @@ const pdfSchema = z.object({
 
 type SeedPaths = z.infer<typeof pathsSchema>;
 type SeedPdf = Pick<z.infer<typeof pdfSchema>, "path" | "size">;
-export type SeedDocument = { id: string; data: Docs; pdf: SeedPdf | null };
+export type SeedDocument = {
+	id: string;
+	data: Docs;
+	reasoning: Reasoning | null;
+	pdf: SeedPdf | null;
+};
 export type SeedWriter = {
 	uploadPdf: (key: string, pdf: SeedPdf) => Promise<void>;
 	upsertDocument: (document: SeedDocument) => Promise<void>;
@@ -76,6 +82,33 @@ async function readSeedPdf(id: string, directory: string): Promise<SeedPdf | nul
 	} finally {
 		await file.close();
 	}
+}
+
+async function readSeedReasoning(id: string, root: string): Promise<Reasoning | null> {
+	let file: string;
+	try {
+		file = await realpath(join(root, id, "reasoning.json"));
+	} catch (error: unknown) {
+		if (error instanceof Error && "code" in error && error.code === "ENOENT") return null;
+		throw error;
+	}
+	const local = relative(root, file);
+	if (isAbsolute(local) || local === ".." || local.startsWith(`..${sep}`)) {
+		throw new Error(`Reasoning path is outside the source directory: ${id}`);
+	}
+	const text = await readFile(file, "utf8");
+	let input: unknown;
+	try {
+		input = JSON.parse(text);
+	} catch {
+		throw new Error(`Invalid reasoning JSON: ${file}`);
+	}
+	const parsed = reasoningSchema.safeParse(input);
+	if (!parsed.success) {
+		const fields = parsed.error.issues.map((issue) => issue.path.join(".")).join(", ");
+		throw new Error(`Invalid reasoning schema: ${file}. Fields: ${fields}`);
+	}
+	return parsed.data;
 }
 
 export async function readSeedDocuments(paths: SeedPaths): Promise<SeedDocument[]> {
@@ -122,7 +155,12 @@ export async function readSeedDocuments(paths: SeedPaths): Promise<SeedDocument[
 				throw new Error(`Invalid fiche.structure_json: ${file}`);
 			}
 		}
-		result.push({ id, data: parsed.data, pdf: await readSeedPdf(id, pdfDir) });
+		result.push({
+			id,
+			data: parsed.data,
+			reasoning: await readSeedReasoning(id, root),
+			pdf: await readSeedPdf(id, pdfDir),
+		});
 	}
 	if (result.length === 0) throw new Error(`No documents found in ${explorerDir}.`);
 	return result;
@@ -175,8 +213,9 @@ async function main(): Promise<void> {
 	const inputStarted = Date.now();
 	const records = await readSeedDocuments(paths);
 	const pdfCount = records.filter((record) => record.pdf !== null).length;
+	const reasoningCount = records.filter((record) => record.reasoning !== null).length;
 	logDocumentEvent("seed.input.complete", {
-		documentCount: records.length, pdfCount, durationMs: Date.now() - inputStarted,
+		documentCount: records.length, pdfCount, reasoningCount, durationMs: Date.now() - inputStarted,
 	});
 	for (const record of records) {
 		if (!record.pdf) logDocumentEvent("seed.pdf.missing", { documentId: record.id });
@@ -229,12 +268,17 @@ async function main(): Promise<void> {
 					document.data.fiche.fiche_md.trim() && document.data.note.note_md.trim(),
 				);
 				await db.insert(documents).values({
-					id: document.id, data: document.data, public: true, createdBy: null,
-					generationCompleted,
+					id: document.id, data: document.data, reasoning: document.reasoning,
+					public: true, createdBy: null, generationCompleted,
 				}).onConflictDoUpdate({
 					target: documents.id,
 					// Preserve ownership, visibility, and deletion on repeat runs.
-					set: { data: document.data, generationCompleted },
+					// Preserve saved reasoning if the source file is missing.
+					set: {
+						data: document.data,
+						generationCompleted,
+						...(document.reasoning === null ? {} : { reasoning: document.reasoning }),
+					},
 				});
 			},
 		});

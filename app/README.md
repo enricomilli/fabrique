@@ -435,6 +435,8 @@ Public documents includes all public documents. Both lists exclude deleted docum
 Document pages and PDFs permit the owner or a signed-in reader of a public document.
 
 The seed script reads `../explorer/<id>/data.json` and uploads `../data/pdf/<id>.pdf` to the configured S3 bucket.
+It also validates `../explorer/<id>/reasoning.json` and saves it in the document's `reasoning` column.
+Reasoning files are optional. Repeat runs preserve saved reasoning if the source file is missing.
 Run `npm run db:seed` after database migrations.
 Use `EXPLORER_DIR` and `PDF_DIR`, or the seed path options, to change the source directories.
 These local directories are seed inputs, not runtime data sources.

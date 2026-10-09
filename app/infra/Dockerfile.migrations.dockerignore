@@ -10,6 +10,7 @@
 !app/src/db/**
 !app/src/lib/
 !app/src/lib/docs.schema.ts
+!app/src/lib/reasoning.schema.ts
 !app/src/lib/docs.server.ts
 !app/src/lib/document-log.ts
 !app/src/lib/pdf.server.ts
