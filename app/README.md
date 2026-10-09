@@ -457,6 +457,17 @@ The fake worker app at `workers/fake-generation` replays the saved `daley_thesis
 It requires an explicit demo setting. Do not use it with a real worker on the same queue.
 See `workers/fake-generation/README.md` for the install and start commands.
 
+#### Document logs
+
+The web app, fake worker, and seed script write structured JSON logs.
+Logs show document IDs, operation names, durations, response codes, and storage request IDs when available.
+PDF request and upload logs also show request IDs.
+Logs do not include document content, cookies, or credentials.
+
+In Dokploy, check the `web`, `fake-generation`, `migrations`, and `seaweedfs` service logs.
+Use the document ID to find events for the same document across services.
+For PDF lookup failures, find `document.storage.head.failed` and check its `httpStatusCode`.
+
 The queue name is `document-generation`. The job name is `generate-document`.
 The job ID is the document ID. The payload contains `documentId`, `userId`, `bucket`, and `key`.
 A worker must validate the generated payload and save it before it sets `generation_completed` to true.

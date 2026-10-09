@@ -8,6 +8,7 @@ import {
 	type FicheMetadata,
 	parseFicheStructure,
 } from "./docs.schema.ts";
+import { logDocumentError, logDocumentEvent } from "./document-log.ts";
 
 type DocumentRecord = typeof documents.$inferSelect;
 
@@ -22,12 +23,7 @@ async function lookupPdf(id: string): Promise<{ size: number } | null> {
 		const { findStoredPdf } = await import("./s3-pdf.server.ts");
 		return await findStoredPdf(id);
 	} catch (error: unknown) {
-		console.error("Cannot read the document PDF.", {
-			documentId: id,
-			errorName: error instanceof Error ? error.name : "UnknownError",
-			errorMessage:
-				error instanceof Error ? error.message : "Unknown storage error.",
-		});
+		logDocumentError("document.pdf.lookup.failed", error, { documentId: id });
 		throw new Error("Cannot read the document PDF.");
 	}
 }
@@ -195,13 +191,24 @@ function summarizeRecord(record: DocumentRecord): DocumentSummary {
 }
 
 export async function loadDocuments(): Promise<DocumentSummary[]> {
+	const started = performance.now();
+	logDocumentEvent("document.list.started", { scope: "public" });
 	let records: DocumentRecord[];
 	try {
 		const { db } = await import("../db/drizzle.ts");
 		records = await db.select().from(documents).where(publicDocumentsFilter);
-	} catch {
+	} catch (error: unknown) {
+		logDocumentError("document.list.failed", error, {
+			scope: "public",
+			durationMs: Math.round(performance.now() - started),
+		});
 		throw new Error("Cannot read documents.");
 	}
+	logDocumentEvent("document.list.completed", {
+		scope: "public",
+		count: records.length,
+		durationMs: Math.round(performance.now() - started),
+	});
 	return records
 		.sort((left, right) => left.id.localeCompare(right.id, "en"))
 		.map(summarizeRecord);
@@ -210,6 +217,8 @@ export async function loadDocuments(): Promise<DocumentSummary[]> {
 export async function loadMyDocuments(
 	userId: string,
 ): Promise<DocumentSummary[]> {
+	const started = performance.now();
+	logDocumentEvent("document.list.started", { scope: "owned" });
 	let records: DocumentRecord[];
 	try {
 		const { db } = await import("../db/drizzle.ts");
@@ -217,9 +226,18 @@ export async function loadMyDocuments(
 			.select()
 			.from(documents)
 			.where(and(eq(documents.createdBy, userId), isNull(documents.deletedAt)));
-	} catch {
+	} catch (error: unknown) {
+		logDocumentError("document.list.failed", error, {
+			scope: "owned",
+			durationMs: Math.round(performance.now() - started),
+		});
 		throw new Error("Cannot read documents.");
 	}
+	logDocumentEvent("document.list.completed", {
+		scope: "owned",
+		count: records.length,
+		durationMs: Math.round(performance.now() - started),
+	});
 	return records
 		.sort((left, right) => left.id.localeCompare(right.id, "en"))
 		.map(summarizeRecord);
@@ -229,7 +247,6 @@ export async function loadDocument(
 	id: string,
 	userId?: string,
 ): Promise<DocumentDetail | null> {
-	// Reject encoded separators and control characters.
 	if (
 		!id ||
 		id === "." ||
@@ -239,13 +256,16 @@ export async function loadDocument(
 			const code = character.charCodeAt(0);
 			return code < 32 || code === 127;
 		})
-	)
+	) {
+		logDocumentEvent("document.read.rejected", { reason: "invalid_id" });
 		return null;
-
-	let record: DocumentRecord | undefined;
+	}
+	const started = performance.now();
+	logDocumentEvent("document.read.started", { documentId: id });
+	let phase = "database";
 	try {
 		const { db } = await import("../db/drizzle.ts");
-		[record] = await db
+		const [record] = await db
 			.select()
 			.from(documents)
 			.where(
@@ -259,37 +279,58 @@ export async function loadDocument(
 				),
 			)
 			.limit(1);
-	} catch {
-		throw new Error("Cannot read the document.");
-	}
-	if (!record) return null;
-	if (!record.generationCompleted) {
-		const data = record.data === null ? null : validateDocument(record.data);
-		const pdf = await lookupPdf(id);
-		return {
+		if (!record) {
+			logDocumentEvent("document.read.unavailable", {
+				documentId: id,
+				durationMs: Math.round(performance.now() - started),
+			});
+			return null;
+		}
+		logDocumentEvent("document.read.database.completed", {
+			documentId: id,
+			generationCompleted: record.generationCompleted,
+		});
+		phase = "validation";
+		const data =
+			record.data === null && !record.generationCompleted
+				? null
+				: validateDocument(record.data);
+		phase = "pdf";
+		let pdfUrl = record.generationCompleted ? (data?.pdf_url ?? null) : null;
+		if (!pdfUrl) {
+			const pdf = await lookupPdf(id);
+			if (pdf) pdfUrl = `/api/pdfs/${encodeURIComponent(id)}`;
+		}
+		phase = "summary";
+		const result: DocumentDetail = {
 			...summarizeRecord(record),
 			hasFiche: Boolean(data?.fiche.fiche_md.trim()),
 			hasNote: Boolean(data?.note.note_md.trim()),
 			ficheMarkdown: data?.fiche.fiche_md ?? "",
 			noteMarkdown: data?.note.note_md ?? "",
-			pdfUrl: pdf ? `/api/pdfs/${encodeURIComponent(id)}` : null,
-			generationData: data,
+			pdfUrl,
+			generationData: record.generationCompleted ? null : data,
 		};
+		logDocumentEvent("document.read.completed", {
+			documentId: id,
+			generationCompleted: record.generationCompleted,
+			hasPdf: pdfUrl !== null,
+			hasFiche: result.hasFiche,
+			hasNote: result.hasNote,
+			ficheSteps: data?.fiche.steps.length ?? 0,
+			noteIterations: data?.note.iterations.length ?? 0,
+			durationMs: Math.round(performance.now() - started),
+		});
+		return result;
+	} catch (error: unknown) {
+		logDocumentError("document.read.failed", error, {
+			documentId: id,
+			phase,
+			durationMs: Math.round(performance.now() - started),
+		});
+		if (phase === "database") throw new Error("Cannot read the document.");
+		throw error;
 	}
-	const document = validateDocument(record.data);
-	const summary = summarize(id, document, record.public);
-	let pdfUrl = document.pdf_url ?? null;
-	if (!pdfUrl) {
-		const pdf = await lookupPdf(id);
-		if (pdf) pdfUrl = `/api/pdfs/${encodeURIComponent(id)}`;
-	}
-	return {
-		...summary,
-		ficheMarkdown: document.fiche.fiche_md,
-		noteMarkdown: document.note.note_md,
-		pdfUrl,
-		generationData: null,
-	};
 }
 
 export async function setDocumentVisibility(

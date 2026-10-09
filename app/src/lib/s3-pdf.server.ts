@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import {
 	GetObjectCommand,
 	HeadObjectCommand,
@@ -5,6 +6,7 @@ import {
 } from "@aws-sdk/client-s3";
 import { and, eq, isNull, or } from "drizzle-orm";
 import { documents } from "../db/schema/documents.ts";
+import { logDocumentError, logDocumentEvent } from "./document-log.ts";
 import { parseRange } from "./pdf.server.ts";
 
 interface S3Connection {
@@ -16,15 +18,24 @@ let client: S3Client | undefined;
 
 async function getS3Connection(): Promise<S3Connection> {
 	const { env } = await import("../env.ts");
-	client ??= new S3Client({
-		endpoint: env.S3_ENDPOINT,
-		region: env.S3_REGION,
-		forcePathStyle: env.S3_FORCE_PATH_STYLE,
-		credentials: {
-			accessKeyId: env.S3_ACCESS_KEY_ID,
-			secretAccessKey: env.S3_SECRET_ACCESS_KEY,
-		},
-	});
+	if (!client) {
+		const endpoint = new URL(env.S3_ENDPOINT);
+		logDocumentEvent("document.storage.configured", {
+			endpoint: `${endpoint.protocol}//${endpoint.host}${endpoint.pathname}`,
+			bucket: env.S3_BUCKET,
+			region: env.S3_REGION,
+			forcePathStyle: env.S3_FORCE_PATH_STYLE,
+		});
+		client = new S3Client({
+			endpoint: env.S3_ENDPOINT,
+			region: env.S3_REGION,
+			forcePathStyle: env.S3_FORCE_PATH_STYLE,
+			credentials: {
+				accessKeyId: env.S3_ACCESS_KEY_ID,
+				secretAccessKey: env.S3_SECRET_ACCESS_KEY,
+			},
+		});
+	}
 	return { client, bucket: env.S3_BUCKET };
 }
 
@@ -51,20 +62,46 @@ function isValidId(id: string): boolean {
 export async function findStoredPdf(
 	id: string,
 ): Promise<{ size: number } | null> {
-	if (!isValidId(id)) return null;
-	const { client, bucket } = await getS3Connection();
+	if (!isValidId(id)) {
+		logDocumentEvent("document.storage.head.rejected", {
+			reason: "invalid_id",
+		});
+		return null;
+	}
+	const started = performance.now();
+	let bucket: string | undefined;
+	logDocumentEvent("document.storage.head.started", { documentId: id });
 	try {
-		const object = await client.send(
-			new HeadObjectCommand({
-				Bucket: bucket,
-				Key: `pdfs/${id}.pdf`,
-			}),
+		const connection = await getS3Connection();
+		bucket = connection.bucket;
+		const object = await connection.client.send(
+			new HeadObjectCommand({ Bucket: bucket, Key: `pdfs/${id}.pdf` }),
 		);
 		if (object.ContentLength === undefined)
 			throw new Error("The PDF size is unavailable.");
+		logDocumentEvent("document.storage.head.completed", {
+			documentId: id,
+			bucket,
+			bytes: object.ContentLength,
+			httpStatusCode: object.$metadata.httpStatusCode,
+			storageRequestId: object.$metadata.requestId,
+			durationMs: Math.round(performance.now() - started),
+		});
 		return { size: object.ContentLength };
 	} catch (error: unknown) {
-		if (isMissingObject(error)) return null;
+		if (isMissingObject(error)) {
+			logDocumentEvent("document.storage.head.missing", {
+				documentId: id,
+				bucket,
+				durationMs: Math.round(performance.now() - started),
+			});
+			return null;
+		}
+		logDocumentError("document.storage.head.failed", error, {
+			documentId: id,
+			bucket,
+			durationMs: Math.round(performance.now() - started),
+		});
 		throw error;
 	}
 }
@@ -73,11 +110,21 @@ export async function serveStoredPdf(
 	request: Request,
 	id: string,
 ): Promise<Response> {
+	const started = performance.now();
+	const requestId = randomUUID();
+	const context = { requestId, documentId: id, method: request.method };
+	logDocumentEvent("document.pdf.request.started", context);
 	const headers = new Headers({
 		"Cache-Control": "no-store",
 		"X-Content-Type-Options": "nosniff",
 	});
 	const errorResponse = (status: number, message: string): Response => {
+		logDocumentEvent("document.pdf.request.rejected", {
+			...context,
+			status,
+			reason: message,
+			durationMs: Math.round(performance.now() - started),
+		});
 		headers.set("Content-Type", "text/plain; charset=utf-8");
 		headers.delete("Content-Disposition");
 		headers.delete("Content-Range");
@@ -96,6 +143,7 @@ export async function serveStoredPdf(
 		const session = await auth.api.getSession({ headers: request.headers });
 		if (!session) return errorResponse(401, "Unauthorized.");
 		if (!isValidId(id)) return errorResponse(404, "PDF not found.");
+		logDocumentEvent("document.pdf.auth.completed", context);
 		const { db } = await import("../db/drizzle.ts");
 		const [document] = await db
 			.select({ id: documents.id })
@@ -112,6 +160,7 @@ export async function serveStoredPdf(
 			)
 			.limit(1);
 		if (!document) return errorResponse(404, "PDF not found.");
+		logDocumentEvent("document.pdf.access.completed", context);
 		const s3 = await getS3Connection();
 		const pdf = await findStoredPdf(id);
 		if (!pdf) return errorResponse(404, "PDF not found.");
@@ -125,6 +174,11 @@ export async function serveStoredPdf(
 		if (range === "unsatisfied") {
 			headers.set("Content-Range", `bytes */${pdf.size}`);
 			headers.set("Content-Length", "0");
+			logDocumentEvent("document.pdf.range.rejected", {
+				...context,
+				status: 416,
+				bytes: pdf.size,
+			});
 			return new Response(null, { status: 416, headers });
 		}
 		const length = range ? range.end - range.start + 1 : pdf.size;
@@ -135,8 +189,21 @@ export async function serveStoredPdf(
 				`bytes ${range.start}-${range.end}/${pdf.size}`,
 			);
 		const status = range ? 206 : 200;
-		if (request.method === "HEAD" || length === 0)
+		if (request.method === "HEAD" || length === 0) {
+			logDocumentEvent("document.pdf.request.completed", {
+				...context,
+				status,
+				bytes: length,
+				durationMs: Math.round(performance.now() - started),
+			});
 			return new Response(null, { status, headers });
+		}
+		logDocumentEvent("document.storage.get.started", {
+			...context,
+			bucket: s3.bucket,
+			rangeStart: range?.start,
+			rangeEnd: range?.end,
+		});
 		const object = await s3.client.send(
 			new GetObjectCommand({
 				Bucket: s3.bucket,
@@ -145,11 +212,60 @@ export async function serveStoredPdf(
 			}),
 		);
 		if (!object.Body) throw new Error("The PDF body is unavailable.");
-		return new Response(object.Body.transformToWebStream(), {
+		logDocumentEvent("document.storage.get.completed", {
+			...context,
+			httpStatusCode: object.$metadata.httpStatusCode,
+			storageRequestId: object.$metadata.requestId,
+		});
+		const reader = object.Body.transformToWebStream().getReader();
+		let bytes = 0;
+		const body = new ReadableStream<Uint8Array>({
+			async pull(controller) {
+				try {
+					const chunk = await reader.read();
+					if (chunk.done) {
+						logDocumentEvent("document.pdf.stream.completed", {
+							...context,
+							status,
+							bytes,
+							durationMs: Math.round(performance.now() - started),
+						});
+						controller.close();
+					} else {
+						bytes += chunk.value.byteLength;
+						controller.enqueue(chunk.value);
+					}
+				} catch (error: unknown) {
+					logDocumentError("document.pdf.stream.failed", error, {
+						...context,
+						bytes,
+					});
+					controller.error(error);
+				}
+			},
+			async cancel() {
+				logDocumentEvent("document.pdf.stream.canceled", {
+					...context,
+					bytes,
+					durationMs: Math.round(performance.now() - started),
+				});
+				try {
+					await reader.cancel();
+				} catch (error: unknown) {
+					logDocumentError("document.pdf.stream.cancel.failed", error, context);
+					throw error;
+				}
+			},
+		});
+		return new Response(body, {
 			status,
 			headers,
 		});
 	} catch (error: unknown) {
+		logDocumentError("document.pdf.request.failed", error, {
+			...context,
+			durationMs: Math.round(performance.now() - started),
+		});
 		return isMissingObject(error)
 			? errorResponse(404, "PDF not found.")
 			: errorResponse(500, "Cannot read the PDF.");

@@ -11,6 +11,7 @@ import { db } from "../db/drizzle";
 import { documents } from "../db/schema/documents";
 import { env } from "../env";
 import { auth } from "../integrations/better-auth";
+import { logDocumentError, logDocumentEvent } from "./document-log";
 import { enqueueDocumentGeneration } from "./generation-queue.server";
 import { MAX_PDF_BYTES } from "./upload-limits";
 
@@ -100,8 +101,16 @@ async function storePdf(
 	request: Request,
 	key: string,
 	declaredBytes: number | undefined,
+	context: { requestId: string; documentId: string },
 ): Promise<void> {
 	if (!request.body) throw new UploadError("invalid_pdf", 400);
+	const startedAt = Date.now();
+	logDocumentEvent("document.upload.s3.configured", {
+		...context,
+		endpointHostname: new URL(env.S3_ENDPOINT).hostname,
+		bucket: env.S3_BUCKET,
+		forcePathStyle: env.S3_FORCE_PATH_STYLE,
+	});
 	const reader = request.body.getReader();
 	const source = Readable.from(
 		(async function* () {
@@ -137,18 +146,40 @@ async function storePdf(
 		void reader.cancel().catch(() => undefined);
 	};
 	request.signal.addEventListener("abort", stop, { once: true });
+	logDocumentEvent("document.upload.multipart.start", context);
 	const streamed = pipeline(source, validated);
 	const stored = upload.done();
 	try {
 		if (request.signal.aborted) stop();
 		await Promise.all([streamed, stored]);
 		if (request.signal.aborted) throw new UploadError("upload_failed", 500);
+		logDocumentEvent("document.upload.multipart.complete", {
+			...context,
+			durationMs: Date.now() - startedAt,
+		});
 	} catch (error: unknown) {
+		logDocumentError("document.upload.multipart.error", error, {
+			...context,
+			durationMs: Date.now() - startedAt,
+			aborted: request.signal.aborted,
+		});
 		stop();
 		// Wait for S3 requests before cleanup. Upload.abort() alone returns before those requests finish.
 		await Promise.allSettled([streamed, stored]);
-		await upload.abort();
+		logDocumentEvent("document.upload.multipart.abort.start", context);
+		try {
+			await upload.abort();
+			logDocumentEvent("document.upload.multipart.abort.success", context);
+		} catch (abortError: unknown) {
+			logDocumentError(
+				"document.upload.multipart.abort.error",
+				abortError,
+				context,
+			);
+			throw abortError;
+		}
 		if (upload.uploadId) {
+			logDocumentEvent("document.upload.multipart.cleanup.start", context);
 			await getS3Client()
 				.send(
 					new AbortMultipartUploadCommand({
@@ -157,22 +188,48 @@ async function storePdf(
 						UploadId: upload.uploadId,
 					}),
 				)
+				.then(() => {
+					logDocumentEvent(
+						"document.upload.multipart.cleanup.success",
+						context,
+					);
+				})
 				.catch((cleanupError: unknown) => {
 					if (
-						!(
-							cleanupError instanceof Error &&
-							cleanupError.name === "NoSuchUpload"
-						)
+						cleanupError instanceof Error &&
+						cleanupError.name === "NoSuchUpload"
 					) {
-						console.error("Cannot abort an incomplete PDF upload.");
+						logDocumentEvent("document.upload.multipart.cleanup.success", {
+							...context,
+							alreadyAbsent: true,
+						});
+					} else {
+						logDocumentError(
+							"document.upload.multipart.cleanup.error",
+							cleanupError,
+							context,
+						);
 					}
 				});
 		}
 		// A completed object can race with cancellation. Delete it as well.
+		logDocumentEvent("document.upload.delete.start", {
+			...context,
+			reason: "multipart_failure",
+		});
 		await getS3Client()
 			.send(new DeleteObjectCommand({ Bucket: env.S3_BUCKET, Key: key }))
-			.catch(() => {
-				console.error("Cannot delete an incomplete PDF upload.");
+			.then(() => {
+				logDocumentEvent("document.upload.delete.success", {
+					...context,
+					reason: "multipart_failure",
+				});
+			})
+			.catch((cleanupError: unknown) => {
+				logDocumentError("document.upload.delete.error", cleanupError, {
+					...context,
+					reason: "multipart_failure",
+				});
 			});
 		throw error;
 	} finally {
@@ -229,13 +286,27 @@ function validateRequest(request: Request): {
 }
 
 export async function uploadDocument(request: Request): Promise<Response> {
+	const requestId = randomUUID();
+	const startedAt = Date.now();
+	let documentId: string | undefined;
+	let status = 500;
+	logDocumentEvent("document.upload.start", { requestId });
 	try {
 		const session = await auth.api.getSession({ headers: request.headers });
 		if (!session) throw new UploadError("unauthorized", 401);
 		const { filename, isPublic, declaredBytes } = validateRequest(request);
 		const id = randomUUID();
+		documentId = id;
+		const context = { requestId, documentId: id };
+		logDocumentEvent("document.upload.validated", {
+			...context,
+			declaredBytes,
+			isPublic,
+		});
 		const key = `pdfs/${id}.pdf`;
-		await storePdf(request, key, declaredBytes);
+		await storePdf(request, key, declaredBytes, context);
+		const insertStartedAt = Date.now();
+		logDocumentEvent("document.upload.db.insert.start", context);
 		try {
 			await db.insert(documents).values({
 				id,
@@ -245,30 +316,53 @@ export async function uploadDocument(request: Request): Promise<Response> {
 				createdBy: session.user.id,
 				public: isPublic,
 			});
+			logDocumentEvent("document.upload.db.insert.success", {
+				...context,
+				durationMs: Date.now() - insertStartedAt,
+			});
 		} catch (error: unknown) {
+			logDocumentError("document.upload.db.insert.error", error, {
+				...context,
+				durationMs: Date.now() - insertStartedAt,
+			});
+			logDocumentEvent("document.upload.db.cleanup.start", context);
 			await getS3Client()
 				.send(new DeleteObjectCommand({ Bucket: env.S3_BUCKET, Key: key }))
-				.catch(() => {
-					console.error(
-						"Cannot delete the PDF after a document insert failed.",
+				.then(() => {
+					logDocumentEvent("document.upload.db.cleanup.success", context);
+				})
+				.catch((cleanupError: unknown) => {
+					logDocumentError(
+						"document.upload.db.cleanup.error",
+						cleanupError,
+						context,
 					);
 				});
 			throw error;
 		}
 		try {
-			await enqueueDocumentGeneration({
-				documentId: id,
-				userId: session.user.id,
-				bucket: env.S3_BUCKET,
-				key,
-			});
+			await enqueueDocumentGeneration(
+				{
+					documentId: id,
+					userId: session.user.id,
+					bucket: env.S3_BUCKET,
+					key,
+				},
+				requestId,
+			);
 		} catch {
 			// Redis can accept a job before its reply fails. Preserve the document for recovery.
+			logDocumentEvent("document.upload.queue.uncertain_failure", {
+				...context,
+				preserved: true,
+			});
+			status = 503;
 			return Response.json(
 				{ error: "upload_failed", id },
 				{ status: 503, headers: { "Cache-Control": "no-store" } },
 			);
 		}
+		status = 201;
 		return Response.json(
 			{ id },
 			{ status: 201, headers: { "Cache-Control": "no-store" } },
@@ -280,9 +374,24 @@ export async function uploadDocument(request: Request): Promise<Response> {
 			error instanceof UploadError
 				? error
 				: new UploadError("upload_failed", 500);
+		status = failure.status;
+		const event =
+			failure.code === "unauthorized"
+				? "document.upload.auth.denied"
+				: failure.code === "invalid_pdf" || failure.code === "too_large"
+					? "document.upload.validation.rejected"
+					: "document.upload.error";
+		logDocumentError(event, failure, { requestId, documentId, status });
 		return Response.json(
 			{ error: failure.code },
 			{ status: failure.status, headers: { "Cache-Control": "no-store" } },
 		);
+	} finally {
+		logDocumentEvent("document.upload.response", {
+			requestId,
+			documentId,
+			status,
+			durationMs: Date.now() - startedAt,
+		});
 	}
 }

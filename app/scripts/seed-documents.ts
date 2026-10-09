@@ -10,6 +10,7 @@ import { z } from "zod";
 import { documents } from "../src/db/schema/documents.ts";
 import { type Docs, docsSchema, parseFicheStructure } from "../src/lib/docs.schema.ts";
 import { getExplorerDirectory } from "../src/lib/docs.server.ts";
+import { logDocumentEvent, logDocumentError } from "../src/lib/document-log.ts";
 import { findPdf, getPdfDirectory } from "../src/lib/pdf.server.ts";
 
 const pathsSchema = z.object({
@@ -129,10 +130,30 @@ export async function readSeedDocuments(paths: SeedPaths): Promise<SeedDocument[
 
 export async function writeSeedDocuments(records: SeedDocument[], writer: SeedWriter): Promise<void> {
 	for (const document of records) {
-		if (document.pdf) await writer.uploadPdf(`pdfs/${document.id}.pdf`, document.pdf);
-		await writer.upsertDocument(document);
+		let operation = "pdf.upload";
+		let started = Date.now();
+		try {
+			if (document.pdf) {
+				logDocumentEvent("seed.pdf.upload.start", { documentId: document.id, sizeBytes: document.pdf.size });
+				await writer.uploadPdf(`pdfs/${document.id}.pdf`, document.pdf);
+				logDocumentEvent("seed.pdf.upload.complete", { documentId: document.id, durationMs: Date.now() - started });
+			}
+			operation = "document.upsert";
+			started = Date.now();
+			logDocumentEvent("seed.document.upsert.start", { documentId: document.id });
+			await writer.upsertDocument(document);
+			logDocumentEvent("seed.document.upsert.complete", { documentId: document.id, durationMs: Date.now() - started });
+		} catch (error: unknown) {
+			logDocumentError("seed.document.failed", error, {
+				documentId: document.id, operation, durationMs: Date.now() - started,
+			});
+			throw error;
+		}
 	}
 }
+
+const seedStarted = Date.now();
+let seedOperation = "input.validate";
 
 async function main(): Promise<void> {
 	const { values } = parseArgs({
@@ -147,17 +168,27 @@ async function main(): Promise<void> {
 		console.log("Usage: npm run db:seed -- [--explorer-dir PATH] [--pdf-dir PATH] [--dry-run]");
 		return;
 	}
+	logDocumentEvent("seed.start", { dryRun: values["dry-run"] });
 	const paths = getSeedPaths({ explorerDir: values["explorer-dir"], pdfDir: values["pdf-dir"] });
 	// Validate all source files before the first upload or database write.
+	logDocumentEvent("seed.input.start");
+	const inputStarted = Date.now();
 	const records = await readSeedDocuments(paths);
 	const pdfCount = records.filter((record) => record.pdf !== null).length;
-	console.log(`Validated ${records.length} documents and ${pdfCount} PDF signatures.`);
+	logDocumentEvent("seed.input.complete", {
+		documentCount: records.length, pdfCount, durationMs: Date.now() - inputStarted,
+	});
 	for (const record of records) {
-		if (!record.pdf) console.warn(`No local PDF for ${record.id}. Only the document will be seeded.`);
+		if (!record.pdf) logDocumentEvent("seed.pdf.missing", { documentId: record.id });
 	}
 	if (values["dry-run"]) return;
 
+	seedOperation = "config.validate";
 	const config = storageSchema.parse(process.env);
+	logDocumentEvent("seed.storage.configured", {
+		databaseHost: new URL(config.DATABASE_URL).hostname,
+		storageHost: new URL(config.S3_ENDPOINT).hostname,
+	});
 	const pool = new Pool({ connectionString: config.DATABASE_URL });
 	const db = drizzle({ client: pool });
 	const s3 = new S3Client({
@@ -167,8 +198,17 @@ async function main(): Promise<void> {
 		credentials: { accessKeyId: config.S3_ACCESS_KEY_ID, secretAccessKey: config.S3_SECRET_ACCESS_KEY },
 	});
 	try {
+		seedOperation = "storage.bucket_check";
+		const bucketStarted = Date.now();
+		logDocumentEvent("seed.storage.bucket_check.start");
 		await s3.send(new HeadBucketCommand({ Bucket: config.S3_BUCKET }));
+		logDocumentEvent("seed.storage.bucket_check.complete", { durationMs: Date.now() - bucketStarted });
+		seedOperation = "db.check";
+		const databaseStarted = Date.now();
+		logDocumentEvent("seed.db.check.start");
 		await db.select({ id: documents.id }).from(documents).limit(1);
+		logDocumentEvent("seed.db.check.complete", { durationMs: Date.now() - databaseStarted });
+		seedOperation = "documents.write";
 		await writeSeedDocuments(records, {
 			async uploadPdf(key, pdf) {
 				const body = createReadStream(pdf.path);
@@ -196,7 +236,6 @@ async function main(): Promise<void> {
 					// Preserve ownership, visibility, and deletion on repeat runs.
 					set: { data: document.data, generationCompleted },
 				});
-				console.log(`Seeded document ${document.id}.`);
 			},
 		});
 	} finally {
@@ -206,8 +245,13 @@ async function main(): Promise<void> {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-	main().catch((error: unknown) => {
-		console.error(error instanceof Error ? error.message : "Document seed failed.");
+	main().then(() => {
+		logDocumentEvent("seed.complete", { durationMs: Date.now() - seedStarted });
+	}).catch((error: unknown) => {
+		logDocumentError("seed.main.failed", seedOperation === "input.validate" ? new Error("The seed input is invalid.") : error, {
+			operation: seedOperation, durationMs: Date.now() - seedStarted,
+			errorType: error instanceof Error ? error.name : "UnknownError",
+		});
 		process.exitCode = 1;
 	});
 }
