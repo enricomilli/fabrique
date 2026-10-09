@@ -198,7 +198,7 @@
   "reasoning_legend_unread": "Non consultée",
   "reasoning_map_accessible_label": "{title} · {read} / {total} pages consultées",
   "reasoning_map_details": "{read} / {total} pages consultées · {percent}",
-  "reasoning_map_hint": "Chaque ligne montre la part des pages consultées dans une section du document.",
+  "reasoning_map_hint": "La largeur indique le nombre de pages. La hauteur indique la part consultée.",
   "reasoning_map_subtitle": "{count} entrées · {read} pages consultées sur {total}",
   "reasoning_map_subtitle_single": "{count} entrée · {read} pages consultées sur {total}",
   "reasoning_map_title": "Carte de lecture",
@@ -221,5 +221,11 @@
   "reasoning_summary_search": "recherche « {text} »",
   "reasoning_summary_writing": "Rédige {drafts}.",
   "reasoning_word_single": "{count} mot",
-  "reasoning_words": "{count} mots"
+  "reasoning_words": "{count} mots",
+  "document_reasoning": "Raisonnement",
+  "document_reasoning_description": "Explorez les lectures, le raisonnement et le code du modèle utilisés pour rédiger la note.",
+  "document_read_reasoning": "Lire le raisonnement",
+  "reasoning_pages_read": "{read} / {total} pages consultées",
+  "reasoning_open_iteration": "Ouvrir l’itération {number}",
+  "reasoning_pdf_hint": "Sélectionnez un lien de page pour ouvrir le PDF source."
 }

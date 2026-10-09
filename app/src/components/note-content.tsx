@@ -10,12 +10,9 @@ export function NoteContent({
 	pdfUrl?: string | null;
 	title: string;
 }) {
-	const { isOpen, plugins, components, sidebar } = usePdfCitations(
-		pdfUrl,
-		"note-pdf-open",
-	);
+	const { plugins, components } = usePdfCitations(pdfUrl);
 	return (
-		<div className={`note-reader ${isOpen ? "note-reader-pdf" : ""}`}>
+		<div className="note-reader">
 			<div className="note-content mx-auto flow-root w-full min-w-0 max-w-[53rem]">
 				<h1 className="mt-10 text-balance text-center wrap-break-words font-heading text-xl leading-relaxed sm:text-2xl">
 					{title}
@@ -26,7 +23,6 @@ export function NoteContent({
 					components={components}
 				/>
 			</div>
-			{sidebar}
 		</div>
 	);
 }

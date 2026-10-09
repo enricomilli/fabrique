@@ -198,7 +198,7 @@
   "reasoning_legend_unread": "Unread",
   "reasoning_map_accessible_label": "{title} · {read} / {total} pages read",
   "reasoning_map_details": "{read} / {total} pages read · {percent}",
-  "reasoning_map_hint": "Each row shows the share of pages read in a document section.",
+  "reasoning_map_hint": "Segment width shows page count. Fill height shows the share read.",
   "reasoning_map_subtitle": "{count} entries · {read} pages read out of {total}",
   "reasoning_map_subtitle_single": "{count} entry · {read} pages read out of {total}",
   "reasoning_map_title": "Reading map",
@@ -221,5 +221,11 @@
   "reasoning_summary_search": "search for “{text}”",
   "reasoning_summary_writing": "Writes {drafts}.",
   "reasoning_word_single": "{count} word",
-  "reasoning_words": "{count} words"
+  "reasoning_words": "{count} words",
+  "document_reasoning": "Reasoning",
+  "document_reasoning_description": "Explore the model’s reading, reasoning, and code used to write the note.",
+  "document_read_reasoning": "Read the reasoning",
+  "reasoning_pages_read": "{read} / {total} pages read",
+  "reasoning_open_iteration": "Open iteration {number}",
+  "reasoning_pdf_hint": "Select a page link to open the source PDF."
 }

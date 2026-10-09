@@ -3,6 +3,7 @@ import {
 	ArrowLeftIcon,
 	ArrowRightIcon,
 	BookOpenIcon,
+	BrainIcon,
 	ListIcon,
 } from "lucide-react";
 import { AppHeader } from "#/components/app-header";
@@ -27,6 +28,14 @@ function DocumentSelectionPage() {
 		.join(" · ");
 	const formats = [
 		{
+			to: "/documents/$documentId/reasoning" as const,
+			title: m.document_reasoning(),
+			description: m.document_reasoning_description(),
+			action: m.document_read_reasoning(),
+			available: document.hasReasoning,
+			icon: BrainIcon,
+		},
+		{
 			to: "/documents/$documentId/fiche" as const,
 			title: m.document_fiche(),
 			description: m.document_fiche_description(),
@@ -47,8 +56,8 @@ function DocumentSelectionPage() {
 	return (
 		<div className="min-h-screen">
 			<AppHeader />
-			<main className="mx-auto w-full max-w-4xl px-6 py-8 sm:py-12">
-				<header className="mt-6 text-center">
+			<main className="mx-auto w-full max-w-7xl px-6 py-8 sm:py-12">
+				<header className="mx-auto mt-6 max-w-3xl text-center">
 					<h1 className="text-balance break-words font-heading text-xl leading-relaxed sm:text-2xl">
 						{document.title}
 					</h1>
@@ -59,7 +68,7 @@ function DocumentSelectionPage() {
 					)}
 				</header>
 				<section className="mt-12" aria-label={m.document_choose()}>
-					<div className="grid gap-5 sm:grid-cols-2">
+					<div className="grid gap-5 lg:grid-cols-3">
 						{formats.map((format) => {
 							const Icon = format.icon;
 							const body = (

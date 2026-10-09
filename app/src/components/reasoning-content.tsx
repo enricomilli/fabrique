@@ -1,6 +1,6 @@
 import { cn } from "cn";
 import { ChevronRight } from "lucide-react";
-import { type ReactNode, useId, useRef, useState } from "react";
+import { type ReactNode, useEffect, useId, useRef, useState } from "react";
 import { Badge } from "#/components/ui/badge";
 import { Button } from "#/components/ui/button";
 import { Card, CardContent, CardHeader } from "#/components/ui/card";
@@ -67,6 +67,8 @@ function PageLink({
 	return (
 		<a
 			href={pdfPageUrl(url, page)}
+			target="_blank"
+			rel="noopener noreferrer"
 			className={`underline decoration-muted-foreground underline-offset-4 hover:text-primary ${focusClass}`}
 		>
 			{children}
@@ -187,6 +189,8 @@ function ReadingMap({
 													// biome-ignore lint/a11y/useAnchorContent: TooltipTrigger adds the fill and keeps the accessible label.
 													<a
 														href={pdfPageUrl(pdfUrl, entry.pdf_page)}
+														target="_blank"
+														rel="noopener noreferrer"
 														aria-label={entry.title}
 													/>
 												) : (
@@ -651,10 +655,49 @@ function ReasoningLayout({
 	const iterations = sections.find((section) => section.id === "iterations");
 	const bars = sections.find((section) => section.id === "iteration_bars");
 	const items = iterations?.data.items ?? [];
-	const [selected, setSelected] = useState<number | null>(
-		() =>
-			items.find((item) => item.selected_by_default)?.n ?? items[0]?.n ?? null,
-	);
+	const [selected, setSelected] = useState<number | null>(items[0]?.n ?? null);
+
+	useEffect(() => {
+		const cards = items.flatMap((item) => {
+			const card = headers.current
+				.get(item.n)
+				?.closest<HTMLElement>("[data-slot=card]");
+			return card ? [{ number: item.n, element: card }] : [];
+		});
+		const firstCard = cards[0];
+		if (!firstCard) return;
+
+		let frame: number | null = null;
+		function updateSelection() {
+			frame = null;
+			const top = Number.parseFloat(
+				window.getComputedStyle(firstCard.element).scrollMarginTop,
+			);
+			const readingTop = Math.max(
+				Number.isFinite(top) ? top : 0,
+				window.innerHeight / 3,
+			);
+			let foremost = firstCard.number;
+			for (const card of cards) {
+				foremost = card.number;
+				if (card.element.getBoundingClientRect().bottom > readingTop) break;
+			}
+			setSelected(foremost);
+		}
+
+		function scheduleSelection() {
+			if (frame === null) frame = window.requestAnimationFrame(updateSelection);
+		}
+
+		updateSelection();
+		window.addEventListener("scroll", scheduleSelection, { passive: true });
+		window.addEventListener("resize", scheduleSelection);
+		return () => {
+			window.removeEventListener("scroll", scheduleSelection);
+			window.removeEventListener("resize", scheduleSelection);
+			if (frame !== null) window.cancelAnimationFrame(frame);
+		};
+	}, [items]);
 	const cardId = (number: number) => `${id}-iteration-${number}`;
 
 	function selectIteration(number: number) {
@@ -671,7 +714,7 @@ function ReasoningLayout({
 	}
 
 	return (
-		<article className="w-full min-w-0 space-y-6 font-sans text-sm leading-relaxed wrap-break-words">
+		<article className="w-full min-w-0 space-y-6 font-sans text-sm leading-relaxed wrap-break-words pt-14">
 			<p className="sr-only">{title}</p>
 			{map && <ReadingMap section={map} pdfUrl={pdfUrl} kpis={kpis} />}
 			{(mostRead || neverOpened) && (

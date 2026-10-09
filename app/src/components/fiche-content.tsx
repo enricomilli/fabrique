@@ -52,12 +52,7 @@ export function FicheContent({
 	const title = useMemo(() => extractFicheTitle(markdown), [markdown]);
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [activeId, setActiveId] = useState<string | null>(null);
-	const {
-		isOpen,
-		plugins: citationPlugins,
-		components,
-		sidebar,
-	} = usePdfCitations(pdfUrl, "fiche-pdf-open");
+	const { plugins: citationPlugins, components } = usePdfCitations(pdfUrl);
 	const plugins = useMemo<Options["remarkPlugins"]>(
 		() => [...anchorPlugins, ...(citationPlugins ?? [])],
 		[citationPlugins],
@@ -112,9 +107,7 @@ export function FicheContent({
 	}, [headings]);
 
 	return (
-		<div
-			className={`fiche-reader lg:col-span-3 lg:grid lg:grid-cols-subgrid ${isOpen ? "fiche-reader-pdf" : ""}`}
-		>
+		<div className="fiche-reader lg:col-span-3 lg:grid lg:grid-cols-subgrid">
 			{headings.length > 0 && (
 				<>
 					<nav
@@ -154,7 +147,6 @@ export function FicheContent({
 					components={components}
 				/>
 			</div>
-			{sidebar}
 		</div>
 	);
 }
