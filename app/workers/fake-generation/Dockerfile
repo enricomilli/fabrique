@@ -8,7 +8,7 @@ RUN npm ci
 COPY app/workers/fake-generation/tsconfig.json ./
 COPY app/workers/fake-generation/src/ ./src/
 COPY app/workers/fake-generation/fixtures/ ./fixtures/
-COPY app/src/lib/docs.schema.ts app/src/lib/document-log.ts /build/app/src/lib/
+COPY app/src/lib/docs.schema.ts app/src/lib/reasoning.schema.ts app/src/lib/document-log.ts /build/app/src/lib/
 # Let the shared schema use the worker dependencies.
 RUN ln -s workers/fake-generation/node_modules /build/app/node_modules \
     && npm run build

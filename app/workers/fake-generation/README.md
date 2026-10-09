@@ -126,3 +126,19 @@ The Docker build and runtime image include the copied fixture. No explorer direc
 - `ficheMarkdown`, `noteMarkdown`, `notePrompt`, and `labels` expose the fixture content and validated label order.
 - `fixture` exposes the validated source data for the worker schedule and final metadata.
 SIGINT and SIGTERM wait for the active job before the worker closes its connections.
+
+## Reasoning replay
+
+`fixtures/reasoning.json` copies `explorer/daley_thesis/reasoning.json`.
+The worker validates it with `reasoningSchema` at start.
+Each note iteration saves its intention, action, and feedback in `documents.reasoning` with the matching `data` update.
+Pending snapshots contain only saved iterations. They contain no future iterations, reading statistics, or duration charts.
+The generation activity feed uses the reasoning iteration content component. Older snapshots keep the original iteration display.
+Completion saves all reasoning sections, final data, and the completion flag in one update.
+Iteration durations, duration labels, chart values, and the duration KPI use the simulated note timings.
+
+Each update compares both previous JSON columns. A concurrent change causes a retry without an overwrite.
+Retries preserve saved iteration details and add missing details for older pending demos.
+The worker rejects unrelated reasoning and invalid saved iteration sequences.
+Completed documents remain unchanged. Existing completed demos need a separate backfill.
+The Docker image includes both fixtures and both schemas.

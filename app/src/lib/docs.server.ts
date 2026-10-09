@@ -53,6 +53,7 @@ export interface DocumentDetail extends DocumentSummary {
 	noteMarkdown: string;
 	pdfUrl: string | null;
 	generationData: Docs | null;
+	generationReasoning?: Reasoning | null;
 	hasReasoning: boolean;
 }
 // Start the server from app, or set EXPLORER_DIR to an absolute directory path.
@@ -312,6 +313,10 @@ export async function loadDocument(
 			noteMarkdown: data?.note.note_md ?? "",
 			pdfUrl,
 			generationData: record.generationCompleted ? null : data,
+			generationReasoning:
+				!record.generationCompleted && record.reasoning !== null
+					? reasoningSchema.parse(record.reasoning)
+					: null,
 			hasReasoning: record.reasoning !== null,
 		};
 		logDocumentEvent("document.read.completed", {

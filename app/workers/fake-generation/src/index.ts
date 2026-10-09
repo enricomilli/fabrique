@@ -7,6 +7,7 @@ import { docsSchema, parseFicheStructure, type Docs } from "../../../src/lib/doc
 import { logDocumentEvent, logDocumentError } from "../../../src/lib/document-log.js";
 import {
   ficheMarkdown, fixture, iteration, labels, noteMarkdown, notePrompt, placeholder, step, structure,
+  reasoningSnapshot, validateSavedReasoning,
 } from "./content.js";
 
 const jobSchema = z.object({
@@ -17,6 +18,7 @@ type DocumentGenerationJob = z.infer<typeof jobSchema>;
 type DocumentRow = {
   title: string | null;
   data: unknown;
+  reasoning: unknown;
   generation_completed: boolean;
 };
 
@@ -87,7 +89,7 @@ const worker = new Worker<DocumentGenerationJob, void, "generate-document">(
         operation = "db.select";
         logDocumentEvent("worker.db.select.start", context);
         const result = await client.query<DocumentRow>(
-          `SELECT title, data, generation_completed FROM documents
+          `SELECT title, data, reasoning, generation_completed FROM documents
            WHERE id = $1 AND created_by = $2 AND deleted_at IS NULL`,
           [payload.documentId, payload.userId],
         );
@@ -115,6 +117,8 @@ const worker = new Worker<DocumentGenerationJob, void, "generate-document">(
           || data.note.iterations.some((value, index) => value.n !== fixture.note.iterations[index].n || value.kind !== "root")) {
           throw new Error("The saved demo stages are invalid.");
         }
+        let savedReasoning: unknown = row.reasoning;
+        let reasoning = validateSavedReasoning(savedReasoning, data);
 
         // Each stage preserves saved outputs. The SQL also checks ownership and deletion.
         for (let stage = 0; stage < stageDelays.length; stage += 1) {
@@ -166,16 +170,21 @@ const worker = new Worker<DocumentGenerationJob, void, "generate-document">(
             next.note.metadata.rlm_status = "running";
           } else if (stage < noteEnd) {
             const index = stage - noteStart;
-            if (next.note.iterations.length > index) { resumeSkip(); continue; }
-            next.note.iterations.push(iteration(index, seconds));
-            const count = next.note.iterations.length;
-            next.note.metadata = {
-              ...next.note.metadata, iterations: count, trace_files: count,
-              trace_root_calls: next.note.iterations.filter((value) => value.kind === "root").length,
-              rlm_time_s: next.note.iterations.reduce((sum, value) => sum + value.elapsed_s, 0),
-              wall_time_s: elapsedSeconds, rlm_status: "running",
-            };
-            next.note.rlm_stdout = next.note.iterations.map((value) => value.exec_stdout).join("\n\n");
+            const savedCount = reasoning?.sections.find((section) => section.id === "iterations")?.data.items.length ?? 0;
+            if (next.note.iterations.length > index && savedCount >= next.note.iterations.length) {
+              resumeSkip(); continue;
+            }
+            if (next.note.iterations.length <= index) {
+              next.note.iterations.push(iteration(index, seconds));
+              const count = next.note.iterations.length;
+              next.note.metadata = {
+                ...next.note.metadata, iterations: count, trace_files: count,
+                trace_root_calls: next.note.iterations.filter((value) => value.kind === "root").length,
+                rlm_time_s: next.note.iterations.reduce((sum, value) => sum + value.elapsed_s, 0),
+                wall_time_s: elapsedSeconds, rlm_status: "running",
+              };
+              next.note.rlm_stdout = next.note.iterations.map((value) => value.exec_stdout).join("\n\n");
+            }
           } else if (stage === noteEnd) {
             if (next.note.note_md) { resumeSkip(); continue; }
             next.note.note_md = noteMarkdown;
@@ -206,13 +215,18 @@ const worker = new Worker<DocumentGenerationJob, void, "generate-document">(
           operation = "stage.save";
           const saveStarted = Date.now();
           logDocumentEvent("worker.stage.save.start", stageContext);
+          const nextReasoning = next.note.iterations.length > 0 || complete
+            ? reasoningSnapshot(next, reasoning, complete) : reasoning;
           const updated = await client.query(
-            `UPDATE documents SET data = $3::jsonb, generation_completed = $4
+            `UPDATE documents SET data = $3::jsonb, generation_completed = $4, reasoning = $6::jsonb
              WHERE id = $1 AND created_by = $2 AND deleted_at IS NULL
                AND generation_completed = false AND data IS NOT DISTINCT FROM $5::jsonb
+               AND reasoning IS NOT DISTINCT FROM $7::jsonb
              RETURNING id`,
             [payload.documentId, payload.userId, JSON.stringify(next), complete,
-              saved === null ? null : JSON.stringify(saved)],
+              saved === null ? null : JSON.stringify(saved),
+              nextReasoning === null ? null : JSON.stringify(nextReasoning),
+              savedReasoning === null ? null : JSON.stringify(savedReasoning)],
           );
           logDocumentEvent("worker.stage.save.result", {
             ...stageContext, rowCount: updated.rowCount, durationMs: Date.now() - saveStarted, complete,
@@ -241,6 +255,8 @@ const worker = new Worker<DocumentGenerationJob, void, "generate-document">(
           }
           data = next;
           saved = next;
+          reasoning = nextReasoning;
+          savedReasoning = nextReasoning;
           logDocumentEvent("worker.stage.complete", {
             ...stageContext, complete, durationMs: Date.now() - stageStarted,
           });

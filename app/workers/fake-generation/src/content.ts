@@ -6,6 +6,7 @@ import {
   type FicheStep,
   type NoteIteration,
 } from "../../../src/lib/docs.schema.js";
+import { reasoningSchema, type Reasoning } from "../../../src/lib/reasoning.schema.js";
 
 const source: unknown = JSON.parse(readFileSync(new URL("../fixtures/data.json", import.meta.url), "utf8"));
 export const fixture = docsSchema.parse(source);
@@ -70,4 +71,57 @@ export function iteration(index: number, seconds: number): NoteIteration {
   result.timings.predicted_ms *= scale;
   result.timings.predicted_per_second = scale > 0 ? source.timings.predicted_per_second / scale : 0;
   return result;
+}
+
+const reasoningSource: unknown = JSON.parse(readFileSync(new URL("../fixtures/reasoning.json", import.meta.url), "utf8"));
+export const reasoningFixture = reasoningSchema.parse(reasoningSource);
+const reasoningIterations = reasoningFixture.sections.find((section) => section.id === "iterations");
+if (!reasoningIterations || reasoningIterations.data.items.length !== fixture.note.iterations.length
+  || reasoningIterations.data.items.some((item, index) => item.n !== fixture.note.iterations[index].n)) {
+  throw new Error("The reasoning fixture iterations are invalid.");
+}
+const iterationSection = reasoningIterations;
+
+export function reasoningSnapshot(data: Docs, saved: Reasoning | null, complete: boolean): Reasoning {
+  const result = structuredClone(reasoningFixture);
+  const previous = saved?.sections.find((section) => section.id === "iterations");
+  const items = data.note.iterations.map((note, index) => {
+    const item = structuredClone(previous?.data.items[index] ?? iterationSection.data.items[index]);
+    item.seconds = note.elapsed_s;
+    item.header_label = `Itération ${item.n} · ${new Intl.NumberFormat("fr", { maximumFractionDigits: 1 }).format(item.seconds)} s`;
+    return item;
+  });
+  if (!complete) {
+    result.sections = [{ ...structuredClone(iterationSection), data: { items } }];
+  } else {
+    for (const section of result.sections) {
+      if (section.id === "iterations") section.data.items = items;
+      if (section.id === "iteration_bars") {
+        section.data.items = items.map(({ n, kind, seconds }) => ({ n, kind, seconds }));
+        section.data.max_seconds = Math.max(0, ...items.map((item) => item.seconds));
+      }
+      if (section.id === "kpis") {
+        for (const item of section.data.items) {
+          if (item.key !== "iterations") continue;
+          item.raw.seconds = items.reduce((sum, iteration) => sum + iteration.seconds, 0);
+          item.caption = `itérations · ${Math.round(item.raw.seconds)} s · ${item.raw.note_words} mots`;
+        }
+      }
+    }
+  }
+  return reasoningSchema.parse(result);
+}
+
+export function validateSavedReasoning(value: unknown, data: Docs): Reasoning | null {
+  if (value === null) return null;
+  const saved = reasoningSchema.parse(value);
+  const items = saved.sections[0];
+  if (saved.source.run_id !== reasoningFixture.source.run_id
+    || saved.source.thesis_id !== reasoningFixture.source.thesis_id
+    || saved.sections.length !== 1 || items?.id !== "iterations"
+    || items.data.items.length > data.note.iterations.length
+    || items.data.items.some((item, index) => item.n !== data.note.iterations[index].n)) {
+    throw new Error("The saved demo reasoning stages are invalid.");
+  }
+  return saved;
 }

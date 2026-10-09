@@ -1,6 +1,13 @@
 import { cn } from "cn";
 import { ChevronRight } from "lucide-react";
-import { type ReactNode, useEffect, useId, useRef, useState } from "react";
+import {
+	type ReactNode,
+	type Ref,
+	useEffect,
+	useId,
+	useRef,
+	useState,
+} from "react";
 import { Badge } from "#/components/ui/badge";
 import { Button } from "#/components/ui/button";
 import { Card, CardContent, CardHeader } from "#/components/ui/card";
@@ -454,7 +461,7 @@ function GestureDetails({
 	);
 }
 
-function IterationContent({
+export function IterationContent({
 	item,
 	pdfUrl,
 }: {
@@ -656,6 +663,7 @@ function ReasoningLayout({
 	const bars = sections.find((section) => section.id === "iteration_bars");
 	const items = iterations?.data.items ?? [];
 	const [selected, setSelected] = useState<number | null>(items[0]?.n ?? null);
+	const [collapsed, setCollapsed] = useState<Record<number, boolean>>({});
 
 	useEffect(() => {
 		const cards = items.flatMap((item) => {
@@ -690,9 +698,12 @@ function ReasoningLayout({
 		}
 
 		updateSelection();
+		const observer = new ResizeObserver(scheduleSelection);
+		for (const card of cards) observer.observe(card.element);
 		window.addEventListener("scroll", scheduleSelection, { passive: true });
 		window.addEventListener("resize", scheduleSelection);
 		return () => {
+			observer.disconnect();
 			window.removeEventListener("scroll", scheduleSelection);
 			window.removeEventListener("resize", scheduleSelection);
 			if (frame !== null) window.cancelAnimationFrame(frame);
@@ -703,6 +714,7 @@ function ReasoningLayout({
 	function selectIteration(number: number) {
 		const header = headers.current.get(number);
 		if (!header) return;
+		setCollapsed((previous) => ({ ...previous, [number]: false }));
 		setSelected(number);
 		header.focus({ preventScroll: true });
 		header.closest("[data-slot=card]")?.scrollIntoView({
@@ -738,39 +750,24 @@ function ReasoningLayout({
 							<h2 className="sr-only">{m.reasoning_iterations_title()}</h2>
 							{items.length === 0 && <EmptyItems />}
 							{items.map((item) => (
-								<Card
+								<ReasoningIterationCard
 									key={item.n}
 									id={cardId(item.n)}
-									data-reasoning-iteration
-									data-iteration-number={item.n}
-									data-selected={selected === item.n}
-									className={cn(
-										"scroll-mt-24 motion-safe:transition-[border-color,box-shadow] motion-safe:duration-150",
-										selected === item.n && "border-primary ring-1 ring-primary",
-									)}
-								>
-									<CardHeader className="flex-row flex-wrap items-baseline justify-between gap-2 pb-3">
-										<h3
-											tabIndex={-1}
-											ref={(node) => {
-												if (node) headers.current.set(item.n, node);
-												else headers.current.delete(item.n);
-											}}
-											className={`${labelClass} text-foreground ${focusClass}`}
-										>
-											{m.reasoning_iteration_header({
-												number: reasoningNumber(item.n),
-												seconds: reasoningSeconds(item.seconds),
-											})}
-										</h3>
-										<Badge variant="secondary">
-											{reasoningKind(item.kind)}
-										</Badge>
-									</CardHeader>
-									<CardContent>
-										<IterationContent item={item} pdfUrl={pdfUrl} />
-									</CardContent>
-								</Card>
+									item={item}
+									pdfUrl={pdfUrl}
+									selected={selected === item.n}
+									open={!collapsed[item.n]}
+									onOpenChange={(open) =>
+										setCollapsed((previous) => ({
+											...previous,
+											[item.n]: !open,
+										}))
+									}
+									headingRef={(node) => {
+										if (node) headers.current.set(item.n, node);
+										else headers.current.delete(item.n);
+									}}
+								/>
 							))}
 						</section>
 					)}
@@ -810,5 +807,69 @@ export function ReasoningContent(props: ReasoningContentProps) {
 			reasoning={props.reasoning}
 			pdfUrl={safePdfUrl(props.pdfUrl)}
 		/>
+	);
+}
+
+export function ReasoningIterationCard({
+	item,
+	pdfUrl,
+	id,
+	selected = false,
+	headingRef,
+	open,
+	onOpenChange,
+}: {
+	item: ReasoningIteration;
+	pdfUrl: string | null;
+	id?: string;
+	selected?: boolean;
+	headingRef?: Ref<HTMLHeadingElement>;
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
+}) {
+	return (
+		<Card
+			id={id}
+			data-reasoning-iteration
+			data-iteration-number={item.n}
+			data-selected={selected}
+			className={cn(
+				"min-w-0 scroll-mt-24 text-sm leading-relaxed wrap-break-words motion-safe:transition-[border-color,box-shadow] motion-safe:duration-150",
+				selected && "border-primary ring-1 ring-primary",
+			)}
+		>
+			<Collapsible defaultOpen open={open} onOpenChange={onOpenChange}>
+				<CardHeader className="p-0">
+					<h3
+						tabIndex={-1}
+						ref={headingRef}
+						className={`${labelClass} text-foreground ${focusClass}`}
+					>
+						<CollapsibleTrigger
+							className={`group flex min-h-11 w-full items-center gap-3 rounded-lg px-5 py-4 text-start hover:bg-muted/50 ${focusClass}`}
+						>
+							<span className="min-w-0 flex-1">
+								{m.reasoning_iteration_header({
+									number: reasoningNumber(item.n),
+									seconds: reasoningSeconds(item.seconds),
+								})}
+							</span>
+							<Badge variant="secondary" className="shrink-0 normal-case">
+								{reasoningKind(item.kind)}
+							</Badge>
+							<ChevronRight
+								aria-hidden="true"
+								className="size-4 shrink-0 group-data-[panel-open]:rotate-90"
+							/>
+						</CollapsibleTrigger>
+					</h3>
+				</CardHeader>
+				<CollapsibleContent keepMounted>
+					<CardContent>
+						<IterationContent item={item} pdfUrl={pdfUrl} />
+					</CardContent>
+				</CollapsibleContent>
+			</Collapsible>
+		</Card>
 	);
 }

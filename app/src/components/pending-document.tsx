@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { AppHeader } from "#/components/app-header";
+import { ReasoningIterationCard } from "#/components/reasoning-content";
 import { Button } from "#/components/ui/button";
 import type { FicheCall, NoteIteration } from "#/lib/docs.schema";
 import type { DocumentDetail } from "#/lib/docs.server";
@@ -41,7 +42,20 @@ export function PendingDocument({ document }: { document: DocumentDetail }) {
 				iteration.status >= 200 &&
 				iteration.status < 300,
 		) ?? [];
+	const reasoningItems =
+		document.generationReasoning?.sections.find(
+			(section) => section.id === "iterations",
+		)?.data.items ?? [];
 	const latest = iterations.at(-1);
+	const latestIteration = latest?.n ?? null;
+	const [iterationExpansion, setIterationExpansion] = useState<{
+		latest: number | null;
+		expanded: number | null;
+	}>({ latest: latestIteration, expanded: latestIteration });
+	const expandedIteration =
+		iterationExpansion.latest === latestIteration
+			? iterationExpansion.expanded
+			: latestIteration;
 	const parallelStages =
 		!ficheReady && Boolean(stages.find((stage) => stage.label === "2d")?.call);
 	const activeStages =
@@ -357,12 +371,30 @@ export function PendingDocument({ document }: { document: DocumentDetail }) {
 								</p>
 							</article>
 						)}
-						{[...iterations].reverse().map((iteration) => (
-							<IterationCard
-								key={`${iteration.file}:${iteration.n}`}
-								iteration={iteration}
-							/>
-						))}
+						{[...iterations].reverse().map((iteration) => {
+							const item = reasoningItems.find(
+								(item) => item.n === iteration.n,
+							);
+							return item ? (
+								<ReasoningIterationCard
+									key={`${iteration.file}:${iteration.n}`}
+									item={item}
+									pdfUrl={document.pdfUrl}
+									open={expandedIteration === item.n}
+									onOpenChange={(open) =>
+										setIterationExpansion({
+											latest: latestIteration,
+											expanded: open ? item.n : null,
+										})
+									}
+								/>
+							) : (
+								<IterationCard
+									key={`${iteration.file}:${iteration.n}`}
+									iteration={iteration}
+								/>
+							);
+						})}
 						{ficheReady && (
 							<FicheActivityCard
 								key="fiche:final"
