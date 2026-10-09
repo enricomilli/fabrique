@@ -9,6 +9,7 @@ import {
 	parseFicheStructure,
 } from "./docs.schema.ts";
 import { logDocumentError, logDocumentEvent } from "./document-log.ts";
+import { type Reasoning, reasoningSchema } from "./reasoning.schema.ts";
 
 type DocumentRecord = typeof documents.$inferSelect;
 
@@ -52,6 +53,7 @@ export interface DocumentDetail extends DocumentSummary {
 	noteMarkdown: string;
 	pdfUrl: string | null;
 	generationData: Docs | null;
+	hasReasoning: boolean;
 }
 // Start the server from app, or set EXPLORER_DIR to an absolute directory path.
 export function getExplorerDirectory(): string {
@@ -310,6 +312,7 @@ export async function loadDocument(
 			noteMarkdown: data?.note.note_md ?? "",
 			pdfUrl,
 			generationData: record.generationCompleted ? null : data,
+			hasReasoning: record.reasoning !== null,
 		};
 		logDocumentEvent("document.read.completed", {
 			documentId: id,
@@ -370,4 +373,26 @@ export async function softDeleteDocument(
 		)
 		.returning({ id: documents.id });
 	if (updated.length === 0) throw new Error("Cannot delete this document.");
+}
+
+export async function loadDocumentReasoning(
+	id: string,
+	userId: string,
+): Promise<Reasoning | null> {
+	const { db } = await import("../db/drizzle.ts");
+	const [record] = await db
+		.select({ reasoning: documents.reasoning })
+		.from(documents)
+		.where(
+			and(
+				eq(documents.id, id),
+				isNull(documents.deletedAt),
+				or(eq(documents.public, true), eq(documents.createdBy, userId)),
+			),
+		)
+		.limit(1);
+	if (!record || record.reasoning === null) return null;
+	const parsed = reasoningSchema.safeParse(record.reasoning);
+	if (!parsed.success) throw new Error("Invalid reasoning schema.");
+	return parsed.data;
 }

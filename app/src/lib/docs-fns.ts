@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import type { DocumentDetail, DocumentSummary } from "./docs.server";
+import type { Reasoning } from "./reasoning.schema";
 
 export type { DocumentDetail, DocumentSummary } from "./docs.server";
 
@@ -47,4 +48,13 @@ export const deleteDocument = createServerFn({ method: "POST" })
 		const session = await ensureSession();
 		const { softDeleteDocument } = await import("./docs.server");
 		await softDeleteDocument(data.id, session.user.id);
+	});
+
+export const getDocumentReasoning = createServerFn({ method: "GET" })
+	.inputValidator(z.object({ id: z.string().min(1) }))
+	.handler(async ({ data }): Promise<Reasoning | null> => {
+		const { ensureSession } = await import("./fns/session-fns");
+		const session = await ensureSession();
+		const { loadDocumentReasoning } = await import("./docs.server");
+		return loadDocumentReasoning(data.id, session.user.id);
 	});
